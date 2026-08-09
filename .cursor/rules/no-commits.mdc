@@ -1,0 +1,13 @@
+---
+description: User owns all git commits; never commit or push
+alwaysApply: true
+---
+
+# Git: never commit
+
+The user handles all committing themselves.
+
+- Never run `git commit`, `git add` for committing, or create commits
+- Never push to remote
+- Never open PRs unless explicitly asked
+- Suggest a commit message only if they ask

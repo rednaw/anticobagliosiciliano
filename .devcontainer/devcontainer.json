@@ -1,0 +1,26 @@
+{
+	"name": "anticobagliosiciliano",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/workspace",
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,readonly,consistency=cached",
+		"source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,readonly,consistency=cached"
+	],
+	"postCreateCommand": "npm ci",
+	"forwardPorts": [5173],
+	"portsAttributes": {
+		"5173": {
+			"label": "Vite dev server",
+			"onAutoForward": "notify"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": ["svelte.svelte-vscode"]
+		}
+	}
+}
