@@ -1,9 +1,27 @@
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+
+const SA_SCRIPT =
+	/<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
+
+/** Strip Simple Analytics in dev — production builds keep the tag in app.html. */
+function simpleAnalyticsDevPlugin(): Plugin {
+	return {
+		name: 'simple-analytics-dev',
+		transformIndexHtml: {
+			order: 'pre',
+			handler(html, ctx) {
+				if (!ctx.server) return html;
+				return html.replace(SA_SCRIPT, '');
+			}
+		}
+	};
+}
 
 export default defineConfig({
 	plugins: [
+		simpleAnalyticsDevPlugin(),
 		sveltekit({
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.

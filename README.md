@@ -24,6 +24,14 @@ Push to `main`. The GitHub Actions workflow builds and deploys to GitHub Pages.
 
 In the repo settings, set **Pages → Source** to **GitHub Actions**. For a custom domain, add it under **Pages → Custom domain**.
 
+### Simple Analytics
+
+Production only — reports under **`anticobagliosiciliano.rednaw.github.io`**
+(`app.html` + `site-config.ts`). The script is stripped during `npm run dev`.
+
+1. In [Simple Analytics](https://simpleanalytics.com/) → **Websites** → add `anticobagliosiciliano.rednaw.github.io`.
+2. Deploy — page views appear after the first visit (SPA navigation is tracked automatically).
+
 ## Contact email
 
 Update `email` in `src/lib/data/content.ts` if needed (used by the contact form / mailto).
