@@ -1,0 +1,541 @@
+{
+  "downloadedAt": "2026-08-10T07:17:32.333Z",
+  "source": "https://anticobagliosiciliano.it/",
+  "pages": {
+    "home": [
+      {
+        "file": "home/baglio-dallalto.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/10/baglio-dallalto.jpg",
+        "hash": "947d7ba57d3f90c867a2d9fd2f7c84e9",
+        "bytes": 428836
+      },
+      {
+        "file": "home/img_6532.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6532.jpg",
+        "hash": "0380a737d7cdb930ba264a7c38791468",
+        "bytes": 4748446
+      },
+      {
+        "file": "home/img_6783.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6783.jpg",
+        "hash": "4524a6d09fbe0386e2325e4d9f4c4b2c",
+        "bytes": 4046548
+      },
+      {
+        "file": "home/soggiorno-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/soggiorno-2.jpg",
+        "hash": "a2df83b100d19700ad573c2f88900941",
+        "bytes": 2660422
+      },
+      {
+        "file": "home/patio-3.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/patio-3.jpg",
+        "hash": "9164f011ed0b5a253290ac8984ee644a",
+        "bytes": 2304633
+      },
+      {
+        "file": "home/Foto-portone.jpeg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2025/05/Foto-portone.jpeg",
+        "hash": "4a866c56e815d2235834523f48efb090",
+        "bytes": 2355125
+      },
+      {
+        "file": "home/Foto-giardino-3-copia.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2025/05/Foto-giardino-3-copia.jpg",
+        "hash": "fa972c01bfc14d5f7bd5c2485e2e94ba",
+        "bytes": 6778981
+      },
+      {
+        "file": "home/Screenshot-2025-05-25-alle-16.40.39.png",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2025/05/Screenshot-2025-05-25-alle-16.40.39.png",
+        "hash": "c59f6f30bbf79e2dc33e88fb53046788",
+        "bytes": 934253
+      },
+      {
+        "file": "home/Screenshot-2025-05-25-alle-16.23.41.png",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2025/05/Screenshot-2025-05-25-alle-16.23.41.png",
+        "hash": "f0214c12d0402006e368cc503a9e2818",
+        "bytes": 211254
+      },
+      {
+        "file": "home/Digital-Gallery-Award-TRA-2025.png",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2025/05/Digital-Gallery-Award-TRA-2025.png",
+        "hash": "3e54e3728f2b994bc7c3fb748a70a38d",
+        "bytes": 84274
+      }
+    ],
+    "casa-1": [
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_65321.jpg",
+        "hash": "0380a737d7cdb930ba264a7c38791468",
+        "bytes": 4748446,
+        "duplicateOf": "home/img_6532.jpg"
+      },
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6532.jpg",
+        "hash": "0380a737d7cdb930ba264a7c38791468",
+        "bytes": 4748446,
+        "duplicateOf": "home/img_6532.jpg"
+      },
+      {
+        "file": "casa-1/img_6807.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6807.jpg",
+        "hash": "fbd011834af93d21bca0ce056c737419",
+        "bytes": 4091712
+      },
+      {
+        "file": "casa-1/img_6513.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6513.jpg",
+        "hash": "8eb5cbde5c64aea50d3d851b12bde182",
+        "bytes": 3866925
+      },
+      {
+        "file": "casa-1/img_6514.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6514.jpg",
+        "hash": "053c4aeb84c88ab8d42cc0bf29511431",
+        "bytes": 3891490
+      },
+      {
+        "file": "casa-1/img_6511.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6511.jpg",
+        "hash": "ba9ebaa31778b670c045e014c091a9db",
+        "bytes": 3785952
+      },
+      {
+        "file": "casa-1/img_6494.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6494.jpg",
+        "hash": "9084dae8037d69b94a70f3e2b1c5bdf0",
+        "bytes": 3796602
+      },
+      {
+        "file": "casa-1/img_6493.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6493.jpg",
+        "hash": "07ea4090f9954126d228899e21077147",
+        "bytes": 4203113
+      },
+      {
+        "file": "casa-1/img_6368.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6368.jpg",
+        "hash": "dd1adfaa42df1d9744afbe6a150af260",
+        "bytes": 2032519
+      },
+      {
+        "file": "casa-1/img_6383.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6383.jpg",
+        "hash": "5f5d0d2b60149086f30ea4187e391a59",
+        "bytes": 3888229
+      },
+      {
+        "file": "casa-1/img_6391.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6391.jpg",
+        "hash": "9b21be01a98fe774b1dc66106aa96686",
+        "bytes": 3803826
+      },
+      {
+        "file": "casa-1/img_6501.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6501.jpg",
+        "hash": "568cde4b9edfd68244cc475d47a7e8c7",
+        "bytes": 3380805
+      },
+      {
+        "file": "casa-1/img_6482.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6482.jpg",
+        "hash": "cf1879b7089d27ec5529e9dcd0a476d8",
+        "bytes": 3942302
+      },
+      {
+        "file": "casa-1/img_6419.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6419.jpg",
+        "hash": "4439c59cbb06f95e28ca8ea1a6cea0a8",
+        "bytes": 4225132
+      },
+      {
+        "file": "casa-1/img_6669.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6669.jpg",
+        "hash": "5b603ace9b7c15cb5dcc2fd36058aec7",
+        "bytes": 4356401
+      },
+      {
+        "file": "casa-1/img_6653.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6653.jpg",
+        "hash": "c11b76a0618b32fb267fe6e72649db59",
+        "bytes": 4426901
+      },
+      {
+        "file": "casa-1/img_6479.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6479.jpg",
+        "hash": "13f92c974af8657b2124b646c8e21a42",
+        "bytes": 5714963
+      },
+      {
+        "file": "casa-1/img_6470.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6470.jpg",
+        "hash": "d50f7a39cb11ddfddb6827c209622466",
+        "bytes": 3422899
+      }
+    ],
+    "casa-2": [
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6783.jpg",
+        "hash": "4524a6d09fbe0386e2325e4d9f4c4b2c",
+        "bytes": 4046548,
+        "duplicateOf": "home/img_6783.jpg"
+      },
+      {
+        "file": "casa-2/img_5927.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_5927.jpg",
+        "hash": "28c38d113a866bb48a084681b55d980d",
+        "bytes": 2426951
+      },
+      {
+        "file": "casa-2/img_6628.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6628.jpg",
+        "hash": "39ef1620a21ea6ba6c4b017dd21131c2",
+        "bytes": 4047292
+      },
+      {
+        "file": "casa-2/img_5743.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_5743.jpg",
+        "hash": "1218509a995b5fe7eb82e1cbe274245d",
+        "bytes": 1928794
+      },
+      {
+        "file": "casa-2/img_6589.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6589.jpg",
+        "hash": "3ab5fb4dba47315ba9ec0d8c2bcd737f",
+        "bytes": 3971277
+      },
+      {
+        "file": "casa-2/img_6800.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6800.jpg",
+        "hash": "71c75d394e81c7fa7c1b677ad4237089",
+        "bytes": 3896803
+      },
+      {
+        "file": "casa-2/img_6580.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6580.jpg",
+        "hash": "68c28c9b41297e4c8357af8404349bcd",
+        "bytes": 3842756
+      },
+      {
+        "file": "casa-2/img_5759.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_5759.jpg",
+        "hash": "183f5aec0b53aa62f6a6278844246daa",
+        "bytes": 1917908
+      },
+      {
+        "file": "casa-2/img_5756.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_5756.jpg",
+        "hash": "ed881e5ef35a57c0872d3af1d68addd3",
+        "bytes": 1770604
+      },
+      {
+        "file": "casa-2/img_6623.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6623.jpg",
+        "hash": "0e179f7ceae9bc004eef737a65f2a547",
+        "bytes": 4019805
+      },
+      {
+        "file": "casa-2/img_6769.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6769.jpg",
+        "hash": "048d2d17828ed3ef470b0a24fbab4d5b",
+        "bytes": 5926296
+      },
+      {
+        "file": "casa-2/img_65581.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_65581.jpg",
+        "hash": "97bf822c55be510a6b770e33da35b248",
+        "bytes": 3969033
+      },
+      {
+        "file": "casa-2/img_65771.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_65771.jpg",
+        "hash": "9a3e33f621a05ac3c23ee1266b51439e",
+        "bytes": 4410881
+      },
+      {
+        "file": "casa-2/img_6645.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6645.jpg",
+        "hash": "6fa29bea61220d19505b7458c62e7ef2",
+        "bytes": 4738765
+      },
+      {
+        "file": "casa-2/img_6643.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6643.jpg",
+        "hash": "71d196a9d3a075424c2bba207e4d8e79",
+        "bytes": 4544107
+      },
+      {
+        "file": "casa-2/img_6776.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6776.jpg",
+        "hash": "7f9083b6f714ea367488ff409842cd10",
+        "bytes": 7062695
+      },
+      {
+        "file": "casa-2/img_6609.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6609.jpg",
+        "hash": "32074bb83e985db49713bb038cbc1d18",
+        "bytes": 5112614
+      },
+      {
+        "file": "casa-2/img_5933.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_5933.jpg",
+        "hash": "7b49b73430a6838a18f8b94935263a2c",
+        "bytes": 2727107
+      }
+    ],
+    "casa-3": [
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/soggiorno-21.jpg",
+        "hash": "a2df83b100d19700ad573c2f88900941",
+        "bytes": 2660422,
+        "duplicateOf": "home/soggiorno-2.jpg"
+      },
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/soggiorno-2.jpg",
+        "hash": "a2df83b100d19700ad573c2f88900941",
+        "bytes": 2660422,
+        "duplicateOf": "home/soggiorno-2.jpg"
+      },
+      {
+        "file": "casa-3/ingresso-soggiorno.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/ingresso-soggiorno.jpg",
+        "hash": "71ec7e945e54403a4047f4d0a1f4bab2",
+        "bytes": 2339770
+      },
+      {
+        "file": "casa-3/letto-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/letto-1.jpg",
+        "hash": "dafb7bb9189f7729e70a0ca364f67278",
+        "bytes": 2192413
+      },
+      {
+        "file": "casa-3/letto-3.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/letto-3.jpg",
+        "hash": "864e6a8b7c30d36090fc8c1363af899d",
+        "bytes": 2429318
+      },
+      {
+        "file": "casa-3/letto-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/letto-2.jpg",
+        "hash": "9174a44996f6753d470c9b080a5ecc47",
+        "bytes": 2254874
+      },
+      {
+        "file": "casa-3/bagno-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/bagno-1.jpg",
+        "hash": "ec218e7cc2b88b832b47f99af8cd7b67",
+        "bytes": 2329359
+      },
+      {
+        "file": "casa-3/bagno-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/bagno-2.jpg",
+        "hash": "e9c4c7a8398b5bb0bd4864d60fd78df8",
+        "bytes": 2194218
+      },
+      {
+        "file": "casa-3/cucina-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/cucina-1.jpg",
+        "hash": "e7fb221f79e373f5b5709fa579c6293a",
+        "bytes": 2425272
+      },
+      {
+        "file": "casa-3/cucina-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/cucina-2.jpg",
+        "hash": "05dfccf272cfc9745567a61972f0ff74",
+        "bytes": 2424972
+      },
+      {
+        "file": "casa-3/soggiorno-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/soggiorno-1.jpg",
+        "hash": "82b50fd897c348b2fcd0f9674996c0c4",
+        "bytes": 2752771
+      },
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/terrazzo.jpg",
+        "hash": "c11b76a0618b32fb267fe6e72649db59",
+        "bytes": 4426901,
+        "duplicateOf": "casa-1/img_6653.jpg"
+      },
+      {
+        "file": "casa-3/ingresso-sul-cortile.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/ingresso-sul-cortile.jpg",
+        "hash": "bfe2702c25b3706c19b0f5d1c064d0d9",
+        "bytes": 2578587
+      }
+    ],
+    "casa-4": [
+      {
+        "file": null,
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/patio-3.jpg",
+        "hash": "9164f011ed0b5a253290ac8984ee644a",
+        "bytes": 2304633,
+        "duplicateOf": "home/patio-3.jpg"
+      },
+      {
+        "file": "casa-4/porta-sul-cortile.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/porta-sul-cortile.jpg",
+        "hash": "4bd2085baccea8bd0860f67ecd3b5f67",
+        "bytes": 2671356
+      },
+      {
+        "file": "casa-4/soggiorno-11.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/soggiorno-11.jpg",
+        "hash": "490dd89c581b78f1cde8224baf9d0042",
+        "bytes": 2413591
+      },
+      {
+        "file": "casa-4/cucina-11.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/cucina-11.jpg",
+        "hash": "a189fa5b2fce782bfb27cfd9493c2467",
+        "bytes": 2369392
+      },
+      {
+        "file": "casa-4/cucina-4.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/cucina-4.jpg",
+        "hash": "735abf09b388067a7b8c0b00899952be",
+        "bytes": 1974415
+      },
+      {
+        "file": "casa-4/cucina-3.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/cucina-3.jpg",
+        "hash": "e8814f363651ed93494b566043ecac03",
+        "bytes": 2173745
+      },
+      {
+        "file": "casa-4/cucina-21.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/cucina-21.jpg",
+        "hash": "5d99d7058211d754f9a30a6189ad45fd",
+        "bytes": 2323116
+      },
+      {
+        "file": "casa-4/patio-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/patio-2.jpg",
+        "hash": "77f420ee10fb75ddb21f48a5037c314f",
+        "bytes": 2507799
+      },
+      {
+        "file": "casa-4/letto-piano-terra.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/letto-piano-terra.jpg",
+        "hash": "c2e43a6b24bb9a1b598f703b14da2c0b",
+        "bytes": 2269891
+      },
+      {
+        "file": "casa-4/bagno-piano-terra-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/bagno-piano-terra-1.jpg",
+        "hash": "9ff1dd90b2993ffa830564f8e35d18e0",
+        "bytes": 2196501
+      },
+      {
+        "file": "casa-4/bagno-piano-terra-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/bagno-piano-terra-2.jpg",
+        "hash": "27d0b1e29d8886d08c0310e3b56fa01e",
+        "bytes": 1984421
+      },
+      {
+        "file": "casa-4/soggiorno-22.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/soggiorno-22.jpg",
+        "hash": "509a864de75ad02eda4eed9926771d29",
+        "bytes": 2285203
+      },
+      {
+        "file": "casa-4/letto-primo-piano-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/letto-primo-piano-1.jpg",
+        "hash": "d9275472c8694e3904aaa8f22b581662",
+        "bytes": 2815394
+      },
+      {
+        "file": "casa-4/letto-primo-piano-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/letto-primo-piano-2.jpg",
+        "hash": "8aae948a0c2231ab94602c3e52a274f0",
+        "bytes": 2580676
+      },
+      {
+        "file": "casa-4/bagno-primo-piano-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/bagno-primo-piano-2.jpg",
+        "hash": "e38795c6f1622c16d25cb5c71ceb8e53",
+        "bytes": 2497606
+      },
+      {
+        "file": "casa-4/bagno-primo-piano-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/bagno-primo-piano-1.jpg",
+        "hash": "a4e3f03ffee58982337c259d681d2e89",
+        "bytes": 2506844
+      },
+      {
+        "file": "casa-4/patio-1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/patio-1.jpg",
+        "hash": "d8c28d9b0543ef049ca40e005436e6f8",
+        "bytes": 2846473
+      },
+      {
+        "file": "casa-4/terrazzo-2.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/terrazzo-2.jpg",
+        "hash": "a5a033ec77b8f2cfa363cdc1d594e46e",
+        "bytes": 2966309
+      },
+      {
+        "file": "casa-4/terrazzo1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/terrazzo1.jpg",
+        "hash": "c97c057078c4760b79ffb6913212f1d1",
+        "bytes": 3046372
+      }
+    ],
+    "imperdibili": [
+      {
+        "file": "imperdibili/segesta.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/segesta.jpg",
+        "hash": "987b167f63aac102f586a8348f5de5ed",
+        "bytes": 37942
+      },
+      {
+        "file": "imperdibili/37597-o19aqt.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/37597-o19aqt.jpg",
+        "hash": "49762692505b55e4f5d340f5871cf3b2",
+        "bytes": 259374
+      },
+      {
+        "file": "imperdibili/sicilia-scopello-11.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/sicilia-scopello-11.jpg",
+        "hash": "17a8170ab859910a3bdef329415ce257",
+        "bytes": 156607
+      },
+      {
+        "file": "imperdibili/050411sicilia0241-copia.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/050411sicilia0241-copia.jpg",
+        "hash": "8b2002fd2d2abd04640c31b63704edd4",
+        "bytes": 4424791
+      },
+      {
+        "file": "imperdibili/l10-monreale-chiostro1.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/l10-monreale-chiostro1.jpg",
+        "hash": "3b34e79bbfadf51c062fec1ec32cd8da",
+        "bytes": 486043
+      },
+      {
+        "file": "imperdibili/palermo_cappella_palatina-400x300.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/palermo_cappella_palatina-400x300.jpg",
+        "hash": "df26bff3647bd23bc40138b2583cd6fd",
+        "bytes": 41767
+      },
+      {
+        "file": "imperdibili/tempio_selinunte.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/tempio_selinunte.jpg",
+        "hash": "fdb746e42e75d62d1b98eab3c4ee027c",
+        "bytes": 269084
+      },
+      {
+        "file": "imperdibili/erice.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/erice.jpg",
+        "hash": "d9238c862ab3db304059035fc2992be4",
+        "bytes": 22099
+      }
+    ]
+  }
+}
