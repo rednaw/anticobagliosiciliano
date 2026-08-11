@@ -13,7 +13,7 @@
 		"archivio:build": "node scripts/build-archivio.mjs"
 	},
 	"engines": {
-		"node": ">=24"
+		"node": ">=24.19.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.10",
