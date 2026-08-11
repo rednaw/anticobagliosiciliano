@@ -4,12 +4,6 @@
   "pages": {
     "home": [
       {
-        "file": "home/baglio-dallalto.jpg",
-        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/10/baglio-dallalto.jpg",
-        "hash": "947d7ba57d3f90c867a2d9fd2f7c84e9",
-        "bytes": 428836
-      },
-      {
         "file": "home/img_6532.jpg",
         "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/04/img_6532.jpg",
         "hash": "0380a737d7cdb930ba264a7c38791468",
@@ -501,40 +495,16 @@
         "bytes": 259374
       },
       {
-        "file": "imperdibili/sicilia-scopello-11.jpg",
-        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/sicilia-scopello-11.jpg",
-        "hash": "17a8170ab859910a3bdef329415ce257",
-        "bytes": 156607
-      },
-      {
         "file": "imperdibili/050411sicilia0241-copia.jpg",
         "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/050411sicilia0241-copia.jpg",
         "hash": "8b2002fd2d2abd04640c31b63704edd4",
         "bytes": 4424791
       },
       {
-        "file": "imperdibili/l10-monreale-chiostro1.jpg",
-        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/l10-monreale-chiostro1.jpg",
-        "hash": "3b34e79bbfadf51c062fec1ec32cd8da",
-        "bytes": 486043
-      },
-      {
         "file": "imperdibili/palermo_cappella_palatina-400x300.jpg",
         "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/palermo_cappella_palatina-400x300.jpg",
         "hash": "df26bff3647bd23bc40138b2583cd6fd",
         "bytes": 41767
-      },
-      {
-        "file": "imperdibili/tempio_selinunte.jpg",
-        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/tempio_selinunte.jpg",
-        "hash": "fdb746e42e75d62d1b98eab3c4ee027c",
-        "bytes": 269084
-      },
-      {
-        "file": "imperdibili/erice.jpg",
-        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/09/erice.jpg",
-        "hash": "d9238c862ab3db304059035fc2992be4",
-        "bytes": 22099
       }
     ]
   }
