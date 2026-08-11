@@ -1,0 +1,46 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:recommended",
+		":semanticCommits",
+		":disableRateLimiting",
+		"mergeConfidence:all-badges"
+	],
+	"labels": ["dependencies"],
+	"rangeStrategy": "bump",
+	"minimumReleaseAge": "1 day",
+	"lockFileMaintenance": {
+		"enabled": true,
+		"schedule": ["at any time"]
+	},
+	"packageRules": [
+		{
+			"description": "SvelteKit stack",
+			"matchManagers": ["npm"],
+			"groupName": "svelte stack",
+			"matchPackageNames": [
+				"/^@sveltejs//",
+				"/^svelte$/",
+				"/^svelte-check$/"
+			]
+		},
+		{
+			"description": "Vite",
+			"matchManagers": ["npm"],
+			"groupName": "vite",
+			"matchPackageNames": ["/^vite$/"]
+		},
+		{
+			"description": "GitHub Actions",
+			"matchManagers": ["github-actions"],
+			"groupName": "github actions"
+		},
+		{
+			"description": "Devcontainer Node base image",
+			"matchManagers": ["dockerfile"],
+			"matchFileNames": [".devcontainer/Dockerfile"],
+			"matchPackageNames": ["node"],
+			"groupName": "node docker"
+		}
+	]
+}
