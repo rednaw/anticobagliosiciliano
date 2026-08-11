@@ -1,3 +1,3 @@
-# allow crawling everything by default
+# allow crawling the public site
 User-agent: *
-Disallow:
+Disallow: /archivio/

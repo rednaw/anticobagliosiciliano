@@ -35,3 +35,13 @@ Production only — reports under **`anticobagliosiciliano.rednaw.github.io`**
 ## Contact email
 
 Update `email` in `src/lib/data/content.ts` if needed (used by the contact form / mailto).
+
+## Owner archive browser
+
+Unlinked page at **`/archivio/`** — thumbnail gallery of photos/text from `archive/` (old `.it`, Lodgify `.com`, WordPress.com). Thumbs ship with the site; clicking opens full-res from GitHub LFS (`media.githubusercontent.com`). Not in the nav; `noindex` + `robots.txt` disallow.
+
+Regenerate after archive changes (requires LFS files locally):
+
+```sh
+npm run archivio:build
+```
