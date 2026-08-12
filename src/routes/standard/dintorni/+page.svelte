@@ -41,7 +41,7 @@
 	<div class="container">
 		<Reveal>
 			<h2>Vieni a scoprirli da qui</h2>
-			<a class="btn btn-light" href={resolve('/contatti')}>Prenota il soggiorno</a>
+			<a class="btn btn-light" href={resolve('/standard/contatti/')}>Prenota il soggiorno</a>
 		</Reveal>
 	</div>
 </section>

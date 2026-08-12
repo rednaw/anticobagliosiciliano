@@ -4,6 +4,9 @@ export type ArchivioImage = {
 	title: string;
 	thumb: string;
 	full: string;
+	width: number;
+	height: number;
+	bytes: number;
 };
 
 export type ArchivioText = {

@@ -80,6 +80,31 @@ async function writeThumb(srcAbs, thumbAbs) {
 		.toFile(thumbAbs);
 }
 
+/** Original file size + pixel dimensions (after EXIF orientation). */
+async function originalMeta(srcAbs) {
+	const [stat, meta] = await Promise.all([fs.stat(srcAbs), sharp(srcAbs).rotate().metadata()]);
+	return {
+		bytes: stat.size,
+		width: meta.width ?? 0,
+		height: meta.height ?? 0
+	};
+}
+
+async function imageEntry({ idParts, filename, title, thumbRel, archiveRel, srcAbs }) {
+	await writeThumb(srcAbs, path.join(outRoot, thumbRel));
+	const meta = await originalMeta(srcAbs);
+	return {
+		id: slugId(...idParts),
+		filename,
+		title,
+		thumb: `/archivio/${thumbRel}`,
+		full: mediaUrl(archiveRel),
+		width: meta.width,
+		height: meta.height,
+		bytes: meta.bytes
+	};
+}
+
 async function readTextFiles(dir) {
 	try {
 		const entries = await fs.readdir(dir);
@@ -120,16 +145,16 @@ async function buildOriginalSite() {
 				continue;
 			}
 			const thumbRel = `thumbs/original-site/${rel.replace(/\.[^.]+$/, '.jpg')}`;
-			const thumbAbs = path.join(outRoot, thumbRel);
-			await writeThumb(srcAbs, thumbAbs);
-			const archiveRel = `original-site/${rel}`;
-			images.push({
-				id: slugId('original-site', rel),
-				filename: path.basename(rel),
-				title: titleFromFilename(path.basename(rel)),
-				thumb: `/archivio/${thumbRel}`,
-				full: mediaUrl(archiveRel)
-			});
+			images.push(
+				await imageEntry({
+					idParts: ['original-site', rel],
+					filename: path.basename(rel),
+					title: titleFromFilename(path.basename(rel)),
+					thumbRel,
+					archiveRel: `original-site/${rel}`,
+					srcAbs
+				})
+			);
 		}
 		groups.push({
 			id: pageId,
@@ -156,15 +181,16 @@ async function buildLodgify() {
 	for (const srcAbs of files) {
 		const filename = path.basename(srcAbs);
 		const thumbRel = `thumbs/lodgify-com/${filename.replace(/\.[^.]+$/, '.jpg')}`;
-		await writeThumb(srcAbs, path.join(outRoot, thumbRel));
-		const archiveRel = `lodgify-com/images/${filename}`;
-		images.push({
-			id: slugId('lodgify-com', filename),
-			filename,
-			title: titleFromFilename(filename),
-			thumb: `/archivio/${thumbRel}`,
-			full: mediaUrl(archiveRel)
-		});
+		images.push(
+			await imageEntry({
+				idParts: ['lodgify-com', filename],
+				filename,
+				title: titleFromFilename(filename),
+				thumbRel,
+				archiveRel: `lodgify-com/images/${filename}`,
+				srcAbs
+			})
+		);
 	}
 
 	const texts = await readTextFiles(path.join(base, 'text'));
@@ -199,15 +225,16 @@ async function buildOldWordpress() {
 	for (const srcAbs of files) {
 		const filename = path.basename(srcAbs);
 		const thumbRel = `thumbs/old-wordpress/${filename.replace(/\.[^.]+$/, '.jpg')}`;
-		await writeThumb(srcAbs, path.join(outRoot, thumbRel));
-		const archiveRel = `old-wordpress/images/${filename}`;
-		images.push({
-			id: slugId('old-wordpress', filename),
-			filename,
-			title: titleFromFilename(filename),
-			thumb: `/archivio/${thumbRel}`,
-			full: mediaUrl(archiveRel)
-		});
+		images.push(
+			await imageEntry({
+				idParts: ['old-wordpress', filename],
+				filename,
+				title: titleFromFilename(filename),
+				thumbRel,
+				archiveRel: `old-wordpress/images/${filename}`,
+				srcAbs
+			})
+		);
 	}
 
 	const texts = await readTextFiles(path.join(base, 'text'));

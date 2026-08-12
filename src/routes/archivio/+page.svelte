@@ -37,6 +37,12 @@
 			.replace(/>/g, '&gt;')
 			.replace(/"/g, '&quot;');
 	}
+
+	function formatBytes(bytes: number): string {
+		if (bytes < 1024) return `${bytes} B`;
+		if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+		return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+	}
 </script>
 
 <svelte:head>
@@ -50,7 +56,7 @@
 		<h1>Archivio siti precedenti</h1>
 		<p class="lead">
 			Galleria in sola lettura delle foto e dei testi recuperati dai vecchi siti. Clicca una
-			miniatura per aprire l’immagine a piena risoluzione (GitHub).
+			miniatura per aprire l’immagine a piena risoluzione.
 		</p>
 
 		<div class="tabs" role="tablist" aria-label="Sorgente archivio">
@@ -99,7 +105,11 @@
 												width="480"
 												height="360"
 											/>
-											<span class="caption">{image.filename}</span>
+											<span class="meta">
+												<span class="filename">{image.filename}</span>
+												<span class="dims">{image.width}×{image.height}</span>
+												<span class="size">{formatBytes(image.bytes)}</span>
+											</span>
 										</a>
 									</li>
 								{/each}
@@ -194,7 +204,7 @@
 		margin: 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 		gap: 0.75rem;
 	}
 
@@ -223,11 +233,17 @@
 		background: var(--paper-deep);
 	}
 
-	.caption {
+	.meta {
+		display: grid;
+		gap: 0.15rem;
+		padding: 0.35rem 0.5rem 0.55rem;
 		font-size: 0.72rem;
-		line-height: 1.3;
-		padding: 0 0.45rem 0.5rem;
+		line-height: 1.35;
 		color: var(--muted);
+	}
+
+	.filename {
+		color: var(--ink-soft);
 		word-break: break-all;
 	}
 

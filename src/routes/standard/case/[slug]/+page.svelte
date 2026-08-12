@@ -40,7 +40,7 @@
 				</Reveal>
 			{/each}
 			<Reveal>
-				<a class="btn" href={resolve('/contatti')}>Richiesta disponibilità</a>
+				<a class="btn" href={resolve('/standard/contatti/')}>Richiesta disponibilità</a>
 			</Reveal>
 		</div>
 		<aside>
@@ -76,7 +76,7 @@
 		<div class="grid">
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
-					<a href={resolve(`/case/${other.slug}`)}>
+					<a href={resolve(`/standard/case/${other.slug}/`)}>
 						<img src={asset(other.image)} alt={other.name} loading="lazy" />
 						<span>{other.name}</span>
 					</a>

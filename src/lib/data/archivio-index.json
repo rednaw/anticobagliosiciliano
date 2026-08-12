@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T17:49:54.686Z",
+  "generatedAt": "2026-08-12T15:53:30.552Z",
   "repo": "rednaw/anticobagliosiciliano",
   "branch": "main",
   "note": "Hidden owner archive browser. Thumbnails ship with the site; full-res opens from GitHub LFS media CDN.",
@@ -18,63 +18,90 @@
               "filename": "img_6532.jpg",
               "title": "img 6532",
               "thumb": "/archivio/thumbs/original-site/home/img_6532.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/img_6532.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/img_6532.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4748446
             },
             {
               "id": "original-site-home-img-6783-jpg-ef02ae73a2",
               "filename": "img_6783.jpg",
               "title": "img 6783",
               "thumb": "/archivio/thumbs/original-site/home/img_6783.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/img_6783.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/img_6783.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4046548
             },
             {
               "id": "original-site-home-soggiorno-2-jpg-f48cdd79ae",
               "filename": "soggiorno-2.jpg",
               "title": "soggiorno 2",
               "thumb": "/archivio/thumbs/original-site/home/soggiorno-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/soggiorno-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/soggiorno-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2660422
             },
             {
               "id": "original-site-home-patio-3-jpg-66964a86b2",
               "filename": "patio-3.jpg",
               "title": "patio 3",
               "thumb": "/archivio/thumbs/original-site/home/patio-3.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/patio-3.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/patio-3.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2304633
             },
             {
               "id": "original-site-home-foto-portone-jpeg-d202745715",
               "filename": "Foto-portone.jpeg",
               "title": "Foto portone",
               "thumb": "/archivio/thumbs/original-site/home/Foto-portone.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Foto-portone.jpeg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Foto-portone.jpeg",
+              "width": 1536,
+              "height": 2048,
+              "bytes": 2355125
             },
             {
               "id": "original-site-home-foto-giardino-3-copia-jpg-5d1c881674",
               "filename": "Foto-giardino-3-copia.jpg",
               "title": "Foto giardino 3 copia",
               "thumb": "/archivio/thumbs/original-site/home/Foto-giardino-3-copia.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Foto-giardino-3-copia.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Foto-giardino-3-copia.jpg",
+              "width": 5836,
+              "height": 4377,
+              "bytes": 6778981
             },
             {
               "id": "original-site-home-screenshot-2025-05-25-alle-16-40-39-png-d9d0b2a95b",
               "filename": "Screenshot-2025-05-25-alle-16.40.39.png",
               "title": "Screenshot 2025 05 25 alle 16.40.39",
               "thumb": "/archivio/thumbs/original-site/home/Screenshot-2025-05-25-alle-16.40.39.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Screenshot-2025-05-25-alle-16.40.39.png"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Screenshot-2025-05-25-alle-16.40.39.png",
+              "width": 1617,
+              "height": 1020,
+              "bytes": 934253
             },
             {
               "id": "original-site-home-screenshot-2025-05-25-alle-16-23-41-png-a75428660f",
               "filename": "Screenshot-2025-05-25-alle-16.23.41.png",
               "title": "Screenshot 2025 05 25 alle 16.23.41",
               "thumb": "/archivio/thumbs/original-site/home/Screenshot-2025-05-25-alle-16.23.41.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Screenshot-2025-05-25-alle-16.23.41.png"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Screenshot-2025-05-25-alle-16.23.41.png",
+              "width": 1626,
+              "height": 866,
+              "bytes": 211254
             },
             {
               "id": "original-site-home-digital-gallery-award-tra-2025-png-e2af90e7b2",
               "filename": "Digital-Gallery-Award-TRA-2025.png",
               "title": "Digital Gallery Award TRA 2025",
               "thumb": "/archivio/thumbs/original-site/home/Digital-Gallery-Award-TRA-2025.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Digital-Gallery-Award-TRA-2025.png"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/home/Digital-Gallery-Award-TRA-2025.png",
+              "width": 1280,
+              "height": 900,
+              "bytes": 84274
             }
           ],
           "texts": []
@@ -88,112 +115,160 @@
               "filename": "img_6807.jpg",
               "title": "img 6807",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6807.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6807.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6807.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4091712
             },
             {
               "id": "original-site-casa-1-img-6513-jpg-13c2d9a904",
               "filename": "img_6513.jpg",
               "title": "img 6513",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6513.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6513.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6513.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3866925
             },
             {
               "id": "original-site-casa-1-img-6514-jpg-e4a030940a",
               "filename": "img_6514.jpg",
               "title": "img 6514",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6514.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6514.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6514.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3891490
             },
             {
               "id": "original-site-casa-1-img-6511-jpg-94e2db909a",
               "filename": "img_6511.jpg",
               "title": "img 6511",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6511.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6511.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6511.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3785952
             },
             {
               "id": "original-site-casa-1-img-6494-jpg-4d40c6cf4d",
               "filename": "img_6494.jpg",
               "title": "img 6494",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6494.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6494.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6494.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3796602
             },
             {
               "id": "original-site-casa-1-img-6493-jpg-5478fdf958",
               "filename": "img_6493.jpg",
               "title": "img 6493",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6493.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6493.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6493.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4203113
             },
             {
               "id": "original-site-casa-1-img-6368-jpg-fd51eb14b2",
               "filename": "img_6368.jpg",
               "title": "img 6368",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6368.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6368.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6368.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2032519
             },
             {
               "id": "original-site-casa-1-img-6383-jpg-9e3480c502",
               "filename": "img_6383.jpg",
               "title": "img 6383",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6383.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6383.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6383.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3888229
             },
             {
               "id": "original-site-casa-1-img-6391-jpg-6532c23a59",
               "filename": "img_6391.jpg",
               "title": "img 6391",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6391.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6391.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6391.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3803826
             },
             {
               "id": "original-site-casa-1-img-6501-jpg-9a3f6275aa",
               "filename": "img_6501.jpg",
               "title": "img 6501",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6501.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6501.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6501.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3380805
             },
             {
               "id": "original-site-casa-1-img-6482-jpg-f43e3b2413",
               "filename": "img_6482.jpg",
               "title": "img 6482",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6482.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6482.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6482.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3942302
             },
             {
               "id": "original-site-casa-1-img-6419-jpg-5bc7ee56e8",
               "filename": "img_6419.jpg",
               "title": "img 6419",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6419.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6419.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6419.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4225132
             },
             {
               "id": "original-site-casa-1-img-6669-jpg-9576597910",
               "filename": "img_6669.jpg",
               "title": "img 6669",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6669.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6669.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6669.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4356401
             },
             {
               "id": "original-site-casa-1-img-6653-jpg-0cdabeab81",
               "filename": "img_6653.jpg",
               "title": "img 6653",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6653.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6653.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6653.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4426901
             },
             {
               "id": "original-site-casa-1-img-6479-jpg-40de97e6e4",
               "filename": "img_6479.jpg",
               "title": "img 6479",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6479.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6479.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6479.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 5714963
             },
             {
               "id": "original-site-casa-1-img-6470-jpg-6c468d7d84",
               "filename": "img_6470.jpg",
               "title": "img 6470",
               "thumb": "/archivio/thumbs/original-site/casa-1/img_6470.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6470.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-1/img_6470.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3422899
             }
           ],
           "texts": []
@@ -207,119 +282,170 @@
               "filename": "img_5927.jpg",
               "title": "img 5927",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_5927.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5927.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5927.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2426951
             },
             {
               "id": "original-site-casa-2-img-6628-jpg-7c96164944",
               "filename": "img_6628.jpg",
               "title": "img 6628",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6628.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6628.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6628.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4047292
             },
             {
               "id": "original-site-casa-2-img-5743-jpg-8877eadced",
               "filename": "img_5743.jpg",
               "title": "img 5743",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_5743.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5743.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5743.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1928794
             },
             {
               "id": "original-site-casa-2-img-6589-jpg-416ea84625",
               "filename": "img_6589.jpg",
               "title": "img 6589",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6589.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6589.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6589.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3971277
             },
             {
               "id": "original-site-casa-2-img-6800-jpg-c8f605d54a",
               "filename": "img_6800.jpg",
               "title": "img 6800",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6800.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6800.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6800.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3896803
             },
             {
               "id": "original-site-casa-2-img-6580-jpg-a7943d2f84",
               "filename": "img_6580.jpg",
               "title": "img 6580",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6580.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6580.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6580.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3842756
             },
             {
               "id": "original-site-casa-2-img-5759-jpg-668cee3d3b",
               "filename": "img_5759.jpg",
               "title": "img 5759",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_5759.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5759.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5759.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1917908
             },
             {
               "id": "original-site-casa-2-img-5756-jpg-88c7e2fa19",
               "filename": "img_5756.jpg",
               "title": "img 5756",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_5756.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5756.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5756.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1770604
             },
             {
               "id": "original-site-casa-2-img-6623-jpg-2342a5171c",
               "filename": "img_6623.jpg",
               "title": "img 6623",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6623.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6623.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6623.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4019805
             },
             {
               "id": "original-site-casa-2-img-6769-jpg-d2cc9f12ac",
               "filename": "img_6769.jpg",
               "title": "img 6769",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6769.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6769.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6769.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 5926296
             },
             {
               "id": "original-site-casa-2-img-65581-jpg-37d00113d5",
               "filename": "img_65581.jpg",
               "title": "img 65581",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_65581.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_65581.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_65581.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3969033
             },
             {
               "id": "original-site-casa-2-img-65771-jpg-8d86fbc0ae",
               "filename": "img_65771.jpg",
               "title": "img 65771",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_65771.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_65771.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_65771.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4410881
             },
             {
               "id": "original-site-casa-2-img-6645-jpg-86c68d1734",
               "filename": "img_6645.jpg",
               "title": "img 6645",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6645.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6645.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6645.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4738765
             },
             {
               "id": "original-site-casa-2-img-6643-jpg-57c997e019",
               "filename": "img_6643.jpg",
               "title": "img 6643",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6643.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6643.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6643.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4544107
             },
             {
               "id": "original-site-casa-2-img-6776-jpg-cc45d32e84",
               "filename": "img_6776.jpg",
               "title": "img 6776",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6776.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6776.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6776.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 7062695
             },
             {
               "id": "original-site-casa-2-img-6609-jpg-ed51ed5f74",
               "filename": "img_6609.jpg",
               "title": "img 6609",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_6609.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6609.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_6609.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 5112614
             },
             {
               "id": "original-site-casa-2-img-5933-jpg-c2a3d69c91",
               "filename": "img_5933.jpg",
               "title": "img 5933",
               "thumb": "/archivio/thumbs/original-site/casa-2/img_5933.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5933.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-2/img_5933.jpg",
+              "width": 2304,
+              "height": 3456,
+              "bytes": 2727107
             }
           ],
           "texts": []
@@ -333,70 +459,100 @@
               "filename": "ingresso-soggiorno.jpg",
               "title": "ingresso soggiorno",
               "thumb": "/archivio/thumbs/original-site/casa-3/ingresso-soggiorno.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/ingresso-soggiorno.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/ingresso-soggiorno.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2339770
             },
             {
               "id": "original-site-casa-3-letto-1-jpg-52b7e0cdf7",
               "filename": "letto-1.jpg",
               "title": "letto 1",
               "thumb": "/archivio/thumbs/original-site/casa-3/letto-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/letto-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/letto-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2192413
             },
             {
               "id": "original-site-casa-3-letto-3-jpg-d2b1d5102f",
               "filename": "letto-3.jpg",
               "title": "letto 3",
               "thumb": "/archivio/thumbs/original-site/casa-3/letto-3.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/letto-3.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/letto-3.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2429318
             },
             {
               "id": "original-site-casa-3-letto-2-jpg-192939f095",
               "filename": "letto-2.jpg",
               "title": "letto 2",
               "thumb": "/archivio/thumbs/original-site/casa-3/letto-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/letto-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/letto-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2254874
             },
             {
               "id": "original-site-casa-3-bagno-1-jpg-51c5490047",
               "filename": "bagno-1.jpg",
               "title": "bagno 1",
               "thumb": "/archivio/thumbs/original-site/casa-3/bagno-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/bagno-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/bagno-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2329359
             },
             {
               "id": "original-site-casa-3-bagno-2-jpg-9a7d66a3da",
               "filename": "bagno-2.jpg",
               "title": "bagno 2",
               "thumb": "/archivio/thumbs/original-site/casa-3/bagno-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/bagno-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/bagno-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2194218
             },
             {
               "id": "original-site-casa-3-cucina-1-jpg-8bd13cff1a",
               "filename": "cucina-1.jpg",
               "title": "cucina 1",
               "thumb": "/archivio/thumbs/original-site/casa-3/cucina-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/cucina-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/cucina-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2425272
             },
             {
               "id": "original-site-casa-3-cucina-2-jpg-e49fdc9fe8",
               "filename": "cucina-2.jpg",
               "title": "cucina 2",
               "thumb": "/archivio/thumbs/original-site/casa-3/cucina-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/cucina-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/cucina-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2424972
             },
             {
               "id": "original-site-casa-3-soggiorno-1-jpg-5560603676",
               "filename": "soggiorno-1.jpg",
               "title": "soggiorno 1",
               "thumb": "/archivio/thumbs/original-site/casa-3/soggiorno-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/soggiorno-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/soggiorno-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2752771
             },
             {
               "id": "original-site-casa-3-ingresso-sul-cortile-jpg-9825bd3151",
               "filename": "ingresso-sul-cortile.jpg",
               "title": "ingresso sul cortile",
               "thumb": "/archivio/thumbs/original-site/casa-3/ingresso-sul-cortile.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/ingresso-sul-cortile.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-3/ingresso-sul-cortile.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2578587
             }
           ],
           "texts": []
@@ -410,126 +566,180 @@
               "filename": "porta-sul-cortile.jpg",
               "title": "porta sul cortile",
               "thumb": "/archivio/thumbs/original-site/casa-4/porta-sul-cortile.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/porta-sul-cortile.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/porta-sul-cortile.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2671356
             },
             {
               "id": "original-site-casa-4-soggiorno-11-jpg-a7e4eff9d2",
               "filename": "soggiorno-11.jpg",
               "title": "soggiorno 11",
               "thumb": "/archivio/thumbs/original-site/casa-4/soggiorno-11.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/soggiorno-11.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/soggiorno-11.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2413591
             },
             {
               "id": "original-site-casa-4-cucina-11-jpg-8cbf96eda7",
               "filename": "cucina-11.jpg",
               "title": "cucina 11",
               "thumb": "/archivio/thumbs/original-site/casa-4/cucina-11.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-11.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-11.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2369392
             },
             {
               "id": "original-site-casa-4-cucina-4-jpg-833752ede9",
               "filename": "cucina-4.jpg",
               "title": "cucina 4",
               "thumb": "/archivio/thumbs/original-site/casa-4/cucina-4.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-4.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-4.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1974415
             },
             {
               "id": "original-site-casa-4-cucina-3-jpg-d038afa435",
               "filename": "cucina-3.jpg",
               "title": "cucina 3",
               "thumb": "/archivio/thumbs/original-site/casa-4/cucina-3.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-3.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-3.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2173745
             },
             {
               "id": "original-site-casa-4-cucina-21-jpg-616c0b3c32",
               "filename": "cucina-21.jpg",
               "title": "cucina 21",
               "thumb": "/archivio/thumbs/original-site/casa-4/cucina-21.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-21.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/cucina-21.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2323116
             },
             {
               "id": "original-site-casa-4-patio-2-jpg-10754fa289",
               "filename": "patio-2.jpg",
               "title": "patio 2",
               "thumb": "/archivio/thumbs/original-site/casa-4/patio-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/patio-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/patio-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2507799
             },
             {
               "id": "original-site-casa-4-letto-piano-terra-jpg-f836dab57b",
               "filename": "letto-piano-terra.jpg",
               "title": "letto piano terra",
               "thumb": "/archivio/thumbs/original-site/casa-4/letto-piano-terra.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/letto-piano-terra.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/letto-piano-terra.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2269891
             },
             {
               "id": "original-site-casa-4-bagno-piano-terra-1-jpg-6551e49799",
               "filename": "bagno-piano-terra-1.jpg",
               "title": "bagno piano terra 1",
               "thumb": "/archivio/thumbs/original-site/casa-4/bagno-piano-terra-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-piano-terra-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-piano-terra-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2196501
             },
             {
               "id": "original-site-casa-4-bagno-piano-terra-2-jpg-8485b64ff4",
               "filename": "bagno-piano-terra-2.jpg",
               "title": "bagno piano terra 2",
               "thumb": "/archivio/thumbs/original-site/casa-4/bagno-piano-terra-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-piano-terra-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-piano-terra-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1984421
             },
             {
               "id": "original-site-casa-4-soggiorno-22-jpg-30ab69b1ff",
               "filename": "soggiorno-22.jpg",
               "title": "soggiorno 22",
               "thumb": "/archivio/thumbs/original-site/casa-4/soggiorno-22.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/soggiorno-22.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/soggiorno-22.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2285203
             },
             {
               "id": "original-site-casa-4-letto-primo-piano-1-jpg-34b73ba5ef",
               "filename": "letto-primo-piano-1.jpg",
               "title": "letto primo piano 1",
               "thumb": "/archivio/thumbs/original-site/casa-4/letto-primo-piano-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/letto-primo-piano-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/letto-primo-piano-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2815394
             },
             {
               "id": "original-site-casa-4-letto-primo-piano-2-jpg-1c830e285d",
               "filename": "letto-primo-piano-2.jpg",
               "title": "letto primo piano 2",
               "thumb": "/archivio/thumbs/original-site/casa-4/letto-primo-piano-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/letto-primo-piano-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/letto-primo-piano-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2580676
             },
             {
               "id": "original-site-casa-4-bagno-primo-piano-2-jpg-756dc03492",
               "filename": "bagno-primo-piano-2.jpg",
               "title": "bagno primo piano 2",
               "thumb": "/archivio/thumbs/original-site/casa-4/bagno-primo-piano-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-primo-piano-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-primo-piano-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2497606
             },
             {
               "id": "original-site-casa-4-bagno-primo-piano-1-jpg-00f8161fe4",
               "filename": "bagno-primo-piano-1.jpg",
               "title": "bagno primo piano 1",
               "thumb": "/archivio/thumbs/original-site/casa-4/bagno-primo-piano-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-primo-piano-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/bagno-primo-piano-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2506844
             },
             {
               "id": "original-site-casa-4-patio-1-jpg-9ed33a8aed",
               "filename": "patio-1.jpg",
               "title": "patio 1",
               "thumb": "/archivio/thumbs/original-site/casa-4/patio-1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/patio-1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/patio-1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2846473
             },
             {
               "id": "original-site-casa-4-terrazzo-2-jpg-5bf070a264",
               "filename": "terrazzo-2.jpg",
               "title": "terrazzo 2",
               "thumb": "/archivio/thumbs/original-site/casa-4/terrazzo-2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/terrazzo-2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/terrazzo-2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2966309
             },
             {
               "id": "original-site-casa-4-terrazzo1-jpg-d4394a6770",
               "filename": "terrazzo1.jpg",
               "title": "terrazzo1",
               "thumb": "/archivio/thumbs/original-site/casa-4/terrazzo1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/terrazzo1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/casa-4/terrazzo1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3046372
             }
           ],
           "texts": []
@@ -543,28 +753,40 @@
               "filename": "segesta.jpg",
               "title": "segesta",
               "thumb": "/archivio/thumbs/original-site/imperdibili/segesta.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/segesta.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/segesta.jpg",
+              "width": 500,
+              "height": 323,
+              "bytes": 37942
             },
             {
               "id": "original-site-imperdibili-37597-o19aqt-jpg-5d2d328763",
               "filename": "37597-o19aqt.jpg",
               "title": "37597 o19aqt",
               "thumb": "/archivio/thumbs/original-site/imperdibili/37597-o19aqt.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/37597-o19aqt.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/37597-o19aqt.jpg",
+              "width": 1667,
+              "height": 1667,
+              "bytes": 259374
             },
             {
               "id": "original-site-imperdibili-050411sicilia0241-copia-jpg-a8c59d7264",
               "filename": "050411sicilia0241-copia.jpg",
               "title": "050411sicilia0241 copia",
               "thumb": "/archivio/thumbs/original-site/imperdibili/050411sicilia0241-copia.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/050411sicilia0241-copia.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/050411sicilia0241-copia.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 4424791
             },
             {
               "id": "original-site-imperdibili-palermo-cappella-palatina-400x300-jpg-9ed935b007",
               "filename": "palermo_cappella_palatina-400x300.jpg",
               "title": "palermo cappella palatina 400x300",
               "thumb": "/archivio/thumbs/original-site/imperdibili/palermo_cappella_palatina-400x300.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/palermo_cappella_palatina-400x300.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/original-site/imperdibili/palermo_cappella_palatina-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "bytes": 41767
             }
           ],
           "texts": []
@@ -585,651 +807,930 @@
               "filename": "05cab256-f2a0-49fe-a207-360dd2c4464b.jpg",
               "title": "05cab256 f2a0 49fe a207 360dd2c4464b",
               "thumb": "/archivio/thumbs/lodgify-com/05cab256-f2a0-49fe-a207-360dd2c4464b.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/05cab256-f2a0-49fe-a207-360dd2c4464b.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/05cab256-f2a0-49fe-a207-360dd2c4464b.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1985922
             },
             {
               "id": "lodgify-com-07bd6013-8ee1-4945-b21a-fb41d234325e-jpg-47f1a51138",
               "filename": "07bd6013-8ee1-4945-b21a-fb41d234325e.jpg",
               "title": "07bd6013 8ee1 4945 b21a fb41d234325e",
               "thumb": "/archivio/thumbs/lodgify-com/07bd6013-8ee1-4945-b21a-fb41d234325e.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/07bd6013-8ee1-4945-b21a-fb41d234325e.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/07bd6013-8ee1-4945-b21a-fb41d234325e.jpg",
+              "width": 500,
+              "height": 323,
+              "bytes": 38404
             },
             {
               "id": "lodgify-com-0808970e-f8d2-4a1e-b975-330c0626522d-jpg-ae15d45b83",
               "filename": "0808970e-f8d2-4a1e-b975-330c0626522d.jpg",
               "title": "0808970e f8d2 4a1e b975 330c0626522d",
               "thumb": "/archivio/thumbs/lodgify-com/0808970e-f8d2-4a1e-b975-330c0626522d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/0808970e-f8d2-4a1e-b975-330c0626522d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/0808970e-f8d2-4a1e-b975-330c0626522d.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3572855
             },
             {
               "id": "lodgify-com-092ebc94-29d2-4d10-b188-d0750e86aef2-jpg-0489563711",
               "filename": "092ebc94-29d2-4d10-b188-d0750e86aef2.jpg",
               "title": "092ebc94 29d2 4d10 b188 d0750e86aef2",
               "thumb": "/archivio/thumbs/lodgify-com/092ebc94-29d2-4d10-b188-d0750e86aef2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/092ebc94-29d2-4d10-b188-d0750e86aef2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/092ebc94-29d2-4d10-b188-d0750e86aef2.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4835536
             },
             {
               "id": "lodgify-com-09d326af-79fa-40d6-9b44-93c43995dc8a-jpg-abe0319112",
               "filename": "09d326af-79fa-40d6-9b44-93c43995dc8a.jpg",
               "title": "09d326af 79fa 40d6 9b44 93c43995dc8a",
               "thumb": "/archivio/thumbs/lodgify-com/09d326af-79fa-40d6-9b44-93c43995dc8a.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/09d326af-79fa-40d6-9b44-93c43995dc8a.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/09d326af-79fa-40d6-9b44-93c43995dc8a.jpg",
+              "width": 3264,
+              "height": 2448,
+              "bytes": 2143297
             },
             {
               "id": "lodgify-com-1314aa26-edfb-4333-833f-f5d86e4a14a1-jpg-fd9607c107",
               "filename": "1314aa26-edfb-4333-833f-f5d86e4a14a1.jpg",
               "title": "1314aa26 edfb 4333 833f f5d86e4a14a1",
               "thumb": "/archivio/thumbs/lodgify-com/1314aa26-edfb-4333-833f-f5d86e4a14a1.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/1314aa26-edfb-4333-833f-f5d86e4a14a1.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/1314aa26-edfb-4333-833f-f5d86e4a14a1.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2503536
             },
             {
               "id": "lodgify-com-180023ad-c383-4d99-bfcc-79e225235855-jpg-6da8784b49",
               "filename": "180023ad-c383-4d99-bfcc-79e225235855.jpg",
               "title": "180023ad c383 4d99 bfcc 79e225235855",
               "thumb": "/archivio/thumbs/lodgify-com/180023ad-c383-4d99-bfcc-79e225235855.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/180023ad-c383-4d99-bfcc-79e225235855.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/180023ad-c383-4d99-bfcc-79e225235855.jpg",
+              "width": 630,
+              "height": 840,
+              "bytes": 172263
             },
             {
               "id": "lodgify-com-1e06e24e-3c93-45cb-9ee0-145b542a7a20-jpg-cbdade7f4e",
               "filename": "1e06e24e-3c93-45cb-9ee0-145b542a7a20.jpg",
               "title": "1e06e24e 3c93 45cb 9ee0 145b542a7a20",
               "thumb": "/archivio/thumbs/lodgify-com/1e06e24e-3c93-45cb-9ee0-145b542a7a20.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/1e06e24e-3c93-45cb-9ee0-145b542a7a20.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/1e06e24e-3c93-45cb-9ee0-145b542a7a20.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 5230702
             },
             {
               "id": "lodgify-com-1e94b319-8798-4516-b4d4-1d73419595a4-jpg-0f649a75ef",
               "filename": "1e94b319-8798-4516-b4d4-1d73419595a4.jpg",
               "title": "1e94b319 8798 4516 b4d4 1d73419595a4",
               "thumb": "/archivio/thumbs/lodgify-com/1e94b319-8798-4516-b4d4-1d73419595a4.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/1e94b319-8798-4516-b4d4-1d73419595a4.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/1e94b319-8798-4516-b4d4-1d73419595a4.jpg",
+              "width": 607,
+              "height": 377,
+              "bytes": 119563
             },
             {
               "id": "lodgify-com-2b58b23d-44fd-4b7d-a136-b83207b31044-jpg-e3c1ebb791",
               "filename": "2b58b23d-44fd-4b7d-a136-b83207b31044.jpg",
               "title": "2b58b23d 44fd 4b7d a136 b83207b31044",
               "thumb": "/archivio/thumbs/lodgify-com/2b58b23d-44fd-4b7d-a136-b83207b31044.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/2b58b23d-44fd-4b7d-a136-b83207b31044.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/2b58b23d-44fd-4b7d-a136-b83207b31044.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 4545728
             },
             {
               "id": "lodgify-com-2ff04396-2db4-4ee0-a48e-d2354abfd457-jpg-5f99be4816",
               "filename": "2ff04396-2db4-4ee0-a48e-d2354abfd457.jpg",
               "title": "2ff04396 2db4 4ee0 a48e d2354abfd457",
               "thumb": "/archivio/thumbs/lodgify-com/2ff04396-2db4-4ee0-a48e-d2354abfd457.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/2ff04396-2db4-4ee0-a48e-d2354abfd457.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/2ff04396-2db4-4ee0-a48e-d2354abfd457.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1992045
             },
             {
               "id": "lodgify-com-302e188b-b27c-4b4b-a1e1-73e16758feca-jpg-e51d92cbfe",
               "filename": "302e188b-b27c-4b4b-a1e1-73e16758feca.jpg",
               "title": "302e188b b27c 4b4b a1e1 73e16758feca",
               "thumb": "/archivio/thumbs/lodgify-com/302e188b-b27c-4b4b-a1e1-73e16758feca.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/302e188b-b27c-4b4b-a1e1-73e16758feca.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/302e188b-b27c-4b4b-a1e1-73e16758feca.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1834514
             },
             {
               "id": "lodgify-com-3298a3a1-2e1a-45fa-a679-f98eb3dc6e2a-jpg-60f9c19409",
               "filename": "3298a3a1-2e1a-45fa-a679-f98eb3dc6e2a.jpg",
               "title": "3298a3a1 2e1a 45fa a679 f98eb3dc6e2a",
               "thumb": "/archivio/thumbs/lodgify-com/3298a3a1-2e1a-45fa-a679-f98eb3dc6e2a.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3298a3a1-2e1a-45fa-a679-f98eb3dc6e2a.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3298a3a1-2e1a-45fa-a679-f98eb3dc6e2a.jpg",
+              "width": 3192,
+              "height": 2304,
+              "bytes": 402814
             },
             {
               "id": "lodgify-com-35181a93-31f7-4893-9a5e-9be209e873e5-jpg-a6e1ee83dd",
               "filename": "35181a93-31f7-4893-9a5e-9be209e873e5.jpg",
               "title": "35181a93 31f7 4893 9a5e 9be209e873e5",
               "thumb": "/archivio/thumbs/lodgify-com/35181a93-31f7-4893-9a5e-9be209e873e5.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/35181a93-31f7-4893-9a5e-9be209e873e5.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/35181a93-31f7-4893-9a5e-9be209e873e5.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 7186566
             },
             {
               "id": "lodgify-com-35d17e28-6ca2-4e2b-88d4-128c17f4106f-jpg-17719ec2f6",
               "filename": "35d17e28-6ca2-4e2b-88d4-128c17f4106f.jpg",
               "title": "35d17e28 6ca2 4e2b 88d4 128c17f4106f",
               "thumb": "/archivio/thumbs/lodgify-com/35d17e28-6ca2-4e2b-88d4-128c17f4106f.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/35d17e28-6ca2-4e2b-88d4-128c17f4106f.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/35d17e28-6ca2-4e2b-88d4-128c17f4106f.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1938221
             },
             {
               "id": "lodgify-com-35d8e66d-a452-4274-aabd-ee7081117c3c-jpg-c5927aca5a",
               "filename": "35d8e66d-a452-4274-aabd-ee7081117c3c.jpg",
               "title": "35d8e66d a452 4274 aabd ee7081117c3c",
               "thumb": "/archivio/thumbs/lodgify-com/35d8e66d-a452-4274-aabd-ee7081117c3c.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/35d8e66d-a452-4274-aabd-ee7081117c3c.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/35d8e66d-a452-4274-aabd-ee7081117c3c.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4072547
             },
             {
               "id": "lodgify-com-36912ecf-d448-44f7-ab45-4e2e777f6c91-jpg-e0fc0cac9b",
               "filename": "36912ecf-d448-44f7-ab45-4e2e777f6c91.jpg",
               "title": "36912ecf d448 44f7 ab45 4e2e777f6c91",
               "thumb": "/archivio/thumbs/lodgify-com/36912ecf-d448-44f7-ab45-4e2e777f6c91.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/36912ecf-d448-44f7-ab45-4e2e777f6c91.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/36912ecf-d448-44f7-ab45-4e2e777f6c91.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2481304
             },
             {
               "id": "lodgify-com-3cf8dea4-8e75-4117-bf98-2dff240af4fe-jpg-190da96704",
               "filename": "3cf8dea4-8e75-4117-bf98-2dff240af4fe.jpg",
               "title": "3cf8dea4 8e75 4117 bf98 2dff240af4fe",
               "thumb": "/archivio/thumbs/lodgify-com/3cf8dea4-8e75-4117-bf98-2dff240af4fe.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3cf8dea4-8e75-4117-bf98-2dff240af4fe.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3cf8dea4-8e75-4117-bf98-2dff240af4fe.jpg",
+              "width": 4000,
+              "height": 3000,
+              "bytes": 2202215
             },
             {
               "id": "lodgify-com-3d11d7a8-974a-42f0-8cb3-7f1b131fdf0a-jpg-2fde1a8c10",
               "filename": "3d11d7a8-974a-42f0-8cb3-7f1b131fdf0a.jpg",
               "title": "3d11d7a8 974a 42f0 8cb3 7f1b131fdf0a",
               "thumb": "/archivio/thumbs/lodgify-com/3d11d7a8-974a-42f0-8cb3-7f1b131fdf0a.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3d11d7a8-974a-42f0-8cb3-7f1b131fdf0a.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3d11d7a8-974a-42f0-8cb3-7f1b131fdf0a.jpg",
+              "width": 2110,
+              "height": 3456,
+              "bytes": 537749
             },
             {
               "id": "lodgify-com-3ec9e6e8-c35f-4537-ab22-884f39181e7d-jpg-7edcb43ebe",
               "filename": "3ec9e6e8-c35f-4537-ab22-884f39181e7d.jpg",
               "title": "3ec9e6e8 c35f 4537 ab22 884f39181e7d",
               "thumb": "/archivio/thumbs/lodgify-com/3ec9e6e8-c35f-4537-ab22-884f39181e7d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3ec9e6e8-c35f-4537-ab22-884f39181e7d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3ec9e6e8-c35f-4537-ab22-884f39181e7d.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 5997214
             },
             {
               "id": "lodgify-com-3ffd4cc0-8a7e-439e-88af-d097f261749d-jpg-276012179e",
               "filename": "3ffd4cc0-8a7e-439e-88af-d097f261749d.jpg",
               "title": "3ffd4cc0 8a7e 439e 88af d097f261749d",
               "thumb": "/archivio/thumbs/lodgify-com/3ffd4cc0-8a7e-439e-88af-d097f261749d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3ffd4cc0-8a7e-439e-88af-d097f261749d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3ffd4cc0-8a7e-439e-88af-d097f261749d.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4004616
             },
             {
               "id": "lodgify-com-3fff5d67-97af-4242-9906-ad951bde6028-jpg-b4409f0ffe",
               "filename": "3fff5d67-97af-4242-9906-ad951bde6028.jpg",
               "title": "3fff5d67 97af 4242 9906 ad951bde6028",
               "thumb": "/archivio/thumbs/lodgify-com/3fff5d67-97af-4242-9906-ad951bde6028.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3fff5d67-97af-4242-9906-ad951bde6028.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/3fff5d67-97af-4242-9906-ad951bde6028.jpg",
+              "width": 1170,
+              "height": 777,
+              "bytes": 711360
             },
             {
               "id": "lodgify-com-401bb0f3-4686-4737-b49e-39bdcf6b8212-jpg-7234c54f7e",
               "filename": "401bb0f3-4686-4737-b49e-39bdcf6b8212.jpg",
               "title": "401bb0f3 4686 4737 b49e 39bdcf6b8212",
               "thumb": "/archivio/thumbs/lodgify-com/401bb0f3-4686-4737-b49e-39bdcf6b8212.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/401bb0f3-4686-4737-b49e-39bdcf6b8212.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/401bb0f3-4686-4737-b49e-39bdcf6b8212.jpg",
+              "width": 832,
+              "height": 624,
+              "bytes": 93722
             },
             {
               "id": "lodgify-com-40d2c359-af86-4233-95bc-79fc0b384a71-jpg-eccec5c978",
               "filename": "40d2c359-af86-4233-95bc-79fc0b384a71.jpg",
               "title": "40d2c359 af86 4233 95bc 79fc0b384a71",
               "thumb": "/archivio/thumbs/lodgify-com/40d2c359-af86-4233-95bc-79fc0b384a71.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/40d2c359-af86-4233-95bc-79fc0b384a71.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/40d2c359-af86-4233-95bc-79fc0b384a71.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3456197
             },
             {
               "id": "lodgify-com-42d13d78-88df-4016-8536-4651e42a575f-jpg-b83741075e",
               "filename": "42d13d78-88df-4016-8536-4651e42a575f.jpg",
               "title": "42d13d78 88df 4016 8536 4651e42a575f",
               "thumb": "/archivio/thumbs/lodgify-com/42d13d78-88df-4016-8536-4651e42a575f.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/42d13d78-88df-4016-8536-4651e42a575f.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/42d13d78-88df-4016-8536-4651e42a575f.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2623952
             },
             {
               "id": "lodgify-com-4470ae5e-71ee-4abc-8bd3-96547dde1fa0-jpg-e6a3f70909",
               "filename": "4470ae5e-71ee-4abc-8bd3-96547dde1fa0.jpg",
               "title": "4470ae5e 71ee 4abc 8bd3 96547dde1fa0",
               "thumb": "/archivio/thumbs/lodgify-com/4470ae5e-71ee-4abc-8bd3-96547dde1fa0.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/4470ae5e-71ee-4abc-8bd3-96547dde1fa0.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/4470ae5e-71ee-4abc-8bd3-96547dde1fa0.jpg",
+              "width": 2288,
+              "height": 1712,
+              "bytes": 726417
             },
             {
               "id": "lodgify-com-45c4c7af-30aa-472c-a1f4-31c20ad74f6d-jpg-fbe9dc19f0",
               "filename": "45c4c7af-30aa-472c-a1f4-31c20ad74f6d.jpg",
               "title": "45c4c7af 30aa 472c a1f4 31c20ad74f6d",
               "thumb": "/archivio/thumbs/lodgify-com/45c4c7af-30aa-472c-a1f4-31c20ad74f6d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/45c4c7af-30aa-472c-a1f4-31c20ad74f6d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/45c4c7af-30aa-472c-a1f4-31c20ad74f6d.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4032551
             },
             {
               "id": "lodgify-com-45c71940-5344-4206-9996-9b0084664bc9-jpg-bc7a5aa583",
               "filename": "45c71940-5344-4206-9996-9b0084664bc9.jpg",
               "title": "45c71940 5344 4206 9996 9b0084664bc9",
               "thumb": "/archivio/thumbs/lodgify-com/45c71940-5344-4206-9996-9b0084664bc9.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/45c71940-5344-4206-9996-9b0084664bc9.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/45c71940-5344-4206-9996-9b0084664bc9.jpg",
+              "width": 3264,
+              "height": 2448,
+              "bytes": 3600948
             },
             {
               "id": "lodgify-com-47b73296-f40a-4f80-b3b7-02f90a98340a-jpg-aee0f229cf",
               "filename": "47b73296-f40a-4f80-b3b7-02f90a98340a.jpg",
               "title": "47b73296 f40a 4f80 b3b7 02f90a98340a",
               "thumb": "/archivio/thumbs/lodgify-com/47b73296-f40a-4f80-b3b7-02f90a98340a.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/47b73296-f40a-4f80-b3b7-02f90a98340a.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/47b73296-f40a-4f80-b3b7-02f90a98340a.jpg",
+              "width": 500,
+              "height": 375,
+              "bytes": 66157
             },
             {
               "id": "lodgify-com-47ba85e0-13d0-460a-94c8-79915791e898-jpg-e6af091165",
               "filename": "47ba85e0-13d0-460a-94c8-79915791e898.jpg",
               "title": "47ba85e0 13d0 460a 94c8 79915791e898",
               "thumb": "/archivio/thumbs/lodgify-com/47ba85e0-13d0-460a-94c8-79915791e898.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/47ba85e0-13d0-460a-94c8-79915791e898.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/47ba85e0-13d0-460a-94c8-79915791e898.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4347892
             },
             {
               "id": "lodgify-com-48ab2759-8952-4379-9591-3111f7578add-jpg-ed1d09e4f8",
               "filename": "48ab2759-8952-4379-9591-3111f7578add.jpg",
               "title": "48ab2759 8952 4379 9591 3111f7578add",
               "thumb": "/archivio/thumbs/lodgify-com/48ab2759-8952-4379-9591-3111f7578add.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/48ab2759-8952-4379-9591-3111f7578add.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/48ab2759-8952-4379-9591-3111f7578add.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 5784331
             },
             {
               "id": "lodgify-com-4dd8e040-49c6-4b25-ab01-f52e3e1a7e16-jpg-b638474afc",
               "filename": "4dd8e040-49c6-4b25-ab01-f52e3e1a7e16.jpg",
               "title": "4dd8e040 49c6 4b25 ab01 f52e3e1a7e16",
               "thumb": "/archivio/thumbs/lodgify-com/4dd8e040-49c6-4b25-ab01-f52e3e1a7e16.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/4dd8e040-49c6-4b25-ab01-f52e3e1a7e16.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/4dd8e040-49c6-4b25-ab01-f52e3e1a7e16.jpg",
+              "width": 678,
+              "height": 424,
+              "bytes": 90107
             },
             {
               "id": "lodgify-com-4ee3e260-bdc0-4917-933f-8677eb2f740d-jpg-bc2b8f8d81",
               "filename": "4ee3e260-bdc0-4917-933f-8677eb2f740d.jpg",
               "title": "4ee3e260 bdc0 4917 933f 8677eb2f740d",
               "thumb": "/archivio/thumbs/lodgify-com/4ee3e260-bdc0-4917-933f-8677eb2f740d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/4ee3e260-bdc0-4917-933f-8677eb2f740d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/4ee3e260-bdc0-4917-933f-8677eb2f740d.jpg",
+              "width": 2288,
+              "height": 1712,
+              "bytes": 870022
             },
             {
               "id": "lodgify-com-501bced3-0144-4f59-8d5b-9c8688ccaa7e-jpg-94e101e8c8",
               "filename": "501bced3-0144-4f59-8d5b-9c8688ccaa7e.jpg",
               "title": "501bced3 0144 4f59 8d5b 9c8688ccaa7e",
               "thumb": "/archivio/thumbs/lodgify-com/501bced3-0144-4f59-8d5b-9c8688ccaa7e.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/501bced3-0144-4f59-8d5b-9c8688ccaa7e.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/501bced3-0144-4f59-8d5b-9c8688ccaa7e.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4152836
             },
             {
               "id": "lodgify-com-5128148a-7c78-40dd-8e16-9ea5cad6a5bb-jpg-28f7707952",
               "filename": "5128148a-7c78-40dd-8e16-9ea5cad6a5bb.jpg",
               "title": "5128148a 7c78 40dd 8e16 9ea5cad6a5bb",
               "thumb": "/archivio/thumbs/lodgify-com/5128148a-7c78-40dd-8e16-9ea5cad6a5bb.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/5128148a-7c78-40dd-8e16-9ea5cad6a5bb.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/5128148a-7c78-40dd-8e16-9ea5cad6a5bb.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1468377
             },
             {
               "id": "lodgify-com-52cf8b89-165d-4119-b6c5-57b921e36f29-jpg-74f3f66bf9",
               "filename": "52cf8b89-165d-4119-b6c5-57b921e36f29.jpg",
               "title": "52cf8b89 165d 4119 b6c5 57b921e36f29",
               "thumb": "/archivio/thumbs/lodgify-com/52cf8b89-165d-4119-b6c5-57b921e36f29.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/52cf8b89-165d-4119-b6c5-57b921e36f29.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/52cf8b89-165d-4119-b6c5-57b921e36f29.jpg",
+              "width": 500,
+              "height": 366,
+              "bytes": 22983
             },
             {
               "id": "lodgify-com-54e0a4f8-e843-402e-94a5-fb4a46c8bf6a-jpg-6a7176a4dc",
               "filename": "54e0a4f8-e843-402e-94a5-fb4a46c8bf6a.jpg",
               "title": "54e0a4f8 e843 402e 94a5 fb4a46c8bf6a",
               "thumb": "/archivio/thumbs/lodgify-com/54e0a4f8-e843-402e-94a5-fb4a46c8bf6a.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/54e0a4f8-e843-402e-94a5-fb4a46c8bf6a.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/54e0a4f8-e843-402e-94a5-fb4a46c8bf6a.jpg",
+              "width": 3264,
+              "height": 2448,
+              "bytes": 3269807
             },
             {
               "id": "lodgify-com-576d5268-6749-4569-a46a-ee7ba5352b27-jpg-e46cb35bac",
               "filename": "576d5268-6749-4569-a46a-ee7ba5352b27.jpg",
               "title": "576d5268 6749 4569 a46a ee7ba5352b27",
               "thumb": "/archivio/thumbs/lodgify-com/576d5268-6749-4569-a46a-ee7ba5352b27.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/576d5268-6749-4569-a46a-ee7ba5352b27.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/576d5268-6749-4569-a46a-ee7ba5352b27.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4007597
             },
             {
               "id": "lodgify-com-579e0886-d7dc-456a-a16d-49601a273d94-jpg-3bde493349",
               "filename": "579e0886-d7dc-456a-a16d-49601a273d94.jpg",
               "title": "579e0886 d7dc 456a a16d 49601a273d94",
               "thumb": "/archivio/thumbs/lodgify-com/579e0886-d7dc-456a-a16d-49601a273d94.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/579e0886-d7dc-456a-a16d-49601a273d94.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/579e0886-d7dc-456a-a16d-49601a273d94.jpg",
+              "width": 904,
+              "height": 576,
+              "bytes": 157438
             },
             {
               "id": "lodgify-com-5db8e626-168c-44e7-a6d4-6ad130c22256-jpg-9a36800725",
               "filename": "5db8e626-168c-44e7-a6d4-6ad130c22256.jpg",
               "title": "5db8e626 168c 44e7 a6d4 6ad130c22256",
               "thumb": "/archivio/thumbs/lodgify-com/5db8e626-168c-44e7-a6d4-6ad130c22256.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/5db8e626-168c-44e7-a6d4-6ad130c22256.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/5db8e626-168c-44e7-a6d4-6ad130c22256.jpg",
+              "width": 1960,
+              "height": 1696,
+              "bytes": 281875
             },
             {
               "id": "lodgify-com-68200a10-42d2-4d0d-81ad-afc75022d2d2-jpg-5cf7c3681d",
               "filename": "68200a10-42d2-4d0d-81ad-afc75022d2d2.jpg",
               "title": "68200a10 42d2 4d0d 81ad afc75022d2d2",
               "thumb": "/archivio/thumbs/lodgify-com/68200a10-42d2-4d0d-81ad-afc75022d2d2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/68200a10-42d2-4d0d-81ad-afc75022d2d2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/68200a10-42d2-4d0d-81ad-afc75022d2d2.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4828618
             },
             {
               "id": "lodgify-com-69fe221f-7653-4775-87ef-0720c449d153-jpg-cfd25f070b",
               "filename": "69fe221f-7653-4775-87ef-0720c449d153.jpg",
               "title": "69fe221f 7653 4775 87ef 0720c449d153",
               "thumb": "/archivio/thumbs/lodgify-com/69fe221f-7653-4775-87ef-0720c449d153.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/69fe221f-7653-4775-87ef-0720c449d153.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/69fe221f-7653-4775-87ef-0720c449d153.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2901011
             },
             {
               "id": "lodgify-com-6b4a240f-aff1-42f5-9a3c-58705d70b68b-jpg-b78ba5f28a",
               "filename": "6b4a240f-aff1-42f5-9a3c-58705d70b68b.jpg",
               "title": "6b4a240f aff1 42f5 9a3c 58705d70b68b",
               "thumb": "/archivio/thumbs/lodgify-com/6b4a240f-aff1-42f5-9a3c-58705d70b68b.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6b4a240f-aff1-42f5-9a3c-58705d70b68b.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6b4a240f-aff1-42f5-9a3c-58705d70b68b.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4514266
             },
             {
               "id": "lodgify-com-6c1972ae-d794-4bab-9012-9d091b3c34f8-jpg-4cd814e355",
               "filename": "6c1972ae-d794-4bab-9012-9d091b3c34f8.jpg",
               "title": "6c1972ae d794 4bab 9012 9d091b3c34f8",
               "thumb": "/archivio/thumbs/lodgify-com/6c1972ae-d794-4bab-9012-9d091b3c34f8.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6c1972ae-d794-4bab-9012-9d091b3c34f8.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6c1972ae-d794-4bab-9012-9d091b3c34f8.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 4451793
             },
             {
               "id": "lodgify-com-6cfa8ded-c917-4bb3-81bb-fc0a57b19172-jpg-0c22936acc",
               "filename": "6cfa8ded-c917-4bb3-81bb-fc0a57b19172.jpg",
               "title": "6cfa8ded c917 4bb3 81bb fc0a57b19172",
               "thumb": "/archivio/thumbs/lodgify-com/6cfa8ded-c917-4bb3-81bb-fc0a57b19172.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6cfa8ded-c917-4bb3-81bb-fc0a57b19172.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6cfa8ded-c917-4bb3-81bb-fc0a57b19172.jpg",
+              "width": 2304,
+              "height": 3456,
+              "bytes": 1399250
             },
             {
               "id": "lodgify-com-6d80ef9a-9353-4cc7-89a6-a654c669eb66-jpg-ffab2101d6",
               "filename": "6d80ef9a-9353-4cc7-89a6-a654c669eb66.jpg",
               "title": "6d80ef9a 9353 4cc7 89a6 a654c669eb66",
               "thumb": "/archivio/thumbs/lodgify-com/6d80ef9a-9353-4cc7-89a6-a654c669eb66.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6d80ef9a-9353-4cc7-89a6-a654c669eb66.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/6d80ef9a-9353-4cc7-89a6-a654c669eb66.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3063079
             },
             {
               "id": "lodgify-com-7258d677-6c76-4959-a890-940e2b338dd8-jpg-f42464160e",
               "filename": "7258d677-6c76-4959-a890-940e2b338dd8.jpg",
               "title": "7258d677 6c76 4959 a890 940e2b338dd8",
               "thumb": "/archivio/thumbs/lodgify-com/7258d677-6c76-4959-a890-940e2b338dd8.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7258d677-6c76-4959-a890-940e2b338dd8.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7258d677-6c76-4959-a890-940e2b338dd8.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2171075
             },
             {
               "id": "lodgify-com-735197ed-c3b9-4d7a-8239-3412674acae0-jpg-daa5b91106",
               "filename": "735197ed-c3b9-4d7a-8239-3412674acae0.jpg",
               "title": "735197ed c3b9 4d7a 8239 3412674acae0",
               "thumb": "/archivio/thumbs/lodgify-com/735197ed-c3b9-4d7a-8239-3412674acae0.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/735197ed-c3b9-4d7a-8239-3412674acae0.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/735197ed-c3b9-4d7a-8239-3412674acae0.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4458584
             },
             {
               "id": "lodgify-com-7584f56c-8a31-4670-93cb-75a64f750e69-jpg-bb615659bc",
               "filename": "7584f56c-8a31-4670-93cb-75a64f750e69.jpg",
               "title": "7584f56c 8a31 4670 93cb 75a64f750e69",
               "thumb": "/archivio/thumbs/lodgify-com/7584f56c-8a31-4670-93cb-75a64f750e69.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7584f56c-8a31-4670-93cb-75a64f750e69.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7584f56c-8a31-4670-93cb-75a64f750e69.jpg",
+              "width": 1212,
+              "height": 942,
+              "bytes": 501729
             },
             {
               "id": "lodgify-com-75df1db4-508e-48d3-9ebc-17cbac2cbb13-jpg-98fdf64e1f",
               "filename": "75df1db4-508e-48d3-9ebc-17cbac2cbb13.jpg",
               "title": "75df1db4 508e 48d3 9ebc 17cbac2cbb13",
               "thumb": "/archivio/thumbs/lodgify-com/75df1db4-508e-48d3-9ebc-17cbac2cbb13.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/75df1db4-508e-48d3-9ebc-17cbac2cbb13.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/75df1db4-508e-48d3-9ebc-17cbac2cbb13.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4006616
             },
             {
               "id": "lodgify-com-77b01c01-be01-4218-91d6-e479e81d1f6a-jpg-f26b2229b9",
               "filename": "77b01c01-be01-4218-91d6-e479e81d1f6a.jpg",
               "title": "77b01c01 be01 4218 91d6 e479e81d1f6a",
               "thumb": "/archivio/thumbs/lodgify-com/77b01c01-be01-4218-91d6-e479e81d1f6a.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/77b01c01-be01-4218-91d6-e479e81d1f6a.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/77b01c01-be01-4218-91d6-e479e81d1f6a.jpg",
+              "width": 862,
+              "height": 580,
+              "bytes": 71019
             },
             {
               "id": "lodgify-com-7ad09199-4ca4-4c37-9d91-6b1c225b36e8-jpg-6e9418942a",
               "filename": "7ad09199-4ca4-4c37-9d91-6b1c225b36e8.jpg",
               "title": "7ad09199 4ca4 4c37 9d91 6b1c225b36e8",
               "thumb": "/archivio/thumbs/lodgify-com/7ad09199-4ca4-4c37-9d91-6b1c225b36e8.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7ad09199-4ca4-4c37-9d91-6b1c225b36e8.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7ad09199-4ca4-4c37-9d91-6b1c225b36e8.jpg",
+              "width": 3264,
+              "height": 2448,
+              "bytes": 2338816
             },
             {
               "id": "lodgify-com-7bafd15e-a6a1-4bc3-a7d6-aeae2698a658-jpg-feaecc48d8",
               "filename": "7bafd15e-a6a1-4bc3-a7d6-aeae2698a658.jpg",
               "title": "7bafd15e a6a1 4bc3 a7d6 aeae2698a658",
               "thumb": "/archivio/thumbs/lodgify-com/7bafd15e-a6a1-4bc3-a7d6-aeae2698a658.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7bafd15e-a6a1-4bc3-a7d6-aeae2698a658.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7bafd15e-a6a1-4bc3-a7d6-aeae2698a658.jpg",
+              "width": 922,
+              "height": 614,
+              "bytes": 279128
             },
             {
               "id": "lodgify-com-7c5b1558-fdc9-4874-9728-b73e6500ae1b-jpg-9e5496fd04",
               "filename": "7c5b1558-fdc9-4874-9728-b73e6500ae1b.jpg",
               "title": "7c5b1558 fdc9 4874 9728 b73e6500ae1b",
               "thumb": "/archivio/thumbs/lodgify-com/7c5b1558-fdc9-4874-9728-b73e6500ae1b.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7c5b1558-fdc9-4874-9728-b73e6500ae1b.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/7c5b1558-fdc9-4874-9728-b73e6500ae1b.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4106721
             },
             {
               "id": "lodgify-com-82eefa5e-058a-45e0-9106-6265b77942b6-jpg-faf15c0405",
               "filename": "82eefa5e-058a-45e0-9106-6265b77942b6.jpg",
               "title": "82eefa5e 058a 45e0 9106 6265b77942b6",
               "thumb": "/archivio/thumbs/lodgify-com/82eefa5e-058a-45e0-9106-6265b77942b6.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/82eefa5e-058a-45e0-9106-6265b77942b6.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/82eefa5e-058a-45e0-9106-6265b77942b6.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1376219
             },
             {
               "id": "lodgify-com-832f5e6c-b22c-410b-a40e-beaa2f3a7450-jpg-e567216cd0",
               "filename": "832f5e6c-b22c-410b-a40e-beaa2f3a7450.jpg",
               "title": "832f5e6c b22c 410b a40e beaa2f3a7450",
               "thumb": "/archivio/thumbs/lodgify-com/832f5e6c-b22c-410b-a40e-beaa2f3a7450.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/832f5e6c-b22c-410b-a40e-beaa2f3a7450.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/832f5e6c-b22c-410b-a40e-beaa2f3a7450.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4202849
             },
             {
               "id": "lodgify-com-84c1d61e-a357-4ad6-9094-33908a1a5af9-jpg-d62c7301c3",
               "filename": "84c1d61e-a357-4ad6-9094-33908a1a5af9.jpg",
               "title": "84c1d61e a357 4ad6 9094 33908a1a5af9",
               "thumb": "/archivio/thumbs/lodgify-com/84c1d61e-a357-4ad6-9094-33908a1a5af9.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/84c1d61e-a357-4ad6-9094-33908a1a5af9.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/84c1d61e-a357-4ad6-9094-33908a1a5af9.jpg",
+              "width": 400,
+              "height": 300,
+              "bytes": 42417
             },
             {
               "id": "lodgify-com-86a102a7-df10-4c05-abeb-0a8e6c44c5c0-jpg-2a2227577c",
               "filename": "86a102a7-df10-4c05-abeb-0a8e6c44c5c0.jpg",
               "title": "86a102a7 df10 4c05 abeb 0a8e6c44c5c0",
               "thumb": "/archivio/thumbs/lodgify-com/86a102a7-df10-4c05-abeb-0a8e6c44c5c0.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/86a102a7-df10-4c05-abeb-0a8e6c44c5c0.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/86a102a7-df10-4c05-abeb-0a8e6c44c5c0.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2812493
             },
             {
               "id": "lodgify-com-88beef92-ec70-49dd-a1bd-3c54f518ae79-jpg-2b7b69885b",
               "filename": "88beef92-ec70-49dd-a1bd-3c54f518ae79.jpg",
               "title": "88beef92 ec70 49dd a1bd 3c54f518ae79",
               "thumb": "/archivio/thumbs/lodgify-com/88beef92-ec70-49dd-a1bd-3c54f518ae79.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/88beef92-ec70-49dd-a1bd-3c54f518ae79.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/88beef92-ec70-49dd-a1bd-3c54f518ae79.jpg",
+              "width": 2304,
+              "height": 3456,
+              "bytes": 4482533
             },
             {
               "id": "lodgify-com-8acaed07-5dc2-475b-bdaa-eae44a31c300-jpg-6afd938a31",
               "filename": "8acaed07-5dc2-475b-bdaa-eae44a31c300.jpg",
               "title": "8acaed07 5dc2 475b bdaa eae44a31c300",
               "thumb": "/archivio/thumbs/lodgify-com/8acaed07-5dc2-475b-bdaa-eae44a31c300.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/8acaed07-5dc2-475b-bdaa-eae44a31c300.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/8acaed07-5dc2-475b-bdaa-eae44a31c300.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3912943
             },
             {
               "id": "lodgify-com-8da97e03-1fbb-4478-a759-d5b58ab3d102-jpg-0a84a30394",
               "filename": "8da97e03-1fbb-4478-a759-d5b58ab3d102.jpg",
               "title": "8da97e03 1fbb 4478 a759 d5b58ab3d102",
               "thumb": "/archivio/thumbs/lodgify-com/8da97e03-1fbb-4478-a759-d5b58ab3d102.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/8da97e03-1fbb-4478-a759-d5b58ab3d102.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/8da97e03-1fbb-4478-a759-d5b58ab3d102.jpg",
+              "width": 640,
+              "height": 480,
+              "bytes": 74872
             },
             {
               "id": "lodgify-com-923505e7-8e61-4a4d-8481-97f62cbf38a2-jpg-4e978785c6",
               "filename": "923505e7-8e61-4a4d-8481-97f62cbf38a2.jpg",
               "title": "923505e7 8e61 4a4d 8481 97f62cbf38a2",
               "thumb": "/archivio/thumbs/lodgify-com/923505e7-8e61-4a4d-8481-97f62cbf38a2.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/923505e7-8e61-4a4d-8481-97f62cbf38a2.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/923505e7-8e61-4a4d-8481-97f62cbf38a2.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3065245
             },
             {
               "id": "lodgify-com-92f7506d-2ae8-4b97-9601-7b9978d7a425-jpg-376aa1577a",
               "filename": "92f7506d-2ae8-4b97-9601-7b9978d7a425.jpg",
               "title": "92f7506d 2ae8 4b97 9601 7b9978d7a425",
               "thumb": "/archivio/thumbs/lodgify-com/92f7506d-2ae8-4b97-9601-7b9978d7a425.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/92f7506d-2ae8-4b97-9601-7b9978d7a425.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/92f7506d-2ae8-4b97-9601-7b9978d7a425.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3572563
             },
             {
               "id": "lodgify-com-9346bd4f-2312-4b4c-8916-c081b9702742-jpg-7fd7a9a7ff",
               "filename": "9346bd4f-2312-4b4c-8916-c081b9702742.jpg",
               "title": "9346bd4f 2312 4b4c 8916 c081b9702742",
               "thumb": "/archivio/thumbs/lodgify-com/9346bd4f-2312-4b4c-8916-c081b9702742.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/9346bd4f-2312-4b4c-8916-c081b9702742.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/9346bd4f-2312-4b4c-8916-c081b9702742.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4039068
             },
             {
               "id": "lodgify-com-940b4911-8c36-44d9-b001-d4768bf5ffdf-jpg-294d688dbe",
               "filename": "940b4911-8c36-44d9-b001-d4768bf5ffdf.jpg",
               "title": "940b4911 8c36 44d9 b001 d4768bf5ffdf",
               "thumb": "/archivio/thumbs/lodgify-com/940b4911-8c36-44d9-b001-d4768bf5ffdf.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/940b4911-8c36-44d9-b001-d4768bf5ffdf.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/940b4911-8c36-44d9-b001-d4768bf5ffdf.jpg",
+              "width": 2755,
+              "height": 2304,
+              "bytes": 383484
             },
             {
               "id": "lodgify-com-959e15d8-ec02-40cf-b77d-1e2b7585f9e8-jpg-ccc75bf271",
               "filename": "959e15d8-ec02-40cf-b77d-1e2b7585f9e8.jpg",
               "title": "959e15d8 ec02 40cf b77d 1e2b7585f9e8",
               "thumb": "/archivio/thumbs/lodgify-com/959e15d8-ec02-40cf-b77d-1e2b7585f9e8.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/959e15d8-ec02-40cf-b77d-1e2b7585f9e8.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/959e15d8-ec02-40cf-b77d-1e2b7585f9e8.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4484777
             },
             {
               "id": "lodgify-com-97953e3f-414f-4e43-bae1-ae143de206b4-jpg-885004aa54",
               "filename": "97953e3f-414f-4e43-bae1-ae143de206b4.jpg",
               "title": "97953e3f 414f 4e43 bae1 ae143de206b4",
               "thumb": "/archivio/thumbs/lodgify-com/97953e3f-414f-4e43-bae1-ae143de206b4.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/97953e3f-414f-4e43-bae1-ae143de206b4.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/97953e3f-414f-4e43-bae1-ae143de206b4.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4153718
             },
             {
               "id": "lodgify-com-9a9dce5b-aa93-430f-a5fd-568e23846f45-jpg-9077e2ed3b",
               "filename": "9a9dce5b-aa93-430f-a5fd-568e23846f45.jpg",
               "title": "9a9dce5b aa93 430f a5fd 568e23846f45",
               "thumb": "/archivio/thumbs/lodgify-com/9a9dce5b-aa93-430f-a5fd-568e23846f45.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/9a9dce5b-aa93-430f-a5fd-568e23846f45.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/9a9dce5b-aa93-430f-a5fd-568e23846f45.jpg",
+              "width": 3872,
+              "height": 2592,
+              "bytes": 768138
             },
             {
               "id": "lodgify-com-9b6cbbfa-4c33-4ff9-a402-4ba7a6801a77-jpg-67a7dbbce2",
               "filename": "9b6cbbfa-4c33-4ff9-a402-4ba7a6801a77.jpg",
               "title": "9b6cbbfa 4c33 4ff9 a402 4ba7a6801a77",
               "thumb": "/archivio/thumbs/lodgify-com/9b6cbbfa-4c33-4ff9-a402-4ba7a6801a77.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/9b6cbbfa-4c33-4ff9-a402-4ba7a6801a77.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/9b6cbbfa-4c33-4ff9-a402-4ba7a6801a77.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3919878
             },
             {
               "id": "lodgify-com-a49be0bd-ee79-4a76-801e-52e665bc1635-jpg-99f5630b8d",
               "filename": "a49be0bd-ee79-4a76-801e-52e665bc1635.jpg",
               "title": "a49be0bd ee79 4a76 801e 52e665bc1635",
               "thumb": "/archivio/thumbs/lodgify-com/a49be0bd-ee79-4a76-801e-52e665bc1635.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a49be0bd-ee79-4a76-801e-52e665bc1635.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a49be0bd-ee79-4a76-801e-52e665bc1635.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 1490181
             },
             {
               "id": "lodgify-com-a634e989-1e41-4b76-b5bb-337541cdbc6f-jpg-92efd8ce3b",
               "filename": "a634e989-1e41-4b76-b5bb-337541cdbc6f.jpg",
               "title": "a634e989 1e41 4b76 b5bb 337541cdbc6f",
               "thumb": "/archivio/thumbs/lodgify-com/a634e989-1e41-4b76-b5bb-337541cdbc6f.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a634e989-1e41-4b76-b5bb-337541cdbc6f.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a634e989-1e41-4b76-b5bb-337541cdbc6f.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 4383870
             },
             {
               "id": "lodgify-com-a7d6f327-d394-4bb1-a307-04bd07b6a7be-jpg-e75d21d47f",
               "filename": "a7d6f327-d394-4bb1-a307-04bd07b6a7be.jpg",
               "title": "a7d6f327 d394 4bb1 a307 04bd07b6a7be",
               "thumb": "/archivio/thumbs/lodgify-com/a7d6f327-d394-4bb1-a307-04bd07b6a7be.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a7d6f327-d394-4bb1-a307-04bd07b6a7be.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a7d6f327-d394-4bb1-a307-04bd07b6a7be.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4293202
             },
             {
               "id": "lodgify-com-a8ae0f2c-e06d-489e-a127-e9f8d9ab7fa6-jpg-deeae3f212",
               "filename": "a8ae0f2c-e06d-489e-a127-e9f8d9ab7fa6.jpg",
               "title": "a8ae0f2c e06d 489e a127 e9f8d9ab7fa6",
               "thumb": "/archivio/thumbs/lodgify-com/a8ae0f2c-e06d-489e-a127-e9f8d9ab7fa6.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a8ae0f2c-e06d-489e-a127-e9f8d9ab7fa6.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a8ae0f2c-e06d-489e-a127-e9f8d9ab7fa6.jpg",
+              "width": 2304,
+              "height": 3456,
+              "bytes": 1570322
             },
             {
               "id": "lodgify-com-a95d82bc-0bfb-411f-b73b-57b2e3ae45b5-jpg-d07dd2d8a7",
               "filename": "a95d82bc-0bfb-411f-b73b-57b2e3ae45b5.jpg",
               "title": "a95d82bc 0bfb 411f b73b 57b2e3ae45b5",
               "thumb": "/archivio/thumbs/lodgify-com/a95d82bc-0bfb-411f-b73b-57b2e3ae45b5.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a95d82bc-0bfb-411f-b73b-57b2e3ae45b5.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/a95d82bc-0bfb-411f-b73b-57b2e3ae45b5.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 3905398
             },
             {
               "id": "lodgify-com-b2639d60-45d0-483d-898c-bd2e8dc5c330-jpg-77214a4dce",
               "filename": "b2639d60-45d0-483d-898c-bd2e8dc5c330.jpg",
               "title": "b2639d60 45d0 483d 898c bd2e8dc5c330",
               "thumb": "/archivio/thumbs/lodgify-com/b2639d60-45d0-483d-898c-bd2e8dc5c330.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b2639d60-45d0-483d-898c-bd2e8dc5c330.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b2639d60-45d0-483d-898c-bd2e8dc5c330.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2718355
             },
             {
               "id": "lodgify-com-b286460f-65f9-4e0b-9a42-c66a2a9ea241-jpg-e680564646",
               "filename": "b286460f-65f9-4e0b-9a42-c66a2a9ea241.jpg",
               "title": "b286460f 65f9 4e0b 9a42 c66a2a9ea241",
               "thumb": "/archivio/thumbs/lodgify-com/b286460f-65f9-4e0b-9a42-c66a2a9ea241.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b286460f-65f9-4e0b-9a42-c66a2a9ea241.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b286460f-65f9-4e0b-9a42-c66a2a9ea241.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3888653
             },
             {
               "id": "lodgify-com-b5f51c58-3231-4341-8cc1-666f4b5f811e-jpg-bec879b594",
               "filename": "b5f51c58-3231-4341-8cc1-666f4b5f811e.jpg",
               "title": "b5f51c58 3231 4341 8cc1 666f4b5f811e",
               "thumb": "/archivio/thumbs/lodgify-com/b5f51c58-3231-4341-8cc1-666f4b5f811e.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b5f51c58-3231-4341-8cc1-666f4b5f811e.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b5f51c58-3231-4341-8cc1-666f4b5f811e.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4631771
             },
             {
               "id": "lodgify-com-b7644b40-1faf-4a8e-9317-36c22dabf012-jpg-f8bbe4e173",
               "filename": "b7644b40-1faf-4a8e-9317-36c22dabf012.jpg",
               "title": "b7644b40 1faf 4a8e 9317 36c22dabf012",
               "thumb": "/archivio/thumbs/lodgify-com/b7644b40-1faf-4a8e-9317-36c22dabf012.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b7644b40-1faf-4a8e-9317-36c22dabf012.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/b7644b40-1faf-4a8e-9317-36c22dabf012.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2356504
             },
             {
               "id": "lodgify-com-bbe3a0e0-7898-402d-ba87-3f65ae4e8c50-jpg-aa83d14974",
               "filename": "bbe3a0e0-7898-402d-ba87-3f65ae4e8c50.jpg",
               "title": "bbe3a0e0 7898 402d ba87 3f65ae4e8c50",
               "thumb": "/archivio/thumbs/lodgify-com/bbe3a0e0-7898-402d-ba87-3f65ae4e8c50.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/bbe3a0e0-7898-402d-ba87-3f65ae4e8c50.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/bbe3a0e0-7898-402d-ba87-3f65ae4e8c50.jpg",
+              "width": 1280,
+              "height": 960,
+              "bytes": 176614
             },
             {
               "id": "lodgify-com-be76c01f-ed39-4907-b392-0150773596fc-jpg-01b34376d6",
               "filename": "be76c01f-ed39-4907-b392-0150773596fc.jpg",
               "title": "be76c01f ed39 4907 b392 0150773596fc",
               "thumb": "/archivio/thumbs/lodgify-com/be76c01f-ed39-4907-b392-0150773596fc.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/be76c01f-ed39-4907-b392-0150773596fc.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/be76c01f-ed39-4907-b392-0150773596fc.jpg",
+              "width": 1024,
+              "height": 768,
+              "bytes": 228641
             },
             {
               "id": "lodgify-com-c1a9c10d-0a47-487a-bf1c-98fb536e8a7d-jpg-b95080adbe",
               "filename": "c1a9c10d-0a47-487a-bf1c-98fb536e8a7d.jpg",
               "title": "c1a9c10d 0a47 487a bf1c 98fb536e8a7d",
               "thumb": "/archivio/thumbs/lodgify-com/c1a9c10d-0a47-487a-bf1c-98fb536e8a7d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/c1a9c10d-0a47-487a-bf1c-98fb536e8a7d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/c1a9c10d-0a47-487a-bf1c-98fb536e8a7d.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3322753
             },
             {
               "id": "lodgify-com-c35d64e1-9655-4fee-977a-c7d00b3dec11-jpg-b16f92132d",
               "filename": "c35d64e1-9655-4fee-977a-c7d00b3dec11.jpg",
               "title": "c35d64e1 9655 4fee 977a c7d00b3dec11",
               "thumb": "/archivio/thumbs/lodgify-com/c35d64e1-9655-4fee-977a-c7d00b3dec11.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/c35d64e1-9655-4fee-977a-c7d00b3dec11.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/c35d64e1-9655-4fee-977a-c7d00b3dec11.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3258790
             },
             {
               "id": "lodgify-com-ca7e75dd-9a76-4f03-b70e-5fe29a30286d-jpg-5db12be3ca",
               "filename": "ca7e75dd-9a76-4f03-b70e-5fe29a30286d.jpg",
               "title": "ca7e75dd 9a76 4f03 b70e 5fe29a30286d",
               "thumb": "/archivio/thumbs/lodgify-com/ca7e75dd-9a76-4f03-b70e-5fe29a30286d.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/ca7e75dd-9a76-4f03-b70e-5fe29a30286d.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/ca7e75dd-9a76-4f03-b70e-5fe29a30286d.jpg",
+              "width": 2240,
+              "height": 1728,
+              "bytes": 329925
             },
             {
               "id": "lodgify-com-cd7b037f-ab4e-4972-8004-67d2a550f537-jpg-4f0bbcb8dc",
               "filename": "cd7b037f-ab4e-4972-8004-67d2a550f537.jpg",
               "title": "cd7b037f ab4e 4972 8004 67d2a550f537",
               "thumb": "/archivio/thumbs/lodgify-com/cd7b037f-ab4e-4972-8004-67d2a550f537.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/cd7b037f-ab4e-4972-8004-67d2a550f537.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/cd7b037f-ab4e-4972-8004-67d2a550f537.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 3140556
             },
             {
               "id": "lodgify-com-ce786eb9-8312-4f39-a65f-f5c29eff90ae-jpg-fefe45c6cf",
               "filename": "ce786eb9-8312-4f39-a65f-f5c29eff90ae.jpg",
               "title": "ce786eb9 8312 4f39 a65f f5c29eff90ae",
               "thumb": "/archivio/thumbs/lodgify-com/ce786eb9-8312-4f39-a65f-f5c29eff90ae.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/ce786eb9-8312-4f39-a65f-f5c29eff90ae.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/ce786eb9-8312-4f39-a65f-f5c29eff90ae.jpg",
+              "width": 3456,
+              "height": 2304,
+              "bytes": 2110500
             },
             {
               "id": "lodgify-com-d30f926d-c79c-4941-b4f8-7d76aa7651ea-jpg-ae402212e0",
               "filename": "d30f926d-c79c-4941-b4f8-7d76aa7651ea.jpg",
               "title": "d30f926d c79c 4941 b4f8 7d76aa7651ea",
               "thumb": "/archivio/thumbs/lodgify-com/d30f926d-c79c-4941-b4f8-7d76aa7651ea.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/d30f926d-c79c-4941-b4f8-7d76aa7651ea.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/d30f926d-c79c-4941-b4f8-7d76aa7651ea.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4508264
             },
             {
               "id": "lodgify-com-e3fa1409-3222-40e0-a08b-35bdb9350c81-jpg-91c1fe2b27",
               "filename": "e3fa1409-3222-40e0-a08b-35bdb9350c81.jpg",
               "title": "e3fa1409 3222 40e0 a08b 35bdb9350c81",
               "thumb": "/archivio/thumbs/lodgify-com/e3fa1409-3222-40e0-a08b-35bdb9350c81.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/e3fa1409-3222-40e0-a08b-35bdb9350c81.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/e3fa1409-3222-40e0-a08b-35bdb9350c81.jpg",
+              "width": 1024,
+              "height": 768,
+              "bytes": 213626
             },
             {
               "id": "lodgify-com-e5d2c737-6d27-4b99-9965-d62823e71aeb-jpg-304ff65c0f",
               "filename": "e5d2c737-6d27-4b99-9965-d62823e71aeb.jpg",
               "title": "e5d2c737 6d27 4b99 9965 d62823e71aeb",
               "thumb": "/archivio/thumbs/lodgify-com/e5d2c737-6d27-4b99-9965-d62823e71aeb.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/e5d2c737-6d27-4b99-9965-d62823e71aeb.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/e5d2c737-6d27-4b99-9965-d62823e71aeb.jpg",
+              "width": 3342,
+              "height": 2132,
+              "bytes": 554927
             },
             {
               "id": "lodgify-com-eeb1ecae-98a4-4845-bb3e-c57cd6ed7125-jpg-582285785d",
               "filename": "eeb1ecae-98a4-4845-bb3e-c57cd6ed7125.jpg",
               "title": "eeb1ecae 98a4 4845 bb3e c57cd6ed7125",
               "thumb": "/archivio/thumbs/lodgify-com/eeb1ecae-98a4-4845-bb3e-c57cd6ed7125.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/eeb1ecae-98a4-4845-bb3e-c57cd6ed7125.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/eeb1ecae-98a4-4845-bb3e-c57cd6ed7125.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4531966
             },
             {
               "id": "lodgify-com-f3ef6dbc-dc45-4d4d-a248-e10e27b0d647-jpg-4d1ab8759b",
               "filename": "f3ef6dbc-dc45-4d4d-a248-e10e27b0d647.jpg",
               "title": "f3ef6dbc dc45 4d4d a248 e10e27b0d647",
               "thumb": "/archivio/thumbs/lodgify-com/f3ef6dbc-dc45-4d4d-a248-e10e27b0d647.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/f3ef6dbc-dc45-4d4d-a248-e10e27b0d647.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/f3ef6dbc-dc45-4d4d-a248-e10e27b0d647.jpg",
+              "width": 4752,
+              "height": 3168,
+              "bytes": 4149783
             },
             {
               "id": "lodgify-com-f4ddd4e7-cd94-481a-ad7b-438ea3f62c42-jpg-67a6a8d9ec",
               "filename": "f4ddd4e7-cd94-481a-ad7b-438ea3f62c42.jpg",
               "title": "f4ddd4e7 cd94 481a ad7b 438ea3f62c42",
               "thumb": "/archivio/thumbs/lodgify-com/f4ddd4e7-cd94-481a-ad7b-438ea3f62c42.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/f4ddd4e7-cd94-481a-ad7b-438ea3f62c42.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/f4ddd4e7-cd94-481a-ad7b-438ea3f62c42.jpg",
+              "width": 800,
+              "height": 540,
+              "bytes": 36285
             },
             {
               "id": "lodgify-com-fb727dfc-f5d5-496a-9774-77819e76a05f-jpg-9d10eba875",
               "filename": "fb727dfc-f5d5-496a-9774-77819e76a05f.jpg",
               "title": "fb727dfc f5d5 496a 9774 77819e76a05f",
               "thumb": "/archivio/thumbs/lodgify-com/fb727dfc-f5d5-496a-9774-77819e76a05f.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/fb727dfc-f5d5-496a-9774-77819e76a05f.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/fb727dfc-f5d5-496a-9774-77819e76a05f.jpg",
+              "width": 720,
+              "height": 524,
+              "bytes": 213139
             },
             {
               "id": "lodgify-com-fd7d9731-7386-481c-98c2-977581fc0e56-jpg-6fe61cdcc6",
               "filename": "fd7d9731-7386-481c-98c2-977581fc0e56.jpg",
               "title": "fd7d9731 7386 481c 98c2 977581fc0e56",
               "thumb": "/archivio/thumbs/lodgify-com/fd7d9731-7386-481c-98c2-977581fc0e56.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/fd7d9731-7386-481c-98c2-977581fc0e56.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/lodgify-com/images/fd7d9731-7386-481c-98c2-977581fc0e56.jpg",
+              "width": 2304,
+              "height": 3456,
+              "bytes": 1660450
             }
           ],
           "texts": []
@@ -1276,6 +1777,12 @@
               "body": "# Imperdibili\n\nSource: https://anticobagliosiciliano.com/it/591433/imperdibili\n\n## Tonnara di Scopello — 20 min.\nLa Tonnara è un piccolo gioiello architettonico incastonato all’interno di un contesto paesaggistico di particolare bellezza. Ai piedi del borgo di Scopello, con i suoi splendidi faraglioni ed i ricchi fondali.\n\n## Segesta — 20 min.\nSito archeologico di rara bellezza. Si visita il tempio, posto su un poggio alle cui spalle si sviluppa un canyon, e il Teatro in cima al monte Barbaro da cui si gode un bellissimo panorama sul golfo.\n\n## Riserva dello Zingaro — 30 min.\nZona di costa protetta. Calette di ciotoli con acqua cristallina. Divieto alle imbarcazioni e alla pesca. Nella stagione meno calda è affascinante percorre il sentiero che congiunge i due ingressi della riserva.\n\n## Duomo di Monreale — 40 min.\nVisita immancabile. Uno dei gioielli più rari del patrimonio artistico italiano, sorprendente riuscita dell'incontro degli universi culturali islamico, bizantino, romanico: il Duomo normanno coi mosaici.\n\n## Cappella Palatina, Palermo — 40 min.\nCapolavoro dell’Arte Normanna. La Cappella Palatina di Palermo è l’esempio più elevato, dal punto di vista storico-artistico, della convivenza tra culture, religioni e modi di pensare apparentemente inconciliabili.\n\n## Selinunte — 45 min.\nUno dei maggiori centri archeologici siciliani. L'area da visitare è molto vasta. Comprende vari templi, resti di mura, strade ed edifici monumentali testimoni della grande ricchezza raggiunta da Selinunte.\n\n## Erice — 50 min.\nSuggestivo borgo fondato dagli Elimi, posto in cima al monte Sant'Angelo a circa 800 metri, da cui è possibile ammirare panorami sulle isole Egadi, sulle saline e sulla città di Trapani.\n"
             },
             {
+              "id": "text-landing-md-95f5a88627",
+              "title": "landing",
+              "filename": "landing.md",
+              "body": "# Landing — Antico Baglio Siciliano\n\nSource: https://anticobagliosiciliano.com/ (testi della homepage Lodgify)\n\n## Perché è un posto speciale\n\nLa particolarità e il fascino delle nostre case nasce dal contesto architettonico di cui fanno parte. Si trovano infatti all’interno di un antico baglio, ossia un tipico edificio rurale siciliano il cui cuore è l'ampio cortile chiuso da un grande portone: sotto il gelso che troneggia nel suo centro è piacevole fermarsi a chiacchierare o sedersi a leggere.\n\n## Dove si trova\n\nIl baglio si trova nelle campagne di Balestrate, piccolo centro costiero del bel Golfo di Castellammare, sulla costa settentrionale della Sicilia tra Palermo e Trapani. Dista 3 chilometri dal paese e dalla spiaggia ed è a soli 20 minuti di auto dall’aeroporto di Palermo e a 35 minuti da quello di Trapani. In entrambi gli aeroporti potete noleggiare un’auto. Se volete invece arrivare con la vostra auto considerate i traghetti da Genova, Civitavecchia, Napoli, Salerno e, perché no, Cagliari! Il porto di Palermo dista da casa solo 45 minuti.\n\n## Cosa potete fare\n\nGrazie alla sua ottima posizione, si possono raggiungere facilmente alcuni dei più bei luoghi di mare e d’arte della Sicilia Occidentale (la Tonnara di Scopello, la Riserva dello Zingaro, San Vito lo Capo, Segesta, Erice, Monreale, Palermo, Selinunte). La costa del Golfo di Castellammare alterna infatti lunghi tratti di spiaggia di sabbia, ideali per chi ha bambini piccoli, a spettacolari tratti rocciosi inframmezzati da calette. Ricca la varietà dei luoghi d'arte che va dai celebri siti archeologici di Segesta e Selinunte, all'arte normanna di Monreale e Palermo, al suggestivo borgo di Erice con la sua vista spettacolare sulle isole Egadi e sulle saline di Trapani.\n"
+            },
+            {
               "id": "text-se-avete-tempo-md-a5a07dc741",
               "title": "se avete tempo",
               "filename": "se-avete-tempo.md",
@@ -1299,14 +1806,20 @@
               "filename": "facciata-case.jpg",
               "title": "facciata case",
               "thumb": "/archivio/thumbs/old-wordpress/facciata-case.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/old-wordpress/images/facciata-case.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/old-wordpress/images/facciata-case.jpg",
+              "width": 3264,
+              "height": 2448,
+              "bytes": 2682197
             },
             {
               "id": "old-wordpress-img-0365-jpg-397699f9f9",
               "filename": "img_0365.jpg",
               "title": "img 0365",
               "thumb": "/archivio/thumbs/old-wordpress/img_0365.jpg",
-              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/old-wordpress/images/img_0365.jpg"
+              "full": "https://media.githubusercontent.com/media/rednaw/anticobagliosiciliano/refs/heads/main/archive/old-wordpress/images/img_0365.jpg",
+              "width": 3264,
+              "height": 2448,
+              "bytes": 3878673
             }
           ],
           "texts": []

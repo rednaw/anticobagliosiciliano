@@ -10,12 +10,12 @@
 			<p class="muted">{site.tagline} · {site.location}</p>
 		</div>
 		<nav aria-label="Footer">
-			<a href={resolve('/')}>Home</a>
+			<a href={resolve('/standard/')}>Home</a>
 			{#each houses as house}
-				<a href={resolve(`/case/${house.slug}`)}>{house.name}</a>
+				<a href={resolve(`/standard/case/${house.slug}/`)}>{house.name}</a>
 			{/each}
-			<a href={resolve('/dintorni')}>Dintorni</a>
-			<a href={resolve('/contatti')}>Contatti</a>
+			<a href={resolve('/standard/dintorni/')}>Dintorni</a>
+			<a href={resolve('/standard/contatti/')}>Contatti</a>
 		</nav>
 		<div class="end">
 			<a href={`mailto:${site.email}`}>{site.email}</a>

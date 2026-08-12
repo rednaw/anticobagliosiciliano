@@ -5,6 +5,6 @@ Not used by the SvelteKit build (`static/images/` remains the live asset source)
 
 - **Source:** https://anticobagliosiciliano.com/
 - **Images:** `images/` (Lodgify CDN `l.icdbcdn.com`)
-- **Texts:** `text/` (page copy worth preserving)
+- **Texts:** `text/` (page copy worth preserving, including homepage landing sections)
 
 Image binaries are intended for Git LFS (`archive/**/*.{jpg,jpeg,png,webp}`).

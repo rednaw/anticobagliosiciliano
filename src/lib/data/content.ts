@@ -33,8 +33,9 @@ export const houses: House[] = [
 		size: '100 m²',
 		bedrooms: '2 camere + loft',
 		bathrooms: '2 bagni',
-		image: '/images/houses/casa-1/01-img_6807.jpg',
+		image: '/images/houses/casa-1/00-img_6532.jpg',
 		gallery: [
+			'/images/houses/casa-1/01-img_6807.jpg',
 			'/images/houses/casa-1/02-img_6513.jpg',
 			'/images/houses/casa-1/03-img_6514.jpg',
 			'/images/houses/casa-1/04-img_6511.jpg',
@@ -58,8 +59,9 @@ export const houses: House[] = [
 		size: '65 m²',
 		bedrooms: '1 camera + mezzanino',
 		bathrooms: '1 bagno',
-		image: '/images/houses/casa-2/01-img_65581.jpg',
+		image: '/images/houses/casa-2/00-img_6783.jpg',
 		gallery: [
+			'/images/houses/casa-2/01-img_65581.jpg',
 			'/images/houses/casa-2/02-img_65771.jpg',
 			'/images/houses/casa-2/03-img_6645.jpg',
 			'/images/houses/casa-2/04-img_6643.jpg',
@@ -83,8 +85,9 @@ export const houses: House[] = [
 		size: '110+ m²',
 		bedrooms: '3 camere',
 		bathrooms: 'Bagni privati',
-		image: '/images/houses/casa-3/01-ingresso-soggiorno.jpg',
+		image: '/images/houses/casa-3/00-soggiorno-2.jpg',
 		gallery: [
+			'/images/houses/casa-3/01-ingresso-soggiorno.jpg',
 			'/images/houses/casa-3/02-letto-1.jpg',
 			'/images/houses/casa-3/03-letto-3.jpg',
 			'/images/houses/casa-3/04-letto-2.jpg',
@@ -113,8 +116,9 @@ export const houses: House[] = [
 		size: '110+ m²',
 		bedrooms: '2 camere',
 		bathrooms: '2 bagni',
-		image: '/images/houses/casa-4/01-porta-sul-cortile.jpg',
+		image: '/images/houses/casa-4/00-patio-3.jpg',
 		gallery: [
+			'/images/houses/casa-4/01-porta-sul-cortile.jpg',
 			'/images/houses/casa-4/02-soggiorno-11.jpg',
 			'/images/houses/casa-4/03-cucina-11.jpg',
 			'/images/houses/casa-4/04-cucina-4.jpg',

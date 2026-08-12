@@ -41,3 +41,19 @@ Production only — reports under **`anticobagliosiciliano.rednaw.github.io`**
 
 Update `email` in `src/lib/data/content.ts` if needed (used by the contact form / mailto).
 
+## Access gate & design variants
+
+Password gate (`src/lib/gate.ts`), then hub at `/` to choose:
+
+- **`/standard/`** — current marketing site design
+- **`/experimental/`** — alternate design (stub for now)
+- **`/archivio/`** — photo/text archive from previous sites
+
+Variants are kept isolated so one can be chosen and the others deleted — see [`.cursor/rules/design-variants.mdc`](.cursor/rules/design-variants.mdc).
+
+Regenerate archive thumbs after `archive/` changes (requires LFS files locally):
+
+```sh
+npm run archivio:build
+```
+
