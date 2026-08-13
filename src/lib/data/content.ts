@@ -89,7 +89,7 @@ export const houses: House[] = [
 		guests: '4–8 ospiti',
 		size: '110+ m²',
 		bedrooms: '3 camere',
-		bathrooms: 'Bagni privati',
+		bathrooms: '2 bagni',
 		image: '/images/houses/casa-3/00-soggiorno-2.jpg',
 		gallery: [
 			'/images/houses/casa-3/01-ingresso-soggiorno.jpg',
