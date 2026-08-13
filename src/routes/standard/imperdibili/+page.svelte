@@ -26,7 +26,7 @@
 	<div class="container list">
 		{#each places as place, i}
 			<Reveal delay={(i % 3) * 50}>
-				<article>
+				<article id={place.slug}>
 					<img src={asset(place.image)} alt={place.name} loading="lazy" />
 					<div class="body">
 						<span class="time">{place.time} dal baglio</span>
@@ -75,6 +75,7 @@
 		display: grid;
 		gap: 1.25rem;
 		align-items: start;
+		scroll-margin-top: calc(var(--header-h) + 1.25rem);
 	}
 
 	article img {

@@ -147,7 +147,7 @@
 	</div>
 </section>
 
-<section class="section amenities">
+<section class="section amenities band-dark">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -192,7 +192,7 @@
 	</div>
 </section>
 
-<section class="section quotes">
+<section class="section quotes band-dark">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -226,23 +226,18 @@
 			</div>
 		</Reveal>
 		<div class="place-grid">
-			{#each places.slice(0, 4) as place, i}
-				<Reveal delay={i * 60}>
-					<article>
+			{#each places as place, i}
+				<Reveal delay={i * 50}>
+					<a class="place" href="{resolve('/standard/imperdibili/')}#{place.slug}">
 						<img src={asset(place.image)} alt={place.name} loading="lazy" />
 						<div>
 							<span>{place.time}</span>
 							<h3>{place.name}</h3>
 						</div>
-					</article>
+					</a>
 				</Reveal>
 			{/each}
 		</div>
-		<Reveal>
-			<p class="places-cta">
-				<a class="btn" href={resolve('/standard/imperdibili/')}>Tutti gli imperdibili</a>
-			</p>
-		</Reveal>
 	</div>
 </section>
 
@@ -497,6 +492,44 @@
 		color: var(--muted);
 	}
 
+	.band-dark {
+		background: color-mix(in srgb, var(--sea-deep) 92%, black);
+		color: #fff;
+	}
+
+	.band-dark .eyebrow {
+		color: color-mix(in srgb, var(--sun) 85%, #fff);
+	}
+
+	.band-dark .section-head p {
+		color: color-mix(in srgb, #fff 78%, transparent);
+	}
+
+	.band-dark .amenity-list {
+		border-top-color: color-mix(in srgb, #fff 18%, transparent);
+	}
+
+	.band-dark .amenity-list li {
+		border-bottom-color: color-mix(in srgb, #fff 18%, transparent);
+	}
+
+	.band-dark .amenity-list span {
+		color: color-mix(in srgb, #fff 68%, transparent);
+	}
+
+	.band-dark blockquote {
+		background: color-mix(in srgb, #fff 8%, transparent);
+		border-left-color: var(--sun);
+	}
+
+	.band-dark blockquote strong {
+		color: #fff;
+	}
+
+	.band-dark blockquote footer {
+		color: color-mix(in srgb, #fff 68%, transparent);
+	}
+
 	.award-grid {
 		display: grid;
 		gap: 1.5rem;
@@ -565,14 +598,17 @@
 
 	.place-grid {
 		display: grid;
+		grid-template-columns: 1fr;
 		gap: 1rem;
 	}
 
-	.place-grid article {
+	.place-grid .place {
 		position: relative;
-		min-height: 14rem;
+		display: block;
+		aspect-ratio: 4 / 3;
 		overflow: hidden;
 		color: #fff;
+		text-decoration: none;
 	}
 
 	.place-grid img {
@@ -581,18 +617,18 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: center top;
 		transition: transform 1.1s var(--ease);
 	}
 
-	.place-grid article:hover img {
+	.place-grid .place:hover img {
 		transform: scale(1.05);
 	}
 
 	.place-grid div {
-		position: relative;
+		position: absolute;
+		inset: 0;
 		z-index: 1;
-		height: 100%;
-		min-height: 14rem;
 		display: grid;
 		align-content: end;
 		padding: 1.25rem;
@@ -608,11 +644,7 @@
 
 	.place-grid h3 {
 		margin: 0.25rem 0 0;
-		font-size: 1.45rem;
-	}
-
-	.places-cta {
-		margin: 2rem 0 0;
+		font-size: clamp(1.05rem, 2.5vw, 1.45rem);
 	}
 
 	.cta {
