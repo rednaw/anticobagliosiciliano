@@ -8,7 +8,7 @@
 	const links = [
 		{ href: '/standard', label: 'Home' },
 		{ href: '/standard/#alloggi', label: 'Alloggi' },
-		{ href: '/standard/dintorni', label: 'Dintorni' },
+		{ href: '/standard/imperdibili', label: 'Imperdibili' },
 		{ href: '/standard/contatti', label: 'Contatti' }
 	] as const;
 
@@ -26,7 +26,7 @@
 	function hrefFor(href: (typeof links)[number]['href']) {
 		if (href === '/standard/#alloggi') return `${resolve('/standard/')}#alloggi`;
 		if (href === '/standard') return resolve('/standard/');
-		if (href === '/standard/dintorni') return resolve('/standard/dintorni/');
+		if (href === '/standard/imperdibili') return resolve('/standard/imperdibili/');
 		return resolve('/standard/contatti/');
 	}
 </script>

@@ -14,7 +14,7 @@
 			{#each houses as house}
 				<a href={resolve(`/standard/case/${house.slug}/`)}>{house.name}</a>
 			{/each}
-			<a href={resolve('/standard/dintorni/')}>Dintorni</a>
+			<a href={resolve('/standard/imperdibili/')}>Imperdibili</a>
 			<a href={resolve('/standard/contatti/')}>Contatti</a>
 		</nav>
 		<div class="end">

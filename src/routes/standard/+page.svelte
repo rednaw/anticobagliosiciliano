@@ -132,13 +132,16 @@
 			<p class="eyebrow">Il giardino</p>
 			<h2>Vivi il nostro giardino siciliano</h2>
 			<p>
-				Un autentico agrumeto e un uliveto secolare avvolgono la struttura, regalando profumi, ombra
-				e silenzio. Tra gli alberi, una zona relax sotto una grande tettoia antica: leggere, riposare
-				su una sdraio, condividere momenti speciali.
+				Il cuore dell’Antico Baglio Siciliano è la natura che lo circonda: un autentico agrumeto e
+				un uliveto secolare avvolgono la struttura, regalando profumi, ombra e silenzio.
 			</p>
 			<p>
-				A disposizione anche un’area barbecue, perfetta per cene all’aperto tra il verde e la pietra
-				viva del baglio.
+				Tra gli alberi si apre una zona relax sotto una grande tettoia antica, dove puoi leggere,
+				riposare su una sdraio o condividere momenti speciali con chi ami.
+			</p>
+			<p>
+				A disposizione anche un’area barbecue perfetta per cene all’aperto, tra il verde e la pietra
+				viva del nostro baglio.
 			</p>
 		</Reveal>
 	</div>
@@ -217,9 +220,9 @@
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
-				<p class="eyebrow">Dintorni</p>
-				<h2>Balestrate e dintorni</h2>
-				<p>Mare, natura e borghi autentici a pochi minuti dal baglio.</p>
+				<p class="eyebrow">Imperdibili</p>
+				<h2>Balestrate e dintorni: tra mare, natura e borghi autentici</h2>
+				<p>A pochi minuti dal baglio — da Scopello a Segesta, dallo Zingaro a Monreale.</p>
 			</div>
 		</Reveal>
 		<div class="place-grid">
@@ -237,7 +240,7 @@
 		</div>
 		<Reveal>
 			<p class="places-cta">
-				<a class="btn" href={resolve('/standard/dintorni/')}>Tutti gli imperdibili</a>
+				<a class="btn" href={resolve('/standard/imperdibili/')}>Tutti gli imperdibili</a>
 			</p>
 		</Reveal>
 	</div>

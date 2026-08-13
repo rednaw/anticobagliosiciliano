@@ -26,12 +26,12 @@ export const houses: House[] = [
 	{
 		slug: 'casa-1',
 		name: 'Casa 1',
-		tagline: 'Spaziosa, luminosa, con loft e terrazza sui tetti',
+		tagline: 'Spaziosa, luminosa, con soppalco e terrazza sui tetti',
 		summary:
-			'100 m² su due livelli, ideale per famiglie o due/tre coppie. Soggiorno ampio, due camere, loft e terrazza privata.',
+			'Oltre 100 mq su due livelli, ideale per famiglie o due/tre coppie. Soggiorno ampio, due camere, soppalco e terrazza privata.',
 		guests: '4–6 ospiti',
 		size: '100 m²',
-		bedrooms: '2 camere + loft',
+		bedrooms: '2 camere + soppalco',
 		bathrooms: '2 bagni',
 		image: '/images/houses/casa-1/00-img_6532.jpg',
 		gallery: [
@@ -42,22 +42,24 @@ export const houses: House[] = [
 			'/images/houses/casa-1/05-img_6494.jpg'
 		],
 		paragraphs: [
-			'Su due livelli e circa 100 m², la casa si apre su un ampio soggiorno con due divani, un comodo tavolo da pranzo e una cucina bella e organizzata, aperta su un lato ma con spazio autonomo.',
-			'Ci sono due camere spaziose e luminose, entrambe affacciate su un magnifico uliveto. La più grande ha un letto matrimoniale (160×200), la seconda due letti singoli che si possono affiancare. In entrambe c’è spazio per una culla.',
-			'Dalla sala una scala in pietra conduce al grande loft, utilizzabile come terza camera per 2/3 persone, con divano letto (140×200) e spazio per un letto aggiuntivo. Da qui si accede a una terrazza di 15 m² sui tetti del baglio: ideale per colazione al sole, abbronzatura in privacy o fresco della sera.',
-			'Due bagni eleganti con doccia, uno a piano terra e uno nel loft. L’ingresso dà sul cortile del baglio, con spazio riservato per sdraio o cene a lume di candela. Restaurata con pietre antiche, cotto artigianale e travi di castagno; riscaldamento per soggiorni anche invernali.'
+			'Disposta su due livelli, per un totale di oltre 100 mq, la casa si apre su un ampio soggiorno con due divani, un comodo tavolo da pranzo e una bella cucina che, benché aperta da un lato, ha uno spazio autonomo, comodo e organizzato. Due sono le stanze da letto, entrambe spaziose e luminose ed entrambe affacciate su un magnifico uliveto. La più grande ha un letto matrimoniale (160 x 200), la seconda due letti singoli eventualmente affiancabili. In entrambe c’è lo spazio per un lettino per bambini.',
+			'Una scala in muratura porta dal soggiorno all’ampio soppalco, dove si apre un’altra zona soggiorno eventualmente utilizzabile come terza camera da letto per 2/3 persone. Vi è infatti un divano letto (140x 200) e lo spazio per un eventuale letto supplementare. Da qui si accede a un bel terrazzo (15 mq) sui tetti del Baglio dove si può fare colazione col primo sole del mattino, prendere il sole in totale privacy o godersi il fresco della sera.',
+			'La casa ha due bagni spaziosi ed eleganti, entrambi con doccia, uno a piano terra e uno nella zona soppalco.',
+			'L’ingresso della casa si affaccia sul cortile del Baglio e nello spazio riservato antistante è possibile rilassarsi su una sdraio o cenare a lume di candela.',
+			'La casa è frutto di un recente restauro: l’utilizzo di materiali di recupero, come antiche pietre e ringhiere, e la scelta di utilizzare cotto fatto a mano per i pavimenti e travi grezze di castagno per i soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
+			'Sistemazione ideale per una famiglia di 4/6 persone, per due/tre coppie di amici, per due famiglie.'
 		],
-		highlights: ['Terrazza sui tetti 15 m²', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento']
+		highlights: ['Terrazza sui tetti 15 mq', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento']
 	},
 	{
 		slug: 'casa-2',
 		name: 'Casa 2',
 		tagline: 'Intima e raffinata, perfetta per coppie o piccole famiglie',
 		summary:
-			'65 m² su due piani con camera al piano terra, mezzanino e terrazza. Ideale per una coppia o 3–4 persone.',
+			'Circa 65 mq su due livelli con camera al piano terra, soppalco e terrazza. Ideale per una coppia o 3–4 persone.',
 		guests: '2–4 ospiti',
 		size: '65 m²',
-		bedrooms: '1 camera + mezzanino',
+		bedrooms: '1 camera + soppalco',
 		bathrooms: '1 bagno',
 		image: '/images/houses/casa-2/00-img_6783.jpg',
 		gallery: [
@@ -69,11 +71,14 @@ export const houses: House[] = [
 			'/images/houses/casa-2/06-img_6609.jpg'
 		],
 		paragraphs: [
-			'Su due piani e circa 65 m². L’ingresso apre su una zona pranzo ampia con cucina comoda e organizzata. Al piano terra la camera, luminosa, con grandi finestre sull’uliveto e letto matrimoniale (160×200); su richiesta terzo letto o culla. Accanto, bagno con doccia spaziosa.',
-			'Una scala in pietra porta al mezzanino: zona living anche utilizzabile come seconda camera per 2/3 persone, con divano letto (140×200) e spazio per un letto extra. Da qui una terrazza di 15 m² sui tetti del baglio.',
-			'Affaccio sul cortile con spazio riservato. Restauro con materiali di recupero, cotto artigianale e travi di castagno; riscaldamento per l’inverno. Perfetta per una coppia, una famiglia di 3/4 o due coppie.'
+			'La casa è disposta su due livelli per un totale di circa 65 mq. L’ingresso dà su un’ampia zona pranzo con una bella cucina a vista, comoda e organizzata. Sempre al piano terra si trova la stanza da letto, spaziosa e luminosa, con due grandi finestre affacciate su un magnifico uliveto. Il letto matrimoniale (160 x 200) lascia spazio ad un eventuale terzo letto o a un lettino per bambini (entrambi su richiesta). Accanto alla camera si trova un bagno con doccia, spazioso ed elegante.',
+			'Una scala in muratura porta al soppalco dove si apre la zona soggiorno, eventualmente utilizzabile come seconda camera da letto per 2/3 persone. Vi si trova infatti un divano letto (140x 200) e vi è spazio per un eventuale letto supplementare.',
+			'Da qui si accede a un bel terrazzo (15 mq) sui tetti del Baglio dove potrete fare colazione col primo sole del mattino, prendere il sole in totale privacy o godervi il fresco della sera.',
+			'La casa si affaccia sul cortile del Baglio e nello spazio riservato antistante è possibile rilassarsi su una sdraio o cenare a lume di candela.',
+			'La casa è frutto di un recente restauro: l’utilizzo di materiali di recupero, come antiche pietre e ringhiere, e la scelta di utilizzare cotto fatto a mano per i pavimenti e travi grezze di castagno per i soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
+			'Sistemazione ideale per una coppia, per una famiglia di 3/4 persone, per due coppie di amici.'
 		],
-		highlights: ['Terrazza 15 m²', 'Vista uliveto', 'Ideale per coppie', 'Riscaldamento']
+		highlights: ['Terrazza 15 mq', 'Vista uliveto', 'Ideale per coppie', 'Riscaldamento']
 	},
 	{
 		slug: 'casa-3',
@@ -159,17 +164,17 @@ export const amenities = [
 export const awards = [
 	{
 		title: 'Superhost Airbnb',
-		text: 'Riconoscimento per l’eccellenza nell’ospitalità e le recensioni eccellenti degli ospiti.',
+		text: 'Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta qualità e recensioni eccellenti da parte degli ospiti.',
 		image: '/images/awards/superhost.png'
 	},
 	{
 		title: 'Amato dagli ospiti Airbnb',
-		text: 'Un premio speciale per attenzione e cura, e il rapporto di fiducia costruito nel tempo.',
+		text: 'Un riconoscimento speciale per l’attenzione e la cura verso gli ospiti, che ci ha permesso di costruire un rapporto di fiducia e calore.',
 		image: '/images/awards/guest-favorite.png'
 	},
 	{
 		title: 'Traveller Review Awards',
-		text: 'Premio annuale Booking.com basato sulle recensioni positive ricevute.',
+		text: 'Premio annuale assegnato da Booking.com basato sulle recensioni positive ricevute, a testimonianza della soddisfazione dei nostri clienti.',
 		image: '/images/awards/traveller-review.png'
 	}
 ];
@@ -196,42 +201,49 @@ export type Place = {
 	image: string;
 };
 
+/** Italian originals from Lodgify Imperdibili (archive/lodgify-com/text/imperdibili.md). */
 export const places: Place[] = [
 	{
-		name: 'Faraglioni di Scopello',
+		name: 'Tonnara di Scopello',
 		time: '20 min',
-		text: 'Scogliere e acque cristalline ai piedi della Tonnara: un tuffo nel paesaggio più iconico della costa.',
+		text: 'La Tonnara è un piccolo gioiello architettonico incastonato all’interno di un contesto paesaggistico di particolare bellezza. Ai piedi del borgo di Scopello, con i suoi splendidi faraglioni ed i ricchi fondali, assolutamente da non perdere un tuffo nelle sue acque. Nel suo territorio sorgeva la mitica città di Cetaria (terra dei tonni), citata nelle opere di Tolomeo e di Plinio per l’eccezionale abbondanza di tonni presenti nel suo mare. L’ultima stagione di pesca è stata nel 1984.',
 		image: '/images/places/scopello.jpg'
 	},
 	{
-		name: 'Tempio di Segesta',
+		name: 'Segesta',
 		time: '20 min',
-		text: 'Sito archeologico di rara bellezza: il tempio sulla collina e il teatro sul monte Barbaro con vista sul golfo.',
+		text: 'Sito archeologico di rara bellezza. Si visita il tempio, posto su un poggio alle cui spalle si sviluppa un canyon, e il Teatro in cima al monte Barbaro da cui si gode un bellissimo panorama sul golfo.',
 		image: '/images/places/segesta.jpg'
 	},
 	{
 		name: 'Riserva dello Zingaro',
 		time: '30 min',
-		text: 'Costa protetta, calette di ciottoli e sentieri mediterranei tra scogliere e silenzio.',
+		text: 'Zona di costa protetta. Calette di ciotoli con acqua cristallina. Divieto alle imbarcazioni e alla pesca. Nella stagione meno calda è affascinante percorre il sentiero che congiunge i due ingressi della riserva. Panorami mozzafiato e profumi della macchia mediterranea.',
 		image: '/images/places/zingaro.jpg'
 	},
 	{
-		name: 'Erice',
-		time: '50 min',
-		text: 'Borgo elimo a 800 m, vie acciottolate e viste sulle Egadi, le saline e Trapani.',
-		image: '/images/places/erice.jpg'
+		name: 'Duomo di Monreale',
+		time: '40 min',
+		text: 'Visita immancabile. Uno dei gioielli più rari del patrimonio artistico italiano, sorprendente riuscita dell’incontro degli universi culturali islamico, bizantino, romanico: il Duomo normanno coi mosaici siculo-veneziani e il chiostro benedettino. Dal Belvedere vista sulla valle dell’Oreto e sulla Conca d’Oro.',
+		image: '/images/places/monreale.jpg'
+	},
+	{
+		name: 'Cappella Palatina, Palermo',
+		time: '40 min',
+		text: 'Capolavoro dell’Arte Normanna. La Cappella Palatina di Palermo è l’esempio più elevato, dal punto di vista storico-artistico, della convivenza tra culture, religioni e modi di pensare apparentemente inconciliabili. Nella sua costruzione furono coinvolte maestranze bizantine, latine e musulmane, queste ultime eseguirono il soffitto a muqarnas, pregevole ed unico esempio al mondo di decorazioni pittoriche islamiche con rappresentazioni di figure umane all’interno di un luogo di culto.',
+		image: '/images/places/cappella-palatina.jpg'
 	},
 	{
 		name: 'Selinunte',
 		time: '45 min',
-		text: 'Uno dei grandi siti greci di Sicilia: templi, acropoli e la spiaggia dove sbarcarono i coloni.',
+		text: 'Uno dei maggiori centri archeologici siciliani. L’area da visitare è molto vasta. Comprende vari templi, resti di mura, strade ed edifici monumentali testimoni della grande ricchezza raggiunta da Selinunte. L’acropoli domina la splendida spiaggia, dove nel 650 a.C., sbarcarono i coloni di Megara Hyblaea, città greca della Sicilia orientale, i quali fondarono l’avamposto ellenico più a occidente di tutta l’isola.',
 		image: '/images/places/selinunte.jpg'
 	},
 	{
-		name: 'Chiostro di Monreale',
-		time: '40 min',
-		text: 'Capolavoro norman-arabo-bizantino: mosaici e chiostro benedettino tra i gioielli d’Italia.',
-		image: '/images/places/monreale.jpg'
+		name: 'Erice',
+		time: '50 min',
+		text: 'Suggestivo borgo fondato dagli Elimi, posto in cima al monte Sant’Angelo a circa 800 metri, da cui è possibile ammirare panorami sulle isole Egadi, sulle saline e sulla città di Trapani. L’affascinante atmosfera dei tortuosi vicoli lastricati, delle chiese e dei cortiletti fioriti è resa ancora più unica dall’irreale momentanea nebbia, creata da nuvole di passaggio, che spesso ammanta la città.',
+		image: '/images/places/erice.jpg'
 	}
 ];
 
