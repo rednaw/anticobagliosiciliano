@@ -3,7 +3,7 @@
 Scraped from the self-hosted (“new”) WordPress site. Not used by the SvelteKit build.
 
 - **Images:** high-res originals (Git LFS); see `manifest.json`
-- **Texts:** `text/nuova-homepage.md` — Italian homepage sections (Chi siamo, cortile, giardino, etc.)
+- **Texts:** `text/nuova-homepage.md` — Italian homepage sections; `text/imperdibili.md` — English (identical to wordpress.com)
 
 Room **English** bodies on `.it` are identical to wordpress.com `/room/casa-N/` — archived under `archive/old-wordpress/text/rooms/`. No public Italian room bodies on `.it`.
 
