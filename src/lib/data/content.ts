@@ -22,6 +22,11 @@ export type House = {
 	highlights: string[];
 };
 
+/**
+ * Casa 1–2: Italian originals from Lodgify (archive/lodgify-com/text/).
+ * Casa 3–4: no Italian original exists; written from the English originals
+ * (archive/old-wordpress/text/rooms/) in the same house style — needs owner review.
+ */
 export const houses: House[] = [
 	{
 		slug: 'casa-1',
@@ -105,9 +110,11 @@ export const houses: House[] = [
 			'/images/houses/casa-3/11-ingresso-sul-cortile.jpg'
 		],
 		paragraphs: [
-			'Casa di campagna su due piani, oltre 110 m²: ideale per 4–8 persone, due/tre coppie o due famiglie. Al piano terra un ampio soggiorno-ingresso conduce all’area notte con tre camere luminose (due matrimoniali e una doppia o twin su richiesta). Due camere guardano l’uliveto, la terza il cortile. Il divano letto in soggiorno ospita altre due persone.',
-			'Una scala in pietra lavica e ferro porta al primo piano: secondo soggiorno e zona cucina/pranzo con forno. Dalla zona living si accede a una terrazza di 15 m² sull’uliveto, per cene serali o relax in privacy.',
-			'Ingresso sul cortile con spazio esclusivo. Restauro con cotto artigianale, pietra lavica e travi rustiche; riscaldamento per l’inverno.'
+			'Questa pittoresca casa di campagna è disposta su due piani, per un totale di oltre 110 mq. Al piano terra un ampio e confortevole soggiorno con zona ingresso dà accesso alla zona notte. Qui si trovano tre camere da letto, tutte spaziose e luminose: due con letto matrimoniale e una terza con due letti singoli. Due camere si affacciano su un magnifico uliveto, la terza sul cortile del Baglio. Il divano letto del soggiorno può inoltre ospitare due persone.',
+			'Una suggestiva scala in pietra lavica e ferro porta al primo piano, dove si aprono un secondo soggiorno e la zona cucina/pranzo. La cucina, bella e comoda, è dotata di forno. Dalla zona giorno si accede a un delizioso terrazzo (15 mq) affacciato sull’uliveto, dove si può cenare la sera o rilassarsi su una sdraio in totale privacy.',
+			'L’ingresso della casa si affaccia sul cortile del Baglio: nello spazio riservato antistante gli ospiti possono godersi la piacevole atmosfera del cortile.',
+			'La casa è frutto di un recente e accurato restauro: l’utilizzo di materiali di recupero, la scelta di cotto fatto a mano per i pavimenti, di pietra lavica per la scala e per la cucina e di travi grezze di legno per i soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
+			'Sistemazione ideale per una famiglia di 4/8 persone, per due/tre coppie di amici, per due famiglie.'
 		],
 		highlights: ['3 camere da letto', 'Terrazza sull’uliveto', 'Cucina con forno', 'Fino a 8 ospiti']
 	},
@@ -143,9 +150,12 @@ export const houses: House[] = [
 			'/images/houses/casa-4/18-terrazzo1.jpg'
 		],
 		paragraphs: [
-			'La casa più elegante del baglio: due livelli, oltre 110 m², ideale per 4–7 persone o due/tre coppie. Al piano terra un ampio soggiorno con due divani (uno trasformabile in letto doppio), cucina elegante, camera matrimoniale e bagno con doccia. Cucina, soggiorno e camera si aprono su un patio interno riservato per colazioni, pranzi e relax.',
-			'Dal soggiorno una scala in mattoni porta al piano superiore: camera spaziosa con angolo lettura, letto matrimoniale separabile in due singoli e, su richiesta, letto aggiuntivo. Bagno en-suite con doccia. Dal balcone sul patio si accede a una terrazza con vista sul cortile e sui tetti del baglio — tramonti sul Golfo di Castellammare.',
-			'Restauro con materiali di recupero, balcone antico in ferro, pavimenti in pietra e travi rustiche; riscaldamento per soggiorni invernali.'
+			'È la casa più elegante del Baglio. Disposta su due livelli, per un totale di oltre 110 mq, si apre al piano terra su un ampio soggiorno con due divani, uno dei quali trasformabile in letto per due persone. Sempre al piano terra si trovano un’elegante cucina, una camera matrimoniale e un bagno con doccia.',
+			'La cucina, il soggiorno e la camera si affacciano tutti su un delizioso patio interno, dove si può fare colazione, pranzare e cenare, oltre che rilassarsi su una chaise longue in totale privacy.',
+			'Una scala in mattoni porta dal soggiorno al primo piano, dove si trova una spaziosa camera da letto con un angolo lettura e due poltrone. Il letto matrimoniale è eventualmente separabile in due letti singoli e, su richiesta, è possibile aggiungere un letto supplementare. La camera dispone di un bagno con doccia en suite.',
+			'Da qui, attraverso un balcone affacciato sul patio, si accede a un bel terrazzo con una splendida vista sul cortile e sui tetti del Baglio, dove prendere il sole, sorseggiare un aperitivo davanti alla luce degli spettacolari tramonti sul Golfo di Castellammare e godersi il fresco della sera.',
+			'La casa è frutto di un recente e accurato restauro: l’utilizzo di materiali di recupero, come un antico balcone con ringhiere in ferro lavorato, e la scelta di pavimenti in pietra e di travi grezze di legno per i soffitti, danno alla casa uno charme e un carattere particolari. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
+			'Sistemazione ideale per una famiglia di 4/7 persone, per due/tre coppie di amici.'
 		],
 		highlights: ['Patio interno privato', 'Vista Golfo di Castellammare', '2 bagni', 'Atmosfera elegante']
 	}
