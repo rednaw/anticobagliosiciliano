@@ -2,7 +2,7 @@
 
 Source: https://anticobagliosiciliano.com/it/596856/casa-di-mastro-giovanni
 
-**Corrispondenza probabile:** Casa 2 sul sito WordPress / rebuild.
+**Old name → current:** Casa di Mastro Giovanni → Casa #2.
 
 La casa è disposta su due livelli per un totale di circa 65 mq. L'ingresso dà su un'ampia zona pranzo con una bella cucina a vista, comoda e organizzata. Sempre al piano terra si trova la stanza da letto, spaziosa e luminosa, con due grandi finestre affacciate su un magnifico uliveto. Il letto matrimoniale (160 x 200) lascia spazio ad un eventuale terzo letto o a un lettino per bambini (entrambi su richiesta). Accanto alla camera si trova un bagno con doccia, spazioso ed elegante.
 

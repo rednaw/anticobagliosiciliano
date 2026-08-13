@@ -67,16 +67,6 @@
 		gap: 0.85rem;
 	}
 
-	h1 {
-		margin: 0;
-		font-size: clamp(1.75rem, 5vw, 2.25rem);
-	}
-
-	.hint {
-		margin: 0;
-		color: var(--ink-soft);
-	}
-
 	input {
 		width: 100%;
 		padding: 0.75rem 0.9rem;
