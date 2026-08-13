@@ -44,7 +44,18 @@ export const houses: House[] = [
 			'/images/houses/casa-1/02-img_6513.jpg',
 			'/images/houses/casa-1/03-img_6514.jpg',
 			'/images/houses/casa-1/04-img_6511.jpg',
-			'/images/houses/casa-1/05-img_6494.jpg'
+			'/images/houses/casa-1/05-img_6494.jpg',
+			'/images/houses/casa-1/06-img_6493.jpg',
+			'/images/houses/casa-1/07-img_6368.jpg',
+			'/images/houses/casa-1/08-img_6383.jpg',
+			'/images/houses/casa-1/09-img_6391.jpg',
+			'/images/houses/casa-1/10-img_6501.jpg',
+			'/images/houses/casa-1/11-img_6482.jpg',
+			'/images/houses/casa-1/12-img_6419.jpg',
+			'/images/houses/casa-1/13-img_6669.jpg',
+			'/images/houses/casa-1/14-img_6653.jpg',
+			'/images/houses/casa-1/15-img_6479.jpg',
+			'/images/houses/casa-1/16-img_6470.jpg'
 		],
 		paragraphs: [
 			'Disposta su due livelli, per un totale di oltre 100 mq, la casa si apre su un ampio soggiorno con due divani, un comodo tavolo da pranzo e una bella cucina che, benché aperta da un lato, ha uno spazio autonomo, comodo e organizzato. Due sono le stanze da letto, entrambe spaziose e luminose ed entrambe affacciate su un magnifico uliveto. La più grande ha un letto matrimoniale (160 x 200), la seconda due letti singoli eventualmente affiancabili. In entrambe c’è lo spazio per un lettino per bambini.',
@@ -73,7 +84,18 @@ export const houses: House[] = [
 			'/images/houses/casa-2/03-img_6645.jpg',
 			'/images/houses/casa-2/04-img_6643.jpg',
 			'/images/houses/casa-2/05-img_6776.jpg',
-			'/images/houses/casa-2/06-img_6609.jpg'
+			'/images/houses/casa-2/06-img_6609.jpg',
+			'/images/houses/casa-2/07-img_5927.jpg',
+			'/images/houses/casa-2/08-img_6628.jpg',
+			'/images/houses/casa-2/09-img_5743.jpg',
+			'/images/houses/casa-2/10-img_6589.jpg',
+			'/images/houses/casa-2/11-img_6800.jpg',
+			'/images/houses/casa-2/12-img_6580.jpg',
+			'/images/houses/casa-2/13-img_5759.jpg',
+			'/images/houses/casa-2/14-img_5756.jpg',
+			'/images/houses/casa-2/15-img_6623.jpg',
+			'/images/houses/casa-2/16-img_6769.jpg',
+			'/images/houses/casa-2/17-img_5933.jpg'
 		],
 		paragraphs: [
 			'La casa è disposta su due livelli per un totale di circa 65 mq. L’ingresso dà su un’ampia zona pranzo con una bella cucina a vista, comoda e organizzata. Sempre al piano terra si trova la stanza da letto, spaziosa e luminosa, con due grandi finestre affacciate su un magnifico uliveto. Il letto matrimoniale (160 x 200) lascia spazio ad un eventuale terzo letto o a un lettino per bambini (entrambi su richiesta). Accanto alla camera si trova un bagno con doccia, spazioso ed elegante.',
@@ -106,7 +128,6 @@ export const houses: House[] = [
 			'/images/houses/casa-3/07-cucina-1.jpg',
 			'/images/houses/casa-3/08-cucina-2.jpg',
 			'/images/houses/casa-3/09-soggiorno-1.jpg',
-			'/images/houses/casa-3/10-terrazzo.jpg',
 			'/images/houses/casa-3/11-ingresso-sul-cortile.jpg'
 		],
 		paragraphs: [

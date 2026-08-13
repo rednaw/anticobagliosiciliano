@@ -54,14 +54,14 @@
 					</ul>
 				</div>
 			</Reveal>
-			<div class="gallery">
-				{#each house.gallery as src, i}
-					<Reveal delay={100 + i * 50}>
-						<img src={asset(src)} alt={`${house.name} — foto ${i + 1}`} loading="lazy" />
-					</Reveal>
-				{/each}
-			</div>
 		</aside>
+	</div>
+	<div class="container gallery">
+		{#each house.gallery as src, i}
+			<Reveal delay={100 + i * 40}>
+				<img src={asset(src)} alt={`${house.name} — foto ${i + 1}`} loading="lazy" />
+			</Reveal>
+		{/each}
 	</div>
 </section>
 
@@ -164,7 +164,6 @@
 		padding: 1.5rem;
 		background: color-mix(in srgb, var(--olive) 8%, #fff);
 		border: 1px solid var(--line);
-		margin-bottom: 1.25rem;
 	}
 
 	.panel ul {
@@ -177,7 +176,9 @@
 
 	.gallery {
 		display: grid;
+		grid-template-columns: 1fr 1fr;
 		gap: 0.75rem;
+		margin-top: 2.5rem;
 	}
 
 	.gallery img {
@@ -217,6 +218,12 @@
 		.layout {
 			grid-template-columns: 1.15fr 0.85fr;
 			gap: 3.5rem;
+			align-items: start;
+		}
+
+		.gallery {
+			grid-template-columns: repeat(3, 1fr);
+			margin-top: 3rem;
 		}
 
 		.grid {
