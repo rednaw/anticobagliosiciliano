@@ -1,13 +1,10 @@
-# Original site image archive
+# Original site archive (anticobagliosiciliano.it)
 
-High-resolution originals scraped from https://anticobagliosiciliano.it/ for future use.
+Scraped from the self-hosted (“new”) WordPress site. Not used by the SvelteKit build.
 
-These files are **not** used by the SvelteKit site. Live assets stay in `static/images/`.
-Image binaries are stored in **Git LFS**; `README.md` and `manifest.json` stay in normal Git.
+- **Images:** high-res originals (Git LFS); see `manifest.json`
+- **Texts:** `text/nuova-homepage.md` — Italian homepage sections; `text/imperdibili.md` — English (identical to wordpress.com)
 
-Downloaded: 2026-08-10T07:17:32.333Z
-Unique files: 74 (~216MB)
-Skipped duplicates: 7
-Failed: 1 (`palermo_cappella_palatina.jpg` — only a 400×300 derivative exists upstream)
+Room **English** bodies on `.it` are identical to wordpress.com `/room/casa-N/` — archived under `archive/old-wordpress/text/rooms/`. No public Italian room bodies on `.it`.
 
-See `manifest.json` for source URLs and checksums.
+Downloaded images: 2026-08-10T07:17:32.333Z — 74 unique (~216MB); 7 skipped duplicates; 1 failed (`palermo_cappella_palatina.jpg`).

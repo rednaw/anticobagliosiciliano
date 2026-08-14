@@ -10,6 +10,22 @@
 			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Figtree:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
+		<!-- Restore unlock before first paint (avoids flash of gate / content). -->
+		<script>
+			(function () {
+				try {
+					if (localStorage.getItem('abs-site-access') === 'ok') {
+						document.documentElement.setAttribute('data-access', 'ok');
+					}
+				} catch (e) {}
+			})();
+		</script>
+		<style>
+			/* Returning visitors: hide gate shell until the app hydrates the real site. */
+			html[data-access='ok'] .gate-screen {
+				display: none !important;
+			}
+		</style>
 		<!-- hostname must match SIMPLE_ANALYTICS_HOSTNAME in src/lib/site-config.ts -->
 		<script
 			async

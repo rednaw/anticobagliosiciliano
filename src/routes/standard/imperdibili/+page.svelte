@@ -5,28 +5,30 @@
 </script>
 
 <svelte:head>
-	<title>Dintorni · {site.name}</title>
+	<title>Imperdibili · {site.name}</title>
 	<meta
 		name="description"
-		content="Mare, natura e borghi autentici a pochi minuti dall’Antico Baglio Siciliano."
+		content="Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano."
 	/>
 </svelte:head>
 
 <section class="hero">
 	<div class="container">
-		<p class="eyebrow">Imperdibili</p>
-		<h1>Balestrate e dintorni</h1>
-		<p class="lead">Tra mare, natura e borghi autentici — tutto a portata di baglio.</p>
+		<h1>Imperdibili</h1>
+		<p class="lead">
+			Grazie alla posizione del baglio si raggiungono facilmente alcuni dei più bei luoghi di mare e
+			d’arte della Sicilia occidentale.
+		</p>
 	</div>
 </section>
 
 <section class="section">
 	<div class="container list">
 		{#each places as place, i}
-			<Reveal delay={(i % 3) * 60}>
-				<article>
+			<Reveal delay={(i % 3) * 50}>
+				<article id={place.slug}>
 					<img src={asset(place.image)} alt={place.name} loading="lazy" />
-					<div>
+					<div class="body">
 						<span class="time">{place.time} dal baglio</span>
 						<h2>{place.name}</h2>
 						<p>{place.text}</p>
@@ -41,7 +43,7 @@
 	<div class="container">
 		<Reveal>
 			<h2>Vieni a scoprirli da qui</h2>
-			<a class="btn btn-light" href={resolve('/contatti')}>Prenota il soggiorno</a>
+			<a class="btn btn-light" href={resolve('/standard/contatti/')}>Prenota il soggiorno</a>
 		</Reveal>
 	</div>
 </section>
@@ -58,26 +60,32 @@
 
 	.lead {
 		margin: 0;
-		max-width: 32rem;
+		max-width: 36rem;
 		font-size: 1.15rem;
+		line-height: 1.55;
 		color: var(--ink-soft);
 	}
 
 	.list {
 		display: grid;
-		gap: 2rem;
+		gap: 2.75rem;
 	}
 
 	article {
 		display: grid;
 		gap: 1.25rem;
-		align-items: center;
+		align-items: start;
+		scroll-margin-top: calc(var(--header-h) + 1.25rem);
 	}
 
 	article img {
 		width: 100%;
 		aspect-ratio: 16 / 11;
 		object-fit: cover;
+	}
+
+	.body {
+		max-width: 40rem;
 	}
 
 	.time {
@@ -91,13 +99,15 @@
 	}
 
 	h2 {
-		margin: 0 0 0.65rem;
+		margin: 0 0 0.75rem;
 		font-size: clamp(1.6rem, 3vw, 2.2rem);
 	}
 
-	p {
+	.body p {
 		margin: 0;
 		color: var(--ink-soft);
+		line-height: 1.65;
+		font-size: 1.02rem;
 	}
 
 	.cta {
@@ -113,12 +123,13 @@
 
 	@media (min-width: 800px) {
 		.list {
-			gap: 3rem;
+			gap: 3.5rem;
 		}
 
 		article {
-			grid-template-columns: 1.1fr 0.9fr;
-			gap: 2.5rem;
+			grid-template-columns: 1fr 1.15fr;
+			gap: 2.75rem;
+			align-items: center;
 		}
 
 		article:nth-child(even) img {

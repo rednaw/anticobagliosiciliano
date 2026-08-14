@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { asset, resolve } from '$app/paths';
 	import Reveal from '$lib/components/Reveal.svelte';
+	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import { houses, site } from '$lib/data/content';
 
 	let { data } = $props();
@@ -39,9 +40,6 @@
 					<p class="body">{paragraph}</p>
 				</Reveal>
 			{/each}
-			<Reveal>
-				<a class="btn" href={resolve('/contatti')}>Richiesta disponibilità</a>
-			</Reveal>
 		</div>
 		<aside>
 			<Reveal delay={80}>
@@ -54,14 +52,15 @@
 					</ul>
 				</div>
 			</Reveal>
-			<div class="gallery">
-				{#each house.gallery as src, i}
-					<Reveal delay={100 + i * 50}>
-						<img src={asset(src)} alt={`${house.name} — foto ${i + 1}`} loading="lazy" />
-					</Reveal>
-				{/each}
-			</div>
 		</aside>
+	</div>
+	<div class="container gallery">
+		<Reveal delay={100}>
+			<GalleryCarousel images={house.gallery} alt={house.name} />
+		</Reveal>
+		<Reveal delay={140}>
+			<a class="btn cta" href={resolve('/standard/contatti/')}>Richiesta disponibilità</a>
+		</Reveal>
 	</div>
 </section>
 
@@ -76,7 +75,7 @@
 		<div class="grid">
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
-					<a href={resolve(`/case/${other.slug}`)}>
+					<a href={resolve(`/standard/case/${other.slug}/`)}>
 						<img src={asset(other.image)} alt={other.name} loading="lazy" />
 						<span>{other.name}</span>
 					</a>
@@ -164,7 +163,6 @@
 		padding: 1.5rem;
 		background: color-mix(in srgb, var(--olive) 8%, #fff);
 		border: 1px solid var(--line);
-		margin-bottom: 1.25rem;
 	}
 
 	.panel ul {
@@ -176,14 +174,11 @@
 	}
 
 	.gallery {
-		display: grid;
-		gap: 0.75rem;
+		margin-top: 2.5rem;
 	}
 
-	.gallery img {
-		width: 100%;
-		aspect-ratio: 16 / 11;
-		object-fit: cover;
+	.cta {
+		margin-top: 1.5rem;
 	}
 
 	.more {
@@ -217,6 +212,11 @@
 		.layout {
 			grid-template-columns: 1.15fr 0.85fr;
 			gap: 3.5rem;
+			align-items: start;
+		}
+
+		.gallery {
+			margin-top: 3rem;
 		}
 
 		.grid {

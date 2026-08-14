@@ -16,11 +16,13 @@ Quello che vogliamo offrirvi è la possibilità di soggiornare in un luogo di cu
 
 ## Tipologie elencate (prezzi indicativi al momento dello scrape)
 
-| Nome | Ospiti | Da |
-|------|--------|-----|
-| Casa sull'agrumeto | 4 (1 camera, 1 bagno) | €70/notte |
-| Casa di Mastro Carmelo | 7 (3 camere, 2 bagni) | €110/notte |
-| Casa di Mastro Giovanni | 5 (2 camere, 1 bagno) | €90/notte |
-| Casa di Mastro Niculai | 8 (3 camere, 2 bagni) | €130/notte |
-| Casa di Mastro Pino | 7 (2 camere, 2 bagni) | €120/notte |
-| Tipologia di affitto #5 (intero?) | 26 | €300/notte |
+“Mastro …” names are the **old** Lodgify labels. Current names are Casa #1–#4. Four houses for rent; Agrumeto is archived only (no longer rented).
+
+| Old (Lodgify) | Current | Ospiti | Da |
+|---------------|---------|--------|-----|
+| Casa di Mastro Carmelo | Casa #1 | 7 (3 camere, 2 bagni) | €110/notte |
+| Casa di Mastro Giovanni | Casa #2 | 5 (2 camere, 1 bagno) | €90/notte |
+| Casa di Mastro Niculai | Casa #3 (likely; 8 ospiti) | 8 (3 camere, 2 bagni) | €130/notte |
+| Casa di Mastro Pino | Casa #4 (likely; 7 ospiti) | 7 (2 camere, 2 bagni) | €120/notte |
+| Casa sull'agrumeto | — (not for rent; was Casa #5 on `.it`) | 4 | €70/notte |
+| Tipologia di affitto #5 (intero?) | whole property? | 26 | €300/notte |

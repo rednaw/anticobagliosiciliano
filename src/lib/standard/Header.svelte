@@ -6,16 +6,16 @@
 	let open = $state(false);
 
 	const links = [
-		{ href: '/', label: 'Home' },
-		{ href: '/#alloggi', label: 'Alloggi' },
-		{ href: '/dintorni', label: 'Dintorni' },
-		{ href: '/contatti', label: 'Contatti' }
+		{ href: '/standard', label: 'Home' },
+		{ href: '/standard/#alloggi', label: 'Alloggi' },
+		{ href: '/standard/imperdibili', label: 'Imperdibili' },
+		{ href: '/standard/contatti', label: 'Contatti' }
 	] as const;
 
 	function isActive(href: string) {
 		const path = page.url.pathname.replace(new RegExp(`^${base}`), '').replace(/\/$/, '') || '/';
 		const target = href.split('#')[0]?.replace(/\/$/, '') || '/';
-		if (target === '/') return path === '/';
+		if (target === '/standard') return path === '/standard';
 		return path === target || path.startsWith(`${target}/`);
 	}
 
@@ -24,16 +24,16 @@
 	}
 
 	function hrefFor(href: (typeof links)[number]['href']) {
-		if (href === '/#alloggi') return `${resolve('/')}#alloggi`;
-		if (href === '/') return resolve('/');
-		if (href === '/dintorni') return resolve('/dintorni');
-		return resolve('/contatti');
+		if (href === '/standard/#alloggi') return `${resolve('/standard/')}#alloggi`;
+		if (href === '/standard') return resolve('/standard/');
+		if (href === '/standard/imperdibili') return resolve('/standard/imperdibili/');
+		return resolve('/standard/contatti/');
 	}
 </script>
 
 <header class="header">
 	<div class="container bar">
-		<a class="brand" href={resolve('/')} onclick={close}>
+		<a class="brand" href={resolve('/standard/')} onclick={close}>
 			<span class="brand-name">{site.name}</span>
 			<span class="brand-tag">{site.tagline}</span>
 		</a>
@@ -58,10 +58,10 @@
 			<div class="nav-houses">
 				<p>Case</p>
 				{#each houses as house}
-					<a href={resolve(`/case/${house.slug}`)} onclick={close}>{house.name}</a>
+					<a href={resolve(`/standard/case/${house.slug}/`)} onclick={close}>{house.name}</a>
 				{/each}
 			</div>
-			<a class="nav-cta" href={resolve('/contatti')} onclick={close}>Prenota ora</a>
+			<a class="nav-cta" href={resolve('/standard/contatti/')} onclick={close}>Prenota ora</a>
 		</nav>
 	</div>
 </header>
@@ -86,6 +86,8 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
+		/* Clear fixed HubBack in the top-left corner */
+		padding-left: 1.85rem;
 	}
 
 	.brand {

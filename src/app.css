@@ -100,19 +100,20 @@ p {
 }
 
 .section-head {
-	max-width: 36rem;
 	margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .section-head h2 {
 	font-size: clamp(2rem, 4vw, 3rem);
 	margin: 0 0 0.75rem;
+	max-width: none;
 }
 
 .section-head p {
 	color: var(--ink-soft);
 	margin: 0;
 	font-size: 1.125rem;
+	max-width: 40rem;
 }
 
 .btn {
