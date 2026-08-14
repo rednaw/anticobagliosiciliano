@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { asset, resolve } from '$app/paths';
 	import Reveal from '$lib/components/Reveal.svelte';
+	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import { houses, site } from '$lib/data/content';
 
 	let { data } = $props();
@@ -39,9 +40,6 @@
 					<p class="body">{paragraph}</p>
 				</Reveal>
 			{/each}
-			<Reveal>
-				<a class="btn" href={resolve('/standard/contatti/')}>Richiesta disponibilità</a>
-			</Reveal>
 		</div>
 		<aside>
 			<Reveal delay={80}>
@@ -57,11 +55,12 @@
 		</aside>
 	</div>
 	<div class="container gallery">
-		{#each house.gallery as src, i}
-			<Reveal delay={100 + i * 40}>
-				<img src={asset(src)} alt={`${house.name} — foto ${i + 1}`} loading="lazy" />
-			</Reveal>
-		{/each}
+		<Reveal delay={100}>
+			<GalleryCarousel images={house.gallery} alt={house.name} />
+		</Reveal>
+		<Reveal delay={140}>
+			<a class="btn cta" href={resolve('/standard/contatti/')}>Richiesta disponibilità</a>
+		</Reveal>
 	</div>
 </section>
 
@@ -175,16 +174,11 @@
 	}
 
 	.gallery {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 0.75rem;
 		margin-top: 2.5rem;
 	}
 
-	.gallery img {
-		width: 100%;
-		aspect-ratio: 16 / 11;
-		object-fit: cover;
+	.cta {
+		margin-top: 1.5rem;
 	}
 
 	.more {
@@ -222,7 +216,6 @@
 		}
 
 		.gallery {
-			grid-template-columns: repeat(3, 1fr);
 			margin-top: 3rem;
 		}
 
