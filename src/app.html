@@ -14,7 +14,6 @@
 		<script>
 			(function () {
 				try {
-					// `?gate` (dev) must still see the gate, so don't pre-hide it.
 					if (new URLSearchParams(location.search).has('gate')) return;
 					if (localStorage.getItem('abs-site-access') === 'ok') {
 						document.documentElement.setAttribute('data-access', 'ok');
@@ -30,7 +29,6 @@
 		</style>
 		<noscript>
 			<style>
-				/* Reveal hides content until JS observes it; without JS, leave it visible. */
 				.reveal {
 					opacity: 1 !important;
 					transform: none !important;

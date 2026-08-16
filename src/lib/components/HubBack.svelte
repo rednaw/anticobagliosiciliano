@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
-	// Shared by all three variants, so the label is a prop rather than a lookup:
-	// only the standard variant is bilingual.
 	let { label = 'Torna all’indice' }: { label?: string } = $props();
 </script>
 

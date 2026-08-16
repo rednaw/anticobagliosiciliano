@@ -11,7 +11,6 @@
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 
-	// The enquiry page is reached through the CTA only — no duplicate plain link.
 	const links = $derived([
 		{ subpath: '', label: pick(ui.navHome, locale), hash: '' },
 		{ subpath: '', label: pick(ui.navHouses, locale), hash: '#alloggi' },

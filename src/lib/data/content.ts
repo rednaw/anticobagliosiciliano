@@ -1,32 +1,16 @@
 import type { Locale, LocalizedString, LocalizedStrings } from '$lib/i18n';
 import { pick, pickList } from '$lib/i18n';
 
-/**
- * Marketing content for `/standard/`.
- *
- * Language policy: EN and IT body copy come only from legacy archives
- * (wordpress.com, Lodgify, .it Nuova Homepage). No machine translation.
- *
- * Gaps (no EN original): homepage narrative, amenities, awards, most UI chrome,
- * house taglines/summaries/highlights as currently worded in Italian.
- * Casa 3–4 Italian paragraphs: no Lodgify/WP Italian original — provisional
- * owner-reviewed drafts derived from the English WP rooms (see comments below).
- */
+/** Marketing copy for `/standard/`. Tagline stays Italian in both languages. */
 
 export const site = {
 	name: 'Antico Baglio Siciliano',
-	/** Italian only — no EN tagline in archive. */
 	tagline: 'Case vacanze in Sicilia',
-	/** EN translated, so the footer doesn't mix languages beside the Italian tagline. */
 	location: {
 		it: 'Balestrate, Sicilia occidentale',
 		en: 'Balestrate, western Sicily'
 	} satisfies LocalizedString,
 	email: 'info@anticobagliosiciliano.it',
-	/**
-	 * Hero lead from .it Nuova Homepage (archive/original-site/text/nuova-homepage.md).
-	 * EN translated — the homepage postdates the owners' English site.
-	 */
 	description: {
 		it: 'Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.',
 		en: 'In the heart of western Sicily, a genuine experience of rest and culture.'
@@ -36,7 +20,6 @@ export const site = {
 export type HouseSource = {
 	slug: string;
 	name: string;
-	/** Short cards — Italian site-authored; EN uses first beats from archive room bodies where noted. */
 	tagline: LocalizedString;
 	summary: LocalizedString;
 	guests: LocalizedString;
@@ -50,14 +33,8 @@ export type HouseSource = {
 };
 
 /**
- * Casa 1–2 IT: Lodgify (archive/lodgify-com/text/casa-di-mastro-*.md).
- * Casa 1–4 EN: wordpress.com rooms (archive/old-wordpress/text/rooms/casa-*.md),
- *   owner-written English kept as-is apart from four corrections:
- *   Casa 2 "bathroom with a spacious and elegant shower" → the bathroom is what is
- *   spacious and elegant; Casa 3 "two doubles and one double bed (or twin on
- *   request)" contradicted itself → two doubles and one twin, matching the Italian
- *   and the photos; Casa 4 a comma splice and "chaise long" → "chaise longue".
- * Casa 3–4 IT: no Italian original; provisional drafts from EN WP (owner review).
+ * Room copy: Casa 1–2 IT from Lodgify; EN from the old WordPress rooms.
+ * Casa 3–4 IT has no archive original (drafted from the English, owner-reviewed).
  */
 export const housesSource: HouseSource[] = [
 	{
@@ -112,7 +89,6 @@ export const housesSource: HouseSource[] = [
 				'Ideal accommodation for a family of 4/6 persons, for two/three couples, or for two families.'
 			]
 		},
-		// EN mirrors the IT list item for item; the archive has no highlight chips.
 		highlights: {
 			it: ['Terrazza sui tetti 15 mq', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
 			en: [
@@ -215,7 +191,6 @@ export const housesSource: HouseSource[] = [
 			'/images/houses/casa-3/11-ingresso-sul-cortile.jpg'
 		],
 		paragraphs: {
-			// Provisional IT (no Lodgify/WP Italian original) — from EN WP, owner-reviewed.
 			it: [
 				'Questa pittoresca casa di campagna è disposta su due piani, per un totale di oltre 110 mq. Al piano terra un ampio e confortevole soggiorno con zona ingresso dà accesso alla zona notte. Qui si trovano tre camere da letto, tutte spaziose e luminose: due con letto matrimoniale e una terza con due letti singoli. Due camere si affacciano su un magnifico uliveto, la terza sul cortile del Baglio. Il divano letto del soggiorno può inoltre ospitare due persone.',
 				'Una suggestiva scala in pietra lavica e ferro porta al primo piano, dove si aprono un secondo soggiorno e la zona cucina/pranzo. La cucina, bella e comoda, è dotata di forno. Dalla zona giorno si accede a un delizioso terrazzo (15 mq) affacciato sull’uliveto, dove si può cenare la sera o rilassarsi su una sdraio in totale privacy.',
@@ -277,7 +252,6 @@ export const housesSource: HouseSource[] = [
 			'/images/houses/casa-4/18-terrazzo1.jpg'
 		],
 		paragraphs: {
-			// Provisional IT (no Lodgify/WP Italian original) — from EN WP, owner-reviewed.
 			it: [
 				'È la casa più elegante del Baglio. Disposta su due livelli, per un totale di oltre 110 mq, si apre al piano terra su un ampio soggiorno con due divani, uno dei quali trasformabile in letto per due persone. Sempre al piano terra si trovano un’elegante cucina, una camera matrimoniale e un bagno con doccia.',
 				'La cucina, il soggiorno e la camera si affacciano tutti su un delizioso patio interno, dove si può fare colazione, pranzare e cenare, oltre che rilassarsi su una chaise longue in totale privacy.',
@@ -347,7 +321,6 @@ export function getHouse(slug: string, locale: Locale = 'it'): House | undefined
 	return source ? localizeHouse(source, locale) : undefined;
 }
 
-/** Italian from .it Nuova Homepage Comfort list. EN translated. */
 const amenitiesSource = [
 	{
 		title: { it: 'Wi‑Fi gratuito', en: 'Free Wi‑Fi' },
@@ -395,11 +368,6 @@ export function amenities(locale: Locale = 'it') {
 	}));
 }
 
-/**
- * Italian from .it Nuova Homepage. EN descriptions translated; the award names
- * themselves use the English the awarding platforms use (Airbnb Superhost,
- * Guest Favourite), and Booking's "Traveller Review Awards" is already English.
- */
 const awardsSource = [
 	{
 		title: { it: 'Superhost Airbnb', en: 'Airbnb Superhost' },
@@ -435,10 +403,7 @@ export function awards(locale: Locale = 'it') {
 	}));
 }
 
-/**
- * Guest quotes stay in the language the guest wrote them — translating a review
- * would misrepresent it. Only the source line is localised.
- */
+/** Quotes stay in the guest’s language; only the source line is localised. */
 const testimonialsSource = [
 	{
 		name: 'Carmine',
@@ -470,15 +435,7 @@ export type PlaceSource = {
 	image: string;
 };
 
-/**
- * IT: Lodgify originals (archive/lodgify-com/text/imperdibili.md) — unedited.
- *
- * EN: the archived "English" (archive/old-wordpress/text/imperdibili.md) is itself
- * machine translation and in places not grammatical ("Visit inevitable.",
- * "Masterpiece Art Norman.", "Sicilia n-Venetian"). It has been rewritten here in
- * correct English, preserving every fact, name and date from that source. The
- * archive keeps the original wording as the historical record.
- */
+/** Place texts: IT from Lodgify; EN rewritten from the old WordPress machine translation. */
 export const placesSource: PlaceSource[] = [
 	{
 		slug: 'tonnara-di-scopello',
@@ -516,7 +473,6 @@ export const placesSource: PlaceSource[] = [
 		time: '40 min',
 		text: {
 			it: 'Visita immancabile. Uno dei gioielli più rari del patrimonio artistico italiano, sorprendente riuscita dell’incontro degli universi culturali islamico, bizantino, romanico: il Duomo normanno coi mosaici siculo-veneziani e il chiostro benedettino. Dal Belvedere vista sulla valle dell’Oreto e sulla Conca d’Oro.',
-			// Closing sentence translated from the Italian; the English source omitted it.
 			en: 'A must-see. One of the rarest jewels of Italy’s artistic heritage and a remarkable meeting of the Islamic, Byzantine and Romanesque worlds: the Norman cathedral with its Sicilian-Venetian mosaics, and the Benedictine cloister. From the Belvedere there is a view over the Oreto valley and the Conca d’Oro.'
 		},
 		image: '/images/places/monreale.jpg'
@@ -571,16 +527,6 @@ export function places(locale: Locale = 'it'): Place[] {
 	}));
 }
 
-/**
- * Homepage copy. Italian from the .it Nuova Homepage
- * (archive/original-site/text/nuova-homepage.md); section headings and the
- * courtyard/garden narrative postdate the owners' English site, so the English
- * here is translated from the Italian, sentence by sentence.
- *
- * Where the owners' own English had a word for something, it is reused:
- * "overlook" for affacciarsi, "sun lounger" for sdraio, "citrus grove" and
- * "olive grove", and "Testimonials" (their menu label) for the quotes eyebrow.
- */
 export const homeCopy = {
 	chiSiamo: {
 		title: { it: 'Chi siamo', en: 'About us' },
@@ -669,18 +615,6 @@ export const homeCopy = {
 	}
 };
 
-/**
- * Imperdibili page lead — Lodgify landing “Cosa potete fare”, first sentence.
- * archive/lodgify-com/text/landing.md
- *
- * The source paragraph continues with a list of the places and a description of
- * the coast; both languages keep only the opening sentence, since the cards
- * below name every place anyway.
- *
- * No English original exists for this page. The EN is translated, phrased to
- * match the owners’ own habits elsewhere in their English (“From … you can”,
- * “you can easily reach”).
- */
 export const imperdibiliMeta = {
 	it: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano.',
 	en: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte and Erice — a few minutes from Antico Baglio Siciliano.'
@@ -691,14 +625,6 @@ export const imperdibiliLead = {
 	en: 'From the baglio you can easily reach some of the most beautiful stretches of coast and the finest art in western Sicily.'
 } satisfies LocalizedString;
 
-/**
- * Enquiry page. Nothing to salvage: the owners’ English site kept “Contatti” in
- * Italian and had no form, and Lodgify’s was the platform’s own. The English is
- * translated from the Italian, plainly, with no booking-site sales wording.
- *
- * “Check-in” and “Check-out” are the same word in both languages, so they stay
- * inline in the page rather than sitting here as identical pairs.
- */
 export const contactCopy = {
 	metaDescription: {
 		it: 'Richiedi disponibilità per un soggiorno all’Antico Baglio Siciliano.',
@@ -723,11 +649,8 @@ export const contactCopy = {
 		it: 'Si apre il tuo client email con il messaggio già compilato.',
 		en: 'This opens your email program with the message already written.'
 	},
-	/** Used in the mail body, so the message reads in the sender’s language. */
 	mailName: { it: 'Nome', en: 'Name' },
 	mailEmail: { it: 'Email', en: 'Email' },
 	mailNoMessage: { it: '(nessun messaggio)', en: '(no message)' },
 	mailGuest: { it: 'Ospite', en: 'Guest' }
 } satisfies Record<string, LocalizedString>;
-
-/** Prefer locale-aware `houses(locale)` / `places(locale)`. */
