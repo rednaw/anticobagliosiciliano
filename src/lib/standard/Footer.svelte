@@ -1,85 +1,87 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-	import { houses, site } from '$lib/data/content';
+	import { site } from '$lib/data/content';
 </script>
 
 <footer class="footer">
-	<div class="container grid">
-		<div>
-			<p class="brand">{site.name}</p>
-			<p class="muted">{site.tagline} · {site.location}</p>
-		</div>
-		<nav aria-label="Footer">
-			<a href={resolve('/standard/')}>Home</a>
-			{#each houses as house}
-				<a href={resolve(`/standard/case/${house.slug}/`)}>{house.name}</a>
-			{/each}
-			<a href={resolve('/standard/imperdibili/')}>Imperdibili</a>
-			<a href={resolve('/standard/contatti/')}>Contatti</a>
-		</nav>
-		<div class="end">
-			<a href={`mailto:${site.email}`}>{site.email}</a>
-			<p class="muted">© {new Date().getFullYear()} {site.name}</p>
-		</div>
+	<div class="container inner">
+		<span class="rule" aria-hidden="true"></span>
+
+		<p class="brand">{site.name}</p>
+		<p class="meta">{site.tagline} · {site.location}</p>
+
+		<a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+
+		<p class="copy">© {new Date().getFullYear()}</p>
 	</div>
 </footer>
 
 <style>
 	.footer {
-		padding: 3.5rem 0 2.5rem;
+		padding: clamp(2rem, 4vw, 2.75rem) 0 clamp(1.5rem, 2.5vw, 2rem);
 		border-top: 1px solid var(--line);
-		background: color-mix(in srgb, var(--sea) 6%, var(--paper));
+		background:
+			radial-gradient(
+				ellipse 70% 100% at 50% 0%,
+				color-mix(in srgb, var(--olive) 7%, transparent),
+				transparent 70%
+			),
+			color-mix(in srgb, var(--sea) 5%, var(--paper));
 	}
 
-	.grid {
+	.inner {
 		display: grid;
-		gap: 2rem;
+		justify-items: center;
+		text-align: center;
+		gap: 0.3rem;
+	}
+
+	.rule {
+		width: 2rem;
+		height: 2px;
+		margin-bottom: 0.85rem;
+		background: var(--sun);
 	}
 
 	.brand {
-		font-family: var(--font-display);
-		font-size: 1.35rem;
-		margin: 0 0 0.35rem;
-	}
-
-	.muted {
-		color: var(--muted);
 		margin: 0;
-		font-size: 0.95rem;
-	}
-
-	nav {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem 1.25rem;
-	}
-
-	nav a,
-	.end a {
-		text-decoration: none;
+		font-family: var(--font-display);
 		font-weight: 500;
-		color: var(--ink-soft);
+		letter-spacing: -0.02em;
+		font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+		color: var(--ink);
 	}
 
-	nav a:hover,
-	.end a:hover {
+	.meta {
+		margin: 0;
+		font-size: 0.72rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	.email {
+		margin-top: 0.7rem;
+		font-weight: 500;
 		color: var(--sea);
+		text-decoration: none;
+		border-bottom: 1px solid color-mix(in srgb, var(--sea) 30%, transparent);
+		padding-bottom: 0.15rem;
+		transition:
+			border-color 0.3s var(--ease),
+			color 0.3s var(--ease);
 	}
 
-	.end {
-		display: grid;
-		gap: 0.5rem;
+	.email:hover {
+		color: var(--sea-deep);
+		border-bottom-color: var(--sea);
 	}
 
-	@media (min-width: 800px) {
-		.grid {
-			grid-template-columns: 1.4fr 1fr 1fr;
-			align-items: start;
-		}
-
-		.end {
-			justify-items: end;
-			text-align: right;
-		}
+	.copy {
+		margin: 1.25rem 0 0;
+		padding-top: 0.9rem;
+		width: min(100%, 22rem);
+		border-top: 1px solid var(--line);
+		font-size: 0.78rem;
+		color: var(--muted);
 	}
 </style>
