@@ -36,31 +36,30 @@
 	</div>
 </section>
 
-<section class="section about">
+<section class="section about band-dark">
 	<div class="container about-grid">
 		<Reveal>
-			<h2>Chi siamo</h2>
-			<p>
-				Antico Baglio Siciliano è una struttura ricettiva immersa nella natura e nella storia della
-				Sicilia occidentale. Offriamo un’accoglienza autentica, con ambienti confortevoli e un’atmosfera
-				rilassante.
-			</p>
+			<div>
+				<h2>Chi siamo</h2>
+				<p>
+					Antico Baglio Siciliano è una struttura ricettiva immersa nella natura e nella storia della
+					Sicilia occidentale. Offriamo un’accoglienza autentica, con ambienti confortevoli e
+					un’atmosfera rilassante.
+				</p>
+			</div>
 		</Reveal>
-	</div>
-</section>
-
-<section class="video-section" aria-label="Video del baglio">
-	<div class="container">
-		<video
-			class="baglio-video"
-			controls
-			playsinline
-			preload="metadata"
-			poster={asset('/videos/baglio-poster.jpg')}
-		>
-			<source src={asset('/videos/baglio.mp4')} type="video/mp4" />
-			Il tuo browser non supporta la riproduzione video.
-		</video>
+		<Reveal delay={120}>
+			<video
+				class="baglio-video"
+				controls
+				playsinline
+				preload="metadata"
+				poster={asset('/videos/baglio-poster.jpg')}
+			>
+				<source src={asset('/videos/baglio.mp4')} type="video/mp4" />
+				Il tuo browser non supporta la riproduzione video.
+			</video>
+		</Reveal>
 	</div>
 </section>
 
@@ -336,11 +335,6 @@
 		opacity: 0.95;
 	}
 
-	.video-section {
-		padding: clamp(1.5rem, 4vw, 2.5rem) 0 0;
-		background: color-mix(in srgb, var(--sea-deep) 92%, black);
-	}
-
 	.baglio-video {
 		width: 100%;
 		aspect-ratio: 16 / 9;
@@ -358,7 +352,7 @@
 
 	.about-grid {
 		display: grid;
-		gap: 1.5rem;
+		gap: 2rem;
 		align-items: center;
 	}
 
@@ -370,7 +364,7 @@
 	.about p {
 		margin: 0;
 		font-size: 1.15rem;
-		color: var(--ink-soft);
+		color: color-mix(in srgb, #fff 80%, transparent);
 		max-width: 36rem;
 	}
 
@@ -718,6 +712,11 @@
 	}
 
 	@media (min-width: 960px) {
+		.about-grid {
+			grid-template-columns: 0.85fr 1.15fr;
+			gap: 3.5rem;
+		}
+
 		.feature {
 			grid-template-columns: 1.1fr 0.9fr;
 			min-height: 32rem;
