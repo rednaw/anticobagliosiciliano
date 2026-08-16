@@ -28,6 +28,15 @@
 				display: none !important;
 			}
 		</style>
+		<noscript>
+			<style>
+				/* Reveal hides content until JS observes it; without JS, leave it visible. */
+				.reveal {
+					opacity: 1 !important;
+					transform: none !important;
+				}
+			</style>
+		</noscript>
 		<!-- hostname must match SIMPLE_ANALYTICS_HOSTNAME in src/lib/site-config.ts -->
 		<script
 			async

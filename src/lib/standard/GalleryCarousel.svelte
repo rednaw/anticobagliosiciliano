@@ -41,7 +41,10 @@
 		const strip = thumbsEl;
 		if (!strip) return;
 		const thumb = strip.children[index] as HTMLElement | undefined;
-		thumb?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+		if (!thumb) return;
+		const left = thumb.offsetLeft - (strip.clientWidth - thumb.offsetWidth) / 2;
+		const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		strip.scrollTo({ left, behavior: calm ? 'auto' : 'smooth' });
 	}
 
 	function onKeydown(e: KeyboardEvent) {
@@ -51,6 +54,12 @@
 		} else if (e.key === 'ArrowRight') {
 			e.preventDefault();
 			next();
+		} else if (e.key === 'Home') {
+			e.preventDefault();
+			go(0);
+		} else if (e.key === 'End') {
+			e.preventDefault();
+			go(count - 1);
 		}
 	}
 </script>
@@ -88,19 +97,13 @@
 		</div>
 
 		{#if count > 1}
-			<div
-				class="thumbs"
-				bind:this={thumbsEl}
-				role="tablist"
-				aria-label={pick(ui.thumbnails, locale)}
-			>
+			<div class="thumbs" bind:this={thumbsEl} role="group" aria-label={pick(ui.thumbnails, locale)}>
 				{#each images as src, i}
 					<button
 						type="button"
 						class="thumb"
 						class:active={i === index}
-						role="tab"
-						aria-selected={i === index}
+						aria-current={i === index ? 'true' : undefined}
 						aria-label={`${pick(ui.goToPhoto, locale)} ${i + 1}`}
 						onclick={() => go(i)}
 						onkeydown={onKeydown}

@@ -5,6 +5,9 @@
 	import { counterpartHref, pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
 
 	let open = $state(false);
+	let menuBtn: HTMLButtonElement | undefined = $state();
+	let navEl: HTMLElement | undefined = $state();
+	let backdropEl: HTMLButtonElement | undefined = $state();
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 
@@ -27,9 +30,81 @@
 		return path === target || path.startsWith(`${target}/`);
 	}
 
-	function close() {
-		open = false;
+	function isDrawer() {
+		return window.matchMedia('(max-width: 959px)').matches;
 	}
+
+	function close() {
+		if (!open) return;
+		open = false;
+		queueMicrotask(() => menuBtn?.focus());
+	}
+
+	function toggle() {
+		open = !open;
+		if (open) {
+			queueMicrotask(() => {
+				navEl?.querySelector<HTMLElement>('a, button')?.focus();
+			});
+		}
+	}
+
+	function trapFocus(e: KeyboardEvent) {
+		if (e.key === 'Escape') {
+			e.preventDefault();
+			close();
+			return;
+		}
+		if (e.key !== 'Tab' || !isDrawer()) return;
+
+		const nodes = [menuBtn, ...(navEl ? [...navEl.querySelectorAll<HTMLElement>('a, button')] : []), backdropEl].filter(
+			(el): el is HTMLElement => !!el
+		);
+		if (nodes.length === 0) return;
+
+		const first = nodes[0];
+		const last = nodes[nodes.length - 1];
+		const current = document.activeElement as HTMLElement | null;
+
+		if (e.shiftKey && current === first) {
+			e.preventDefault();
+			last.focus();
+		} else if (!e.shiftKey && current === last) {
+			e.preventDefault();
+			first.focus();
+		}
+	}
+
+	$effect(() => {
+		if (!open) return;
+
+		function onKey(e: KeyboardEvent) {
+			trapFocus(e);
+		}
+		function onResize() {
+			if (!isDrawer()) open = false;
+		}
+
+		window.addEventListener('keydown', onKey);
+		window.addEventListener('resize', onResize);
+		const prevOverflow = document.body.style.overflow;
+		if (isDrawer()) document.body.style.overflow = 'hidden';
+
+		const inertEls = [
+			document.querySelector('.skip'),
+			document.querySelector('.hub-back'),
+			document.getElementById('contenuto'),
+			document.querySelector('.footer')
+		].filter((el): el is HTMLElement => !!el);
+		if (isDrawer()) inertEls.forEach((el) => el.setAttribute('inert', ''));
+
+		return () => {
+			window.removeEventListener('keydown', onKey);
+			window.removeEventListener('resize', onResize);
+			document.body.style.overflow = prevOverflow;
+			inertEls.forEach((el) => el.removeAttribute('inert'));
+		};
+	});
 
 	function langHref(target: Locale) {
 		return withBase(counterpartHref(page.url.pathname, target, base), base);
@@ -44,17 +119,18 @@
 		</a>
 
 		<button
+			bind:this={menuBtn}
 			class="menu-btn"
 			type="button"
 			aria-expanded={open}
 			aria-controls="site-nav"
-			onclick={() => (open = !open)}
+			onclick={toggle}
 		>
-			<span class="sr-only">Menu</span>
+			<span class="sr-only">{pick(ui.menu, locale)}</span>
 			<span class="burger" class:open></span>
 		</button>
 
-		<nav id="site-nav" class="nav" class:open aria-label={pick(ui.mainNav, locale)}>
+		<nav bind:this={navEl} id="site-nav" class="nav" class:open aria-label={pick(ui.mainNav, locale)}>
 			{#each links as link}
 				<a href={hrefFor(link.subpath, link.hash)} class:active={isActive(link.subpath, link.hash)} onclick={close}>
 					{link.label}
@@ -96,6 +172,7 @@
 
 {#if open}
 	<button
+		bind:this={backdropEl}
 		class="backdrop"
 		type="button"
 		aria-label={pick(ui.closeMenu, locale)}

@@ -52,6 +52,8 @@
 		transform: translateY(0);
 	}
 
+	/* No-JS fallback lives in app.html <noscript> — this rule only runs when CSS loads with JS. */
+
 	@media (prefers-reduced-motion: reduce) {
 		.reveal {
 			opacity: 1;

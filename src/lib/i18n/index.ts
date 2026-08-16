@@ -56,6 +56,7 @@ export const ui = {
 	backToHub: { it: 'Torna all’indice', en: 'Back to the index' },
 	mainNav: { it: 'Principale', en: 'Main' },
 	language: { it: 'Lingua', en: 'Language' },
+	menu: { it: 'Menu', en: 'Menu' },
 	closeMenu: { it: 'Chiudi menu', en: 'Close menu' },
 	gallery: { it: 'Galleria', en: 'Gallery' },
 	previousPhoto: { it: 'Foto precedente', en: 'Previous photo' },
