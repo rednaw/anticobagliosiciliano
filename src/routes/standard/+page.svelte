@@ -16,11 +16,15 @@
 </svelte:head>
 
 <section class="hero">
-	<img
-		class="hero-media"
-		src={asset('/images/ambiance/hero-portone.jpg')}
-		alt="Portone dell’Antico Baglio Siciliano immerso nel verde"
-	/>
+	<img class="hero-backdrop" src={asset('/images/ambiance/hero-portone-wide.jpg')} alt="" aria-hidden="true" />
+	<picture>
+		<source media="(min-aspect-ratio: 7 / 10)" srcset={asset('/images/ambiance/hero-portone-wide.jpg')} />
+		<img
+			class="hero-media"
+			src={asset('/images/ambiance/hero-portone-tall.jpg')}
+			alt="Portone dell’Antico Baglio Siciliano immerso nel verde"
+		/>
+	</picture>
 	<div class="hero-veil"></div>
 	<div class="hero-copy">
 		<h1>{site.name}</h1>
@@ -259,15 +263,47 @@
 		align-items: end;
 		overflow: hidden;
 		color: #fff;
+		background: var(--sea-deep);
 	}
 
-	.hero-media {
+	/* Fills the frame at any aspect ratio; the sharp image sits on top of it.
+	   Stays scaled up so the blurred edges never reach the hero border. */
+	.hero-backdrop {
 		position: absolute;
 		inset: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		animation: hero-zoom 8s var(--ease) both;
+		object-position: center;
+		filter: blur(2.5rem) brightness(0.82) saturate(1.1);
+		animation: backdrop-zoom 8s var(--ease) both;
+	}
+
+	@keyframes backdrop-zoom {
+		from {
+			transform: scale(1.24);
+		}
+		to {
+			transform: scale(1.14);
+		}
+	}
+
+	/* `contain` keeps the whole portone — sky above, road below — visible on wide screens. */
+	.hero-media {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center;
+		animation: soft-fade 1.2s var(--ease) both;
+	}
+
+	/* Taller than the photo: fill the frame, the portone stays centred. */
+	@media (max-aspect-ratio: 7 / 10) {
+		.hero-media {
+			object-fit: cover;
+		}
 	}
 
 	.hero-veil {
