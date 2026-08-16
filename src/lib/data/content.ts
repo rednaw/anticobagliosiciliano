@@ -134,7 +134,7 @@ export const housesSource: HouseSource[] = [
 			it: 'Circa 65 mq su due livelli con camera al piano terra, soppalco e terrazza. Ideale per una coppia o 3–4 persone.',
 			en: 'Perfect for a couple, for a family of 3/4 persons, or for two couples.'
 		},
-		guests: { it: '2–4 ospiti', en: '3/4 persons' },
+		guests: { it: '2–4 ospiti', en: '2/4 persons' },
 		size: '65 m²',
 		bedrooms: { it: '1 camera + soppalco', en: '1 bedroom + mezzanine' },
 		bathrooms: { it: '1 bagno', en: '1 bathroom' },

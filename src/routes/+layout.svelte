@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { goto } from '$app/navigation';
-	import { resolve } from '$app/paths';
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import Gate from '$lib/components/Gate.svelte';
@@ -14,7 +12,6 @@
 
 	function handleUnlock() {
 		unlocked = true;
-		goto(resolve('/'), { replaceState: true });
 	}
 </script>
 

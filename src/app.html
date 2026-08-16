@@ -14,8 +14,8 @@
 		<script>
 			(function () {
 				try {
-					// `?gate=1` (dev) must still see the gate, so don't pre-hide it.
-					if (location.search.includes('gate=')) return;
+					// `?gate` (dev) must still see the gate, so don't pre-hide it.
+					if (new URLSearchParams(location.search).has('gate')) return;
 					if (localStorage.getItem('abs-site-access') === 'ok') {
 						document.documentElement.setAttribute('data-access', 'ok');
 					}
