@@ -54,7 +54,7 @@
 			<span class="burger" class:open></span>
 		</button>
 
-		<nav id="site-nav" class="nav" class:open aria-label="Principale">
+		<nav id="site-nav" class="nav" class:open aria-label={pick(ui.mainNav, locale)}>
 			{#each links as link}
 				<a href={hrefFor(link.subpath, link.hash)} class:active={isActive(link.subpath, link.hash)} onclick={close}>
 					{link.label}
@@ -73,7 +73,7 @@
 				onclick={close}>{pick(ui.requestAvailability, locale)}</a
 			>
 
-			<div class="langs" aria-label="Language">
+			<div class="langs" aria-label={pick(ui.language, locale)}>
 				<a
 					href={langHref('it')}
 					hreflang="it"
@@ -95,7 +95,12 @@
 </header>
 
 {#if open}
-	<button class="backdrop" type="button" aria-label="Chiudi menu" onclick={close}></button>
+	<button
+		class="backdrop"
+		type="button"
+		aria-label={pick(ui.closeMenu, locale)}
+		onclick={close}
+	></button>
 {/if}
 
 <style>

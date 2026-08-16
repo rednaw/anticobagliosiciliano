@@ -17,11 +17,19 @@ export const site = {
 	name: 'Antico Baglio Siciliano',
 	/** Italian only — no EN tagline in archive. */
 	tagline: 'Case vacanze in Sicilia',
-	location: 'Balestrate, Sicilia occidentale',
+	/** EN translated, so the footer doesn't mix languages beside the Italian tagline. */
+	location: {
+		it: 'Balestrate, Sicilia occidentale',
+		en: 'Balestrate, western Sicily'
+	} satisfies LocalizedString,
 	email: 'info@anticobagliosiciliano.it',
-	/** Hero lead from .it Nuova Homepage (archive/original-site/text/nuova-homepage.md). */
+	/**
+	 * Hero lead from .it Nuova Homepage (archive/original-site/text/nuova-homepage.md).
+	 * EN translated — the homepage postdates the owners' English site.
+	 */
 	description: {
-		it: 'Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.'
+		it: 'Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.',
+		en: 'In the heart of western Sicily, a genuine experience of rest and culture.'
 	} satisfies LocalizedString
 };
 
@@ -56,7 +64,8 @@ export const housesSource: HouseSource[] = [
 		slug: 'casa-1',
 		name: 'Casa 1',
 		tagline: {
-			it: 'Spaziosa, luminosa, con soppalco e terrazza sui tetti'
+			it: 'Spaziosa, luminosa, con soppalco e terrazza sui tetti',
+			en: 'Spacious and bright, with a loft and a terrace on the roofs'
 		},
 		summary: {
 			it: 'Oltre 100 mq su due livelli, ideale per famiglie o due/tre coppie. Soggiorno ampio, due camere, soppalco e terrazza privata.',
@@ -103,16 +112,23 @@ export const housesSource: HouseSource[] = [
 				'Ideal accommodation for a family of 4/6 persons, for two/three couples, or for two families.'
 			]
 		},
+		// EN mirrors the IT list item for item; the archive has no highlight chips.
 		highlights: {
 			it: ['Terrazza sui tetti 15 mq', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
-			en: ['Terrace (15 sq m)', 'Olive grove', 'Heating system']
+			en: [
+				'Terrace on the roofs (15 sq m)',
+				'Olive grove view',
+				'Equipped kitchen',
+				'Heating and air conditioning'
+			]
 		}
 	},
 	{
 		slug: 'casa-2',
 		name: 'Casa 2',
 		tagline: {
-			it: 'Intima e raffinata, perfetta per coppie o piccole famiglie'
+			it: 'Intima e raffinata, perfetta per coppie o piccole famiglie',
+			en: 'Intimate and refined, perfect for couples or small families'
 		},
 		summary: {
 			it: 'Circa 65 mq su due livelli con camera al piano terra, soppalco e terrazza. Ideale per una coppia o 3–4 persone.',
@@ -162,14 +178,20 @@ export const housesSource: HouseSource[] = [
 		},
 		highlights: {
 			it: ['Terrazza 15 mq', 'Vista uliveto', 'Ideale per coppie', 'Riscaldamento e aria condizionata'],
-			en: ['Terrace (15 sq m)', 'Olive grove', 'Heating system']
+			en: [
+				'Terrace (15 sq m)',
+				'Olive grove view',
+				'Ideal for couples',
+				'Heating and air conditioning'
+			]
 		}
 	},
 	{
 		slug: 'casa-3',
 		name: 'Casa 3',
 		tagline: {
-			it: 'La più grande: tre camere e terrazza sull’uliveto'
+			it: 'La più grande: tre camere e terrazza sull’uliveto',
+			en: 'The largest: three bedrooms and a terrace overlooking the olive grove'
 		},
 		summary: {
 			it: 'Oltre 110 m², tre camere e due soggiorni. Ideale per famiglie numerose o gruppi di amici.',
@@ -210,14 +232,20 @@ export const housesSource: HouseSource[] = [
 		},
 		highlights: {
 			it: ['3 camere da letto', 'Terrazza sull’uliveto', 'Cucina con forno', 'Riscaldamento e aria condizionata'],
-			en: ['3 bedrooms', 'Terrace of 15 sqm', 'Kitchen with oven', 'Heating system']
+			en: [
+				'3 bedrooms',
+				'Terrace overlooking the olive grove',
+				'Kitchen with oven',
+				'Heating and air conditioning'
+			]
 		}
 	},
 	{
 		slug: 'casa-4',
 		name: 'Casa 4',
 		tagline: {
-			it: 'La più elegante, con patio interno e vista sul Golfo'
+			it: 'La più elegante, con patio interno e vista sul Golfo',
+			en: 'The most elegant, with an interior patio and a view over the Gulf'
 		},
 		summary: {
 			it: 'Oltre 110 m², patio privato e terrazza con tramonti sul Golfo di Castellammare.',
@@ -268,7 +296,12 @@ export const housesSource: HouseSource[] = [
 		},
 		highlights: {
 			it: ['Patio interno privato', 'Vista Golfo di Castellammare', '2 bagni', 'Riscaldamento e aria condizionata'],
-			en: ['Interior patio', 'Gulf of Castellammare', 'Heating system']
+			en: [
+				'Private interior patio',
+				'View over the Gulf of Castellammare',
+				'2 bathrooms',
+				'Heating and air conditioning'
+			]
 		}
 	}
 ];
@@ -292,7 +325,7 @@ export function localizeHouse(source: HouseSource, locale: Locale): House {
 	return {
 		slug: source.slug,
 		name: source.name,
-		tagline: source.tagline[locale] ?? (locale === 'it' ? source.tagline.it : ''),
+		tagline: pick(source.tagline, locale),
 		summary: pick(source.summary, locale),
 		guests: pick(source.guests, locale),
 		size: source.size,
@@ -314,51 +347,120 @@ export function getHouse(slug: string, locale: Locale = 'it'): House | undefined
 	return source ? localizeHouse(source, locale) : undefined;
 }
 
-/** Italian from .it Nuova Homepage Comfort list. No EN original in archive. */
-export const amenities = [
-	{ title: 'Wi‑Fi gratuito', detail: 'Connessione in tutte le case' },
-	{ title: 'Parcheggio interno', detail: 'Ampio spazio auto nel baglio' },
-	{ title: 'Agrumeto e uliveto', detail: 'Relax tra alberi e profumi di Sicilia' },
-	{ title: 'Area barbecue', detail: 'Cene all’aperto sotto la tettoia' },
-	{ title: 'Pulizia all’arrivo', detail: 'Servizio professionale incluso' },
-	{ title: 'Biancheria inclusa', detail: 'Lenzuola e asciugamani forniti' },
-	{ title: 'Check-in flessibile', detail: 'Arrivi e partenze secondo i tuoi orari' }
-];
-
-/** Italian from .it Nuova Homepage. No EN original in archive. */
-export const awards = [
+/** Italian from .it Nuova Homepage Comfort list. EN translated. */
+const amenitiesSource = [
 	{
-		title: 'Superhost Airbnb',
-		text: 'Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta qualità e recensioni eccellenti da parte degli ospiti.',
+		title: { it: 'Wi‑Fi gratuito', en: 'Free Wi‑Fi' },
+		detail: { it: 'Connessione in tutte le case', en: 'A connection in every house' }
+	},
+	{
+		title: { it: 'Parcheggio interno', en: 'Private parking' },
+		detail: {
+			it: 'Ampio spazio auto nel baglio',
+			en: 'Plenty of space for cars inside the baglio'
+		}
+	},
+	{
+		title: { it: 'Agrumeto e uliveto', en: 'Citrus and olive groves' },
+		detail: {
+			it: 'Relax tra alberi e profumi di Sicilia',
+			en: 'Rest among the trees and the scents of Sicily'
+		}
+	},
+	{
+		title: { it: 'Area barbecue', en: 'Barbecue area' },
+		detail: { it: 'Cene all’aperto sotto la tettoia', en: 'Dinners outdoors under the canopy' }
+	},
+	{
+		title: { it: 'Pulizia all’arrivo', en: 'Cleaned on arrival' },
+		detail: { it: 'Servizio professionale incluso', en: 'A professional service, included' }
+	},
+	{
+		title: { it: 'Biancheria inclusa', en: 'Linen included' },
+		detail: { it: 'Lenzuola e asciugamani forniti', en: 'Sheets and towels provided' }
+	},
+	{
+		title: { it: 'Check-in flessibile', en: 'Flexible check-in' },
+		detail: {
+			it: 'Arrivi e partenze secondo i tuoi orari',
+			en: 'Arrivals and departures to suit your times'
+		}
+	}
+] satisfies { title: LocalizedString; detail: LocalizedString }[];
+
+export function amenities(locale: Locale = 'it') {
+	return amenitiesSource.map((a) => ({
+		title: pick(a.title, locale),
+		detail: pick(a.detail, locale)
+	}));
+}
+
+/**
+ * Italian from .it Nuova Homepage. EN descriptions translated; the award names
+ * themselves use the English the awarding platforms use (Airbnb Superhost,
+ * Guest Favourite), and Booking's "Traveller Review Awards" is already English.
+ */
+const awardsSource = [
+	{
+		title: { it: 'Superhost Airbnb', en: 'Airbnb Superhost' },
+		text: {
+			it: 'Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta qualità e recensioni eccellenti da parte degli ospiti.',
+			en: 'Awarded by Airbnb for excellence in hospitality, for stays of a consistently high standard and excellent guest reviews.'
+		},
 		image: '/images/awards/superhost.png'
 	},
 	{
-		title: 'Amato dagli ospiti Airbnb',
-		text: 'Un riconoscimento speciale per l’attenzione e la cura verso gli ospiti, che ci ha permesso di costruire un rapporto di fiducia e calore.',
+		title: { it: 'Amato dagli ospiti Airbnb', en: 'Airbnb Guest Favourite' },
+		text: {
+			it: 'Un riconoscimento speciale per l’attenzione e la cura verso gli ospiti, che ci ha permesso di costruire un rapporto di fiducia e calore.',
+			en: 'A special recognition for the attention and care we give our guests, which has let us build a relationship of trust and warmth.'
+		},
 		image: '/images/awards/guest-favorite.png'
 	},
 	{
-		title: 'Traveller Review Awards',
-		text: 'Premio annuale assegnato da Booking.com basato sulle recensioni positive ricevute, a testimonianza della soddisfazione dei nostri clienti.',
+		title: { it: 'Traveller Review Awards', en: 'Traveller Review Awards' },
+		text: {
+			it: 'Premio annuale assegnato da Booking.com basato sulle recensioni positive ricevute, a testimonianza della soddisfazione dei nostri clienti.',
+			en: 'An annual award from Booking.com based on the positive reviews we receive, a sign of how satisfied our guests are.'
+		},
 		image: '/images/awards/traveller-review.png'
 	}
-];
+] satisfies { title: LocalizedString; text: LocalizedString; image: string }[];
 
-/** Guest quotes kept in the language they were written. */
-export const testimonials = [
+export function awards(locale: Locale = 'it') {
+	return awardsSource.map((a) => ({
+		title: pick(a.title, locale),
+		text: pick(a.text, locale),
+		image: a.image
+	}));
+}
+
+/**
+ * Guest quotes stay in the language the guest wrote them — translating a review
+ * would misrepresent it. Only the source line is localised.
+ */
+const testimonialsSource = [
 	{
 		name: 'Carmine',
-		source: 'Airbnb · 5 stelle',
+		source: { it: 'Airbnb · 5 stelle', en: 'Airbnb · 5 stars' },
 		quote:
 			'Bellissimo baglio e gentilissima ospitalità. Ritorniamo volentieri. Grazie tante a Marilena ed Elena.'
 	},
 	{
 		name: 'Varvara',
-		source: 'Airbnb · 5 stelle',
+		source: { it: 'Airbnb · 5 stelle', en: 'Airbnb · 5 stars' },
 		quote:
 			'Elena’s house was an oasis of style, beauty and tranquility. We were a bit worried of staying on Sicily in winter, but the house was very warm and cosy! We enjoyed staying there a lot!'
 	}
-];
+] satisfies { name: string; source: LocalizedString; quote: string }[];
+
+export function testimonials(locale: Locale = 'it') {
+	return testimonialsSource.map((t) => ({
+		name: t.name,
+		source: pick(t.source, locale),
+		quote: t.quote
+	}));
+}
 
 export type PlaceSource = {
 	slug: string;
@@ -384,7 +486,7 @@ export const placesSource: PlaceSource[] = [
 		time: '20 min',
 		text: {
 			it: 'La Tonnara è un piccolo gioiello architettonico incastonato all’interno di un contesto paesaggistico di particolare bellezza. Ai piedi del borgo di Scopello, con i suoi splendidi faraglioni ed i ricchi fondali, assolutamente da non perdere un tuffo nelle sue acque. Nel suo territorio sorgeva la mitica città di Cetaria (terra dei tonni), citata nelle opere di Tolomeo e di Plinio per l’eccezionale abbondanza di tonni presenti nel suo mare. L’ultima stagione di pesca è stata nel 1984.',
-			en: 'The Tonnara is a small architectural gem set in a landscape of exceptional beauty. It lies at the foot of the village of Scopello, whose striking sea stacks and rich waters make a swim here hard to resist. This was the site of the mythical city of Cetaria — the land of tuna — mentioned in the works of Ptolemy and Pliny for the exceptional abundance of tuna in its sea. The last fishing season was in 1984.'
+			en: 'The Tonnara is a small architectural gem set in a landscape of exceptional beauty. It lies at the foot of the village of Scopello, where towering rocks rise straight out of the sea and the waters are so rich that a swim is hard to resist. This was the site of the mythical city of Cetaria — the land of tuna — mentioned in the works of Ptolemy and Pliny for the exceptional abundance of tuna in its sea. The last fishing season was in 1984.'
 		},
 		image: '/images/places/scopello.jpg'
 	},
@@ -469,24 +571,101 @@ export function places(locale: Locale = 'it'): Place[] {
 	}));
 }
 
-/** Homepage sections from .it Nuova Homepage — Italian only in archive. */
+/**
+ * Homepage copy. Italian from the .it Nuova Homepage
+ * (archive/original-site/text/nuova-homepage.md); section headings and the
+ * courtyard/garden narrative postdate the owners' English site, so the English
+ * here is translated from the Italian, sentence by sentence.
+ *
+ * Where the owners' own English had a word for something, it is reused:
+ * "overlook" for affacciarsi, "sun lounger" for sdraio, "citrus grove" and
+ * "olive grove", and "Testimonials" (their menu label) for the quotes eyebrow.
+ */
 export const homeCopy = {
 	chiSiamo: {
-		title: 'Chi siamo',
-		body: 'Antico Baglio Siciliano è una struttura ricettiva immersa nella natura e nella storia della Sicilia occidentale. Offriamo un’accoglienza autentica, con ambienti confortevoli e un’atmosfera rilassante.'
+		title: { it: 'Chi siamo', en: 'About us' },
+		body: {
+			it: 'Antico Baglio Siciliano è una struttura ricettiva immersa nella natura e nella storia della Sicilia occidentale. Offriamo un’accoglienza autentica, con ambienti confortevoli e un’atmosfera rilassante.',
+			en: 'Antico Baglio Siciliano is a place to stay surrounded by the nature and the history of western Sicily. We offer a genuine welcome, with comfortable spaces and a restful atmosphere.'
+		}
+	},
+	houses: {
+		title: {
+			it: 'Quattro case indipendenti, un solo cortile',
+			en: 'Four independent houses, one courtyard'
+		},
+		lead: {
+			it: 'Ogni casa ha il suo carattere. Tutte condividono il cuore del baglio e il giardino siciliano.',
+			en: 'Each house has its own character. All of them share the heart of the baglio and the Sicilian garden.'
+		},
+		more: { it: 'Scopri la casa', en: 'See the house' }
 	},
 	cortile: {
-		eyebrow: 'Il cortile',
-		title: 'Il cuore del nostro baglio',
-		lead: 'Lo spazio perfetto per momenti indimenticabili con famiglia e amici.',
-		body: 'L’ampio cortile interno, affacciato da tutti gli appartamenti, offre un ambiente unico dove gruppi di famiglie e amici possono stare insieme senza rinunciare alla privacy. Pranzi all’aperto, giochi per i bambini, serate sotto le stelle — in un’atmosfera autentica siciliana.'
+		eyebrow: { it: 'Il cortile', en: 'The courtyard' },
+		title: { it: 'Il cuore del nostro baglio', en: 'The heart of our baglio' },
+		lead: {
+			it: 'Lo spazio perfetto per momenti indimenticabili con famiglia e amici.',
+			en: 'The perfect space for unforgettable moments with family and friends.'
+		},
+		body: {
+			it: 'L’ampio cortile interno, affacciato da tutti gli appartamenti, offre un ambiente unico dove gruppi di famiglie e amici possono stare insieme senza rinunciare alla privacy. Pranzi all’aperto, giochi per i bambini, serate sotto le stelle — in un’atmosfera autentica siciliana.',
+			en: 'The large inner courtyard, which all the houses overlook, is a space where groups of families and friends can be together without giving up their privacy. Lunches in the open air, games for the children, evenings under the stars — in a genuinely Sicilian atmosphere.'
+		}
 	},
 	giardino: {
-		eyebrow: 'Il giardino',
-		title: 'Vivi il nostro giardino siciliano',
-		p1: 'Il cuore dell’Antico Baglio Siciliano è la natura che lo circonda: un autentico agrumeto e un uliveto secolare avvolgono la struttura, regalando profumi, ombra e silenzio.',
-		p2: 'Tra gli alberi si apre una zona relax sotto una grande tettoia antica, dove puoi leggere, riposare su una sdraio o condividere momenti speciali con chi ami.',
-		p3: 'A disposizione anche un’area barbecue perfetta per cene all’aperto, tra il verde e la pietra viva del nostro baglio.'
+		eyebrow: { it: 'Il giardino', en: 'The garden' },
+		title: { it: 'Vivi il nostro giardino siciliano', en: 'Enjoy our Sicilian garden' },
+		p1: {
+			it: 'Il cuore dell’Antico Baglio Siciliano è la natura che lo circonda: un autentico agrumeto e un uliveto secolare avvolgono la struttura, regalando profumi, ombra e silenzio.',
+			en: 'The heart of Antico Baglio Siciliano is the nature around it: a real citrus grove and a centuries-old olive grove wrap around the houses, giving scent, shade and silence.'
+		},
+		p2: {
+			it: 'Tra gli alberi si apre una zona relax sotto una grande tettoia antica, dove puoi leggere, riposare su una sdraio o condividere momenti speciali con chi ami.',
+			en: 'Among the trees there is a quiet corner under a large old canopy, where you can read, rest on a sun lounger or share special moments with the people you love.'
+		},
+		p3: {
+			it: 'A disposizione anche un’area barbecue perfetta per cene all’aperto, tra il verde e la pietra viva del nostro baglio.',
+			en: 'There is also a barbecue area, perfect for dinners outdoors among the greenery and the bare stone of our baglio.'
+		}
+	},
+	comfort: {
+		title: { it: 'Accoglienza autentica, servizi chiari', en: 'A genuine welcome, clear amenities' }
+	},
+	awards: {
+		title: { it: 'Ospitalità riconosciuta', en: 'Recognised hospitality' }
+	},
+	quotes: {
+		eyebrow: { it: 'Dicono di noi', en: 'Testimonials' },
+		title: { it: 'Parole degli ospiti', en: 'In our guests’ words' }
+	},
+	places: {
+		title: {
+			it: 'Balestrate e dintorni: tra mare, natura e borghi autentici',
+			en: 'Balestrate and its surroundings: between sea, nature, and authentic villages'
+		},
+		lead: {
+			it: 'A pochi minuti dal baglio — da Scopello a Segesta, dallo Zingaro a Monreale.',
+			en: 'A few minutes from the baglio — from Scopello to Segesta, from the Zingaro to Monreale.'
+		}
+	},
+	cta: {
+		title: { it: 'Pronto per la Sicilia?', en: 'Ready for Sicily?' },
+		body: {
+			it: 'Scrivici per disponibilità e preventivo. Ti rispondiamo con cura, come ai nostri ospiti.',
+			en: 'Write to us for availability and a quote. We answer with the same care we give our guests.'
+		}
+	},
+	alt: {
+		hero: {
+			it: 'Portone dell’Antico Baglio Siciliano immerso nel verde',
+			en: 'The gate of Antico Baglio Siciliano surrounded by greenery'
+		},
+		cortile: { it: 'Cortile interno del baglio', en: 'The inner courtyard of the baglio' },
+		giardino: {
+			it: 'Giardino e agrumeto del baglio',
+			en: 'The garden and citrus grove of the baglio'
+		},
+		video: { it: 'Il Baglio ripreso dall’alto', en: 'The baglio seen from above' }
 	}
 };
 
@@ -502,6 +681,11 @@ export const homeCopy = {
  * match the owners’ own habits elsewhere in their English (“From … you can”,
  * “you can easily reach”).
  */
+export const imperdibiliMeta = {
+	it: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano.',
+	en: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte and Erice — a few minutes from Antico Baglio Siciliano.'
+} satisfies LocalizedString;
+
 export const imperdibiliLead = {
 	it: 'Grazie alla sua ottima posizione, si possono raggiungere facilmente alcuni dei più bei luoghi di mare e d’arte della Sicilia Occidentale.',
 	en: 'From the baglio you can easily reach some of the most beautiful stretches of coast and the finest art in western Sicily.'

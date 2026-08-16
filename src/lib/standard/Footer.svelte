@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { site } from '$lib/data/content';
+	import { pick, type Locale } from '$lib/i18n';
+
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
 </script>
 
 <footer class="footer">
@@ -7,7 +11,7 @@
 		<span class="rule" aria-hidden="true"></span>
 
 		<p class="brand">{site.name}</p>
-		<p class="meta">{site.tagline} · {site.location}</p>
+		<p class="meta">{site.tagline} · {pick(site.location, locale)}</p>
 
 		<a class="email" href={`mailto:${site.email}`}>{site.email}</a>
 

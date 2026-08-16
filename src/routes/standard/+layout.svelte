@@ -3,16 +3,19 @@
 	import HubBack from '$lib/components/HubBack.svelte';
 	import Header from '$lib/standard/Header.svelte';
 	import Footer from '$lib/standard/Footer.svelte';
+	import { pick, ui, type Locale } from '$lib/i18n';
 
 	let { children } = $props();
+
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
 
 	$effect(() => {
 		document.documentElement.lang = page.data.locale ?? 'it';
 	});
 </script>
 
-<HubBack />
-<a class="skip" href="#contenuto">Vai al contenuto</a>
+<HubBack label={pick(ui.backToHub, locale)} />
+<a class="skip" href="#contenuto">{pick(ui.skipToContent, locale)}</a>
 <Header />
 <main id="contenuto">
 	{@render children()}

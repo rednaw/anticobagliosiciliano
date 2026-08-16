@@ -17,8 +17,52 @@
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const houseList = $derived(houses(locale));
 	const placeList = $derived(places(locale));
+	const amenityList = $derived(amenities(locale));
+	const awardList = $derived(awards(locale));
+	const quoteList = $derived(testimonials(locale));
 	const contatti = $derived(withBase(standardHref(locale, 'contatti'), base));
 	const imperdibili = $derived(withBase(standardHref(locale, 'imperdibili'), base));
+	const home = $derived({
+		chiSiamo: {
+			title: pick(homeCopy.chiSiamo.title, locale),
+			body: pick(homeCopy.chiSiamo.body, locale)
+		},
+		houses: {
+			title: pick(homeCopy.houses.title, locale),
+			lead: pick(homeCopy.houses.lead, locale),
+			more: pick(homeCopy.houses.more, locale)
+		},
+		cortile: {
+			eyebrow: pick(homeCopy.cortile.eyebrow, locale),
+			title: pick(homeCopy.cortile.title, locale),
+			lead: pick(homeCopy.cortile.lead, locale),
+			body: pick(homeCopy.cortile.body, locale)
+		},
+		giardino: {
+			eyebrow: pick(homeCopy.giardino.eyebrow, locale),
+			title: pick(homeCopy.giardino.title, locale),
+			p1: pick(homeCopy.giardino.p1, locale),
+			p2: pick(homeCopy.giardino.p2, locale),
+			p3: pick(homeCopy.giardino.p3, locale)
+		},
+		comfort: { title: pick(homeCopy.comfort.title, locale) },
+		awards: { title: pick(homeCopy.awards.title, locale) },
+		quotes: {
+			eyebrow: pick(homeCopy.quotes.eyebrow, locale),
+			title: pick(homeCopy.quotes.title, locale)
+		},
+		places: {
+			title: pick(homeCopy.places.title, locale),
+			lead: pick(homeCopy.places.lead, locale)
+		},
+		cta: { title: pick(homeCopy.cta.title, locale), body: pick(homeCopy.cta.body, locale) },
+		alt: {
+			hero: pick(homeCopy.alt.hero, locale),
+			cortile: pick(homeCopy.alt.cortile, locale),
+			giardino: pick(homeCopy.alt.giardino, locale),
+			video: pick(homeCopy.alt.video, locale)
+		}
+	});
 </script>
 
 <svelte:head>
@@ -32,7 +76,7 @@
 		<img
 			class="hero-media"
 			src={asset('/images/ambiance/hero-portone-tall.jpg')}
-			alt="Portone dell’Antico Baglio Siciliano immerso nel verde"
+			alt={home.alt.hero}
 		/>
 	</picture>
 	<div class="hero-veil"></div>
@@ -50,15 +94,15 @@
 	<div class="container about-grid">
 		<Reveal>
 			<div>
-				<h2>{homeCopy.chiSiamo.title}</h2>
-				<p>{homeCopy.chiSiamo.body}</p>
+				<h2>{home.chiSiamo.title}</h2>
+				<p>{home.chiSiamo.body}</p>
 			</div>
 		</Reveal>
 		<Reveal delay={120}>
 			<AmbientVideo
 				src="/videos/baglio-720.mp4"
 				poster="/videos/baglio-poster.jpg"
-				label="Il Baglio ripreso dall’alto"
+				label={home.alt.video}
 			/>
 		</Reveal>
 	</div>
@@ -69,8 +113,8 @@
 		<Reveal>
 			<div class="section-head">
 				<p class="eyebrow">{pick(ui.ourHouses, locale)}</p>
-				<h2>Quattro case indipendenti, un solo cortile</h2>
-				<p>Ogni casa ha il suo carattere. Tutte condividono il cuore del baglio e il giardino siciliano.</p>
+				<h2>{home.houses.title}</h2>
+				<p>{home.houses.lead}</p>
 			</div>
 		</Reveal>
 
@@ -86,7 +130,7 @@
 							</div>
 							<h3>{house.name}</h3>
 							<p>{house.summary}</p>
-							<span class="more">Scopri la casa</span>
+							<span class="more">{home.houses.more}</span>
 						</div>
 					</a>
 				</Reveal>
@@ -96,17 +140,13 @@
 </section>
 
 <section class="feature">
-	<img
-		src={asset('/images/ambiance/cortile.jpg')}
-		alt="Cortile interno del baglio"
-		loading="lazy"
-	/>
+	<img src={asset('/images/ambiance/cortile.jpg')} alt={home.alt.cortile} loading="lazy" />
 	<div class="feature-panel">
 		<Reveal>
-			<p class="eyebrow">{homeCopy.cortile.eyebrow}</p>
-			<h2>{homeCopy.cortile.title}</h2>
-			<p class="lead">{homeCopy.cortile.lead}</p>
-			<p>{homeCopy.cortile.body}</p>
+			<p class="eyebrow">{home.cortile.eyebrow}</p>
+			<h2>{home.cortile.title}</h2>
+			<p class="lead">{home.cortile.lead}</p>
+			<p>{home.cortile.body}</p>
 		</Reveal>
 	</div>
 </section>
@@ -114,18 +154,14 @@
 <section class="section garden">
 	<div class="container garden-grid">
 		<Reveal>
-			<img
-				src={asset('/images/ambiance/giardino.jpg')}
-				alt="Giardino e agrumeto del baglio"
-				loading="lazy"
-			/>
+			<img src={asset('/images/ambiance/giardino.jpg')} alt={home.alt.giardino} loading="lazy" />
 		</Reveal>
 		<Reveal delay={100}>
-			<p class="eyebrow">{homeCopy.giardino.eyebrow}</p>
-			<h2>{homeCopy.giardino.title}</h2>
-			<p>{homeCopy.giardino.p1}</p>
-			<p>{homeCopy.giardino.p2}</p>
-			<p>{homeCopy.giardino.p3}</p>
+			<p class="eyebrow">{home.giardino.eyebrow}</p>
+			<h2>{home.giardino.title}</h2>
+			<p>{home.giardino.p1}</p>
+			<p>{home.giardino.p2}</p>
+			<p>{home.giardino.p3}</p>
 		</Reveal>
 	</div>
 </section>
@@ -135,11 +171,11 @@
 		<Reveal>
 			<div class="section-head">
 				<p class="eyebrow">Comfort</p>
-				<h2>Accoglienza autentica, servizi chiari</h2>
+				<h2>{home.comfort.title}</h2>
 			</div>
 		</Reveal>
 		<ul class="amenity-list">
-			{#each amenities as item, i}
+			{#each amenityList as item, i}
 				<Reveal delay={i * 40}>
 					<li>
 						<strong>{item.title}</strong>
@@ -156,11 +192,11 @@
 		<Reveal>
 			<div class="section-head">
 				<p class="eyebrow">{pick(ui.awards, locale)}</p>
-				<h2>Ospitalità riconosciuta</h2>
+				<h2>{home.awards.title}</h2>
 			</div>
 		</Reveal>
 		<div class="award-grid">
-			{#each awards as award, i}
+			{#each awardList as award, i}
 				<Reveal delay={i * 70}>
 					<figure>
 						<img src={asset(award.image)} alt={award.title} loading="lazy" />
@@ -179,12 +215,12 @@
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
-				<p class="eyebrow">Dicono di noi</p>
-				<h2>Parole degli ospiti</h2>
+				<p class="eyebrow">{home.quotes.eyebrow}</p>
+				<h2>{home.quotes.title}</h2>
 			</div>
 		</Reveal>
 		<div class="quote-grid">
-			{#each testimonials as t, i}
+			{#each quoteList as t, i}
 				<Reveal delay={i * 90}>
 					<blockquote>
 						<p>“{t.quote}”</p>
@@ -204,8 +240,8 @@
 		<Reveal>
 			<div class="section-head">
 				<p class="eyebrow">{pick(ui.navImperdibili, locale)}</p>
-				<h2>Balestrate e dintorni: tra mare, natura e borghi autentici</h2>
-				<p>A pochi minuti dal baglio — da Scopello a Segesta, dallo Zingaro a Monreale.</p>
+				<h2>{home.places.title}</h2>
+				<p>{home.places.lead}</p>
 			</div>
 		</Reveal>
 		<div class="place-grid">
@@ -227,8 +263,8 @@
 <section class="cta">
 	<div class="container cta-inner">
 		<Reveal>
-			<h2>Pronto per la Sicilia?</h2>
-			<p>Scrivici per disponibilità e preventivo. Ti rispondiamo con cura, come ai nostri ospiti.</p>
+			<h2>{home.cta.title}</h2>
+			<p>{home.cta.body}</p>
 			<a class="btn btn-light" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
 		</Reveal>
 	</div>

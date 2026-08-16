@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+
+	// Shared by all three variants, so the label is a prop rather than a lookup:
+	// only the standard variant is bilingual.
+	let { label = 'Torna all’indice' }: { label?: string } = $props();
 </script>
 
-<a class="hub-back" href={resolve('/')} aria-label="Torna all’indice">←</a>
+<a class="hub-back" href={resolve('/')} aria-label={label}>←</a>
 
 <style>
 	.hub-back {

@@ -40,7 +40,34 @@ export const ui = {
 	/** Page eyebrow only; the nav/CTA uses `requestAvailability`. */
 	contact: { it: 'Contatti', en: 'Contact' },
 	/** Owner-supplied wording, not from the archives. Single label for the one enquiry page. */
-	requestAvailability: { it: 'Richiesta disponibilità', en: 'Request availability' }
+	requestAvailability: { it: 'Richiesta disponibilità', en: 'Request availability' },
+
+	/* House page chrome — translated, no archive original. */
+	accommodation: { it: 'Alloggio', en: 'Accommodation' },
+	otherHouses: { it: 'Altre case', en: 'The other houses' },
+	keepExploring: { it: 'Continua a esplorare', en: 'Keep exploring' },
+	houseNotFound: { it: 'Casa non trovata', en: 'House not found' },
+
+	/*
+	 * Controls and screen-reader labels. Mostly invisible, but they were Italian
+	 * on the English pages (and "Language" was English on the Italian ones).
+	 */
+	skipToContent: { it: 'Vai al contenuto', en: 'Skip to content' },
+	backToHub: { it: 'Torna all’indice', en: 'Back to the index' },
+	mainNav: { it: 'Principale', en: 'Main' },
+	language: { it: 'Lingua', en: 'Language' },
+	closeMenu: { it: 'Chiudi menu', en: 'Close menu' },
+	gallery: { it: 'Galleria', en: 'Gallery' },
+	previousPhoto: { it: 'Foto precedente', en: 'Previous photo' },
+	nextPhoto: { it: 'Foto successiva', en: 'Next photo' },
+	thumbnails: { it: 'Anteprime', en: 'Thumbnails' },
+	/** Followed by the photo number: "Vai alla foto 3" / "Go to photo 3". */
+	goToPhoto: { it: 'Vai alla foto', en: 'Go to photo' },
+	replayVideo: { it: 'Rivedi il video', en: 'Replay the video' },
+	videoUnsupported: {
+		it: 'Il tuo browser non supporta la riproduzione video.',
+		en: 'Your browser does not support video playback.'
+	}
 } satisfies Record<string, LocalizedString>;
 
 /** App path (no base) for a standard-variant page. `subpath` e.g. `imperdibili`, `case/casa-1`, or ``. */

@@ -22,7 +22,7 @@
 	<img src={asset(house.image)} alt={house.name} />
 	<div class="veil"></div>
 	<div class="container copy">
-		<p class="eyebrow">Alloggio</p>
+		<p class="eyebrow">{pick(ui.accommodation, locale)}</p>
 		<h1>{house.name}</h1>
 		{#if house.tagline}
 			<p class="tagline">{house.tagline}</p>
@@ -74,8 +74,8 @@
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
-				<p class="eyebrow">Altre case</p>
-				<h2>Continua a esplorare</h2>
+				<p class="eyebrow">{pick(ui.otherHouses, locale)}</p>
+				<h2>{pick(ui.keepExploring, locale)}</h2>
 			</div>
 		</Reveal>
 		<div class="grid">

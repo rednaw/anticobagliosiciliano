@@ -2,7 +2,7 @@
 	import { asset } from '$app/paths';
 	import { page } from '$app/state';
 	import Reveal from '$lib/components/Reveal.svelte';
-	import { imperdibiliLead, places, site } from '$lib/data/content';
+	import { imperdibiliLead, imperdibiliMeta, places, site } from '$lib/data/content';
 	import { pick, ui, type Locale } from '$lib/i18n';
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
@@ -12,10 +12,7 @@
 
 <svelte:head>
 	<title>{pageTitle} · {site.name}</title>
-	<meta
-		name="description"
-		content="Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano."
-	/>
+	<meta name="description" content={pick(imperdibiliMeta, locale)} />
 </svelte:head>
 
 <section class="hero">

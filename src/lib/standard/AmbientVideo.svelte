@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
+	import { page } from '$app/state';
+	import { pick, ui, type Locale } from '$lib/i18n';
 
 	let {
 		src,
@@ -13,6 +15,8 @@
 
 	let el: HTMLVideoElement | undefined = $state();
 	let wrap: HTMLDivElement | undefined = $state();
+
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
 
 	let ended = $state(false);
 
@@ -68,11 +72,16 @@
 		onended={() => (ended = true)}
 	>
 		<source src={asset(src)} type="video/mp4" />
-		Il tuo browser non supporta la riproduzione video.
+		{pick(ui.videoUnsupported, locale)}
 	</video>
 
 	{#if ended}
-		<button type="button" class="replay" onclick={replay} aria-label="Rivedi il video">
+		<button
+			type="button"
+			class="replay"
+			onclick={replay}
+			aria-label={pick(ui.replayVideo, locale)}
+		>
 			<svg viewBox="0 0 24 24" aria-hidden="true">
 				<path
 					d="M12 5V2L8 6l4 4V7a5 5 0 11-4.9 4H5.05A7 7 0 1012 5z"

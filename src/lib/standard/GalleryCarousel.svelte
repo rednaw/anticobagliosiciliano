@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
+	import { page } from '$app/state';
+	import { pick, ui, type Locale } from '$lib/i18n';
 
 	let {
 		images,
@@ -12,8 +14,14 @@
 	let index = $state(0);
 	let thumbsEl: HTMLDivElement | undefined = $state();
 
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const count = $derived(images.length);
 	const current = $derived(images[index] ?? images[0]);
+	const photoAlt = $derived(
+		locale === 'it'
+			? `${alt} — foto ${index + 1} di ${count}`
+			: `${alt} — photo ${index + 1} of ${count}`
+	);
 
 	function go(next: number) {
 		if (count === 0) return;
@@ -48,16 +56,21 @@
 </script>
 
 {#if count > 0}
-	<div class="carousel" role="region" aria-roledescription="carousel" aria-label={`Galleria ${alt}`}>
+	<div
+		class="carousel"
+		role="region"
+		aria-roledescription="carousel"
+		aria-label={`${pick(ui.gallery, locale)} ${alt}`}
+	>
 		<div class="stage">
-			<img src={asset(current)} alt={`${alt} — foto ${index + 1} di ${count}`} />
+			<img src={asset(current)} alt={photoAlt} />
 			{#if count > 1}
 				<button
 					type="button"
 					class="nav prev"
 					onclick={prev}
 					onkeydown={onKeydown}
-					aria-label="Foto precedente"
+					aria-label={pick(ui.previousPhoto, locale)}
 				>
 					‹
 				</button>
@@ -66,7 +79,7 @@
 					class="nav next"
 					onclick={next}
 					onkeydown={onKeydown}
-					aria-label="Foto successiva"
+					aria-label={pick(ui.nextPhoto, locale)}
 				>
 					›
 				</button>
@@ -75,7 +88,12 @@
 		</div>
 
 		{#if count > 1}
-			<div class="thumbs" bind:this={thumbsEl} role="tablist" aria-label="Anteprime">
+			<div
+				class="thumbs"
+				bind:this={thumbsEl}
+				role="tablist"
+				aria-label={pick(ui.thumbnails, locale)}
+			>
 				{#each images as src, i}
 					<button
 						type="button"
@@ -83,7 +101,7 @@
 						class:active={i === index}
 						role="tab"
 						aria-selected={i === index}
-						aria-label={`Vai alla foto ${i + 1}`}
+						aria-label={`${pick(ui.goToPhoto, locale)} ${i + 1}`}
 						onclick={() => go(i)}
 						onkeydown={onKeydown}
 					>
