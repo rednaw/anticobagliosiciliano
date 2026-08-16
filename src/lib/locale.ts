@@ -63,5 +63,5 @@ export type Localized<T> = T extends LocalizedString
 export function localeFromPath(pathname: string, base = ''): Locale {
 	let path = pathname;
 	if (base && path.startsWith(base)) path = path.slice(base.length) || '/';
-	return /\/standard\/en(\/|$)/.test(path) ? 'en' : 'it';
+	return /^\/en(\/|$)/.test(path) ? 'en' : 'it';
 }

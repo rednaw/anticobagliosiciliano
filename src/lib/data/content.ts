@@ -1,7 +1,7 @@
 import type { Locale, LocalizedString, LocalizedStrings } from '$lib/locale';
 import { pick, pickList } from '$lib/locale';
 
-/** Marketing copy for `/standard/`. Tagline stays Italian in both languages. */
+/** Marketing copy. Tagline stays Italian in both languages. */
 
 export const site = {
 	name: 'Antico Baglio Siciliano',

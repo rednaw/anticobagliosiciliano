@@ -19,7 +19,6 @@ export const ui = {
 	keepExploring: { it: 'Continua a esplorare', en: 'Keep exploring' },
 	houseNotFound: { it: 'Casa non trovata', en: 'House not found' },
 	skipToContent: { it: 'Vai al contenuto', en: 'Skip to content' },
-	backToHub: { it: 'Torna all’indice', en: 'Back to the index' },
 	mainNav: { it: 'Principale', en: 'Main' },
 	language: { it: 'Lingua', en: 'Language' },
 	menu: { it: 'Menu', en: 'Menu' },
@@ -38,9 +37,9 @@ export const ui = {
 
 /** App path (no base). `subpath` e.g. `imperdibili`, `case/casa-1`, or ``. */
 export function standardHref(locale: Locale, subpath = ''): string {
-	const root = locale === 'en' ? '/standard/en' : '/standard';
 	const clean = subpath.replace(/^\/+|\/+$/g, '');
-	return clean ? `${root}/${clean}/` : `${root}/`;
+	if (locale === 'en') return clean ? `/en/${clean}/` : '/en/';
+	return clean ? `/${clean}/` : '/';
 }
 
 /** Prefix with SvelteKit `base` (GitHub Pages). */
@@ -50,16 +49,13 @@ export function withBase(pathname: string, base = ''): string {
 	return `${b}${pathname}`;
 }
 
-/** Same page in the other locale under `/standard/`. */
+/** Same page in the other locale. */
 export function counterpartHref(pathname: string, target: Locale, base = ''): string {
 	let path = pathname;
 	if (base && path.startsWith(base)) path = path.slice(base.length) || '/';
 	path = path.replace(/\/+$/, '') || '/';
 
-	const rest = path
-		.replace(/^\/standard\/en(?=\/|$)/, '')
-		.replace(/^\/standard(?=\/|$)/, '')
-		.replace(/^\//, '');
+	const rest = path.replace(/^\/en(?=\/|$)/, '').replace(/^\//, '');
 
 	return standardHref(target, rest);
 }

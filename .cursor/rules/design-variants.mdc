@@ -1,30 +1,10 @@
 ---
-description: Keep Standard / Experimental / Archivio site variants isolated so one can be chosen and the others deleted cleanly.
+description: Public site vs unlinked owner archive.
 alwaysApply: true
 ---
 
-# Design variants isolation
+# Site vs archive
 
-Owners compare designs via a password gate and hub at `/`. Eventually one variant wins; the others are removed.
+The marketing site lives at `/` (Italian) and `/en/` (English). It owns the public chrome (header, footer, styles).
 
-## Variants
-
-| Path | Role |
-|------|------|
-| `/` | Hub only (chooser) — not a design variant |
-| `/standard/` | Current marketing site design |
-| `/experimental/` | Alternate design (may be stub) |
-| `/archivio/` | Old photos/texts archive |
-
-## Isolation (do not entangle)
-
-- Each variant owns its **route tree** and **chrome** (layouts, headers, styles, variant-specific components).
-- Do **not** share layouts or UI components across variants (no parent layout that wraps more than one variant’s chrome).
-- Do **not** add cross-links between variants in nav/footer; the **hub** is the only crossroads.
-- **Allowed shared code** (survives whichever wins): gate/hub, `content.ts` / archive data, `static/` assets, and the tiny hub back-arrow helper.
-- When a design wins: delete the other variant folders and their components; re-point or remove hub/gate as needed — no cross-variant refactor.
-
-## Hub back arrow
-
-- All three variants show the same subtle top-left control back to `/` (hub).
-- Prefer one small shared component (e.g. `HubBack`); keep it trivial to keep or inline later.
+`/archivio/` is an unlinked owner archive of old photos and texts. Do not add it to nav, footer, or any public page. It already sends `noindex`.

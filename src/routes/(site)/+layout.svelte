@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/state';
-	import HubBack from '$lib/components/HubBack.svelte';
 	import Header from '$lib/standard/Header.svelte';
 	import Footer from '$lib/standard/Footer.svelte';
 	import { SITE_ORIGIN } from '$lib/site-config';
@@ -32,7 +31,6 @@
 	<link rel="alternate" hreflang="x-default" href={hrefIt} />
 </svelte:head>
 
-<HubBack label={pick(ui.backToHub, locale)} />
 <a class="skip" href="#contenuto">{pick(ui.skipToContent, locale)}</a>
 <Header />
 <main id="contenuto">

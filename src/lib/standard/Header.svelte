@@ -91,7 +91,6 @@
 
 		const inertEls = [
 			document.querySelector('.skip'),
-			document.querySelector('.hub-back'),
 			document.getElementById('contenuto'),
 			document.querySelector('.footer')
 		].filter((el): el is HTMLElement => !!el);
@@ -195,8 +194,6 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		/* Clear fixed HubBack in the top-left corner */
-		padding-left: 1.85rem;
 	}
 
 	.brand {

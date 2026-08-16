@@ -4,23 +4,6 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#0e3a47" />
-		<!-- Restore unlock before first paint (avoids flash of gate / content). -->
-		<script>
-			(function () {
-				try {
-					if (new URLSearchParams(location.search).has('gate')) return;
-					if (localStorage.getItem('abs-site-access') === 'ok') {
-						document.documentElement.setAttribute('data-access', 'ok');
-					}
-				} catch (e) {}
-			})();
-		</script>
-		<style>
-			/* Returning visitors: hide gate shell until the app hydrates the real site. */
-			html[data-access='ok'] .gate-screen {
-				display: none !important;
-			}
-		</style>
 		<noscript>
 			<style>
 				.reveal {
