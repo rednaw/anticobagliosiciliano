@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { asset, resolve } from '$app/paths';
 	import Reveal from '$lib/components/Reveal.svelte';
+	import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
 	import {
 		amenities,
 		awards,
@@ -49,16 +50,11 @@
 			</div>
 		</Reveal>
 		<Reveal delay={120}>
-			<video
-				class="baglio-video"
-				controls
-				playsinline
-				preload="metadata"
-				poster={asset('/videos/baglio-poster.jpg')}
-			>
-				<source src={asset('/videos/baglio.mp4')} type="video/mp4" />
-				Il tuo browser non supporta la riproduzione video.
-			</video>
+			<AmbientVideo
+				src="/videos/baglio-720.mp4"
+				poster="/videos/baglio-poster.jpg"
+				label="Il Baglio ripreso dall’alto"
+			/>
 		</Reveal>
 	</div>
 </section>
@@ -333,15 +329,6 @@
 		max-width: 28rem;
 		font-size: clamp(1.05rem, 2.2vw, 1.25rem);
 		opacity: 0.95;
-	}
-
-	.baglio-video {
-		width: 100%;
-		aspect-ratio: 16 / 9;
-		display: block;
-		background: #000;
-		border-radius: var(--radius);
-		box-shadow: var(--shadow);
 	}
 
 	.hero-actions {
