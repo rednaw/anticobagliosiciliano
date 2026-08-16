@@ -46,13 +46,6 @@
 				rilassante.
 			</p>
 		</Reveal>
-		<Reveal delay={120}>
-			<img
-				src={asset('/images/ambiance/baglio-dallalto.jpg')}
-				alt="Vista dall’alto dell’Antico Baglio Siciliano"
-				loading="lazy"
-			/>
-		</Reveal>
 	</div>
 </section>
 
@@ -379,11 +372,6 @@
 		font-size: 1.15rem;
 		color: var(--ink-soft);
 		max-width: 36rem;
-	}
-
-	.about img {
-		width: 100%;
-		border-radius: var(--radius);
 	}
 
 	.house-list {
@@ -730,12 +718,6 @@
 	}
 
 	@media (min-width: 960px) {
-		.about-grid {
-			grid-template-columns: 1.1fr 0.9fr;
-			align-items: center;
-			gap: 3rem;
-		}
-
 		.feature {
 			grid-template-columns: 1.1fr 0.9fr;
 			min-height: 32rem;

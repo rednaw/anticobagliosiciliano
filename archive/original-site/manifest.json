@@ -63,6 +63,13 @@
         "hash": "5480922dd6414e598c1ccd255e6014a8",
         "bytes": 1069968,
         "note": "Homepage mobile hero background; archived from static/images/ambiance/hero-portone.jpg before removal"
+      },
+      {
+        "file": "home/baglio-dallalto.jpg",
+        "source": "https://anticobagliosiciliano.it/wp-content/uploads/2017/10/baglio-dallalto.jpg",
+        "hash": "947d7ba57d3f90c867a2d9fd2f7c84e9",
+        "bytes": 428836,
+        "note": "Homepage og:image / aerial view; archived from static/images/ambiance before removal"
       }
     ],
     "casa-1": [
