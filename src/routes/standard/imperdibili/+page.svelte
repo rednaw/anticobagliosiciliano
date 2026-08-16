@@ -1,11 +1,17 @@
 <script lang="ts">
-	import { asset, resolve } from '$app/paths';
+	import { asset } from '$app/paths';
+	import { page } from '$app/state';
 	import Reveal from '$lib/components/Reveal.svelte';
-	import { places, site } from '$lib/data/content';
+	import { imperdibiliLead, places, site } from '$lib/data/content';
+	import { pick, ui, type Locale } from '$lib/i18n';
+
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const placeList = $derived(places(locale));
+	const pageTitle = $derived(pick(ui.navImperdibili, locale));
 </script>
 
 <svelte:head>
-	<title>Imperdibili · {site.name}</title>
+	<title>{pageTitle} · {site.name}</title>
 	<meta
 		name="description"
 		content="Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano."
@@ -14,37 +20,25 @@
 
 <section class="hero">
 	<div class="container">
-		<h1>Imperdibili</h1>
-		<p class="lead">
-			Grazie alla posizione del baglio si raggiungono facilmente alcuni dei più bei luoghi di mare e
-			d’arte della Sicilia occidentale.
-		</p>
+		<h1>{pageTitle}</h1>
+		<p class="lead">{pick(imperdibiliLead, locale)}</p>
 	</div>
 </section>
 
 <section class="section">
 	<div class="container list">
-		{#each places as place, i}
+		{#each placeList as place, i}
 			<Reveal delay={(i % 3) * 50}>
 				<article id={place.slug}>
 					<img src={asset(place.image)} alt={place.name} loading="lazy" />
 					<div class="body">
-						<span class="time">{place.time} dal baglio</span>
+						<span class="time">{place.time}</span>
 						<h2>{place.name}</h2>
 						<p>{place.text}</p>
 					</div>
 				</article>
 			</Reveal>
 		{/each}
-	</div>
-</section>
-
-<section class="cta">
-	<div class="container">
-		<Reveal>
-			<h2>Vieni a scoprirli da qui</h2>
-			<a class="btn btn-light" href={resolve('/standard/contatti/')}>Prenota il soggiorno</a>
-		</Reveal>
 	</div>
 </section>
 
@@ -108,17 +102,6 @@
 		color: var(--ink-soft);
 		line-height: 1.65;
 		font-size: 1.02rem;
-	}
-
-	.cta {
-		padding: 4rem 0;
-		background: var(--sea);
-		color: #fff;
-	}
-
-	.cta h2 {
-		margin: 0 0 1.25rem;
-		font-size: clamp(1.8rem, 4vw, 2.6rem);
 	}
 
 	@media (min-width: 800px) {

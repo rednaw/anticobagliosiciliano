@@ -1,19 +1,28 @@
 <script lang="ts">
-	import { asset, resolve } from '$app/paths';
+	import { asset, base } from '$app/paths';
+	import { page } from '$app/state';
 	import Reveal from '$lib/components/Reveal.svelte';
 	import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
 	import {
 		amenities,
 		awards,
+		homeCopy,
 		houses,
 		places,
 		site,
 		testimonials
 	} from '$lib/data/content';
+	import { pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
+
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const houseList = $derived(houses(locale));
+	const placeList = $derived(places(locale));
+	const contatti = $derived(withBase(standardHref(locale, 'contatti'), base));
+	const imperdibili = $derived(withBase(standardHref(locale, 'imperdibili'), base));
 </script>
 
 <svelte:head>
-	<title>{site.name} · Case vacanze in Sicilia</title>
+	<title>{site.name} · {site.tagline}</title>
 </svelte:head>
 
 <section class="hero">
@@ -29,10 +38,10 @@
 	<div class="hero-veil"></div>
 	<div class="hero-copy">
 		<h1>{site.name}</h1>
-		<p class="hero-lead">Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.</p>
+		<p class="hero-lead">{pick(site.description, locale)}</p>
 		<div class="hero-actions">
-			<a class="btn btn-light" href={resolve('/standard/contatti/')}>Prenota ora</a>
-			<a class="btn btn-ghost" href="#alloggi">Scopri gli alloggi</a>
+			<a class="btn btn-light" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
+			<a class="btn btn-ghost" href="#alloggi">{pick(ui.discoverHouses, locale)}</a>
 		</div>
 	</div>
 </section>
@@ -41,12 +50,8 @@
 	<div class="container about-grid">
 		<Reveal>
 			<div>
-				<h2>Chi siamo</h2>
-				<p>
-					Antico Baglio Siciliano è una struttura ricettiva immersa nella natura e nella storia della
-					Sicilia occidentale. Offriamo un’accoglienza autentica, con ambienti confortevoli e
-					un’atmosfera rilassante.
-				</p>
+				<h2>{homeCopy.chiSiamo.title}</h2>
+				<p>{homeCopy.chiSiamo.body}</p>
 			</div>
 		</Reveal>
 		<Reveal delay={120}>
@@ -63,16 +68,16 @@
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
-				<p class="eyebrow">I nostri alloggi</p>
+				<p class="eyebrow">{pick(ui.ourHouses, locale)}</p>
 				<h2>Quattro case indipendenti, un solo cortile</h2>
 				<p>Ogni casa ha il suo carattere. Tutte condividono il cuore del baglio e il giardino siciliano.</p>
 			</div>
 		</Reveal>
 
 		<div class="house-list">
-			{#each houses as house, i}
+			{#each houseList as house, i}
 				<Reveal delay={i * 80}>
-					<a class="house" href={resolve(`/standard/case/${house.slug}/`)}>
+					<a class="house" href={withBase(standardHref(locale, `case/${house.slug}`), base)}>
 						<img src={asset(house.image)} alt={house.name} loading="lazy" />
 						<div class="house-body">
 							<div class="house-meta">
@@ -98,15 +103,10 @@
 	/>
 	<div class="feature-panel">
 		<Reveal>
-			<p class="eyebrow">Il cortile</p>
-			<h2>Il cuore del nostro baglio</h2>
-			<p class="lead">Lo spazio perfetto per momenti indimenticabili con famiglia e amici.</p>
-			<p>
-				L’ampio cortile interno, affacciato da tutti gli appartamenti, offre un ambiente unico dove
-				gruppi di famiglie e amici possono stare insieme senza rinunciare alla privacy. Pranzi
-				all’aperto, giochi per i bambini, serate sotto le stelle — in un’atmosfera autentica
-				siciliana.
-			</p>
+			<p class="eyebrow">{homeCopy.cortile.eyebrow}</p>
+			<h2>{homeCopy.cortile.title}</h2>
+			<p class="lead">{homeCopy.cortile.lead}</p>
+			<p>{homeCopy.cortile.body}</p>
 		</Reveal>
 	</div>
 </section>
@@ -121,20 +121,11 @@
 			/>
 		</Reveal>
 		<Reveal delay={100}>
-			<p class="eyebrow">Il giardino</p>
-			<h2>Vivi il nostro giardino siciliano</h2>
-			<p>
-				Il cuore dell’Antico Baglio Siciliano è la natura che lo circonda: un autentico agrumeto e
-				un uliveto secolare avvolgono la struttura, regalando profumi, ombra e silenzio.
-			</p>
-			<p>
-				Tra gli alberi si apre una zona relax sotto una grande tettoia antica, dove puoi leggere,
-				riposare su una sdraio o condividere momenti speciali con chi ami.
-			</p>
-			<p>
-				A disposizione anche un’area barbecue perfetta per cene all’aperto, tra il verde e la pietra
-				viva del nostro baglio.
-			</p>
+			<p class="eyebrow">{homeCopy.giardino.eyebrow}</p>
+			<h2>{homeCopy.giardino.title}</h2>
+			<p>{homeCopy.giardino.p1}</p>
+			<p>{homeCopy.giardino.p2}</p>
+			<p>{homeCopy.giardino.p3}</p>
 		</Reveal>
 	</div>
 </section>
@@ -164,7 +155,7 @@
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
-				<p class="eyebrow">Riconoscimenti</p>
+				<p class="eyebrow">{pick(ui.awards, locale)}</p>
 				<h2>Ospitalità riconosciuta</h2>
 			</div>
 		</Reveal>
@@ -212,15 +203,15 @@
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
-				<p class="eyebrow">Imperdibili</p>
+				<p class="eyebrow">{pick(ui.navImperdibili, locale)}</p>
 				<h2>Balestrate e dintorni: tra mare, natura e borghi autentici</h2>
 				<p>A pochi minuti dal baglio — da Scopello a Segesta, dallo Zingaro a Monreale.</p>
 			</div>
 		</Reveal>
 		<div class="place-grid">
-			{#each places as place, i}
+			{#each placeList as place, i}
 				<Reveal delay={i * 50}>
-					<a class="place" href="{resolve('/standard/imperdibili/')}#{place.slug}">
+					<a class="place" href="{imperdibili}#{place.slug}">
 						<img src={asset(place.image)} alt={place.name} loading="lazy" />
 						<div>
 							<span>{place.time}</span>
@@ -238,7 +229,7 @@
 		<Reveal>
 			<h2>Pronto per la Sicilia?</h2>
 			<p>Scrivici per disponibilità e preventivo. Ti rispondiamo con cura, come ai nostri ospiti.</p>
-			<a class="btn btn-light" href={resolve('/standard/contatti/')}>Richiesta disponibilità</a>
+			<a class="btn btn-light" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
 		</Reveal>
 	</div>
 </section>

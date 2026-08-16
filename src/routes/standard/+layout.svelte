@@ -1,9 +1,14 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import HubBack from '$lib/components/HubBack.svelte';
 	import Header from '$lib/standard/Header.svelte';
 	import Footer from '$lib/standard/Footer.svelte';
 
 	let { children } = $props();
+
+	$effect(() => {
+		document.documentElement.lang = page.data.locale ?? 'it';
+	});
 </script>
 
 <HubBack />

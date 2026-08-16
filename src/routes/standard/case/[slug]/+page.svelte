@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { asset, resolve } from '$app/paths';
+	import { asset, base } from '$app/paths';
+	import { page } from '$app/state';
 	import Reveal from '$lib/components/Reveal.svelte';
 	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import { houses, site } from '$lib/data/content';
+	import { pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
 
 	let { data } = $props();
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const house = $derived(data.house);
-	const others = $derived(houses.filter((h) => h.slug !== house.slug));
+	const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
+	const contatti = $derived(withBase(standardHref(locale, 'contatti'), base));
 </script>
 
 <svelte:head>
@@ -20,7 +24,9 @@
 	<div class="container copy">
 		<p class="eyebrow">Alloggio</p>
 		<h1>{house.name}</h1>
-		<p class="tagline">{house.tagline}</p>
+		{#if house.tagline}
+			<p class="tagline">{house.tagline}</p>
+		{/if}
 	</div>
 </section>
 
@@ -44,7 +50,7 @@
 		<aside>
 			<Reveal delay={80}>
 				<div class="panel">
-					<p class="eyebrow">In evidenza</p>
+					<p class="eyebrow">{pick(ui.highlights, locale)}</p>
 					<ul>
 						{#each house.highlights as item}
 							<li>{item}</li>
@@ -59,7 +65,7 @@
 			<GalleryCarousel images={house.gallery} alt={house.name} />
 		</Reveal>
 		<Reveal delay={140}>
-			<a class="btn cta" href={resolve('/standard/contatti/')}>Richiesta disponibilità</a>
+			<a class="btn cta" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
 		</Reveal>
 	</div>
 </section>
@@ -75,7 +81,7 @@
 		<div class="grid">
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
-					<a href={resolve(`/standard/case/${other.slug}/`)}>
+					<a href={withBase(standardHref(locale, `case/${other.slug}`), base)}>
 						<img src={asset(other.image)} alt={other.name} loading="lazy" />
 						<span>{other.name}</span>
 					</a>

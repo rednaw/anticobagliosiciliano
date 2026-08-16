@@ -1,21 +1,29 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { resolve, base } from '$app/paths';
-	import { houses, site } from '$lib/data/content';
+	import { base } from '$app/paths';
+	import { housesSource, site } from '$lib/data/content';
+	import { counterpartHref, pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
 
 	let open = $state(false);
 
-	const links = [
-		{ href: '/standard', label: 'Home' },
-		{ href: '/standard/#alloggi', label: 'Alloggi' },
-		{ href: '/standard/imperdibili', label: 'Imperdibili' },
-		{ href: '/standard/contatti', label: 'Contatti' }
-	] as const;
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
 
-	function isActive(href: string) {
+	// The enquiry page is reached through the CTA only — no duplicate plain link.
+	const links = $derived([
+		{ subpath: '', label: pick(ui.navHome, locale), hash: '' },
+		{ subpath: '', label: pick(ui.navHouses, locale), hash: '#alloggi' },
+		{ subpath: 'imperdibili', label: pick(ui.navImperdibili, locale), hash: '' }
+	]);
+
+	function hrefFor(subpath: string, hash = '') {
+		return `${withBase(standardHref(locale, subpath), base)}${hash}`;
+	}
+
+	function isActive(subpath: string, hash = '') {
 		const path = page.url.pathname.replace(new RegExp(`^${base}`), '').replace(/\/$/, '') || '/';
-		const target = href.split('#')[0]?.replace(/\/$/, '') || '/';
-		if (target === '/standard') return path === '/standard';
+		const target = standardHref(locale, subpath).replace(/\/$/, '') || '/';
+		if (hash === '#alloggi') return false;
+		if (!subpath) return path === target;
 		return path === target || path.startsWith(`${target}/`);
 	}
 
@@ -23,17 +31,14 @@
 		open = false;
 	}
 
-	function hrefFor(href: (typeof links)[number]['href']) {
-		if (href === '/standard/#alloggi') return `${resolve('/standard/')}#alloggi`;
-		if (href === '/standard') return resolve('/standard/');
-		if (href === '/standard/imperdibili') return resolve('/standard/imperdibili/');
-		return resolve('/standard/contatti/');
+	function langHref(target: Locale) {
+		return withBase(counterpartHref(page.url.pathname, target, base), base);
 	}
 </script>
 
 <header class="header">
 	<div class="container bar">
-		<a class="brand" href={resolve('/standard/')} onclick={close}>
+		<a class="brand" href={hrefFor('')} onclick={close}>
 			<span class="brand-name">{site.name}</span>
 			<span class="brand-tag">{site.tagline}</span>
 		</a>
@@ -51,17 +56,40 @@
 
 		<nav id="site-nav" class="nav" class:open aria-label="Principale">
 			{#each links as link}
-				<a href={hrefFor(link.href)} class:active={isActive(link.href)} onclick={close}>
+				<a href={hrefFor(link.subpath, link.hash)} class:active={isActive(link.subpath, link.hash)} onclick={close}>
 					{link.label}
 				</a>
 			{/each}
 			<div class="nav-houses">
-				<p>Case</p>
-				{#each houses as house}
-					<a href={resolve(`/standard/case/${house.slug}/`)} onclick={close}>{house.name}</a>
+				<p>{pick(ui.housesGroup, locale)}</p>
+				{#each housesSource as house}
+					<a href={hrefFor(`case/${house.slug}`)} onclick={close}>{house.name}</a>
 				{/each}
 			</div>
-			<a class="nav-cta" href={resolve('/standard/contatti/')} onclick={close}>Prenota ora</a>
+			<a
+				class="nav-cta"
+				href={hrefFor('contatti')}
+				class:active={isActive('contatti')}
+				onclick={close}>{pick(ui.requestAvailability, locale)}</a
+			>
+
+			<div class="langs" aria-label="Language">
+				<a
+					href={langHref('it')}
+					hreflang="it"
+					class:active={locale === 'it'}
+					onclick={close}
+					aria-current={locale === 'it' ? 'true' : undefined}>IT</a
+				>
+				<span aria-hidden="true">·</span>
+				<a
+					href={langHref('en')}
+					hreflang="en"
+					class:active={locale === 'en'}
+					onclick={close}
+					aria-current={locale === 'en' ? 'true' : undefined}>EN</a
+				>
+			</div>
 		</nav>
 	</div>
 </header>
@@ -221,6 +249,31 @@
 		border-radius: var(--radius);
 	}
 
+	.langs {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin-top: 1rem;
+		padding: 0.5rem 0.4rem 0;
+		border-top: 1px solid var(--line);
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+	}
+
+	.langs a {
+		padding: 0.25rem 0.15rem;
+		font-weight: 700;
+		color: var(--muted);
+	}
+
+	.langs a.active {
+		color: var(--sea);
+	}
+
+	.langs span {
+		color: var(--line);
+	}
+
 	.backdrop {
 		position: fixed;
 		inset: var(--header-h) 0 0 0;
@@ -257,6 +310,12 @@
 		.nav-cta {
 			margin: 0 0 0 0.5rem;
 			padding: 0.65rem 1rem !important;
+		}
+
+		.langs {
+			margin: 0 0 0 0.75rem;
+			padding: 0;
+			border: 0;
 		}
 	}
 </style>

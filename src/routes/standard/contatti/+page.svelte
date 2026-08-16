@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { site } from '$lib/data/content';
+	import { page } from '$app/state';
+	import { contactCopy, site } from '$lib/data/content';
+	import { pick, ui, type Locale } from '$lib/i18n';
+
+	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const heading = $derived(pick(ui.requestAvailability, locale));
+	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
 
 	let name = $state('');
 	let email = $state('');
@@ -11,17 +17,17 @@
 
 	function submit(event: Event) {
 		event.preventDefault();
-		const subject = encodeURIComponent(`Richiesta disponibilità — ${name || 'Ospite'}`);
+		const subject = encodeURIComponent(`${heading} — ${name || t('mailGuest')}`);
 		const body = encodeURIComponent(
 			[
-				`Nome: ${name}`,
-				`Email: ${email}`,
+				`${t('mailName')}: ${name}`,
+				`${t('mailEmail')}: ${email}`,
 				`Check-in: ${checkIn}`,
 				`Check-out: ${checkOut}`,
-				`Adulti: ${adults}`,
-				`Bambini: ${children}`,
+				`${t('adults')}: ${adults}`,
+				`${t('children')}: ${children}`,
 				'',
-				message || '(nessun messaggio)'
+				message || t('mailNoMessage')
 			].join('\n')
 		);
 		window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
@@ -29,35 +35,29 @@
 </script>
 
 <svelte:head>
-	<title>Contatti · {site.name}</title>
-	<meta
-		name="description"
-		content="Richiedi disponibilità per un soggiorno all’Antico Baglio Siciliano."
-	/>
+	<title>{heading} · {site.name}</title>
+	<meta name="description" content={t('metaDescription')} />
 </svelte:head>
 
 <section class="section">
 	<div class="container layout">
 		<div>
-			<p class="eyebrow">Contatti</p>
-			<h1>Richiesta disponibilità</h1>
-			<p class="lead">
-				Raccontaci quando vorresti venire: ti rispondiamo con disponibilità e dettagli per il tuo
-				soggiorno.
-			</p>
+			<p class="eyebrow">{pick(ui.contact, locale)}</p>
+			<h1>{heading}</h1>
+			<p class="lead">{t('lead')}</p>
 			<p class="direct">
-				Oppure scrivi direttamente a
+				{t('direct')}
 				<a href={`mailto:${site.email}`}>{site.email}</a>
 			</p>
 		</div>
 
 		<form class="form" onsubmit={submit}>
 			<label>
-				<span>Il tuo nome</span>
+				<span>{t('name')}</span>
 				<input type="text" name="name" bind:value={name} required autocomplete="name" />
 			</label>
 			<label>
-				<span>La tua email</span>
+				<span>{t('email')}</span>
 				<input type="email" name="email" bind:value={email} required autocomplete="email" />
 			</label>
 			<div class="row">
@@ -72,21 +72,25 @@
 			</div>
 			<div class="row">
 				<label>
-					<span>Adulti</span>
+					<span>{t('adults')}</span>
 					<input type="number" name="adults" min="1" max="20" bind:value={adults} required />
 				</label>
 				<label>
-					<span>Bambini</span>
+					<span>{t('children')}</span>
 					<input type="number" name="children" min="0" max="20" bind:value={children} />
 				</label>
 			</div>
 			<label>
-				<span>Messaggio (facoltativo)</span>
-				<textarea name="message" rows="5" bind:value={message} placeholder="Casa preferita, esigenze particolari…"
+				<span>{t('message')}</span>
+				<textarea
+					name="message"
+					rows="5"
+					bind:value={message}
+					placeholder={t('messagePlaceholder')}
 				></textarea>
 			</label>
-			<button class="btn" type="submit">Invia richiesta</button>
-			<p class="hint">Si apre il tuo client email con il messaggio già compilato.</p>
+			<button class="btn" type="submit">{t('submit')}</button>
+			<p class="hint">{t('hint')}</p>
 		</form>
 	</div>
 </section>
