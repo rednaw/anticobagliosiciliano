@@ -637,6 +637,20 @@ export const contactCopy = {
 	direct: { it: 'Oppure scrivi direttamente a', en: 'Or write to us directly at' },
 	name: { it: 'Il tuo nome', en: 'Your name' },
 	email: { it: 'La tua email', en: 'Your email' },
+	checkIn: { it: 'Check-in', en: 'Check-in' },
+	checkOut: { it: 'Check-out', en: 'Check-out' },
+	datePast: {
+		it: 'Il check-in non può essere nel passato.',
+		en: 'Check-in cannot be in the past.'
+	},
+	dateOrder: {
+		it: 'Il check-out deve essere successivo al check-in.',
+		en: 'Check-out must be after check-in.'
+	},
+	dateMinStay: {
+		it: 'Il soggiorno minimo è di due notti.',
+		en: 'The minimum stay is two nights.'
+	},
 	adults: { it: 'Adulti', en: 'Adults' },
 	children: { it: 'Bambini', en: 'Children' },
 	message: { it: 'Messaggio (facoltativo)', en: 'Message (optional)' },

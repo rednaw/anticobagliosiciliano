@@ -14,16 +14,39 @@
 	let adults = $state('2');
 	let children = $state('0');
 	let message = $state('');
+	let checkInEl = $state<HTMLInputElement | null>(null);
+	let checkOutEl = $state<HTMLInputElement | null>(null);
+
+	const today = $derived(localIsoDate());
+	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, 2) : addDaysIso(today, 2));
+
+	$effect(() => {
+		checkInEl?.setCustomValidity(checkIn && checkIn < today ? t('datePast') : '');
+		checkOutEl?.setCustomValidity(
+			!checkIn || !checkOut
+				? ''
+				: checkOut <= checkIn
+					? t('dateOrder')
+					: checkOut < minCheckOut
+						? t('dateMinStay')
+						: ''
+		);
+	});
 
 	function submit(event: Event) {
 		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		if (!form.checkValidity()) {
+			form.reportValidity();
+			return;
+		}
 		const subject = encodeURIComponent(`${heading} — ${name || t('mailGuest')}`);
 		const body = encodeURIComponent(
 			[
 				`${t('mailName')}: ${name}`,
 				`${t('mailEmail')}: ${email}`,
-				`Check-in: ${checkIn}`,
-				`Check-out: ${checkOut}`,
+				`${t('checkIn')}: ${checkIn}`,
+				`${t('checkOut')}: ${checkOut}`,
 				`${t('adults')}: ${adults}`,
 				`${t('children')}: ${children}`,
 				'',
@@ -31,6 +54,18 @@
 			].join('\n')
 		);
 		window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+	}
+
+	function localIsoDate(d = new Date()): string {
+		const y = d.getFullYear();
+		const m = String(d.getMonth() + 1).padStart(2, '0');
+		const day = String(d.getDate()).padStart(2, '0');
+		return `${y}-${m}-${day}`;
+	}
+
+	function addDaysIso(iso: string, days: number): string {
+		const [y, m, d] = iso.split('-').map(Number);
+		return localIsoDate(new Date(y, m - 1, d + days));
 	}
 </script>
 
@@ -62,12 +97,26 @@
 			</label>
 			<div class="row">
 				<label>
-					<span>Check-in</span>
-					<input type="date" name="checkin" bind:value={checkIn} required />
+					<span>{t('checkIn')}</span>
+					<input
+						bind:this={checkInEl}
+						type="date"
+						name="checkin"
+						bind:value={checkIn}
+						min={today}
+						required
+					/>
 				</label>
 				<label>
-					<span>Check-out</span>
-					<input type="date" name="checkout" bind:value={checkOut} required />
+					<span>{t('checkOut')}</span>
+					<input
+						bind:this={checkOutEl}
+						type="date"
+						name="checkout"
+						bind:value={checkOut}
+						min={minCheckOut}
+						required
+					/>
 				</label>
 			</div>
 			<div class="row">
