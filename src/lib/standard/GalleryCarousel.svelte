@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
 	import { page } from '$app/state';
-	import { pick, ui, type Locale } from '$lib/i18n';
+	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
 	let {
 		images,

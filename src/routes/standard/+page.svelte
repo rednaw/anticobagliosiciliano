@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { asset, base } from '$app/paths';
 	import { page } from '$app/state';
-	import Reveal from '$lib/components/Reveal.svelte';
 	import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
+	import Reveal from '$lib/standard/Reveal.svelte';
 	import {
 		amenities,
 		awards,
@@ -12,7 +12,7 @@
 		site,
 		testimonials
 	} from '$lib/data/content';
-	import { pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
+	import { localize, pick, standardHref, ui, withBase, type Locale } from '$lib/standard/i18n';
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const houseList = $derived(houses(locale));
@@ -22,47 +22,7 @@
 	const quoteList = $derived(testimonials(locale));
 	const contatti = $derived(withBase(standardHref(locale, 'contatti'), base));
 	const imperdibili = $derived(withBase(standardHref(locale, 'imperdibili'), base));
-	const home = $derived({
-		chiSiamo: {
-			title: pick(homeCopy.chiSiamo.title, locale),
-			body: pick(homeCopy.chiSiamo.body, locale)
-		},
-		houses: {
-			title: pick(homeCopy.houses.title, locale),
-			lead: pick(homeCopy.houses.lead, locale),
-			more: pick(homeCopy.houses.more, locale)
-		},
-		cortile: {
-			eyebrow: pick(homeCopy.cortile.eyebrow, locale),
-			title: pick(homeCopy.cortile.title, locale),
-			lead: pick(homeCopy.cortile.lead, locale),
-			body: pick(homeCopy.cortile.body, locale)
-		},
-		giardino: {
-			eyebrow: pick(homeCopy.giardino.eyebrow, locale),
-			title: pick(homeCopy.giardino.title, locale),
-			p1: pick(homeCopy.giardino.p1, locale),
-			p2: pick(homeCopy.giardino.p2, locale),
-			p3: pick(homeCopy.giardino.p3, locale)
-		},
-		comfort: { title: pick(homeCopy.comfort.title, locale) },
-		awards: { title: pick(homeCopy.awards.title, locale) },
-		quotes: {
-			eyebrow: pick(homeCopy.quotes.eyebrow, locale),
-			title: pick(homeCopy.quotes.title, locale)
-		},
-		places: {
-			title: pick(homeCopy.places.title, locale),
-			lead: pick(homeCopy.places.lead, locale)
-		},
-		cta: { title: pick(homeCopy.cta.title, locale), body: pick(homeCopy.cta.body, locale) },
-		alt: {
-			hero: pick(homeCopy.alt.hero, locale),
-			cortile: pick(homeCopy.alt.cortile, locale),
-			giardino: pick(homeCopy.alt.giardino, locale),
-			video: pick(homeCopy.alt.video, locale)
-		}
-	});
+	const home = $derived(localize(homeCopy, locale));
 </script>
 
 <svelte:head>

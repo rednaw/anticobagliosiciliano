@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { asset, base } from '$app/paths';
 	import { page } from '$app/state';
-	import Reveal from '$lib/components/Reveal.svelte';
 	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
+	import Reveal from '$lib/standard/Reveal.svelte';
 	import { houses, site } from '$lib/data/content';
-	import { pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
+	import { pick, standardHref, ui, withBase, type Locale } from '$lib/standard/i18n';
 
 	let { data } = $props();
 	const locale = $derived((page.data.locale ?? 'it') as Locale);

@@ -5,6 +5,7 @@
 	import Gate from '$lib/components/Gate.svelte';
 	import { site } from '$lib/data/content';
 	import { isUnlocked } from '$lib/gate';
+	import { SITE_PUBLIC } from '$lib/site-config';
 
 	let { children } = $props();
 
@@ -17,7 +18,9 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<meta name="robots" content="noindex, nofollow" />
+	{#if !SITE_PUBLIC}
+		<meta name="robots" content="noindex, nofollow" />
+	{/if}
 	<meta property="og:site_name" content={site.name} />
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>

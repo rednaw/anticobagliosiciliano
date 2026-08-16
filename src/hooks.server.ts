@@ -1,5 +1,5 @@
 import { base } from '$app/paths';
-import { localeFromPath } from '$lib/i18n';
+import { localeFromPath } from '$lib/locale';
 import type { Handle } from '@sveltejs/kit';
 
 /** Prerendered HTML must carry the right `lang` — `$effect` only runs after hydration. */

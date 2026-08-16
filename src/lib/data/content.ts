@@ -1,5 +1,5 @@
-import type { Locale, LocalizedString, LocalizedStrings } from '$lib/i18n';
-import { pick, pickList } from '$lib/i18n';
+import type { Locale, LocalizedString, LocalizedStrings } from '$lib/locale';
+import { pick, pickList } from '$lib/locale';
 
 /** Marketing copy for `/standard/`. Tagline stays Italian in both languages. */
 

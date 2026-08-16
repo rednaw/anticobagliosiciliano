@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
 	import { page } from '$app/state';
-	import Reveal from '$lib/components/Reveal.svelte';
 	import { imperdibiliLead, imperdibiliMeta, places, site } from '$lib/data/content';
-	import { pick, ui, type Locale } from '$lib/i18n';
+	import Reveal from '$lib/standard/Reveal.svelte';
+	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const placeList = $derived(places(locale));

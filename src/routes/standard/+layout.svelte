@@ -3,7 +3,7 @@
 	import HubBack from '$lib/components/HubBack.svelte';
 	import Header from '$lib/standard/Header.svelte';
 	import Footer from '$lib/standard/Footer.svelte';
-	import { pick, ui, type Locale } from '$lib/i18n';
+	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
 	let { children } = $props();
 

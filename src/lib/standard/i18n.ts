@@ -1,21 +1,7 @@
-/** Locale helpers and UI chrome for `/standard/`. */
+import type { Locale, LocalizedString } from '$lib/locale';
 
-export type Locale = 'it' | 'en';
-
-export const locales: Locale[] = ['it', 'en'];
-
-export type LocalizedString = { it: string; en?: string };
-export type LocalizedStrings = { it: string[]; en?: string[] };
-
-export function pick(value: LocalizedString, locale: Locale): string {
-	if (locale === 'en' && value.en) return value.en;
-	return value.it;
-}
-
-export function pickList(value: LocalizedStrings, locale: Locale): string[] {
-	if (locale === 'en' && value.en?.length) return value.en;
-	return value.it;
-}
+export type { Locale, LocalizedString, LocalizedStrings, Localized } from '$lib/locale';
+export { pick, pickList, localize, localeFromPath, locales } from '$lib/locale';
 
 export const ui = {
 	navHome: { it: 'Home', en: 'Home' },
@@ -76,10 +62,4 @@ export function counterpartHref(pathname: string, target: Locale, base = ''): st
 		.replace(/^\//, '');
 
 	return standardHref(target, rest);
-}
-
-export function localeFromPath(pathname: string, base = ''): Locale {
-	let path = pathname;
-	if (base && path.startsWith(base)) path = path.slice(base.length) || '/';
-	return /\/standard\/en(\/|$)/.test(path) ? 'en' : 'it';
 }

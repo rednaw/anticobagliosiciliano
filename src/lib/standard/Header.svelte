@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import { housesSource, site } from '$lib/data/content';
-	import { counterpartHref, pick, standardHref, ui, withBase, type Locale } from '$lib/i18n';
+	import { counterpartHref, pick, standardHref, ui, withBase, type Locale } from '$lib/standard/i18n';
 
 	let open = $state(false);
 	let menuBtn: HTMLButtonElement | undefined = $state();

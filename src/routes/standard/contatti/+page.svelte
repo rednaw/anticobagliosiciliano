@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { contactCopy, site } from '$lib/data/content';
-	import { pick, ui, type Locale } from '$lib/i18n';
+	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const heading = $derived(pick(ui.requestAvailability, locale));
