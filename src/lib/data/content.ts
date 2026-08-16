@@ -46,7 +46,7 @@ export const housesSource: HouseSource[] = [
 		},
 		summary: {
 			it: 'Oltre 100 mq su due livelli, ideale per famiglie o due/tre coppie. Soggiorno ampio, due camere, soppalco e terrazza privata.',
-			en: 'Ideal accommodation for a family of 4/6 persons, for two/three couples, or for two families.'
+			en: 'Over 100 square meters on two levels, ideal for families or two/three couples. A large living room, two bedrooms, a loft and a private terrace.'
 		},
 		guests: { it: '4–6 ospiti', en: '4/6 persons' },
 		size: '100 m²',
@@ -108,7 +108,7 @@ export const housesSource: HouseSource[] = [
 		},
 		summary: {
 			it: 'Circa 65 mq su due livelli con camera al piano terra, soppalco e terrazza. Ideale per una coppia o 3–4 persone.',
-			en: 'Perfect for a couple, for a family of 3/4 persons, or for two couples.'
+			en: 'About 65 square meters on two levels, with the bedroom on the ground floor, a loft and a terrace. Ideal for a couple or 3–4 people.'
 		},
 		guests: { it: '2–4 ospiti', en: '2/4 persons' },
 		size: '65 m²',
@@ -171,7 +171,7 @@ export const housesSource: HouseSource[] = [
 		},
 		summary: {
 			it: 'Oltre 110 m², tre camere e due soggiorni. Ideale per famiglie numerose o gruppi di amici.',
-			en: 'Ideal accommodation for a family of 4/8 persons, for two/three couples, or for two families.'
+			en: 'Over 110 square meters, three bedrooms and two living rooms. Ideal for large families or groups of friends.'
 		},
 		guests: { it: '4–8 ospiti', en: '4/8 persons' },
 		size: '110+ m²',
@@ -224,7 +224,7 @@ export const housesSource: HouseSource[] = [
 		},
 		summary: {
 			it: 'Oltre 110 m², patio privato e terrazza con tramonti sul Golfo di Castellammare.',
-			en: 'Ideal accommodation for a family of 4/7 persons or two / three couples.'
+			en: 'Over 110 square meters, with a private patio and a terrace for the sunsets over the Gulf of Castellammare.'
 		},
 		guests: { it: '4–7 ospiti', en: '4/7 persons' },
 		size: '110+ m²',

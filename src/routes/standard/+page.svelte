@@ -45,7 +45,7 @@
 		<p class="hero-lead">{pick(site.description, locale)}</p>
 		<div class="hero-actions">
 			<a class="btn btn-light" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
-			<a class="btn btn-ghost" href="#alloggi">{pick(ui.discoverHouses, locale)}</a>
+			<a class="btn btn-ghost" href="#houses">{pick(ui.discoverHouses, locale)}</a>
 		</div>
 	</div>
 </section>
@@ -68,7 +68,7 @@
 	</div>
 </section>
 
-<section id="alloggi" class="section houses">
+<section id="houses" class="section houses">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">

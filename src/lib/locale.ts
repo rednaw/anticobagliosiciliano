@@ -2,16 +2,26 @@ export type Locale = 'it' | 'en';
 
 export const locales: Locale[] = ['it', 'en'];
 
-export type LocalizedString = { it: string; en?: string };
-export type LocalizedStrings = { it: string[]; en?: string[] };
+export type LocalizedString = { it: string; en: string };
+export type LocalizedStrings = { it: string[]; en: string[] };
 
 export function pick(value: LocalizedString, locale: Locale): string {
-	if (locale === 'en' && value.en) return value.en;
+	if (locale === 'en') {
+		if (import.meta.env.DEV && !value.en) {
+			console.warn('Missing English string:', value.it);
+		}
+		return value.en;
+	}
 	return value.it;
 }
 
 export function pickList(value: LocalizedStrings, locale: Locale): string[] {
-	if (locale === 'en' && value.en?.length) return value.en;
+	if (locale === 'en') {
+		if (import.meta.env.DEV && !value.en?.length) {
+			console.warn('Missing English list:', value.it);
+		}
+		return value.en;
+	}
 	return value.it;
 }
 

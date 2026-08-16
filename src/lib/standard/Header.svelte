@@ -13,7 +13,7 @@
 
 	const links = $derived([
 		{ subpath: '', label: pick(ui.navHome, locale), hash: '' },
-		{ subpath: '', label: pick(ui.navHouses, locale), hash: '#alloggi' },
+		{ subpath: '', label: pick(ui.navHouses, locale), hash: '#houses' },
 		{ subpath: 'imperdibili', label: pick(ui.navImperdibili, locale), hash: '' }
 	]);
 
@@ -24,7 +24,7 @@
 	function isActive(subpath: string, hash = '') {
 		const path = page.url.pathname.replace(new RegExp(`^${base}`), '').replace(/\/$/, '') || '/';
 		const target = standardHref(locale, subpath).replace(/\/$/, '') || '/';
-		if (hash === '#alloggi') return false;
+		if (hash === '#houses') return false;
 		if (!subpath) return path === target;
 		return path === target || path.startsWith(`${target}/`);
 	}
