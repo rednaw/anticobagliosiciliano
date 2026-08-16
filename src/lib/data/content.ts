@@ -528,6 +528,10 @@ export function places(locale: Locale = 'it'): Place[] {
 }
 
 export const homeCopy = {
+	metaDescription: {
+		it: 'Quattro case vacanze in un antico baglio a Balestrate, Sicilia. Cortile, agrumeto e uliveto; a pochi minuti da Scopello, Segesta e lo Zingaro.',
+		en: 'Four holiday houses in a historic baglio in Balestrate, Sicily. Courtyard, citrus and olive groves; minutes from Scopello, Segesta and the Zingaro.'
+	},
 	chiSiamo: {
 		title: { it: 'Chi siamo', en: 'About us' },
 		body: {

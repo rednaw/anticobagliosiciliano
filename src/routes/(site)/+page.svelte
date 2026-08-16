@@ -27,6 +27,8 @@
 
 <svelte:head>
 	<title>{site.name} · {site.tagline}</title>
+	<meta name="description" content={home.metaDescription} />
+	<meta property="og:description" content={home.metaDescription} />
 </svelte:head>
 
 <section class="hero">
