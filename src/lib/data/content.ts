@@ -65,7 +65,7 @@ export const houses: House[] = [
 			'La casa è frutto di un recente restauro: l’utilizzo di materiali di recupero, come antiche pietre e ringhiere, e la scelta di utilizzare cotto fatto a mano per i pavimenti e travi grezze di castagno per i soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
 			'Sistemazione ideale per una famiglia di 4/6 persone, per due/tre coppie di amici, per due famiglie.'
 		],
-		highlights: ['Terrazza sui tetti 15 mq', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento']
+		highlights: ['Terrazza sui tetti 15 mq', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento e aria condizionata']
 	},
 	{
 		slug: 'casa-2',
@@ -105,7 +105,7 @@ export const houses: House[] = [
 			'La casa è frutto di un recente restauro: l’utilizzo di materiali di recupero, come antiche pietre e ringhiere, e la scelta di utilizzare cotto fatto a mano per i pavimenti e travi grezze di castagno per i soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
 			'Sistemazione ideale per una coppia, per una famiglia di 3/4 persone, per due coppie di amici.'
 		],
-		highlights: ['Terrazza 15 mq', 'Vista uliveto', 'Ideale per coppie', 'Riscaldamento']
+		highlights: ['Terrazza 15 mq', 'Vista uliveto', 'Ideale per coppie', 'Riscaldamento e aria condizionata']
 	},
 	{
 		slug: 'casa-3',
@@ -137,7 +137,7 @@ export const houses: House[] = [
 			'La casa è frutto di un recente e accurato restauro: l’utilizzo di materiali di recupero, la scelta di cotto fatto a mano per i pavimenti, di pietra lavica per la scala e per la cucina e di travi grezze di legno per i soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
 			'Sistemazione ideale per una famiglia di 4/8 persone, per due/tre coppie di amici, per due famiglie.'
 		],
-		highlights: ['3 camere da letto', 'Terrazza sull’uliveto', 'Cucina con forno', 'Fino a 8 ospiti']
+		highlights: ['3 camere da letto', 'Terrazza sull’uliveto', 'Cucina con forno', 'Riscaldamento e aria condizionata']
 	},
 	{
 		slug: 'casa-4',
@@ -178,7 +178,7 @@ export const houses: House[] = [
 			'La casa è frutto di un recente e accurato restauro: l’utilizzo di materiali di recupero, come un antico balcone con ringhiere in ferro lavorato, e la scelta di pavimenti in pietra e di travi grezze di legno per i soffitti, danno alla casa uno charme e un carattere particolari. La casa ha un impianto di riscaldamento che la rende confortevole anche per un soggiorno invernale.',
 			'Sistemazione ideale per una famiglia di 4/7 persone, per due/tre coppie di amici.'
 		],
-		highlights: ['Patio interno privato', 'Vista Golfo di Castellammare', '2 bagni', 'Atmosfera elegante']
+		highlights: ['Patio interno privato', 'Vista Golfo di Castellammare', '2 bagni', 'Riscaldamento e aria condizionata']
 	}
 ];
 
