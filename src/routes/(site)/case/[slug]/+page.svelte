@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
+	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
 	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
@@ -15,7 +15,7 @@
 </script>
 
 <section class="hero">
-	<img src={asset(house.image)} alt={house.name} />
+	<img src={imageAsset(house.image)} alt={house.name} />
 	<div class="veil"></div>
 	<div class="container copy">
 		<p class="eyebrow">{pick(ui.accommodation, locale)}</p>
@@ -75,7 +75,7 @@
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
 					<a href={siteHref(locale, `case/${other.slug}`)}>
-						<img src={asset(other.image)} alt={other.name} loading="lazy" />
+						<img src={imageAsset(other.image)} alt={other.name} loading="lazy" />
 						<span>{other.name}</span>
 					</a>
 				</Reveal>

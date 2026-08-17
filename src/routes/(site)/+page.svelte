@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
 	import { page } from '$app/state';
+	import { imageAsset } from '$lib/public-image';
 	import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
 	import SectionHead from '$lib/standard/SectionHead.svelte';
@@ -27,12 +27,12 @@
 </script>
 
 <section class="hero">
-	<img class="hero-backdrop" src={asset('/images/ambiance/hero-portone-wide.jpg')} alt="" aria-hidden="true" />
+	<img class="hero-backdrop" src={imageAsset('/images/ambiance/hero-portone-wide.jpg')} alt="" aria-hidden="true" />
 	<picture>
-		<source media="(min-aspect-ratio: 7 / 10)" srcset={asset('/images/ambiance/hero-portone-wide.jpg')} />
+		<source media="(min-aspect-ratio: 7 / 10)" srcset={imageAsset('/images/ambiance/hero-portone-wide.jpg')} />
 		<img
 			class="hero-media"
-			src={asset('/images/ambiance/hero-portone-tall.jpg')}
+			src={imageAsset('/images/ambiance/hero-portone-tall.jpg')}
 			alt={home.alt.hero}
 		/>
 	</picture>
@@ -79,7 +79,7 @@
 			{#each houseList as house, i}
 				<Reveal delay={i * 80}>
 					<a class="house" href={siteHref(locale, `case/${house.slug}`)}>
-						<img src={asset(house.image)} alt={house.name} loading="lazy" />
+						<img src={imageAsset(house.image)} alt={house.name} loading="lazy" />
 						<div class="house-body">
 							<div class="house-meta">
 								<span>{house.guests}</span>
@@ -97,7 +97,7 @@
 </section>
 
 <section class="feature">
-	<img src={asset('/images/ambiance/cortile.jpg')} alt={home.alt.cortile} loading="lazy" />
+	<img src={imageAsset('/images/ambiance/cortile.jpg')} alt={home.alt.cortile} loading="lazy" />
 	<div class="feature-panel">
 		<Reveal>
 			<p class="eyebrow">{home.cortile.eyebrow}</p>
@@ -111,7 +111,7 @@
 <section class="section garden">
 	<div class="container garden-grid">
 		<Reveal>
-			<img src={asset('/images/ambiance/giardino.jpg')} alt={home.alt.giardino} loading="lazy" />
+			<img src={imageAsset('/images/ambiance/giardino.jpg')} alt={home.alt.giardino} loading="lazy" />
 		</Reveal>
 		<Reveal delay={100}>
 			<p class="eyebrow">{home.giardino.eyebrow}</p>
@@ -148,7 +148,7 @@
 			{#each awardList as award, i}
 				<Reveal delay={i * 70}>
 					<figure>
-						<img src={asset(award.image)} alt={award.title} loading="lazy" />
+						<img src={imageAsset(award.image)} alt={award.title} loading="lazy" />
 						<figcaption>
 							<strong>{award.title}</strong>
 							<span>{award.text}</span>
@@ -194,7 +194,7 @@
 			{#each placeList as place, i}
 				<Reveal delay={i * 50}>
 					<a class="place" href="{imperdibili}#{place.slug}">
-						<img src={asset(place.image)} alt={place.name} loading="lazy" />
+						<img src={imageAsset(place.image)} alt={place.name} loading="lazy" />
 						<div>
 							<span>{place.time}</span>
 							<h3>{place.name}</h3>

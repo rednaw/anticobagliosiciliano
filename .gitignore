@@ -1,5 +1,9 @@
 node_modules
 
+# WebP generated before vite prerender (`npm run build --emit`)
+/static/images/**/*.webp
+/static/videos/**/*.webp
+
 # Output
 .output
 .vercel

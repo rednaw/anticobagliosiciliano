@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
+	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
 	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
@@ -86,7 +87,7 @@
 		muted
 		playsinline
 		preload="none"
-		poster={asset(poster)}
+		poster={imageAsset(poster)}
 		aria-label={label}
 		onplay={() => (playing = true)}
 		onpause={() => (playing = false)}

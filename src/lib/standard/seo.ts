@@ -7,6 +7,7 @@ import {
 	site
 } from '$lib/data/content';
 import { stripBase, type Locale } from '$lib/locale';
+import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
 import { absoluteUrl, pick, ui } from '$lib/standard/i18n';
 
@@ -79,7 +80,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 			return {
 				title: `${house.name} · ${site.name}`,
 				description: house.summary,
-				image: absoluteUrl(house.image, SITE_ORIGIN),
+				image: absoluteUrl(publicImage(house.image), SITE_ORIGIN),
 				imageAlt: house.name
 			};
 		}

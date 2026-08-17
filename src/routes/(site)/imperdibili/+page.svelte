@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
+	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
 	import { imperdibiliLead, places } from '$lib/data/content';
 	import Reveal from '$lib/standard/Reveal.svelte';
@@ -22,7 +22,7 @@
 		{#each placeList as place, i}
 			<Reveal delay={(i % 3) * 50}>
 				<article id={place.slug}>
-					<img src={asset(place.image)} alt={place.name} loading="lazy" />
+					<img src={imageAsset(place.image)} alt={place.name} loading="lazy" />
 					<div class="body">
 						<span class="time">{place.time}</span>
 						<h2>{place.name}</h2>

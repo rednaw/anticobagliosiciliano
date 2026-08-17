@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
+	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
 	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
@@ -71,7 +71,7 @@
 		aria-label={`${pick(ui.gallery, locale)} ${alt}`}
 	>
 		<div class="stage">
-			<img src={asset(current)} alt={photoAlt} />
+			<img src={imageAsset(current)} alt={photoAlt} />
 			{#if count > 1}
 				<button
 					type="button"
@@ -107,7 +107,7 @@
 						onclick={() => go(i)}
 						onkeydown={onKeydown}
 					>
-						<img src={asset(src)} alt="" loading="lazy" />
+						<img src={imageAsset(src)} alt="" loading="lazy" />
 					</button>
 				{/each}
 			</div>
