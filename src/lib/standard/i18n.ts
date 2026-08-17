@@ -19,6 +19,16 @@ export const ui = {
 	otherHouses: { it: 'Altre case', en: 'The other houses' },
 	keepExploring: { it: 'Continua a esplorare', en: 'Keep exploring' },
 	houseNotFound: { it: 'Casa non trovata', en: 'House not found' },
+	notFoundTitle: { it: 'Pagina non trovata', en: 'Page not found' },
+	notFoundBody: {
+		it: 'Questo indirizzo non esiste. Torna alla home per scoprire le case del baglio.',
+		en: 'This address does not exist. Head home to see the houses at the baglio.'
+	},
+	errorTitle: { it: 'Qualcosa è andato storto', en: 'Something went wrong' },
+	errorBody: {
+		it: 'Non siamo riusciti a caricare questa pagina. Puoi tornare alla home e riprovare.',
+		en: 'We could not load this page. You can go back home and try again.'
+	},
 	skipToContent: { it: 'Vai al contenuto', en: 'Skip to content' },
 	mainNav: { it: 'Principale', en: 'Main' },
 	language: { it: 'Lingua', en: 'Language' },

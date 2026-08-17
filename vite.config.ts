@@ -28,6 +28,8 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
+			// Root-absolute assets so GitHub Pages' 404.html works at nested URLs.
+			paths: { relative: false },
 			adapter: adapter({
 				fallback: undefined,
 				precompress: false,
