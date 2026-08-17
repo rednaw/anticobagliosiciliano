@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import { housesSource, site } from '$lib/data/content';
-	import { counterpartHref, pick, standardHref, ui, withBase, type Locale } from '$lib/standard/i18n';
+	import { counterpartHref, pick, siteHref, stripBase, ui, withBase, type Locale } from '$lib/standard/i18n';
 
 	let open = $state(false);
 	let menuBtn: HTMLButtonElement | undefined = $state();
@@ -18,12 +18,12 @@
 	]);
 
 	function hrefFor(subpath: string, hash = '') {
-		return `${withBase(standardHref(locale, subpath), base)}${hash}`;
+		return `${siteHref(locale, subpath, base)}${hash}`;
 	}
 
 	function isActive(subpath: string, hash = '') {
-		const path = page.url.pathname.replace(new RegExp(`^${base}`), '').replace(/\/$/, '') || '/';
-		const target = standardHref(locale, subpath).replace(/\/$/, '') || '/';
+		const path = stripBase(page.url.pathname, base).replace(/\/$/, '') || '/';
+		const target = siteHref(locale, subpath).replace(/\/$/, '') || '/';
 		if (hash === '#houses') return false;
 		if (!subpath) return path === target;
 		return path === target || path.startsWith(`${target}/`);

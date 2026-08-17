@@ -3,6 +3,7 @@
 	import { page } from '$app/state';
 	import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
+	import SectionHead from '$lib/standard/SectionHead.svelte';
 	import {
 		amenities,
 		awards,
@@ -12,7 +13,7 @@
 		site,
 		testimonials
 	} from '$lib/data/content';
-	import { localize, pick, standardHref, ui, withBase, type Locale } from '$lib/standard/i18n';
+	import { localize, pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const houseList = $derived(houses(locale));
@@ -20,8 +21,8 @@
 	const amenityList = $derived(amenities(locale));
 	const awardList = $derived(awards(locale));
 	const quoteList = $derived(testimonials(locale));
-	const contatti = $derived(withBase(standardHref(locale, 'contatti'), base));
-	const imperdibili = $derived(withBase(standardHref(locale, 'imperdibili'), base));
+	const contatti = $derived(siteHref(locale, 'contatti', base));
+	const imperdibili = $derived(siteHref(locale, 'imperdibili', base));
 	const home = $derived(localize(homeCopy, locale));
 </script>
 
@@ -73,17 +74,17 @@
 <section id="houses" class="section">
 	<div class="container">
 		<Reveal>
-			<div class="section-head">
-				<p class="eyebrow">{pick(ui.ourHouses, locale)}</p>
-				<h2>{home.houses.title}</h2>
-				<p>{home.houses.lead}</p>
-			</div>
+			<SectionHead
+				eyebrow={pick(ui.ourHouses, locale)}
+				title={home.houses.title}
+				lead={home.houses.lead}
+			/>
 		</Reveal>
 
 		<div class="house-list">
 			{#each houseList as house, i}
 				<Reveal delay={i * 80}>
-					<a class="house" href={withBase(standardHref(locale, `case/${house.slug}`), base)}>
+					<a class="house" href={siteHref(locale, `case/${house.slug}`, base)}>
 						<img src={asset(house.image)} alt={house.name} loading="lazy" />
 						<div class="house-body">
 							<div class="house-meta">
@@ -131,10 +132,7 @@
 <section class="section band-dark">
 	<div class="container">
 		<Reveal>
-			<div class="section-head">
-				<p class="eyebrow">Comfort</p>
-				<h2>{home.comfort.title}</h2>
-			</div>
+			<SectionHead eyebrow="Comfort" title={home.comfort.title} />
 		</Reveal>
 		<ul class="amenity-list">
 			{#each amenityList as item, i}
@@ -150,10 +148,7 @@
 <section class="section">
 	<div class="container">
 		<Reveal>
-			<div class="section-head">
-				<p class="eyebrow">{pick(ui.awards, locale)}</p>
-				<h2>{home.awards.title}</h2>
-			</div>
+			<SectionHead eyebrow={pick(ui.awards, locale)} title={home.awards.title} />
 		</Reveal>
 		<div class="award-grid">
 			{#each awardList as award, i}
@@ -174,10 +169,7 @@
 <section class="section band-dark">
 	<div class="container">
 		<Reveal>
-			<div class="section-head">
-				<p class="eyebrow">{home.quotes.eyebrow}</p>
-				<h2>{home.quotes.title}</h2>
-			</div>
+			<SectionHead eyebrow={home.quotes.eyebrow} title={home.quotes.title} />
 		</Reveal>
 		<div class="quote-grid">
 			{#each quoteList as t, i}
@@ -198,11 +190,11 @@
 <section class="section">
 	<div class="container">
 		<Reveal>
-			<div class="section-head">
-				<p class="eyebrow">{pick(ui.navImperdibili, locale)}</p>
-				<h2>{home.places.title}</h2>
-				<p>{home.places.lead}</p>
-			</div>
+			<SectionHead
+				eyebrow={pick(ui.navImperdibili, locale)}
+				title={home.places.title}
+				lead={home.places.lead}
+			/>
 		</Reveal>
 		<div class="place-grid">
 			{#each placeList as place, i}
@@ -489,11 +481,11 @@
 		color: #fff;
 	}
 
-	.band-dark .eyebrow {
+	.band-dark :global(.eyebrow) {
 		color: color-mix(in srgb, var(--sun) 85%, #fff);
 	}
 
-	.band-dark .section-head p {
+	.band-dark :global(.section-head p) {
 		color: color-mix(in srgb, #fff 78%, transparent);
 	}
 

@@ -13,7 +13,7 @@ export function pick(value: LocalizedString, locale: Locale): string {
 	return value.it;
 }
 
-export function pickList(value: LocalizedStrings, locale: Locale): string[] {
+function pickList(value: LocalizedStrings, locale: Locale): string[] {
 	if (locale === 'en') {
 		if (import.meta.env.DEV && !value.en?.length) {
 			console.warn('Missing English list:', value.it);
@@ -32,9 +32,19 @@ function isLocalizedString(value: unknown): value is LocalizedString {
 	);
 }
 
-/** Walk a tree of `LocalizedString` leaves and pick the active locale. */
+function isLocalizedStrings(value: unknown): value is LocalizedStrings {
+	return (
+		typeof value === 'object' &&
+		value !== null &&
+		'it' in value &&
+		Array.isArray((value as LocalizedStrings).it)
+	);
+}
+
+/** Walk a tree of `LocalizedString` / `LocalizedStrings` leaves and pick the active locale. */
 export function localize<T>(value: T, locale: Locale): Localized<T> {
 	if (isLocalizedString(value)) return pick(value, locale) as Localized<T>;
+	if (isLocalizedStrings(value)) return pickList(value, locale) as Localized<T>;
 	if (Array.isArray(value)) {
 		return value.map((item) => localize(item, locale)) as Localized<T>;
 	}
@@ -58,8 +68,12 @@ type Localized<T> = T extends LocalizedString
 				? { [K in keyof T]: Localized<T[K]> }
 				: T;
 
+/** Drop the SvelteKit `base` prefix (GitHub Pages). */
+export function stripBase(pathname: string, base = ''): string {
+	if (base && pathname.startsWith(base)) return pathname.slice(base.length) || '/';
+	return pathname;
+}
+
 export function localeFromPath(pathname: string, base = ''): Locale {
-	let path = pathname;
-	if (base && path.startsWith(base)) path = path.slice(base.length) || '/';
-	return /^\/en(\/|$)/.test(path) ? 'en' : 'it';
+	return /^\/en(\/|$)/.test(stripBase(pathname, base)) ? 'en' : 'it';
 }

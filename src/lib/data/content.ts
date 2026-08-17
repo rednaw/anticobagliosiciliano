@@ -1,5 +1,5 @@
 import type { Locale, LocalizedString, LocalizedStrings } from '$lib/locale';
-import { pick, pickList } from '$lib/locale';
+import { localize } from '$lib/locale';
 
 /** Marketing copy. Tagline stays Italian in both languages. */
 
@@ -280,45 +280,13 @@ export const housesSource: HouseSource[] = [
 	}
 ];
 
-type House = {
-	slug: string;
-	name: string;
-	tagline: string;
-	summary: string;
-	guests: string;
-	size: string;
-	bedrooms: string;
-	bathrooms: string;
-	image: string;
-	gallery: string[];
-	paragraphs: string[];
-	highlights: string[];
-};
-
-function localizeHouse(source: HouseSource, locale: Locale): House {
-	return {
-		slug: source.slug,
-		name: source.name,
-		tagline: pick(source.tagline, locale),
-		summary: pick(source.summary, locale),
-		guests: pick(source.guests, locale),
-		size: source.size,
-		bedrooms: pick(source.bedrooms, locale),
-		bathrooms: pick(source.bathrooms, locale),
-		image: source.image,
-		gallery: source.gallery,
-		paragraphs: pickList(source.paragraphs, locale),
-		highlights: pickList(source.highlights, locale)
-	};
+export function houses(locale: Locale = 'it') {
+	return localize(housesSource, locale);
 }
 
-export function houses(locale: Locale = 'it'): House[] {
-	return housesSource.map((h) => localizeHouse(h, locale));
-}
-
-export function getHouse(slug: string, locale: Locale = 'it'): House | undefined {
+export function getHouse(slug: string, locale: Locale = 'it') {
 	const source = housesSource.find((h) => h.slug === slug);
-	return source ? localizeHouse(source, locale) : undefined;
+	return source ? localize(source, locale) : undefined;
 }
 
 const amenitiesSource = [
@@ -362,10 +330,7 @@ const amenitiesSource = [
 ] satisfies { title: LocalizedString; detail: LocalizedString }[];
 
 export function amenities(locale: Locale = 'it') {
-	return amenitiesSource.map((a) => ({
-		title: pick(a.title, locale),
-		detail: pick(a.detail, locale)
-	}));
+	return localize(amenitiesSource, locale);
 }
 
 const awardsSource = [
@@ -396,11 +361,7 @@ const awardsSource = [
 ] satisfies { title: LocalizedString; text: LocalizedString; image: string }[];
 
 export function awards(locale: Locale = 'it') {
-	return awardsSource.map((a) => ({
-		title: pick(a.title, locale),
-		text: pick(a.text, locale),
-		image: a.image
-	}));
+	return localize(awardsSource, locale);
 }
 
 /** Quotes stay in the guest’s language; only the source line is localised. */
@@ -420,11 +381,7 @@ const testimonialsSource = [
 ] satisfies { name: string; source: LocalizedString; quote: string }[];
 
 export function testimonials(locale: Locale = 'it') {
-	return testimonialsSource.map((t) => ({
-		name: t.name,
-		source: pick(t.source, locale),
-		quote: t.quote
-	}));
+	return localize(testimonialsSource, locale);
 }
 
 type PlaceSource = {
@@ -509,22 +466,8 @@ const placesSource: PlaceSource[] = [
 	}
 ];
 
-type Place = {
-	slug: string;
-	name: string;
-	time: string;
-	text: string;
-	image: string;
-};
-
-export function places(locale: Locale = 'it'): Place[] {
-	return placesSource.map((p) => ({
-		slug: p.slug,
-		name: pick(p.name, locale),
-		time: p.time,
-		text: pick(p.text, locale),
-		image: p.image
-	}));
+export function places(locale: Locale = 'it') {
+	return localize(placesSource, locale);
 }
 
 export const homeCopy = {

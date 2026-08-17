@@ -3,14 +3,15 @@
 	import { page } from '$app/state';
 	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
+	import SectionHead from '$lib/standard/SectionHead.svelte';
 	import { houses, site } from '$lib/data/content';
-	import { pick, standardHref, ui, withBase, type Locale } from '$lib/standard/i18n';
+	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
 
 	let { data } = $props();
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const house = $derived(data.house);
 	const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
-	const contatti = $derived(withBase(standardHref(locale, 'contatti'), base));
+	const contatti = $derived(siteHref(locale, 'contatti', base));
 </script>
 
 <svelte:head>
@@ -73,15 +74,12 @@
 <section class="section more">
 	<div class="container">
 		<Reveal>
-			<div class="section-head">
-				<p class="eyebrow">{pick(ui.otherHouses, locale)}</p>
-				<h2>{pick(ui.keepExploring, locale)}</h2>
-			</div>
+			<SectionHead eyebrow={pick(ui.otherHouses, locale)} title={pick(ui.keepExploring, locale)} />
 		</Reveal>
 		<div class="grid">
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
-					<a href={withBase(standardHref(locale, `case/${other.slug}`), base)}>
+					<a href={siteHref(locale, `case/${other.slug}`, base)}>
 						<img src={asset(other.image)} alt={other.name} loading="lazy" />
 						<span>{other.name}</span>
 					</a>

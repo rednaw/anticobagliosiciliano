@@ -1,7 +1,8 @@
-import type { Locale, LocalizedString } from '$lib/locale';
+import { stripBase, type Locale, type LocalizedString } from '$lib/locale';
 
 export type { Locale } from '$lib/locale';
 export { pick, localize } from '$lib/locale';
+export { stripBase };
 
 export const ui = {
 	navHome: { it: 'Home', en: 'Home' },
@@ -50,14 +51,15 @@ export function withBase(pathname: string, base = ''): string {
 	return `${b}${pathname}`;
 }
 
+/** Locale path with the GitHub Pages `base` prefix. */
+export function siteHref(locale: Locale, subpath = '', base = ''): string {
+	return withBase(standardHref(locale, subpath), base);
+}
+
 /** Same page in the other locale. */
 export function counterpartHref(pathname: string, target: Locale, base = ''): string {
-	let path = pathname;
-	if (base && path.startsWith(base)) path = path.slice(base.length) || '/';
-	path = path.replace(/\/+$/, '') || '/';
-
+	const path = stripBase(pathname, base).replace(/\/+$/, '') || '/';
 	const rest = path.replace(/^\/en(?=\/|$)/, '').replace(/^\//, '');
-
 	return standardHref(target, rest);
 }
 
