@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { site } from '$lib/data/content';
-	import { pick, type Locale } from '$lib/standard/i18n';
+	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const privacy = $derived(siteHref(locale, 'privacy'));
 </script>
 
 <footer class="footer">
@@ -15,7 +16,11 @@
 
 		<a class="email" href={`mailto:${site.email}`}>{site.email}</a>
 
-		<p class="copy">© {new Date().getFullYear()}</p>
+		<p class="copy">
+			© {new Date().getFullYear()}
+			<span aria-hidden="true"> · </span>
+			<a href={privacy}>{pick(ui.privacy, locale)}</a>
+		</p>
 	</div>
 </footer>
 
@@ -87,5 +92,17 @@
 		border-top: 1px solid var(--line);
 		font-size: 0.78rem;
 		color: var(--muted);
+	}
+
+	.copy a {
+		color: inherit;
+		text-decoration: none;
+		border-bottom: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
+		padding-bottom: 0.05rem;
+	}
+
+	.copy a:hover {
+		color: var(--sea);
+		border-bottom-color: var(--sea);
 	}
 </style>

@@ -615,3 +615,52 @@ export const contactCopy = {
 	mailNoMessage: { it: '(nessun messaggio)', en: '(no message)' },
 	mailGuest: { it: 'Ospite', en: 'Guest' }
 } satisfies Record<string, LocalizedString>;
+
+export const privacyCopy = {
+	metaDescription: {
+		it: 'Informativa privacy dell’Antico Baglio Siciliano: come trattiamo i dati di chi visita il sito o ci scrive.',
+		en: 'Privacy notice for Antico Baglio Siciliano: how we handle data from people who visit the site or write to us.'
+	},
+	lead: {
+		it: 'Questa pagina spiega in modo sintetico quali dati riguardano chi visita il sito o ci chiede disponibilità.',
+		en: 'This page explains, in short, what data is involved when you visit the site or ask about availability.'
+	},
+	controllerTitle: { it: 'Titolare', en: 'Controller' },
+	controller: {
+		it: 'Il titolare del trattamento è Antico Baglio Siciliano. Per qualsiasi richiesta sulla privacy puoi scrivere a',
+		en: 'The data controller is Antico Baglio Siciliano. For any privacy request you can write to'
+	},
+	contactTitle: { it: 'Richieste di disponibilità', en: 'Availability requests' },
+	contact: {
+		it: 'Il modulo contatti non invia i dati a un server: apre il tuo programma di posta con un messaggio già compilato (nome, email, date, numero di ospiti e l’eventuale testo). Riceviamo solo ciò che ci invii tu. Usiamo questi dati per rispondere e organizzare il soggiorno, e non li cediamo a terzi per marketing.',
+		en: 'The contact form does not post data to a server: it opens your email program with a message already filled in (name, email, dates, number of guests, and any note). We only receive what you send us. We use it to reply and arrange the stay, and we do not pass it to third parties for marketing.'
+	},
+	analyticsTitle: { it: 'Statistiche di visita', en: 'Visit statistics' },
+	analytics: {
+		it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics. Vedi l’',
+		en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics. See the '
+	},
+	analyticsPolicy: {
+		it: 'informativa privacy di Simple Analytics',
+		en: 'Simple Analytics privacy policy'
+	},
+	cookiesTitle: { it: 'Cookie', en: 'Cookies' },
+	cookies: {
+		it: 'Il sito non imposta cookie propri di profilazione o di marketing.',
+		en: 'The site does not set its own profiling or marketing cookies.'
+	},
+	hostingTitle: { it: 'Ospitalità del sito', en: 'Site hosting' },
+	hosting: {
+		it: 'Il sito è pubblicato come pagine statiche su GitHub Pages. Eventuali log tecnici di accesso li tratta GitHub, non noi. Vedi la ',
+		en: 'The site is published as static pages on GitHub Pages. Any technical access logs are processed by GitHub, not by us. See the '
+	},
+	hostingPolicy: {
+		it: 'nota di GitHub Pages sulla raccolta dati',
+		en: 'GitHub Pages note on data collection'
+	},
+	rightsTitle: { it: 'I tuoi diritti', en: 'Your rights' },
+	rights: {
+		it: 'Per i messaggi che ci hai inviato puoi chiedere di leggerli, correggerli o cancellarli, scrivendo all’indirizzo sopra. Non possiamo accedere ai log di GitHub Pages né a visite individuali in Simple Analytics: per quelli valgono le informative dei fornitori. Puoi presentare reclamo al Garante per la protezione dei dati personali.',
+		en: 'For messages you have sent us, you can ask us to read, correct, or delete them by writing to the address above. We cannot access GitHub Pages logs or individual Simple Analytics visits: those sit with the providers’ own policies. You can lodge a complaint with the Italian Data Protection Authority (Garante).'
+	}
+} satisfies Record<string, LocalizedString>;

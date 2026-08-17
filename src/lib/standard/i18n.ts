@@ -14,6 +14,7 @@ export const ui = {
 	highlights: { it: 'In evidenza', en: 'Amenities' },
 	awards: { it: 'Riconoscimenti', en: 'Awards' },
 	contact: { it: 'Contatti', en: 'Contact' },
+	privacy: { it: 'Privacy', en: 'Privacy' },
 	requestAvailability: { it: 'Richiesta disponibilità', en: 'Request availability' },
 	accommodation: { it: 'Alloggio', en: 'Accommodation' },
 	otherHouses: { it: 'Altre case', en: 'The other houses' },
