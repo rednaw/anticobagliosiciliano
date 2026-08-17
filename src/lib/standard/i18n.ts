@@ -63,8 +63,8 @@ export function counterpartHref(pathname: string, target: Locale, base = ''): st
 	return standardHref(target, rest);
 }
 
-/** Absolute URL for canonical / hreflang (origin has no trailing slash). */
-export function absoluteUrl(pathname: string, origin: string, base = ''): string {
-	const path = pathname.startsWith('http') ? pathname : withBase(pathname, base);
-	return `${origin.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`;
+/** Absolute URL for canonical / hreflang. Do not pass `$app/paths` `base` — it is relative per page. */
+export function absoluteUrl(pathname: string, origin: string): string {
+	if (/^https?:\/\//.test(pathname)) return pathname;
+	return new URL(pathname, `${origin.replace(/\/$/, '')}/`).href;
 }

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { page } from '$app/state';
 	import Header from '$lib/standard/Header.svelte';
 	import Footer from '$lib/standard/Footer.svelte';
@@ -16,8 +15,8 @@
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const canonical = $derived(absoluteUrl(page.url.pathname, SITE_ORIGIN));
-	const hrefIt = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'it', base), SITE_ORIGIN, base));
-	const hrefEn = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'en', base), SITE_ORIGIN, base));
+	const hrefIt = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'it'), SITE_ORIGIN));
+	const hrefEn = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'en'), SITE_ORIGIN));
 
 	$effect(() => {
 		document.documentElement.lang = page.data.locale ?? 'it';
