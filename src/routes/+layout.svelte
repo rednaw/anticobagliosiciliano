@@ -13,7 +13,6 @@
 		<meta name="robots" content="noindex, nofollow" />
 	{/if}
 	<meta property="og:site_name" content={site.name} />
-	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 {@render children()}
