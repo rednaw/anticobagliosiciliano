@@ -1,7 +1,5 @@
 export type Locale = 'it' | 'en';
 
-export const locales: Locale[] = ['it', 'en'];
-
 export type LocalizedString = { it: string; en: string };
 export type LocalizedStrings = { it: string[]; en: string[] };
 
@@ -50,7 +48,7 @@ export function localize<T>(value: T, locale: Locale): Localized<T> {
 	return value as Localized<T>;
 }
 
-export type Localized<T> = T extends LocalizedString
+type Localized<T> = T extends LocalizedString
 	? string
 	: T extends LocalizedStrings
 		? string[]

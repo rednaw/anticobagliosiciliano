@@ -107,8 +107,8 @@
 											/>
 											<span class="meta">
 												<span class="filename">{image.filename}</span>
-												<span class="dims">{image.width}×{image.height}</span>
-												<span class="size">{formatBytes(image.bytes)}</span>
+												<span>{image.width}×{image.height}</span>
+												<span>{formatBytes(image.bytes)}</span>
 											</span>
 										</a>
 									</li>
@@ -242,11 +242,6 @@
 		color: var(--muted);
 	}
 
-	.filename {
-		color: var(--ink-soft);
-		word-break: break-all;
-	}
-
 	.texts {
 		display: grid;
 		gap: 1.25rem;
@@ -265,6 +260,11 @@
 	}
 
 	.filename {
+		color: var(--ink-soft);
+		word-break: break-all;
+	}
+
+	.text-block .filename {
 		margin: 0 0 0.85rem;
 		font-size: 0.8rem;
 		color: var(--muted);

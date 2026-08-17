@@ -1,4 +1,4 @@
-export type ArchivioImage = {
+type ArchivioImage = {
 	id: string;
 	filename: string;
 	title: string;
@@ -9,21 +9,21 @@ export type ArchivioImage = {
 	bytes: number;
 };
 
-export type ArchivioText = {
+type ArchivioText = {
 	id: string;
 	title: string;
 	filename: string;
 	body: string;
 };
 
-export type ArchivioGroup = {
+type ArchivioGroup = {
 	id: string;
 	label: string;
 	images: ArchivioImage[];
 	texts: ArchivioText[];
 };
 
-export type ArchivioSource = {
+type ArchivioSource = {
 	id: string;
 	label: string;
 	url: string;

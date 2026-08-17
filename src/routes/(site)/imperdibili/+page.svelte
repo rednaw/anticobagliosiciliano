@@ -112,7 +112,7 @@
 			align-items: center;
 		}
 
-		article:nth-child(even) img {
+		.list :global(.reveal:nth-child(even) img) {
 			order: 2;
 		}
 	}

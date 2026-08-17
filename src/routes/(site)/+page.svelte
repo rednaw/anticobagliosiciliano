@@ -70,7 +70,7 @@
 	</div>
 </section>
 
-<section id="houses" class="section houses">
+<section id="houses" class="section">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -128,7 +128,7 @@
 	</div>
 </section>
 
-<section class="section amenities band-dark">
+<section class="section band-dark">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -147,7 +147,7 @@
 	</div>
 </section>
 
-<section class="section awards">
+<section class="section">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -171,7 +171,7 @@
 	</div>
 </section>
 
-<section class="section quotes band-dark">
+<section class="section band-dark">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -195,7 +195,7 @@
 	</div>
 </section>
 
-<section class="section places">
+<section class="section">
 	<div class="container">
 		<Reveal>
 			<div class="section-head">
@@ -467,7 +467,7 @@
 		border-top: 1px solid var(--line);
 	}
 
-	.amenity-list li {
+	.amenity-list :global(li) {
 		display: grid;
 		gap: 0.25rem;
 		padding: 1.15rem 0;
@@ -501,7 +501,7 @@
 		border-top-color: color-mix(in srgb, #fff 18%, transparent);
 	}
 
-	.band-dark .amenity-list li {
+	.band-dark .amenity-list :global(li) {
 		border-bottom-color: color-mix(in srgb, #fff 18%, transparent);
 	}
 
@@ -699,10 +699,6 @@
 		.garden-grid {
 			grid-template-columns: 1.05fr 0.95fr;
 			gap: 3.5rem;
-		}
-
-		.house-list {
-			grid-template-columns: 1fr 1fr;
 		}
 	}
 </style>

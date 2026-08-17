@@ -2,7 +2,7 @@
 /**
  * Build owner-facing archive browser assets:
  * - static/archivio/thumbs/**  (~400px JPEGs)
- * - static/archivio/data/index.json
+ * - src/lib/data/archivio-index.json
  *
  * Full-res stays in Git LFS; the UI links to media.githubusercontent.com.
  */
@@ -17,7 +17,7 @@ const root = path.resolve(__dirname, '..');
 const archiveRoot = path.join(root, 'archive');
 const outRoot = path.join(root, 'static', 'archivio');
 const thumbsRoot = path.join(outRoot, 'thumbs');
-const indexPath = path.join(outRoot, 'data', 'index.json');
+const indexPath = path.join(root, 'src', 'lib', 'data', 'archivio-index.json');
 
 const REPO = 'rednaw/anticobagliosiciliano';
 const BRANCH = 'main';
@@ -283,10 +283,6 @@ async function main() {
 
 	await fs.writeFile(indexPath, JSON.stringify(index, null, 2) + '\n');
 
-	const libIndexPath = path.join(root, 'src', 'lib', 'data', 'archivio-index.json');
-	await ensureDir(path.dirname(libIndexPath));
-	await fs.writeFile(libIndexPath, JSON.stringify(index, null, 2) + '\n');
-
 	const imageCount = index.sources.reduce(
 		(n, s) => n + s.groups.reduce((m, g) => m + g.images.length, 0),
 		0
@@ -296,7 +292,6 @@ async function main() {
 		0
 	);
 	console.log(`Done: ${imageCount} thumbs, ${textCount} texts → ${path.relative(root, indexPath)}`);
-	console.log(`       + ${path.relative(root, libIndexPath)}`);
 }
 
 main().catch((err) => {

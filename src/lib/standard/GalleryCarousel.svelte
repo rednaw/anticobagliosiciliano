@@ -66,7 +66,6 @@
 
 {#if count > 0}
 	<div
-		class="carousel"
 		role="region"
 		aria-roledescription="carousel"
 		aria-label={`${pick(ui.gallery, locale)} ${alt}`}

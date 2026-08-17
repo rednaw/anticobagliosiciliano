@@ -17,7 +17,7 @@ export const site = {
 	} satisfies LocalizedString
 };
 
-export type HouseSource = {
+type HouseSource = {
 	slug: string;
 	name: string;
 	tagline: LocalizedString;
@@ -280,7 +280,7 @@ export const housesSource: HouseSource[] = [
 	}
 ];
 
-export type House = {
+type House = {
 	slug: string;
 	name: string;
 	tagline: string;
@@ -295,7 +295,7 @@ export type House = {
 	highlights: string[];
 };
 
-export function localizeHouse(source: HouseSource, locale: Locale): House {
+function localizeHouse(source: HouseSource, locale: Locale): House {
 	return {
 		slug: source.slug,
 		name: source.name,
@@ -427,7 +427,7 @@ export function testimonials(locale: Locale = 'it') {
 	}));
 }
 
-export type PlaceSource = {
+type PlaceSource = {
 	slug: string;
 	name: LocalizedString;
 	time: string;
@@ -436,7 +436,7 @@ export type PlaceSource = {
 };
 
 /** Place texts: IT from Lodgify; EN rewritten from the old WordPress machine translation. */
-export const placesSource: PlaceSource[] = [
+const placesSource: PlaceSource[] = [
 	{
 		slug: 'tonnara-di-scopello',
 		name: { it: 'Tonnara di Scopello', en: 'Tonnara di Scopello' },
@@ -509,7 +509,7 @@ export const placesSource: PlaceSource[] = [
 	}
 ];
 
-export type Place = {
+type Place = {
 	slug: string;
 	name: string;
 	time: string;

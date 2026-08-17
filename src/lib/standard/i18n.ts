@@ -1,7 +1,7 @@
 import type { Locale, LocalizedString } from '$lib/locale';
 
-export type { Locale, LocalizedString, LocalizedStrings, Localized } from '$lib/locale';
-export { pick, pickList, localize, localeFromPath, locales } from '$lib/locale';
+export type { Locale } from '$lib/locale';
+export { pick, localize } from '$lib/locale';
 
 export const ui = {
 	navHome: { it: 'Home', en: 'Home' },
