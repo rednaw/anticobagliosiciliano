@@ -1,4 +1,5 @@
-import { SITE_ORIGIN } from '$lib/site-config';
+import { SITE_BASE } from '$lib/site-config';
+import { absoluteUrl } from '$lib/standard/i18n';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;
@@ -7,9 +8,9 @@ export const trailingSlash = 'never';
 export const GET: RequestHandler = () => {
 	const body = `User-agent: *
 Allow: /
-Disallow: /archivio/
+Disallow: ${SITE_BASE}/archivio/
 
-Sitemap: ${SITE_ORIGIN}/sitemap.xml
+Sitemap: ${absoluteUrl('/sitemap.xml')}
 `;
 
 	return new Response(body, {

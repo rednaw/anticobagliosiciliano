@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
+import { SITE_BASE } from './src/lib/site-config.ts';
 
 const SA_SCRIPT =
 	/<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
@@ -28,8 +29,8 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			// Root-absolute assets so GitHub Pages' 404.html works at nested URLs.
-			paths: { relative: false },
+			// Root-absolute under SITE_BASE so GitHub Pages 404.html works at nested URLs.
+			paths: { base: SITE_BASE, relative: false },
 			adapter: adapter({
 				fallback: undefined,
 				precompress: false,

@@ -1,4 +1,5 @@
 import { stripBase, type Locale, type LocalizedString } from '$lib/locale';
+import { SITE_BASE, SITE_ORIGIN } from '$lib/site-config';
 
 export type { Locale } from '$lib/locale';
 export { pick, localize } from '$lib/locale';
@@ -55,27 +56,28 @@ export function standardHref(locale: Locale, subpath = ''): string {
 	return clean ? `/${clean}/` : '/';
 }
 
-/** Prefix with SvelteKit `base` (GitHub Pages). */
-export function withBase(pathname: string, base = ''): string {
+/** Prefix with SvelteKit `base` (GitHub Pages project path). */
+export function withBase(pathname: string, base = SITE_BASE): string {
 	if (!base || base === '/') return pathname;
 	const b = base.endsWith('/') ? base.slice(0, -1) : base;
-	return `${b}${pathname}`;
+	if (pathname === b || pathname.startsWith(`${b}/`)) return pathname;
+	return `${b}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
 }
 
 /** Locale path with the GitHub Pages `base` prefix. */
-export function siteHref(locale: Locale, subpath = '', base = ''): string {
+export function siteHref(locale: Locale, subpath = '', base = SITE_BASE): string {
 	return withBase(standardHref(locale, subpath), base);
 }
 
 /** Same page in the other locale. */
-export function counterpartHref(pathname: string, target: Locale, base = ''): string {
+export function counterpartHref(pathname: string, target: Locale, base = SITE_BASE): string {
 	const path = stripBase(pathname, base).replace(/\/+$/, '') || '/';
 	const rest = path.replace(/^\/en(?=\/|$)/, '').replace(/^\//, '');
 	return standardHref(target, rest);
 }
 
-/** Absolute URL for canonical / hreflang. Do not pass `$app/paths` `base` — it is relative per page. */
-export function absoluteUrl(pathname: string, origin: string): string {
+/** Absolute URL for canonical / hreflang / Open Graph. Applies SITE_BASE. */
+export function absoluteUrl(pathname: string, origin = SITE_ORIGIN): string {
 	if (/^https?:\/\//.test(pathname)) return pathname;
-	return new URL(pathname, `${origin.replace(/\/$/, '')}/`).href;
+	return new URL(withBase(pathname), `${origin.replace(/\/$/, '')}/`).href;
 }

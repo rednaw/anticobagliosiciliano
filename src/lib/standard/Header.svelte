@@ -23,7 +23,7 @@
 
 	function isActive(subpath: string, hash = '') {
 		const path = stripBase(page.url.pathname, base).replace(/\/$/, '') || '/';
-		const target = siteHref(locale, subpath).replace(/\/$/, '') || '/';
+		const target = siteHref(locale, subpath, '').replace(/\/$/, '') || '/';
 		if (hash === '#houses') return false;
 		if (!subpath) return path === target;
 		return path === target || path.startsWith(`${target}/`);
@@ -105,6 +105,8 @@
 	});
 
 	function langHref(target: Locale) {
+		const path = stripBase(page.url.pathname, base).replace(/\/+$/, '') || '/';
+		if (path.endsWith('404.html')) return siteHref(target, '', base);
 		return withBase(counterpartHref(page.url.pathname, target, base), base);
 	}
 </script>

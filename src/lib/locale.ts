@@ -1,3 +1,5 @@
+import { SITE_BASE } from './site-config';
+
 export type Locale = 'it' | 'en';
 
 export type LocalizedString = { it: string; en: string };
@@ -69,11 +71,13 @@ type Localized<T> = T extends LocalizedString
 				: T;
 
 /** Drop the SvelteKit `base` prefix (GitHub Pages). */
-export function stripBase(pathname: string, base = ''): string {
-	if (base && pathname.startsWith(base)) return pathname.slice(base.length) || '/';
+export function stripBase(pathname: string, base = SITE_BASE): string {
+	if (base && (pathname === base || pathname.startsWith(`${base}/`))) {
+		return pathname.slice(base.length) || '/';
+	}
 	return pathname;
 }
 
-export function localeFromPath(pathname: string, base = ''): Locale {
+export function localeFromPath(pathname: string, base = SITE_BASE): Locale {
 	return /^\/en(\/|$)/.test(stripBase(pathname, base)) ? 'en' : 'it';
 }
