@@ -26,12 +26,6 @@
 	const home = $derived(localize(homeCopy, locale));
 </script>
 
-<svelte:head>
-	<title>{site.name} · {site.tagline}</title>
-	<meta name="description" content={home.metaDescription} />
-	<meta property="og:description" content={home.metaDescription} />
-</svelte:head>
-
 <section class="hero">
 	<img class="hero-backdrop" src={asset('/images/ambiance/hero-portone-wide.jpg')} alt="" aria-hidden="true" />
 	<picture>

@@ -8,11 +8,6 @@
 	const t = $derived((key: keyof typeof privacyCopy) => pick(privacyCopy[key], locale));
 </script>
 
-<svelte:head>
-	<title>{heading} · {site.name}</title>
-	<meta name="description" content={t('metaDescription')} />
-</svelte:head>
-
 <section class="section">
 	<div class="container">
 		<h1>{heading}</h1>

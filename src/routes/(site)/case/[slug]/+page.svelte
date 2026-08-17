@@ -4,7 +4,7 @@
 	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
 	import SectionHead from '$lib/standard/SectionHead.svelte';
-	import { houses, site } from '$lib/data/content';
+	import { houses } from '$lib/data/content';
 	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
 
 	let { data } = $props();
@@ -13,11 +13,6 @@
 	const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
 	const contatti = $derived(siteHref(locale, 'contatti', base));
 </script>
-
-<svelte:head>
-	<title>{house.name} · {site.name}</title>
-	<meta name="description" content={house.summary} />
-</svelte:head>
 
 <section class="hero">
 	<img src={asset(house.image)} alt={house.name} />

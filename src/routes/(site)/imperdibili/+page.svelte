@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
 	import { page } from '$app/state';
-	import { imperdibiliLead, imperdibiliMeta, places, site } from '$lib/data/content';
+	import { imperdibiliLead, places } from '$lib/data/content';
 	import Reveal from '$lib/standard/Reveal.svelte';
 	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
@@ -9,11 +9,6 @@
 	const placeList = $derived(places(locale));
 	const pageTitle = $derived(pick(ui.navImperdibili, locale));
 </script>
-
-<svelte:head>
-	<title>{pageTitle} · {site.name}</title>
-	<meta name="description" content={pick(imperdibiliMeta, locale)} />
-</svelte:head>
 
 <section class="hero">
 	<div class="container">

@@ -2,4 +2,4 @@
 	import NotFound from '$lib/standard/NotFound.svelte';
 </script>
 
-<NotFound status={404} />
+<NotFound status={404} head={false} />

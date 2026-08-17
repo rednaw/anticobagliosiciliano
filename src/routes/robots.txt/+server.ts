@@ -7,7 +7,7 @@ export const trailingSlash = 'never';
 export const GET: RequestHandler = () => {
 	const body = `User-agent: *
 Allow: /
-Disallow: /archivio
+Disallow: /archivio/
 
 Sitemap: ${SITE_ORIGIN}/sitemap.xml
 `;

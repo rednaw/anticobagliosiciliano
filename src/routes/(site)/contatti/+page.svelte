@@ -82,11 +82,6 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{heading} · {site.name}</title>
-	<meta name="description" content={t('metaDescription')} />
-</svelte:head>
-
 <section class="section">
 	<div class="container layout">
 		<div>

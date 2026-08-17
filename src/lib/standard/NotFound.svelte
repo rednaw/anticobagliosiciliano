@@ -5,7 +5,7 @@
 	import { localeFromPath } from '$lib/locale';
 	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
 
-	let { status }: { status?: number } = $props();
+	let { status, head = true }: { status?: number; head?: boolean } = $props();
 
 	const locale = $derived(
 		(page.data.locale ?? localeFromPath(page.url.pathname, base)) as Locale
@@ -18,8 +18,10 @@
 </script>
 
 <svelte:head>
-	<title>{heading} · {site.name}</title>
-	<meta name="robots" content="noindex, nofollow" />
+	{#if head}
+		<title>{heading} · {site.name}</title>
+		<meta name="robots" content="noindex, nofollow" />
+	{/if}
 </svelte:head>
 
 <section class="section">

@@ -1,5 +1,5 @@
 /**
- * Public hostname for canonicals, hreflang, sitemap, and Simple Analytics.
+ * Public hostname for canonicals, hreflang, sitemap, Open Graph, and Simple Analytics.
  *
  * Current host is GitHub Pages, pending owner review. After review, set this
  * to `anticobagliosiciliano.it` (and Pages → Custom domain). `app.html`
