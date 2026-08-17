@@ -19,6 +19,11 @@
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 
 	let ended = $state(false);
+	let playing = $state(false);
+	let reduceMotion = $state(false);
+
+	const showControl = $derived(!playing && (reduceMotion || ended));
+	const controlLabel = $derived(pick(ended ? ui.replayVideo : ui.playVideo, locale));
 
 	async function attemptPlay() {
 		if (!el || ended) return;
@@ -29,10 +34,12 @@
 		}
 	}
 
-	async function replay() {
+	async function playFromControl() {
 		if (!el) return;
-		ended = false;
-		el.currentTime = 0;
+		if (ended) {
+			ended = false;
+			el.currentTime = 0;
+		}
 		try {
 			await el.play();
 		} catch {
@@ -41,12 +48,24 @@
 	}
 
 	$effect(() => {
+		const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+		reduceMotion = mq.matches;
+		const onChange = () => {
+			reduceMotion = mq.matches;
+		};
+		mq.addEventListener('change', onChange);
+		return () => mq.removeEventListener('change', onChange);
+	});
+
+	$effect(() => {
 		const video = el;
 		const container = wrap;
 		if (!video || !container) return;
 
-		const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
-		if (calm.matches) return;
+		if (reduceMotion) {
+			video.pause();
+			return;
+		}
 
 		const observer = new IntersectionObserver(
 			([entry]) => {
@@ -60,7 +79,7 @@
 	});
 </script>
 
-<div class="ambient" class:finished={ended} bind:this={wrap}>
+<div class="ambient" bind:this={wrap}>
 	<!-- svelte-ignore a11y_media_has_caption -->
 	<video
 		bind:this={el}
@@ -69,24 +88,28 @@
 		preload="none"
 		poster={asset(poster)}
 		aria-label={label}
-		onended={() => (ended = true)}
+		onplay={() => (playing = true)}
+		onpause={() => (playing = false)}
+		onended={() => {
+			ended = true;
+			playing = false;
+		}}
 	>
 		<source src={asset(src)} type="video/mp4" />
 		{pick(ui.videoUnsupported, locale)}
 	</video>
 
-	{#if ended}
-		<button
-			type="button"
-			class="replay"
-			onclick={replay}
-			aria-label={pick(ui.replayVideo, locale)}
-		>
+	{#if showControl}
+		<button type="button" class="control" onclick={playFromControl} aria-label={controlLabel}>
 			<svg viewBox="0 0 24 24" aria-hidden="true">
-				<path
-					d="M12 5V2L8 6l4 4V7a5 5 0 11-4.9 4H5.05A7 7 0 1012 5z"
-					fill="currentColor"
-				/>
+				{#if ended}
+					<path
+						d="M12 5V2L8 6l4 4V7a5 5 0 11-4.9 4H5.05A7 7 0 1012 5z"
+						fill="currentColor"
+					/>
+				{:else}
+					<path d="M8 5v14l11-7z" fill="currentColor" />
+				{/if}
 			</svg>
 		</button>
 	{/if}
@@ -108,7 +131,7 @@
 		background: #000;
 	}
 
-	.replay {
+	.control {
 		position: absolute;
 		right: 0.75rem;
 		bottom: 0.75rem;
@@ -123,29 +146,10 @@
 		color: #fff;
 		cursor: pointer;
 		backdrop-filter: blur(6px);
-		opacity: 0;
-		transform: translateY(0.35rem);
-		transition:
-			opacity 0.3s var(--ease),
-			transform 0.3s var(--ease),
-			background 0.25s var(--ease);
 	}
 
-	.ambient.finished:hover .replay,
-	.ambient.finished:focus-within .replay {
-		opacity: 1;
-		transform: none;
-	}
-
-	/* Touch devices never hover — keep replay reachable once the clip has ended. */
-	@media (hover: none) {
-		.ambient.finished .replay {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	.replay:hover {
+	.control:hover,
+	.control:focus-visible {
 		background: var(--sea-deep);
 	}
 

@@ -29,6 +29,7 @@ export const ui = {
 	thumbnails: { it: 'Anteprime', en: 'Thumbnails' },
 	goToPhoto: { it: 'Vai alla foto', en: 'Go to photo' },
 	replayVideo: { it: 'Rivedi il video', en: 'Replay the video' },
+	playVideo: { it: 'Riproduci il video', en: 'Play the video' },
 	videoUnsupported: {
 		it: 'Il tuo browser non supporta la riproduzione video.',
 		en: 'Your browser does not support video playback.'
