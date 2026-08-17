@@ -27,7 +27,13 @@
 </script>
 
 <section class="hero">
-	<img class="hero-backdrop" src={imageAsset('/images/ambiance/hero-portone-wide.jpg')} alt="" aria-hidden="true" />
+	<img
+		class="hero-backdrop"
+		src={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
+		alt=""
+		aria-hidden="true"
+		fetchpriority="high"
+	/>
 	<picture>
 		<source media="(min-aspect-ratio: 7 / 10)" srcset={imageAsset('/images/ambiance/hero-portone-wide.jpg')} />
 		<img
