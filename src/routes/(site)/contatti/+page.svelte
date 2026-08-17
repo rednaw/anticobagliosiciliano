@@ -3,6 +3,11 @@
 	import { contactCopy, site } from '$lib/data/content';
 	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
+	const MESSAGE_MAX_LENGTH = 500;
+	const DISALLOWED_CHARS =
+		/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u202A-\u202E\u2066-\u2069]/;
+	const HTML_MARKUP = /<\s*\/?\s*[a-zA-Z!?]/;
+
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const heading = $derived(pick(ui.requestAvailability, locale));
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
@@ -16,6 +21,7 @@
 	let message = $state('');
 	let checkInEl = $state<HTMLInputElement | null>(null);
 	let checkOutEl = $state<HTMLInputElement | null>(null);
+	let messageEl = $state<HTMLTextAreaElement | null>(null);
 
 	const today = $derived(localIsoDate());
 	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, 2) : addDaysIso(today, 2));
@@ -31,7 +37,14 @@
 						? t('dateMinStay')
 						: ''
 		);
+		messageEl?.setCustomValidity(messageValidity(message));
 	});
+
+	function messageValidity(value: string): string {
+		if (value.length > MESSAGE_MAX_LENGTH) return t('messageTooLong');
+		if (DISALLOWED_CHARS.test(value) || HTML_MARKUP.test(value)) return t('messageUnsafe');
+		return '';
+	}
 
 	function submit(event: Event) {
 		event.preventDefault();
@@ -132,11 +145,14 @@
 			<label>
 				<span>{t('message')}</span>
 				<textarea
+					bind:this={messageEl}
 					name="message"
 					rows="5"
+					maxlength={MESSAGE_MAX_LENGTH}
 					bind:value={message}
 					placeholder={t('messagePlaceholder')}
 				></textarea>
+				<span class="char-count">{message.length}/{MESSAGE_MAX_LENGTH}</span>
 			</label>
 			<button class="btn" type="submit">{t('submit')}</button>
 			<p class="hint">{t('hint')}</p>
@@ -191,6 +207,13 @@
 		font-size: 0.85rem;
 		font-weight: 600;
 		color: var(--ink-soft);
+	}
+
+	label span.char-count {
+		font-size: 0.8rem;
+		font-weight: 500;
+		color: var(--muted);
+		justify-self: end;
 	}
 
 	input,

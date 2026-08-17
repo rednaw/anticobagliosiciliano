@@ -605,10 +605,18 @@ export const contactCopy = {
 		it: 'Casa preferita, esigenze particolari…',
 		en: 'Preferred house, anything you need…'
 	},
-	submit: { it: 'Invia richiesta', en: 'Send request' },
+	messageTooLong: {
+		it: 'Il messaggio può avere al massimo 500 caratteri.',
+		en: 'The message can be at most 500 characters.'
+	},
+	messageUnsafe: {
+		it: 'Usa solo testo: niente HTML né caratteri speciali nascosti.',
+		en: 'Please use plain text only — no HTML or hidden special characters.'
+	},
+	submit: { it: 'Apri in email', en: 'Open in email' },
 	hint: {
-		it: 'Si apre il tuo client email con il messaggio già compilato.',
-		en: 'This opens your email program with the message already written.'
+		it: 'Si apre un messaggio già compilato nella tua app di posta: l’invio lo fai tu da lì. Se non si apre nulla, scrivi all’indirizzo qui accanto.',
+		en: 'This opens a draft in your mail app; you send it from there. If nothing opens, write to the address next to the form.'
 	},
 	mailName: { it: 'Nome', en: 'Name' },
 	mailEmail: { it: 'Email', en: 'Email' },
@@ -627,8 +635,8 @@ export const privacyCopy = {
 	},
 	controllerTitle: { it: 'Titolare', en: 'Controller' },
 	controller: {
-		it: 'Il titolare del trattamento è Antico Baglio Siciliano. Per qualsiasi richiesta sulla privacy puoi scrivere a',
-		en: 'The data controller is Antico Baglio Siciliano. For any privacy request you can write to'
+		it: 'Il titolare del trattamento è Antico Baglio Siciliano. Puoi scriverci a',
+		en: 'The data controller is Antico Baglio Siciliano. You can write to us at'
 	},
 	contactTitle: { it: 'Richieste di disponibilità', en: 'Availability requests' },
 	contact: {
