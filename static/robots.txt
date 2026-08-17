@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /archivio
-
-Sitemap: https://anticobagliosiciliano.rednaw.github.io/sitemap.xml

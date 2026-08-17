@@ -1,11 +1,14 @@
-import { base } from '$app/paths';
 import { localeFromPath } from '$lib/locale';
+import { SITE_HOSTNAME } from '$lib/site-config';
 import type { Handle } from '@sveltejs/kit';
 
-/** Prerendered HTML must carry the right `lang` — `$effect` only runs after hydration. */
+/** Prerendered HTML must carry the right `lang` and analytics hostname. */
 export const handle: Handle = async ({ event, resolve }) => {
-	const locale = localeFromPath(event.url.pathname, base);
+	const locale = localeFromPath(event.url.pathname);
 	return resolve(event, {
-		transformPageChunk: ({ html }) => html.replace('<html lang="it">', `<html lang="${locale}">`)
+		transformPageChunk: ({ html }) =>
+			html
+				.replace('<html lang="it">', `<html lang="${locale}">`)
+				.replaceAll('__SITE_HOSTNAME__', SITE_HOSTNAME)
 	});
 };

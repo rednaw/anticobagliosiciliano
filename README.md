@@ -2,6 +2,8 @@
 
 SvelteKit rebuild of [anticobagliosiciliano.it](https://anticobagliosiciliano.it/), deployed as a static site on GitHub Pages.
 
+The public host is **`anticobagliosiciliano.rednaw.github.io`** until the owners approve the custom domain **`anticobagliosiciliano.it`**. Canonicals, hreflang, sitemap, and Simple Analytics all follow `SITE_HOSTNAME` in `src/lib/site-config.ts`.
+
 ## Develop
 
 Requires Node.js 24+.
@@ -27,15 +29,15 @@ npm run preview
 
 Push to `main`. The GitHub Actions workflow builds and deploys to GitHub Pages.
 
-In the repo settings, set **Pages → Source** to **GitHub Actions**. For a custom domain, add it under **Pages → Custom domain**.
+In the repo settings, set **Pages → Source** to **GitHub Actions**. After owner review, set **Pages → Custom domain** to `anticobagliosiciliano.it` and change `SITE_HOSTNAME` in `src/lib/site-config.ts`.
 
 ### Simple Analytics
 
-Production only — reports under **`anticobagliosiciliano.rednaw.github.io`**
-(`app.html` + `site-config.ts`). The script is stripped during `npm run dev`.
+Production only — reports under the current `SITE_HOSTNAME` (`app.html` is filled at prerender). The script is stripped during `npm run dev`.
 
-1. In [Simple Analytics](https://simpleanalytics.com/) → **Websites** → add `anticobagliosiciliano.rednaw.github.io`.
+1. In [Simple Analytics](https://simpleanalytics.com/) → **Websites** → add the current hostname (`anticobagliosiciliano.rednaw.github.io` for now).
 2. Deploy — page views appear after the first visit (SPA navigation is tracked automatically).
+3. When the custom domain goes live, add `anticobagliosiciliano.it` as a website (or rename) so it matches `SITE_HOSTNAME`.
 
 ## Contact email
 
