@@ -138,11 +138,9 @@
 		</Reveal>
 		<ul class="amenity-list">
 			{#each amenityList as item, i}
-				<Reveal delay={i * 40}>
-					<li>
-						<strong>{item.title}</strong>
-						<span>{item.detail}</span>
-					</li>
+				<Reveal as="li" delay={i * 40}>
+					<strong>{item.title}</strong>
+					<span>{item.detail}</span>
 				</Reveal>
 			{/each}
 		</ul>

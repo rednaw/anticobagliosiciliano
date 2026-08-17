@@ -3,10 +3,12 @@
 
 	let {
 		children,
-		delay = 0
+		delay = 0,
+		as = 'div'
 	}: {
 		children: import('svelte').Snippet;
 		delay?: number;
+		as?: 'div' | 'li';
 	} = $props();
 
 	let visible = $state(false);
@@ -28,14 +30,15 @@
 	});
 </script>
 
-<div
+<svelte:element
+	this={as}
 	bind:this={el}
 	class="reveal"
 	class:visible
 	style={`--delay: ${delay}ms`}
 >
 	{@render children()}
-</div>
+</svelte:element>
 
 <style>
 	.reveal {

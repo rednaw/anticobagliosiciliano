@@ -124,44 +124,60 @@
 			aria-controls="site-nav"
 			onclick={toggle}
 		>
-			<span class="sr-only">{pick(ui.menu, locale)}</span>
+			<span class="sr-only">{pick(open ? ui.closeMenu : ui.menu, locale)}</span>
 			<span class="burger" class:open></span>
 		</button>
 
 		<nav bind:this={navEl} id="site-nav" class="nav" class:open aria-label={pick(ui.mainNav, locale)}>
 			{#each links as link}
-				<a href={hrefFor(link.subpath, link.hash)} class:active={isActive(link.subpath, link.hash)} onclick={close}>
+				<a
+					href={hrefFor(link.subpath, link.hash)}
+					class:active={isActive(link.subpath, link.hash)}
+					aria-current={isActive(link.subpath, link.hash) ? 'page' : undefined}
+					onclick={close}
+				>
 					{link.label}
 				</a>
 			{/each}
 			<div class="nav-houses">
 				<p>{pick(ui.housesGroup, locale)}</p>
-				{#each housesSource as house}
-					<a href={hrefFor(`case/${house.slug}`)} onclick={close}>{house.name}</a>
-				{/each}
+				<ul>
+					{#each housesSource as house}
+						<li>
+							<a
+								href={hrefFor(`case/${house.slug}`)}
+								aria-current={isActive(`case/${house.slug}`) ? 'page' : undefined}
+								onclick={close}>{house.name}</a
+							>
+						</li>
+					{/each}
+				</ul>
 			</div>
 			<a
 				class="nav-cta"
 				href={hrefFor('contatti')}
 				class:active={isActive('contatti')}
+				aria-current={isActive('contatti') ? 'page' : undefined}
 				onclick={close}>{pick(ui.requestAvailability, locale)}</a
 			>
 
-			<div class="langs" aria-label={pick(ui.language, locale)}>
+			<div class="langs" role="group" aria-label={pick(ui.language, locale)}>
 				<a
 					href={langHref('it')}
 					hreflang="it"
+					lang="it"
 					class:active={locale === 'it'}
 					onclick={close}
-					aria-current={locale === 'it' ? 'true' : undefined}>IT</a
+					aria-current={locale === 'it' ? 'page' : undefined}>IT</a
 				>
 				<span aria-hidden="true">·</span>
 				<a
 					href={langHref('en')}
 					hreflang="en"
+					lang="en"
 					class:active={locale === 'en'}
 					onclick={close}
-					aria-current={locale === 'en' ? 'true' : undefined}>EN</a
+					aria-current={locale === 'en' ? 'page' : undefined}>EN</a
 				>
 			</div>
 		</nav>
@@ -308,6 +324,14 @@
 		border-top: 1px solid var(--line);
 		border-bottom: 1px solid var(--line);
 		margin: 0.5rem 0;
+	}
+
+	.nav-houses ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.15rem;
 	}
 
 	.nav-houses p {
