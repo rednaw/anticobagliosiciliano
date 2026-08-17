@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asset, base } from '$app/paths';
+	import { asset } from '$app/paths';
 	import { page } from '$app/state';
 	import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
@@ -21,8 +21,8 @@
 	const amenityList = $derived(amenities(locale));
 	const awardList = $derived(awards(locale));
 	const quoteList = $derived(testimonials(locale));
-	const contatti = $derived(siteHref(locale, 'contatti', base));
-	const imperdibili = $derived(siteHref(locale, 'imperdibili', base));
+	const contatti = $derived(siteHref(locale, 'contatti'));
+	const imperdibili = $derived(siteHref(locale, 'imperdibili'));
 	const home = $derived(localize(homeCopy, locale));
 </script>
 
@@ -78,7 +78,7 @@
 		<div class="house-list">
 			{#each houseList as house, i}
 				<Reveal delay={i * 80}>
-					<a class="house" href={siteHref(locale, `case/${house.slug}`, base)}>
+					<a class="house" href={siteHref(locale, `case/${house.slug}`)}>
 						<img src={asset(house.image)} alt={house.name} loading="lazy" />
 						<div class="house-body">
 							<div class="house-meta">

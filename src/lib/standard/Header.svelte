@@ -1,8 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { base } from '$app/paths';
 	import { housesSource, site } from '$lib/data/content';
-	import { counterpartHref, pick, siteHref, stripBase, ui, withBase, type Locale } from '$lib/standard/i18n';
+	import {
+		counterpartHref,
+		pick,
+		siteHref,
+		standardHref,
+		stripBase,
+		ui,
+		withBase,
+		type Locale
+	} from '$lib/standard/i18n';
 
 	let open = $state(false);
 	let menuBtn: HTMLButtonElement | undefined = $state();
@@ -18,12 +26,12 @@
 	]);
 
 	function hrefFor(subpath: string, hash = '') {
-		return `${siteHref(locale, subpath, base)}${hash}`;
+		return `${siteHref(locale, subpath)}${hash}`;
 	}
 
 	function isActive(subpath: string, hash = '') {
-		const path = stripBase(page.url.pathname, base).replace(/\/$/, '') || '/';
-		const target = siteHref(locale, subpath, '').replace(/\/$/, '') || '/';
+		const path = stripBase(page.url.pathname).replace(/\/$/, '') || '/';
+		const target = standardHref(locale, subpath).replace(/\/$/, '') || '/';
 		if (hash === '#houses') return false;
 		if (!subpath) return path === target;
 		return path === target || path.startsWith(`${target}/`);
@@ -105,9 +113,9 @@
 	});
 
 	function langHref(target: Locale) {
-		const path = stripBase(page.url.pathname, base).replace(/\/+$/, '') || '/';
-		if (path.endsWith('404.html')) return siteHref(target, '', base);
-		return withBase(counterpartHref(page.url.pathname, target, base), base);
+		const path = stripBase(page.url.pathname).replace(/\/+$/, '') || '/';
+		if (path.endsWith('404.html')) return siteHref(target);
+		return withBase(counterpartHref(page.url.pathname, target));
 	}
 </script>
 

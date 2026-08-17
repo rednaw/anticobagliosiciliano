@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { asset, base } from '$app/paths';
+	import { asset } from '$app/paths';
 	import { page } from '$app/state';
 	import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
 	import Reveal from '$lib/standard/Reveal.svelte';
@@ -11,7 +11,7 @@
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const house = $derived(data.house);
 	const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
-	const contatti = $derived(siteHref(locale, 'contatti', base));
+	const contatti = $derived(siteHref(locale, 'contatti'));
 </script>
 
 <section class="hero">
@@ -74,7 +74,7 @@
 		<div class="grid">
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
-					<a href={siteHref(locale, `case/${other.slug}`, base)}>
+					<a href={siteHref(locale, `case/${other.slug}`)}>
 						<img src={asset(other.image)} alt={other.name} loading="lazy" />
 						<span>{other.name}</span>
 					</a>

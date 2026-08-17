@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { page } from '$app/state';
 	import Header from '$lib/standard/Header.svelte';
 	import Footer from '$lib/standard/Footer.svelte';
@@ -8,7 +7,7 @@
 	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
 	const locale = $derived(
-		(page.data.locale ?? localeFromPath(page.url.pathname, base)) as Locale
+		(page.data.locale ?? localeFromPath(page.url.pathname)) as Locale
 	);
 
 	$effect(() => {

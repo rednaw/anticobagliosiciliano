@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { page } from '$app/state';
 	import { site } from '$lib/data/content';
 	import { localeFromPath } from '$lib/locale';
@@ -8,13 +7,13 @@
 	let { status, head = true }: { status?: number; head?: boolean } = $props();
 
 	const locale = $derived(
-		(page.data.locale ?? localeFromPath(page.url.pathname, base)) as Locale
+		(page.data.locale ?? localeFromPath(page.url.pathname)) as Locale
 	);
 	const code = $derived(status ?? page.status);
 	const is404 = $derived(code === 404);
 	const heading = $derived(pick(is404 ? ui.notFoundTitle : ui.errorTitle, locale));
 	const body = $derived(pick(is404 ? ui.notFoundBody : ui.errorBody, locale));
-	const home = $derived(siteHref(locale, '', base));
+	const home = $derived(siteHref(locale));
 </script>
 
 <svelte:head>
