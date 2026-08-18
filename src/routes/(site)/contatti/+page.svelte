@@ -79,7 +79,9 @@
 				`${t('children')}: ${children}`,
 				'',
 				message || t('mailNoMessage')
-			].join('\n')
+			]
+				.join('\n')
+				.replace(/\r\n|\n|\r/g, '\r\n')
 		);
 		return `mailto:${site.email}?subject=${subject}&body=${body}`;
 	});
