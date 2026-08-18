@@ -10,7 +10,7 @@
 		checkIn = $bindable(''),
 		checkOut = $bindable(''),
 		locale,
-		error = ''
+		error = $bindable('')
 	}: {
 		checkIn: string;
 		checkOut: string;
@@ -57,10 +57,12 @@
 	}
 
 	function selectDay(iso: string) {
+		error = '';
 		if (picking === 'in') {
 			checkIn = iso;
 			if (checkOut && checkOut < addDays(iso, MIN_STAY)) checkOut = '';
 			picking = 'out';
+			outEl?.focus();
 			return;
 		}
 		checkOut = iso;
@@ -159,6 +161,7 @@
 					class="nav"
 					disabled={!canPrev}
 					aria-label={t('datePrevMonth')}
+					onpointerdown={(event) => event.preventDefault()}
 					onclick={() => shiftMonth(-1)}
 				>
 					‹
@@ -168,6 +171,7 @@
 					type="button"
 					class="nav"
 					aria-label={t('dateNextMonth')}
+					onpointerdown={(event) => event.preventDefault()}
 					onclick={() => shiftMonth(1)}
 				>
 					›
@@ -191,6 +195,7 @@
 							disabled={dayDisabled(iso)}
 							aria-pressed={iso === checkIn || iso === checkOut}
 							aria-label={formatDate(iso)}
+							onpointerdown={(event) => event.preventDefault()}
 							onclick={() => selectDay(iso)}
 						>
 							{Number(iso.slice(8))}

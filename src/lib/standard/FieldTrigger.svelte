@@ -32,6 +32,7 @@
 	<span>{label}</span>
 	<input
 		bind:this={el}
+		bind:value={() => text, () => {}}
 		class="trigger"
 		class:empty
 		class:open
@@ -41,7 +42,6 @@
 		inputmode="none"
 		autocomplete="off"
 		role="combobox"
-		value={text}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? controls : undefined}

@@ -45,16 +45,6 @@
 		...housesSource.map((house) => ({ value: house.slug, label: house.name }))
 	]);
 
-	function setCheckIn(value: string) {
-		checkIn = value;
-		dateError = '';
-	}
-
-	function setCheckOut(value: string) {
-		checkOut = value;
-		dateError = '';
-	}
-
 	/** Browsers phrase their own validation bubbles in the browser language, not the site's. */
 	function fieldError(el: HTMLInputElement | HTMLTextAreaElement): string {
 		if (el.validity.valueMissing) return t('fieldRequired');
@@ -135,12 +125,7 @@
 				<input type="email" name="email" bind:value={email} required autocomplete="email" />
 			</label>
 			<Picker bind:value={houseSlug} label={t('house')} options={houseOptions} />
-			<StayDates
-				bind:checkIn={() => checkIn, setCheckIn}
-				bind:checkOut={() => checkOut, setCheckOut}
-				{locale}
-				error={dateError}
-			/>
+			<StayDates bind:checkIn bind:checkOut bind:error={dateError} {locale} />
 			<div class="row">
 				<Picker bind:value={adults} label={t('adults')} options={ADULT_OPTIONS} />
 				<Picker bind:value={children} label={t('children')} options={CHILD_OPTIONS} />

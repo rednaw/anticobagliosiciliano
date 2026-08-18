@@ -11,7 +11,7 @@ export function dismissable(anchor: HTMLElement, close: (restoreFocus: boolean) 
 	}
 
 	function onFocusOut() {
-		queueMicrotask(() => {
+		setTimeout(() => {
 			if (!anchor.contains(document.activeElement)) close(false);
 		});
 	}

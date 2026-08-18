@@ -66,6 +66,7 @@
 					type="button"
 					class="option"
 					class:selected={option.value === value}
+					onpointerdown={(event) => event.preventDefault()}
 					onclick={() => select(option)}
 				>
 					{option.label}
