@@ -39,6 +39,10 @@
 		<img
 			class="hero-media"
 			src={imageAsset('/images/ambiance/hero-portone-tall.jpg')}
+			srcset="{imageAsset('/images/ambiance/hero-portone-tall-sm.jpg')} 763w, {imageAsset(
+				'/images/ambiance/hero-portone-tall.jpg'
+			)} 1248w"
+			sizes="100vw"
 			alt={home.alt.hero}
 		/>
 	</picture>
@@ -65,6 +69,10 @@
 			<AmbientVideo
 				src="/videos/baglio-720.mp4"
 				poster="/videos/baglio-poster.jpg"
+				posterSrcset="{imageAsset('/videos/baglio-poster-sm.jpg')} 744w, {imageAsset(
+					'/videos/baglio-poster.jpg'
+				)} 1004w"
+				posterSizes="(min-width: 960px) 58vw, calc(100vw - 2.5rem)"
 				label={home.alt.video}
 			/>
 		</Reveal>

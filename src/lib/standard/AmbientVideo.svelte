@@ -7,10 +7,14 @@
 	let {
 		src,
 		poster,
+		posterSrcset,
+		posterSizes,
 		label
 	}: {
 		src: string;
 		poster: string;
+		posterSrcset?: string;
+		posterSizes?: string;
 		label: string;
 	} = $props();
 
@@ -81,13 +85,24 @@
 </script>
 
 <div class="ambient" bind:this={wrap}>
+	{#if posterSrcset}
+		<img
+			class="poster"
+			class:hide={playing}
+			src={imageAsset(poster)}
+			srcset={posterSrcset}
+			sizes={posterSizes}
+			alt=""
+			aria-hidden="true"
+		/>
+	{/if}
 	<!-- svelte-ignore a11y_media_has_caption -->
 	<video
 		bind:this={el}
 		muted
 		playsinline
 		preload="none"
-		poster={imageAsset(poster)}
+		poster={posterSrcset ? undefined : imageAsset(poster)}
 		aria-label={label}
 		onplay={() => (playing = true)}
 		onpause={() => (playing = false)}
@@ -130,6 +145,19 @@
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
 		background: #000;
+	}
+
+	.poster {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		pointer-events: none;
+	}
+
+	.poster.hide {
+		visibility: hidden;
 	}
 
 	.control {
