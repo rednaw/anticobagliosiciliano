@@ -1,8 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { contactCopy, housesSource, site } from '$lib/data/content';
+	import Picker from '$lib/standard/Picker.svelte';
 	import StayDates from '$lib/standard/StayDates.svelte';
 	import { CONTACT_HOUSE_PARAM, pick, ui, type Locale } from '$lib/standard/i18n';
+
+	const ADULT_OPTIONS = numbers(1, 20);
+	const CHILD_OPTIONS = numbers(0, 20);
+
+	function numbers(from: number, to: number) {
+		return Array.from({ length: to - from + 1 }, (_, i) => {
+			const n = String(from + i);
+			return { value: n, label: n };
+		});
+	}
 
 	const MESSAGE_MAX_LENGTH = 500;
 	const DISALLOWED_CHARS =
@@ -30,6 +41,10 @@
 	let dateError = $state('');
 
 	const selectedHouse = $derived(housesSource.find((h) => h.slug === houseSlug));
+	const houseOptions = $derived([
+		{ value: '', label: t('houseAny') },
+		...housesSource.map((house) => ({ value: house.slug, label: house.name }))
+	]);
 
 	const today = $derived(localIsoDate());
 	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, 2) : addDaysIso(today, 2));
@@ -63,9 +78,6 @@
 		if (extra) {
 			el.setCustomValidity(extra);
 			return;
-		}
-		if (el.validity.badInput || el.validity.rangeUnderflow || el.validity.rangeOverflow) {
-			el.setCustomValidity(t('numberInvalid'));
 		}
 	}
 
@@ -164,15 +176,7 @@
 				<span>{t('email')}</span>
 				<input type="email" name="email" bind:value={email} required autocomplete="email" />
 			</label>
-			<label>
-				<span>{t('house')}</span>
-				<select name="casa" bind:value={houseSlug}>
-					<option value="">{t('houseAny')}</option>
-					{#each housesSource as house}
-						<option value={house.slug}>{house.name}</option>
-					{/each}
-				</select>
-			</label>
+			<Picker id="contact-house" bind:value={houseSlug} label={t('house')} options={houseOptions} />
 			<StayDates
 				bind:checkIn={() => checkIn, setCheckIn}
 				bind:checkOut={() => checkOut, setCheckOut}
@@ -181,14 +185,13 @@
 				error={dateError}
 			/>
 			<div class="row">
-				<label>
-					<span>{t('adults')}</span>
-					<input type="number" name="adults" min="1" max="20" bind:value={adults} required />
-				</label>
-				<label>
-					<span>{t('children')}</span>
-					<input type="number" name="children" min="0" max="20" bind:value={children} />
-				</label>
+				<Picker id="contact-adults" bind:value={adults} label={t('adults')} options={ADULT_OPTIONS} />
+				<Picker
+					id="contact-children"
+					bind:value={children}
+					label={t('children')}
+					options={CHILD_OPTIONS}
+				/>
 			</div>
 			<label>
 				<span>{t('message')}</span>
@@ -273,7 +276,6 @@
 	}
 
 	input,
-	select,
 	textarea {
 		width: 100%;
 		padding: 0.8rem 0.9rem;
@@ -284,12 +286,7 @@
 		font: inherit;
 	}
 
-	select {
-		cursor: pointer;
-	}
-
 	input:focus,
-	select:focus,
 	textarea:focus {
 		outline: 2px solid color-mix(in srgb, var(--sea) 45%, transparent);
 		outline-offset: 1px;

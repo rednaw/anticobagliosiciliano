@@ -22,8 +22,8 @@
 	let picking = $state<'in' | 'out'>('in');
 	let view = $state({ y: 0, m: 0 });
 	let rootEl = $state<HTMLDivElement | null>(null);
-	let inBtn = $state<HTMLButtonElement | null>(null);
-	let outBtn = $state<HTMLButtonElement | null>(null);
+	let inBtn = $state<HTMLInputElement | null>(null);
+	let outBtn = $state<HTMLInputElement | null>(null);
 
 	const intlLocale = $derived(locale === 'en' ? 'en-GB' : 'it-IT');
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
@@ -60,6 +60,20 @@
 		const seed = (which === 'out' && checkOut) || checkIn || today;
 		view = { y: yearOf(seed), m: monthOf(seed) };
 		open = true;
+	}
+
+	function onTriggerKey(event: KeyboardEvent, which: 'in' | 'out') {
+		if (event.key !== 'Enter' && event.key !== ' ') return;
+		event.preventDefault();
+		openFor(which);
+	}
+
+	function onFocusOut(event: FocusEvent) {
+		const next = event.relatedTarget;
+		if (next instanceof Node && rootEl?.contains(next)) return;
+		queueMicrotask(() => {
+			if (!rootEl?.contains(document.activeElement)) open = false;
+		});
 	}
 
 	function close() {
@@ -141,40 +155,50 @@
 	}
 </script>
 
-<div class="stay" class:invalid={Boolean(error)} bind:this={rootEl}>
+<div class="stay" class:invalid={Boolean(error)} bind:this={rootEl} onfocusout={onFocusOut}>
 	<div class="row">
-		<div class="field">
+		<label class="field">
 			<span>{t('checkIn')}</span>
-			<button
+			<input
 				bind:this={inBtn}
 				class="trigger"
 				class:empty={!checkIn}
 				class:active={open && picking === 'in'}
-				type="button"
-				aria-expanded={open}
-				aria-controls="stay-calendar"
+				type="text"
+				readonly
+				inputmode="none"
+				autocomplete="off"
+				role="combobox"
+				value={formatShown(checkIn)}
+				aria-haspopup="dialog"
+				aria-expanded={open && picking === 'in'}
+				aria-controls={open ? 'stay-calendar' : undefined}
 				aria-describedby={error ? 'stay-date-error' : undefined}
 				onclick={() => openFor('in')}
-			>
-				{formatShown(checkIn)}
-			</button>
-		</div>
-		<div class="field">
+				onkeydown={(event) => onTriggerKey(event, 'in')}
+			/>
+		</label>
+		<label class="field">
 			<span>{t('checkOut')}</span>
-			<button
+			<input
 				bind:this={outBtn}
 				class="trigger"
 				class:empty={!checkOut}
 				class:active={open && picking === 'out'}
-				type="button"
-				aria-expanded={open}
-				aria-controls="stay-calendar"
+				type="text"
+				readonly
+				inputmode="none"
+				autocomplete="off"
+				role="combobox"
+				value={formatShown(checkOut)}
+				aria-haspopup="dialog"
+				aria-expanded={open && picking === 'out'}
+				aria-controls={open ? 'stay-calendar' : undefined}
 				aria-describedby={error ? 'stay-date-error' : undefined}
 				onclick={() => openFor('out')}
-			>
-				{formatShown(checkOut)}
-			</button>
-		</div>
+				onkeydown={(event) => onTriggerKey(event, 'out')}
+			/>
+		</label>
 	</div>
 
 	{#if error}
@@ -265,12 +289,14 @@
 		text-align: left;
 		cursor: pointer;
 		appearance: none;
+		caret-color: transparent;
 	}
 
 	.trigger.empty {
 		color: var(--muted);
 	}
 
+	.trigger:focus,
 	.trigger.active,
 	.trigger:focus-visible {
 		outline: 2px solid color-mix(in srgb, var(--sea) 45%, transparent);
