@@ -213,8 +213,11 @@
 		position: sticky;
 		top: 0;
 		z-index: 40;
-		backdrop-filter: blur(14px);
+		/* Solid fallback: Safari drops `color-mix`+`backdrop-filter` without the -webkit prefix. */
+		background: var(--paper);
 		background: color-mix(in srgb, var(--paper) 86%, transparent);
+		-webkit-backdrop-filter: blur(14px);
+		backdrop-filter: blur(14px);
 		border-bottom: 1px solid var(--line);
 	}
 

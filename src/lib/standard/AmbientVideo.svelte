@@ -174,6 +174,7 @@
 		background: color-mix(in srgb, var(--sea-deep) 68%, transparent);
 		color: #fff;
 		cursor: pointer;
+		-webkit-backdrop-filter: blur(6px);
 		backdrop-filter: blur(6px);
 	}
 
