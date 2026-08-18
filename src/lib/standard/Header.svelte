@@ -25,7 +25,8 @@
 	const links = $derived([
 		{ subpath: '', label: pick(ui.navHome, locale), hash: '' },
 		{ subpath: '', label: pick(ui.navHouses, locale), hash: '#houses' },
-		{ subpath: 'imperdibili', label: pick(ui.navImperdibili, locale), hash: '' }
+		{ subpath: 'imperdibili', label: pick(ui.navImperdibili, locale), hash: '' },
+		{ subpath: 'come-arrivare', label: pick(ui.navArrive, locale), hash: '' }
 	]);
 
 	const contactLink = $derived(contactHref(locale, houseSlugFromPath(page.url.pathname)));

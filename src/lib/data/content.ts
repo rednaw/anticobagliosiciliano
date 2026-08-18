@@ -573,6 +573,60 @@ export const imperdibiliLead = {
 	en: 'From the baglio you can easily reach some of the most beautiful stretches of coast and the finest art in western Sicily.'
 } satisfies LocalizedString;
 
+export const baglioLocation = {
+	lat: 38.0250627,
+	lon: 13.0150391,
+	map: '/images/ambiance/mappa.jpg',
+	mapSm: '/images/ambiance/mappa-sm.jpg',
+	links: [
+		{
+			id: 'google',
+			href: 'https://maps.app.goo.gl/NA1BwasQVcFzn1qHA',
+			label: { it: 'Apri in Google Maps', en: 'Open in Google Maps' }
+		},
+		{
+			id: 'apple',
+			href: 'https://maps.apple.com/?ll=38.0250627,13.0150391&q=Antico%20Baglio%20Siciliano',
+			label: { it: 'Apri in Apple Maps', en: 'Open in Apple Maps' }
+		},
+		{
+			id: 'osm',
+			href: 'https://www.openstreetmap.org/?mlat=38.0250627&mlon=13.0150391#map=16/38.0250627/13.0150391',
+			label: { it: 'Apri in OpenStreetMap', en: 'Open in OpenStreetMap' }
+		}
+	]
+};
+
+export const arriveCopy = {
+	metaDescription: {
+		it: 'Come arrivare all’Antico Baglio Siciliano a Balestrate: aeroporti, autostrada e una mappa statica da aprire nella tua app di mappe.',
+		en: 'How to get to Antico Baglio Siciliano in Balestrate: airports, the motorway, and a static map to open in your maps app.'
+	},
+	lead: {
+		it: 'Il baglio è nelle campagne di Balestrate, sul Golfo di Castellammare, tra Palermo e Trapani.',
+		en: 'The baglio is in the countryside of Balestrate, on the Gulf of Castellammare, between Palermo and Trapani.'
+	},
+	mapAlt: {
+		it: 'Mappa della campagna di Balestrate con l’Antico Baglio Siciliano segnalato a sud del paese, vicino all’uscita A29',
+		en: 'Map of the Balestrate countryside with Antico Baglio Siciliano marked south of the town, near the A29 exit'
+	},
+	coordsLabel: { it: 'Coordinate', en: 'Coordinates' },
+	airTitle: { it: 'In aereo', en: 'By air' },
+	air: {
+		it: 'L’aeroporto di Palermo (Punta Raisi) è a circa 20 minuti di auto, quello di Trapani a 35. In entrambi potete noleggiare un’auto.',
+		en: 'Palermo airport (Punta Raisi) is about 20 minutes by car, Trapani about 35. You can hire a car at either.'
+	},
+	roadTitle: { it: 'In auto e in traghetto', en: 'By car and ferry' },
+	road: {
+		it: 'Dall’autostrada A29, uscita Balestrate. Il porto di Palermo dista circa 45 minuti. Se venite con la vostra auto, considerate i traghetti da Genova, Civitavecchia, Napoli, Salerno e Cagliari.',
+		en: 'From the A29 motorway, take the Balestrate exit. Palermo harbour is about 45 minutes away. If you are bringing your own car, there are ferries from Genoa, Civitavecchia, Naples, Salerno and Cagliari.'
+	},
+	attribution: {
+		it: 'Mappa © collaboratori di OpenStreetMap.',
+		en: 'Map © OpenStreetMap contributors.'
+	}
+} satisfies Record<string, LocalizedString>;
+
 export const contactCopy = {
 	metaDescription: {
 		it: 'Richiedi disponibilità per un soggiorno all’Antico Baglio Siciliano.',

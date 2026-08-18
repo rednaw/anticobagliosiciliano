@@ -9,6 +9,7 @@ export const ui = {
 	navHome: { it: 'Home', en: 'Home' },
 	navHouses: { it: 'Alloggi', en: 'The Houses' },
 	navImperdibili: { it: 'Imperdibili', en: 'Nearby' },
+	navArrive: { it: 'Come arrivare', en: 'Getting here' },
 	housesGroup: { it: 'Case', en: 'The Houses' },
 	ourHouses: { it: 'I nostri alloggi', en: 'The Houses' },
 	discoverHouses: { it: 'Scopri gli alloggi', en: 'The Houses' },

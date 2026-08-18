@@ -2,6 +2,7 @@ import {
 	contactCopy,
 	getHouse,
 	homeCopy,
+	arriveCopy,
 	imperdibiliMeta,
 	privacyCopy,
 	site
@@ -50,6 +51,15 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 		return {
 			title: `${pick(ui.navImperdibili, locale)} · ${site.name}`,
 			description: pick(imperdibiliMeta, locale),
+			image,
+			imageAlt
+		};
+	}
+
+	if (key === '/come-arrivare') {
+		return {
+			title: `${pick(ui.navArrive, locale)} · ${site.name}`,
+			description: pick(arriveCopy.metaDescription, locale),
 			image,
 			imageAlt
 		};

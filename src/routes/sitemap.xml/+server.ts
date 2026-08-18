@@ -6,7 +6,14 @@ import type { RequestHandler } from './$types';
 export const prerender = true;
 export const trailingSlash = 'never';
 
-const subpaths = ['', 'imperdibili', 'contatti', 'privacy', ...housesSource.map((h) => `case/${h.slug}`)];
+const subpaths = [
+	'',
+	'imperdibili',
+	'come-arrivare',
+	'contatti',
+	'privacy',
+	...housesSource.map((h) => `case/${h.slug}`)
+];
 
 function loc(locale: Locale, subpath: string) {
 	return absoluteUrl(standardHref(locale, subpath), SITE_ORIGIN);
