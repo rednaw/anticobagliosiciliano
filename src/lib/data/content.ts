@@ -598,6 +598,14 @@ export const contactCopy = {
 		it: 'Il soggiorno minimo è di due notti.',
 		en: 'The minimum stay is two nights.'
 	},
+	datePlaceholder: { it: 'Seleziona', en: 'Select' },
+	datePrevMonth: { it: 'Mese precedente', en: 'Previous month' },
+	dateNextMonth: { it: 'Mese successivo', en: 'Next month' },
+	dateCalendar: { it: 'Calendario soggiorno', en: 'Stay calendar' },
+	dateMinStayHint: {
+		it: 'Soggiorno minimo: due notti',
+		en: 'Minimum stay: two nights'
+	},
 	fieldRequired: {
 		it: 'Compila questo campo.',
 		en: 'Please fill in this field.'

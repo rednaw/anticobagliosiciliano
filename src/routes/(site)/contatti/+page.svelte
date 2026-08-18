@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { contactCopy, housesSource, site } from '$lib/data/content';
+	import StayDates from '$lib/standard/StayDates.svelte';
 	import { CONTACT_HOUSE_PARAM, pick, ui, type Locale } from '$lib/standard/i18n';
 
 	const MESSAGE_MAX_LENGTH = 500;
@@ -26,20 +27,24 @@
 	let children = $state('0');
 	let message = $state('');
 	let mailLink = $state<HTMLAnchorElement | null>(null);
+	let dateError = $state('');
 
 	const selectedHouse = $derived(housesSource.find((h) => h.slug === houseSlug));
 
 	const today = $derived(localIsoDate());
 	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, 2) : addDaysIso(today, 2));
 
+	function setCheckIn(value: string) {
+		checkIn = value;
+		dateError = '';
+	}
+
+	function setCheckOut(value: string) {
+		checkOut = value;
+		dateError = '';
+	}
+
 	function extraValidity(el: HTMLInputElement | HTMLTextAreaElement): string {
-		if (el.name === 'checkin') return checkIn && checkIn < today ? t('datePast') : '';
-		if (el.name === 'checkout') {
-			if (!checkIn || !checkOut) return '';
-			if (checkOut <= checkIn) return t('dateOrder');
-			if (checkOut < minCheckOut) return t('dateMinStay');
-			return '';
-		}
 		if (el.name === 'message') return messageValidity(message);
 		return '';
 	}
@@ -60,10 +65,6 @@
 			return;
 		}
 		if (el.validity.badInput || el.validity.rangeUnderflow || el.validity.rangeOverflow) {
-			if (el.type === 'date') {
-				el.setCustomValidity(el.name === 'checkin' ? t('datePast') : t('dateMinStay'));
-				return;
-			}
 			el.setCustomValidity(t('numberInvalid'));
 		}
 	}
@@ -105,13 +106,22 @@
 		return `mailto:${site.email}?subject=${subject}&body=${body}`;
 	});
 
+	function datesMessage(): string {
+		if (!checkIn || !checkOut) return t('fieldRequired');
+		if (checkIn < today) return t('datePast');
+		if (checkOut <= checkIn) return t('dateOrder');
+		if (checkOut < minCheckOut) return t('dateMinStay');
+		return '';
+	}
+
 	function onMailClick(event: MouseEvent) {
 		const form = (event.currentTarget as HTMLElement).closest('form');
 		if (!form) return;
 		localizeForm(form);
-		if (!form.checkValidity()) {
+		dateError = datesMessage();
+		if (!form.checkValidity() || dateError) {
 			event.preventDefault();
-			form.reportValidity();
+			if (!form.checkValidity()) form.reportValidity();
 		}
 	}
 
@@ -163,28 +173,13 @@
 					{/each}
 				</select>
 			</label>
-			<div class="row">
-				<label>
-					<span>{t('checkIn')}</span>
-					<input
-						type="date"
-						name="checkin"
-						bind:value={checkIn}
-						min={today}
-						required
-					/>
-				</label>
-				<label>
-					<span>{t('checkOut')}</span>
-					<input
-						type="date"
-						name="checkout"
-						bind:value={checkOut}
-						min={minCheckOut}
-						required
-					/>
-				</label>
-			</div>
+			<StayDates
+				bind:checkIn={() => checkIn, setCheckIn}
+				bind:checkOut={() => checkOut, setCheckOut}
+				{locale}
+				{today}
+				error={dateError}
+			/>
 			<div class="row">
 				<label>
 					<span>{t('adults')}</span>
