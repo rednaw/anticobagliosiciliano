@@ -125,14 +125,17 @@
 <section class="section garden">
 	<div class="container garden-grid">
 		<Reveal>
-			<img src={imageAsset('/images/ambiance/giardino.jpg')} alt={home.alt.giardino} loading="lazy" />
-		</Reveal>
-		<Reveal delay={100}>
 			<p class="eyebrow">{home.giardino.eyebrow}</p>
 			<h2>{home.giardino.title}</h2>
 			<p>{home.giardino.p1}</p>
 			<p>{home.giardino.p2}</p>
 			<p>{home.giardino.p3}</p>
+		</Reveal>
+		<Reveal delay={100}>
+			<div class="garden-photos">
+				<img src={imageAsset('/images/ambiance/giardino.jpg')} alt={home.alt.giardino} loading="lazy" />
+				<img src={imageAsset('/images/ambiance/agrumeto.jpg')} alt={home.alt.agrumeto} loading="lazy" />
+			</div>
 		</Reveal>
 	</div>
 </section>
@@ -443,10 +446,22 @@
 		align-items: center;
 	}
 
-	.garden-grid img {
+	.garden-photos {
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.garden-photos img {
 		width: 100%;
-		aspect-ratio: 4 / 3;
 		object-fit: cover;
+	}
+
+	.garden-photos img:first-child {
+		aspect-ratio: 4 / 3;
+	}
+
+	.garden-photos img:last-child {
+		aspect-ratio: 3 / 2;
 	}
 
 	.garden h2 {
@@ -697,7 +712,7 @@
 		}
 
 		.garden-grid {
-			grid-template-columns: 1.05fr 0.95fr;
+			grid-template-columns: 0.95fr 1.05fr;
 			gap: 3.5rem;
 		}
 	}

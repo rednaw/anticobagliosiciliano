@@ -555,8 +555,12 @@ export const homeCopy = {
 		},
 		cortile: { it: 'Cortile interno del baglio', en: 'The inner courtyard of the baglio' },
 		giardino: {
-			it: 'Giardino e agrumeto del baglio',
-			en: 'The garden and citrus grove of the baglio'
+			it: 'Tettoia e sdraio affacciate sul giardino del baglio',
+			en: 'Canopy and sun loungers looking onto the baglio garden'
+		},
+		agrumeto: {
+			it: 'Agrumeto del baglio con aranci in frutto',
+			en: 'The baglio citrus grove with orange trees in fruit'
 		},
 		video: { it: 'Il Baglio ripreso dall’alto', en: 'The baglio seen from above' }
 	}
