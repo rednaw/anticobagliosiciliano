@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { contactCopy } from '$lib/data/content';
+	import { dismissable } from '$lib/standard/dismiss';
+	import FieldTrigger from '$lib/standard/FieldTrigger.svelte';
 	import { pick, type Locale } from '$lib/standard/i18n';
 
 	const MIN_STAY = 2;
@@ -8,100 +10,68 @@
 		checkIn = $bindable(''),
 		checkOut = $bindable(''),
 		locale,
-		today,
 		error = ''
 	}: {
 		checkIn: string;
 		checkOut: string;
 		locale: Locale;
-		today: string;
 		error?: string;
 	} = $props();
 
+	const uid = $props.id();
+	const calendarId = `${uid}-calendar`;
+	const errorId = `${uid}-error`;
+	const today = isoDate(new Date());
+
 	let open = $state(false);
 	let picking = $state<'in' | 'out'>('in');
-	let view = $state({ y: 0, m: 0 });
+	let view = $state(monthStart(new Date()));
 	let rootEl = $state<HTMLDivElement | null>(null);
-	let inBtn = $state<HTMLInputElement | null>(null);
-	let outBtn = $state<HTMLInputElement | null>(null);
+	let inEl = $state<HTMLInputElement | null>(null);
+	let outEl = $state<HTMLInputElement | null>(null);
 
 	const intlLocale = $derived(locale === 'en' ? 'en-GB' : 'it-IT');
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
-	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, MIN_STAY) : addDaysIso(today, MIN_STAY));
+	const minCheckOut = $derived(addDays(checkIn || today, MIN_STAY));
 	const weekdays = $derived(weekdayLabels(intlLocale));
 	const monthTitle = $derived(
-		new Intl.DateTimeFormat(intlLocale, { month: 'long', year: 'numeric' }).format(
-			new Date(view.y, view.m, 1)
-		)
+		new Intl.DateTimeFormat(intlLocale, { month: 'long', year: 'numeric' }).format(view)
 	);
-	const cells = $derived(monthCells(view.y, view.m));
-	const canPrev = $derived(view.y > yearOf(today) || (view.y === yearOf(today) && view.m > monthOf(today)));
+	const cells = $derived(monthCells(view));
+	const canPrev = $derived(view > monthStart(parseIso(today)));
 
 	$effect(() => {
-		if (!open) return;
-		function onPointer(event: PointerEvent) {
-			if (!rootEl?.contains(event.target as Node)) open = false;
-		}
-		function onKey(event: KeyboardEvent) {
-			if (event.key !== 'Escape') return;
-			event.preventDefault();
-			close();
-		}
-		document.addEventListener('pointerdown', onPointer);
-		window.addEventListener('keydown', onKey);
-		return () => {
-			document.removeEventListener('pointerdown', onPointer);
-			window.removeEventListener('keydown', onKey);
-		};
+		if (!open || !rootEl) return;
+		return dismissable(rootEl, close);
 	});
 
 	function openFor(which: 'in' | 'out') {
 		picking = which === 'out' && checkIn ? 'out' : 'in';
-		const seed = (which === 'out' && checkOut) || checkIn || today;
-		view = { y: yearOf(seed), m: monthOf(seed) };
+		view = monthStart(parseIso((which === 'out' && checkOut) || checkIn || today));
 		open = true;
 	}
 
-	function onTriggerKey(event: KeyboardEvent, which: 'in' | 'out') {
-		if (event.key !== 'Enter' && event.key !== ' ') return;
-		event.preventDefault();
-		openFor(which);
-	}
-
-	function onFocusOut(event: FocusEvent) {
-		const next = event.relatedTarget;
-		if (next instanceof Node && rootEl?.contains(next)) return;
-		queueMicrotask(() => {
-			if (!rootEl?.contains(document.activeElement)) open = false;
-		});
-	}
-
-	function close() {
+	function close(restoreFocus: boolean) {
 		open = false;
-		(picking === 'out' ? outBtn : inBtn)?.focus();
+		if (restoreFocus) (picking === 'out' ? outEl : inEl)?.focus();
 	}
 
 	function selectDay(iso: string) {
-		if (dayDisabled(iso)) return;
 		if (picking === 'in') {
 			checkIn = iso;
-			if (checkOut && checkOut < addDaysIso(iso, MIN_STAY)) checkOut = '';
+			if (checkOut && checkOut < addDays(iso, MIN_STAY)) checkOut = '';
 			picking = 'out';
 			return;
 		}
 		checkOut = iso;
-		open = false;
-		outBtn?.focus();
+		close(true);
 	}
 
 	function dayDisabled(iso: string) {
-		if (iso < today) return true;
-		if (picking === 'out') return iso < minCheckOut;
-		return false;
+		return picking === 'out' ? iso < minCheckOut : iso < today;
 	}
 
-	function formatShown(iso: string) {
-		if (!iso) return t('datePlaceholder');
+	function formatDate(iso: string) {
 		return new Intl.DateTimeFormat(intlLocale, {
 			day: 'numeric',
 			month: 'short',
@@ -109,16 +79,10 @@
 		}).format(parseIso(iso));
 	}
 
-	function shiftMonth(delta: number) {
-		const next = new Date(view.y, view.m + delta, 1);
-		view = { y: next.getFullYear(), m: next.getMonth() };
-	}
-
-	function localIsoDate(d: Date) {
-		const y = d.getFullYear();
-		const m = String(d.getMonth() + 1).padStart(2, '0');
-		const day = String(d.getDate()).padStart(2, '0');
-		return `${y}-${m}-${day}`;
+	function isoDate(date: Date) {
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+		return `${date.getFullYear()}-${month}-${day}`;
 	}
 
 	function parseIso(iso: string) {
@@ -126,87 +90,69 @@
 		return new Date(y, m - 1, d);
 	}
 
-	function addDaysIso(iso: string, days: number) {
-		const d = parseIso(iso);
-		d.setDate(d.getDate() + days);
-		return localIsoDate(d);
+	function addDays(iso: string, days: number) {
+		const date = parseIso(iso);
+		date.setDate(date.getDate() + days);
+		return isoDate(date);
 	}
 
-	function yearOf(iso: string) {
-		return Number(iso.slice(0, 4));
+	function monthStart(date: Date) {
+		return new Date(date.getFullYear(), date.getMonth(), 1);
 	}
 
-	function monthOf(iso: string) {
-		return Number(iso.slice(5, 7)) - 1;
+	function shiftMonth(delta: number) {
+		view = new Date(view.getFullYear(), view.getMonth() + delta, 1);
 	}
 
 	function weekdayLabels(tag: string) {
-		const fmt = new Intl.DateTimeFormat(tag, { weekday: 'short' });
-		return Array.from({ length: 7 }, (_, i) => fmt.format(new Date(2026, 7, 17 + i)));
+		const format = new Intl.DateTimeFormat(tag, { weekday: 'short' });
+		return Array.from({ length: 7 }, (_, i) => format.format(new Date(2026, 7, 17 + i)));
 	}
 
-	function monthCells(year: number, month: number) {
-		const pad = (new Date(year, month, 1).getDay() + 6) % 7;
-		const count = new Date(year, month + 1, 0).getDate();
-		const out: (string | null)[] = Array.from({ length: pad }, () => null);
-		for (let d = 1; d <= count; d++) out.push(localIsoDate(new Date(year, month, d)));
-		while (out.length % 7) out.push(null);
-		return out;
+	/** Days of the shown month, padded with nulls so weeks start on Monday. */
+	function monthCells(month: Date) {
+		const year = month.getFullYear();
+		const index = month.getMonth();
+		const cells: (string | null)[] = Array.from({ length: (month.getDay() + 6) % 7 }, () => null);
+		const days = new Date(year, index + 1, 0).getDate();
+		for (let day = 1; day <= days; day++) cells.push(isoDate(new Date(year, index, day)));
+		while (cells.length % 7) cells.push(null);
+		return cells;
 	}
 </script>
 
-<div class="stay" class:invalid={Boolean(error)} bind:this={rootEl} onfocusout={onFocusOut}>
+<div class="stay" bind:this={rootEl}>
 	<div class="row">
-		<label class="field">
-			<span>{t('checkIn')}</span>
-			<input
-				bind:this={inBtn}
-				class="trigger"
-				class:empty={!checkIn}
-				class:active={open && picking === 'in'}
-				type="text"
-				readonly
-				inputmode="none"
-				autocomplete="off"
-				role="combobox"
-				value={formatShown(checkIn)}
-				aria-haspopup="dialog"
-				aria-expanded={open && picking === 'in'}
-				aria-controls={open ? 'stay-calendar' : undefined}
-				aria-describedby={error ? 'stay-date-error' : undefined}
-				onclick={() => openFor('in')}
-				onkeydown={(event) => onTriggerKey(event, 'in')}
-			/>
-		</label>
-		<label class="field">
-			<span>{t('checkOut')}</span>
-			<input
-				bind:this={outBtn}
-				class="trigger"
-				class:empty={!checkOut}
-				class:active={open && picking === 'out'}
-				type="text"
-				readonly
-				inputmode="none"
-				autocomplete="off"
-				role="combobox"
-				value={formatShown(checkOut)}
-				aria-haspopup="dialog"
-				aria-expanded={open && picking === 'out'}
-				aria-controls={open ? 'stay-calendar' : undefined}
-				aria-describedby={error ? 'stay-date-error' : undefined}
-				onclick={() => openFor('out')}
-				onkeydown={(event) => onTriggerKey(event, 'out')}
-			/>
-		</label>
+		<FieldTrigger
+			bind:el={inEl}
+			label={t('checkIn')}
+			text={checkIn ? formatDate(checkIn) : t('datePlaceholder')}
+			empty={!checkIn}
+			open={open && picking === 'in'}
+			invalid={Boolean(error)}
+			controls={calendarId}
+			describedby={error ? errorId : undefined}
+			onactivate={() => openFor('in')}
+		/>
+		<FieldTrigger
+			bind:el={outEl}
+			label={t('checkOut')}
+			text={checkOut ? formatDate(checkOut) : t('datePlaceholder')}
+			empty={!checkOut}
+			open={open && picking === 'out'}
+			invalid={Boolean(error)}
+			controls={calendarId}
+			describedby={error ? errorId : undefined}
+			onactivate={() => openFor('out')}
+		/>
 	</div>
 
 	{#if error}
-		<p id="stay-date-error" class="error">{error}</p>
+		<p id={errorId} class="error">{error}</p>
 	{/if}
 
 	{#if open}
-		<div id="stay-calendar" class="cal" role="dialog" aria-label={t('dateCalendar')} aria-modal="false">
+		<div id={calendarId} class="cal" role="dialog" aria-label={t('dateCalendar')}>
 			<div class="cal-nav">
 				<button
 					type="button"
@@ -218,7 +164,12 @@
 					‹
 				</button>
 				<p class="cal-title">{monthTitle}</p>
-				<button type="button" class="nav" aria-label={t('dateNextMonth')} onclick={() => shiftMonth(1)}>
+				<button
+					type="button"
+					class="nav"
+					aria-label={t('dateNextMonth')}
+					onclick={() => shiftMonth(1)}
+				>
 					›
 				</button>
 			</div>
@@ -233,14 +184,13 @@
 						<button
 							type="button"
 							class="day"
-							class:muted={dayDisabled(iso)}
 							class:start={iso === checkIn}
 							class:end={iso === checkOut}
 							class:range={Boolean(checkIn && checkOut && iso > checkIn && iso < checkOut)}
 							class:today={iso === today}
 							disabled={dayDisabled(iso)}
 							aria-pressed={iso === checkIn || iso === checkOut}
-							aria-label={formatShown(iso)}
+							aria-label={formatDate(iso)}
 							onclick={() => selectDay(iso)}
 						>
 							{Number(iso.slice(8))}
@@ -265,47 +215,6 @@
 	.row {
 		display: grid;
 		gap: 1rem;
-	}
-
-	.field {
-		display: grid;
-		gap: 0.4rem;
-	}
-
-	.field span {
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: var(--ink-soft);
-	}
-
-	.trigger {
-		width: 100%;
-		padding: 0.8rem 0.9rem;
-		border: 1px solid var(--line);
-		border-radius: var(--radius);
-		background: var(--paper);
-		color: var(--ink);
-		font: inherit;
-		text-align: left;
-		cursor: pointer;
-		appearance: none;
-		caret-color: transparent;
-	}
-
-	.trigger.empty {
-		color: var(--muted);
-	}
-
-	.trigger:focus,
-	.trigger.active,
-	.trigger:focus-visible {
-		outline: 2px solid color-mix(in srgb, var(--sea) 45%, transparent);
-		outline-offset: 1px;
-		background: #fff;
-	}
-
-	.invalid .trigger {
-		border-color: color-mix(in srgb, var(--sea) 40%, #8a3b2a);
 	}
 
 	.error {
@@ -410,7 +319,6 @@
 		color: #fff;
 	}
 
-	.day.muted,
 	.day:disabled {
 		color: color-mix(in srgb, var(--muted) 55%, var(--paper));
 		cursor: default;

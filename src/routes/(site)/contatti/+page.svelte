@@ -5,13 +5,13 @@
 	import StayDates from '$lib/standard/StayDates.svelte';
 	import { CONTACT_HOUSE_PARAM, pick, ui, type Locale } from '$lib/standard/i18n';
 
-	const ADULT_OPTIONS = numbers(1, 20);
-	const CHILD_OPTIONS = numbers(0, 20);
+	const ADULT_OPTIONS = numberOptions(1, 20);
+	const CHILD_OPTIONS = numberOptions(0, 20);
 
-	function numbers(from: number, to: number) {
+	function numberOptions(from: number, to: number) {
 		return Array.from({ length: to - from + 1 }, (_, i) => {
-			const n = String(from + i);
-			return { value: n, label: n };
+			const value = String(from + i);
+			return { value, label: value };
 		});
 	}
 
@@ -24,13 +24,12 @@
 	const heading = $derived(pick(ui.requestAvailability, locale));
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
 
+	const requestedHouse = page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '';
+
 	let name = $state('');
 	let email = $state('');
 	let houseSlug = $state(
-		(() => {
-			const requested = page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '';
-			return housesSource.some((h) => h.slug === requested) ? requested : '';
-		})()
+		housesSource.some((h) => h.slug === requestedHouse) ? requestedHouse : ''
 	);
 	let checkIn = $state('');
 	let checkOut = $state('');
@@ -46,9 +45,6 @@
 		...housesSource.map((house) => ({ value: house.slug, label: house.name }))
 	]);
 
-	const today = $derived(localIsoDate());
-	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, 2) : addDaysIso(today, 2));
-
 	function setCheckIn(value: string) {
 		checkIn = value;
 		dateError = '';
@@ -59,34 +55,12 @@
 		dateError = '';
 	}
 
-	function extraValidity(el: HTMLInputElement | HTMLTextAreaElement): string {
+	/** Browsers phrase their own validation bubbles in the browser language, not the site's. */
+	function fieldError(el: HTMLInputElement | HTMLTextAreaElement): string {
+		if (el.validity.valueMissing) return t('fieldRequired');
+		if (el.validity.typeMismatch) return t('emailInvalid');
 		if (el.name === 'message') return messageValidity(message);
 		return '';
-	}
-
-	function localizeValidity(el: HTMLInputElement | HTMLTextAreaElement) {
-		el.setCustomValidity('');
-		if (el.validity.valueMissing) {
-			el.setCustomValidity(t('fieldRequired'));
-			return;
-		}
-		if (el.validity.typeMismatch) {
-			el.setCustomValidity(t('emailInvalid'));
-			return;
-		}
-		const extra = extraValidity(el);
-		if (extra) {
-			el.setCustomValidity(extra);
-			return;
-		}
-	}
-
-	function localizeForm(form: HTMLFormElement) {
-		for (const el of form.elements) {
-			if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-				localizeValidity(el);
-			}
-		}
 	}
 
 	function messageValidity(value: string): string {
@@ -118,40 +92,24 @@
 		return `mailto:${site.email}?subject=${subject}&body=${body}`;
 	});
 
-	function datesMessage(): string {
-		if (!checkIn || !checkOut) return t('fieldRequired');
-		if (checkIn < today) return t('datePast');
-		if (checkOut <= checkIn) return t('dateOrder');
-		if (checkOut < minCheckOut) return t('dateMinStay');
-		return '';
-	}
-
 	function onMailClick(event: MouseEvent) {
 		const form = (event.currentTarget as HTMLElement).closest('form');
 		if (!form) return;
-		localizeForm(form);
-		dateError = datesMessage();
-		if (!form.checkValidity() || dateError) {
-			event.preventDefault();
-			if (!form.checkValidity()) form.reportValidity();
+		for (const el of form.elements) {
+			if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+				el.setCustomValidity(fieldError(el));
+			}
 		}
+		dateError = checkIn && checkOut ? '' : t('fieldRequired');
+		const valid = form.checkValidity();
+		if (valid && !dateError) return;
+		event.preventDefault();
+		if (!valid) form.reportValidity();
 	}
 
 	function submit(event: Event) {
 		event.preventDefault();
 		mailLink?.click();
-	}
-
-	function localIsoDate(d = new Date()): string {
-		const y = d.getFullYear();
-		const m = String(d.getMonth() + 1).padStart(2, '0');
-		const day = String(d.getDate()).padStart(2, '0');
-		return `${y}-${m}-${day}`;
-	}
-
-	function addDaysIso(iso: string, days: number): string {
-		const [y, m, d] = iso.split('-').map(Number);
-		return localIsoDate(new Date(y, m - 1, d + days));
 	}
 </script>
 
@@ -176,22 +134,16 @@
 				<span>{t('email')}</span>
 				<input type="email" name="email" bind:value={email} required autocomplete="email" />
 			</label>
-			<Picker id="contact-house" bind:value={houseSlug} label={t('house')} options={houseOptions} />
+			<Picker bind:value={houseSlug} label={t('house')} options={houseOptions} />
 			<StayDates
 				bind:checkIn={() => checkIn, setCheckIn}
 				bind:checkOut={() => checkOut, setCheckOut}
 				{locale}
-				{today}
 				error={dateError}
 			/>
 			<div class="row">
-				<Picker id="contact-adults" bind:value={adults} label={t('adults')} options={ADULT_OPTIONS} />
-				<Picker
-					id="contact-children"
-					bind:value={children}
-					label={t('children')}
-					options={CHILD_OPTIONS}
-				/>
+				<Picker bind:value={adults} label={t('adults')} options={ADULT_OPTIONS} />
+				<Picker bind:value={children} label={t('children')} options={CHILD_OPTIONS} />
 			</div>
 			<label>
 				<span>{t('message')}</span>

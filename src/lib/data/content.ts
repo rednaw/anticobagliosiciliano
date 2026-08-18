@@ -586,18 +586,6 @@ export const contactCopy = {
 	email: { it: 'La tua email', en: 'Your email' },
 	checkIn: { it: 'Check-in', en: 'Check-in' },
 	checkOut: { it: 'Check-out', en: 'Check-out' },
-	datePast: {
-		it: 'Il check-in non può essere nel passato.',
-		en: 'Check-in cannot be in the past.'
-	},
-	dateOrder: {
-		it: 'Il check-out deve essere successivo al check-in.',
-		en: 'Check-out must be after check-in.'
-	},
-	dateMinStay: {
-		it: 'Il soggiorno minimo è di due notti.',
-		en: 'The minimum stay is two nights.'
-	},
 	datePlaceholder: { it: 'Seleziona', en: 'Select' },
 	datePrevMonth: { it: 'Mese precedente', en: 'Previous month' },
 	dateNextMonth: { it: 'Mese successivo', en: 'Next month' },
@@ -613,10 +601,6 @@ export const contactCopy = {
 	emailInvalid: {
 		it: 'Inserisci un indirizzo email valido.',
 		en: 'Please enter a valid email address.'
-	},
-	numberInvalid: {
-		it: 'Inserisci un numero valido.',
-		en: 'Please enter a valid number.'
 	},
 	adults: { it: 'Adulti', en: 'Adults' },
 	children: { it: 'Bambini', en: 'Children' },
