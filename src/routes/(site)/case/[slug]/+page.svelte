@@ -5,13 +5,13 @@
 	import Reveal from '$lib/standard/Reveal.svelte';
 	import SectionHead from '$lib/standard/SectionHead.svelte';
 	import { houses } from '$lib/data/content';
-	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
+	import { contactHref, pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
 
 	let { data } = $props();
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const house = $derived(data.house);
 	const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
-	const contatti = $derived(siteHref(locale, 'contatti'));
+	const contatti = $derived(contactHref(locale, house.slug));
 </script>
 
 <section class="hero">

@@ -598,12 +598,26 @@ export const contactCopy = {
 		it: 'Il soggiorno minimo è di due notti.',
 		en: 'The minimum stay is two nights.'
 	},
+	fieldRequired: {
+		it: 'Compila questo campo.',
+		en: 'Please fill in this field.'
+	},
+	emailInvalid: {
+		it: 'Inserisci un indirizzo email valido.',
+		en: 'Please enter a valid email address.'
+	},
+	numberInvalid: {
+		it: 'Inserisci un numero valido.',
+		en: 'Please enter a valid number.'
+	},
 	adults: { it: 'Adulti', en: 'Adults' },
 	children: { it: 'Bambini', en: 'Children' },
+	house: { it: 'Alloggio', en: 'Accommodation' },
+	houseAny: { it: 'Nessuna preferenza', en: 'No preference' },
 	message: { it: 'Messaggio (facoltativo)', en: 'Message (optional)' },
 	messagePlaceholder: {
-		it: 'Casa preferita, esigenze particolari…',
-		en: 'Preferred house, anything you need…'
+		it: 'Esigenze particolari, lettino, orari di arrivo…',
+		en: 'Anything you need — a cot, arrival time…'
 	},
 	messageTooLong: {
 		it: 'Il messaggio può avere al massimo 500 caratteri.',
@@ -620,6 +634,8 @@ export const contactCopy = {
 	},
 	mailName: { it: 'Nome', en: 'Name' },
 	mailEmail: { it: 'Email', en: 'Email' },
+	mailHouse: { it: 'Alloggio', en: 'Accommodation' },
+	mailNoHouse: { it: '(nessuna preferenza)', en: '(no preference)' },
 	mailNoMessage: { it: '(nessun messaggio)', en: '(no message)' },
 	mailGuest: { it: 'Ospite', en: 'Guest' }
 } satisfies Record<string, LocalizedString>;
@@ -640,8 +656,8 @@ export const privacyCopy = {
 	},
 	contactTitle: { it: 'Richieste di disponibilità', en: 'Availability requests' },
 	contact: {
-		it: 'Il modulo contatti non invia i dati a un server: apre il tuo programma di posta con un messaggio già compilato (nome, email, date, numero di ospiti e l’eventuale testo). Riceviamo solo ciò che ci invii tu. Usiamo questi dati per rispondere e organizzare il soggiorno, e non li cediamo a terzi per marketing.',
-		en: 'The contact form does not post data to a server: it opens your email program with a message already filled in (name, email, dates, number of guests, and any note). We only receive what you send us. We use it to reply and arrange the stay, and we do not pass it to third parties for marketing.'
+		it: 'Il modulo contatti non invia i dati a un server: apre il tuo programma di posta con un messaggio già compilato (nome, email, alloggio, date, numero di ospiti e l’eventuale testo). Riceviamo solo ciò che ci invii tu. Usiamo questi dati per rispondere e organizzare il soggiorno, e non li cediamo a terzi per marketing.',
+		en: 'The contact form does not post data to a server: it opens your email program with a message already filled in (name, email, accommodation, dates, number of guests, and any note). We only receive what you send us. We use it to reply and arrange the stay, and we do not pass it to third parties for marketing.'
 	},
 	analyticsTitle: { it: 'Statistiche di visita', en: 'Visit statistics' },
 	analytics: {

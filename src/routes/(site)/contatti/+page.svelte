@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { contactCopy, site } from '$lib/data/content';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { contactCopy, housesSource, site } from '$lib/data/content';
+	import { CONTACT_HOUSE_PARAM, pick, ui, type Locale } from '$lib/standard/i18n';
 
 	const MESSAGE_MAX_LENGTH = 500;
 	const DISALLOWED_CHARS =
@@ -14,31 +14,67 @@
 
 	let name = $state('');
 	let email = $state('');
+	let houseSlug = $state(
+		(() => {
+			const requested = page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '';
+			return housesSource.some((h) => h.slug === requested) ? requested : '';
+		})()
+	);
 	let checkIn = $state('');
 	let checkOut = $state('');
 	let adults = $state('2');
 	let children = $state('0');
 	let message = $state('');
-	let checkInEl = $state<HTMLInputElement | null>(null);
-	let checkOutEl = $state<HTMLInputElement | null>(null);
-	let messageEl = $state<HTMLTextAreaElement | null>(null);
+	let mailLink = $state<HTMLAnchorElement | null>(null);
+
+	const selectedHouse = $derived(housesSource.find((h) => h.slug === houseSlug));
 
 	const today = $derived(localIsoDate());
 	const minCheckOut = $derived(checkIn ? addDaysIso(checkIn, 2) : addDaysIso(today, 2));
 
-	$effect(() => {
-		checkInEl?.setCustomValidity(checkIn && checkIn < today ? t('datePast') : '');
-		checkOutEl?.setCustomValidity(
-			!checkIn || !checkOut
-				? ''
-				: checkOut <= checkIn
-					? t('dateOrder')
-					: checkOut < minCheckOut
-						? t('dateMinStay')
-						: ''
-		);
-		messageEl?.setCustomValidity(messageValidity(message));
-	});
+	function extraValidity(el: HTMLInputElement | HTMLTextAreaElement): string {
+		if (el.name === 'checkin') return checkIn && checkIn < today ? t('datePast') : '';
+		if (el.name === 'checkout') {
+			if (!checkIn || !checkOut) return '';
+			if (checkOut <= checkIn) return t('dateOrder');
+			if (checkOut < minCheckOut) return t('dateMinStay');
+			return '';
+		}
+		if (el.name === 'message') return messageValidity(message);
+		return '';
+	}
+
+	function localizeValidity(el: HTMLInputElement | HTMLTextAreaElement) {
+		el.setCustomValidity('');
+		if (el.validity.valueMissing) {
+			el.setCustomValidity(t('fieldRequired'));
+			return;
+		}
+		if (el.validity.typeMismatch) {
+			el.setCustomValidity(t('emailInvalid'));
+			return;
+		}
+		const extra = extraValidity(el);
+		if (extra) {
+			el.setCustomValidity(extra);
+			return;
+		}
+		if (el.validity.badInput || el.validity.rangeUnderflow || el.validity.rangeOverflow) {
+			if (el.type === 'date') {
+				el.setCustomValidity(el.name === 'checkin' ? t('datePast') : t('dateMinStay'));
+				return;
+			}
+			el.setCustomValidity(t('numberInvalid'));
+		}
+	}
+
+	function localizeForm(form: HTMLFormElement) {
+		for (const el of form.elements) {
+			if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+				localizeValidity(el);
+			}
+		}
+	}
 
 	function messageValidity(value: string): string {
 		if (value.length > MESSAGE_MAX_LENGTH) return t('messageTooLong');
@@ -46,18 +82,18 @@
 		return '';
 	}
 
-	function submit(event: Event) {
-		event.preventDefault();
-		const form = event.currentTarget as HTMLFormElement;
-		if (!form.checkValidity()) {
-			form.reportValidity();
-			return;
-		}
-		const subject = encodeURIComponent(`${heading} — ${name || t('mailGuest')}`);
+	const mailtoHref = $derived.by(() => {
+		const houseLabel = selectedHouse?.name ?? t('mailNoHouse');
+		const subject = encodeURIComponent(
+			selectedHouse
+				? `${heading} — ${selectedHouse.name} — ${name || t('mailGuest')}`
+				: `${heading} — ${name || t('mailGuest')}`
+		);
 		const body = encodeURIComponent(
 			[
 				`${t('mailName')}: ${name}`,
 				`${t('mailEmail')}: ${email}`,
+				`${t('mailHouse')}: ${houseLabel}`,
 				`${t('checkIn')}: ${checkIn}`,
 				`${t('checkOut')}: ${checkOut}`,
 				`${t('adults')}: ${adults}`,
@@ -66,7 +102,22 @@
 				message || t('mailNoMessage')
 			].join('\n')
 		);
-		window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+		return `mailto:${site.email}?subject=${subject}&body=${body}`;
+	});
+
+	function onMailClick(event: MouseEvent) {
+		const form = (event.currentTarget as HTMLElement).closest('form');
+		if (!form) return;
+		localizeForm(form);
+		if (!form.checkValidity()) {
+			event.preventDefault();
+			form.reportValidity();
+		}
+	}
+
+	function submit(event: Event) {
+		event.preventDefault();
+		mailLink?.click();
 	}
 
 	function localIsoDate(d = new Date()): string {
@@ -94,7 +145,7 @@
 			</p>
 		</div>
 
-		<form class="form" onsubmit={submit}>
+		<form class="form" novalidate onsubmit={submit}>
 			<label>
 				<span>{t('name')}</span>
 				<input type="text" name="name" bind:value={name} required autocomplete="name" />
@@ -103,11 +154,19 @@
 				<span>{t('email')}</span>
 				<input type="email" name="email" bind:value={email} required autocomplete="email" />
 			</label>
+			<label>
+				<span>{t('house')}</span>
+				<select name="casa" bind:value={houseSlug}>
+					<option value="">{t('houseAny')}</option>
+					{#each housesSource as house}
+						<option value={house.slug}>{house.name}</option>
+					{/each}
+				</select>
+			</label>
 			<div class="row">
 				<label>
 					<span>{t('checkIn')}</span>
 					<input
-						bind:this={checkInEl}
 						type="date"
 						name="checkin"
 						bind:value={checkIn}
@@ -118,7 +177,6 @@
 				<label>
 					<span>{t('checkOut')}</span>
 					<input
-						bind:this={checkOutEl}
 						type="date"
 						name="checkout"
 						bind:value={checkOut}
@@ -140,7 +198,6 @@
 			<label>
 				<span>{t('message')}</span>
 				<textarea
-					bind:this={messageEl}
 					name="message"
 					rows="5"
 					maxlength={MESSAGE_MAX_LENGTH}
@@ -149,7 +206,16 @@
 				></textarea>
 				<span class="char-count">{message.length}/{MESSAGE_MAX_LENGTH}</span>
 			</label>
-			<button class="btn" type="submit">{t('submit')}</button>
+			<a
+				bind:this={mailLink}
+				class="btn"
+				href={mailtoHref}
+				target="_blank"
+				rel="noopener noreferrer"
+				onclick={onMailClick}
+			>
+				{t('submit')}
+			</a>
 			<p class="hint">{t('hint')}</p>
 		</form>
 	</div>
@@ -212,6 +278,7 @@
 	}
 
 	input,
+	select,
 	textarea {
 		width: 100%;
 		padding: 0.8rem 0.9rem;
@@ -219,9 +286,15 @@
 		border-radius: var(--radius);
 		background: var(--paper);
 		color: var(--ink);
+		font: inherit;
+	}
+
+	select {
+		cursor: pointer;
 	}
 
 	input:focus,
+	select:focus,
 	textarea:focus {
 		outline: 2px solid color-mix(in srgb, var(--sea) 45%, transparent);
 		outline-offset: 1px;

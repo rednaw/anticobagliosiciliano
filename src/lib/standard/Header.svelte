@@ -2,7 +2,9 @@
 	import { page } from '$app/state';
 	import { housesSource, site } from '$lib/data/content';
 	import {
+		contactHref,
 		counterpartHref,
+		houseSlugFromPath,
 		pick,
 		siteHref,
 		standardHref,
@@ -24,6 +26,8 @@
 		{ subpath: '', label: pick(ui.navHouses, locale), hash: '#houses' },
 		{ subpath: 'imperdibili', label: pick(ui.navImperdibili, locale), hash: '' }
 	]);
+
+	const contactLink = $derived(contactHref(locale, houseSlugFromPath(page.url.pathname)));
 
 	function hrefFor(subpath: string, hash = '') {
 		return `${siteHref(locale, subpath)}${hash}`;
@@ -115,7 +119,7 @@
 	function langHref(target: Locale) {
 		const path = stripBase(page.url.pathname).replace(/\/+$/, '') || '/';
 		if (path.endsWith('404.html')) return siteHref(target);
-		return withBase(counterpartHref(page.url.pathname, target));
+		return `${withBase(counterpartHref(page.url.pathname, target))}${page.url.search}`;
 	}
 </script>
 
@@ -165,7 +169,7 @@
 			</div>
 			<a
 				class="nav-cta"
-				href={hrefFor('contatti')}
+				href={contactLink}
 				class:active={isActive('contatti')}
 				aria-current={isActive('contatti') ? 'page' : undefined}
 				onclick={close}>{pick(ui.requestAvailability, locale)}</a
