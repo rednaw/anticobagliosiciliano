@@ -657,12 +657,12 @@ export const privacyCopy = {
 	},
 	analyticsTitle: { it: 'Statistiche di visita', en: 'Visit statistics' },
 	analytics: {
-		it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics. Vedi l’',
-		en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics. See the '
+		it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics. ',
+		en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics. '
 	},
 	analyticsPolicy: {
-		it: 'informativa privacy di Simple Analytics',
-		en: 'Simple Analytics privacy policy'
+		it: 'Vedi quali dati vengono raccolti',
+		en: 'See what data is collected'
 	},
 	cookiesTitle: { it: 'Cookie', en: 'Cookies' },
 	cookies: {

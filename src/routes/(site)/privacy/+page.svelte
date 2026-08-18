@@ -24,7 +24,7 @@
 
 		<h2>{t('analyticsTitle')}</h2>
 		<p>
-			{t('analytics')}<a href="https://www.simpleanalytics.com/privacy-policy">{t('analyticsPolicy')}</a>.
+			{t('analytics')}<a href="https://www.simpleanalytics.com/data-collection">{t('analyticsPolicy')}</a>.
 		</p>
 
 		<h2>{t('cookiesTitle')}</h2>
