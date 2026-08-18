@@ -25,6 +25,7 @@
 
 	let ended = $state(false);
 	let playing = $state(false);
+	let started = $state(false);
 	let reduceMotion = $state(false);
 
 	const showControl = $derived(!playing && (reduceMotion || ended));
@@ -37,6 +38,16 @@
 		} catch {
 			// iOS Low Power Mode and strict autoplay policies land here: leave the poster up.
 		}
+	}
+
+	function holdLastFrame() {
+		if (!el || ended) return;
+		const duration = el.duration;
+		if (!Number.isFinite(duration) || duration <= 0) return;
+		if (duration - el.currentTime > 0.1) return;
+		ended = true;
+		playing = false;
+		el.pause();
 	}
 
 	async function playFromControl() {
@@ -88,7 +99,7 @@
 	{#if posterSrcset}
 		<img
 			class="poster"
-			class:hide={playing}
+			class:hide={started}
 			src={imageAsset(poster)}
 			srcset={posterSrcset}
 			sizes={posterSizes}
@@ -104,12 +115,12 @@
 		preload="none"
 		poster={posterSrcset ? undefined : imageAsset(poster)}
 		aria-label={label}
-		onplay={() => (playing = true)}
-		onpause={() => (playing = false)}
-		onended={() => {
-			ended = true;
-			playing = false;
+		onplay={() => {
+			playing = true;
+			started = true;
 		}}
+		onpause={() => (playing = false)}
+		ontimeupdate={holdLastFrame}
 	>
 		<source src={asset(src)} type="video/mp4" />
 		{pick(ui.videoUnsupported, locale)}
