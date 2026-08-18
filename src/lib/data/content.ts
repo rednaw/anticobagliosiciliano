@@ -90,10 +90,9 @@ export const housesSource: HouseSource[] = [
 			]
 		},
 		highlights: {
-			it: ['Terrazza sui tetti 15 mq', 'Vista uliveto', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
+			it: ['Terrazza sull’uliveto (15 mq)', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
 			en: [
-				'Terrace on the roofs (15 sq m)',
-				'Olive grove view',
+				'Terrace overlooking the olive grove (15 sq m)',
 				'Equipped kitchen',
 				'Heating and air conditioning'
 			]
@@ -153,11 +152,10 @@ export const housesSource: HouseSource[] = [
 			]
 		},
 		highlights: {
-			it: ['Terrazza 15 mq', 'Vista uliveto', 'Ideale per coppie', 'Riscaldamento e aria condizionata'],
+			it: ['Terrazza sull’uliveto (15 mq)', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
 			en: [
-				'Terrace (15 sq m)',
-				'Olive grove view',
-				'Ideal for couples',
+				'Terrace overlooking the olive grove (15 sq m)',
+				'Equipped kitchen',
 				'Heating and air conditioning'
 			]
 		}
@@ -206,11 +204,10 @@ export const housesSource: HouseSource[] = [
 			]
 		},
 		highlights: {
-			it: ['3 camere da letto', 'Terrazza sull’uliveto', 'Cucina con forno', 'Riscaldamento e aria condizionata'],
+			it: ['Terrazza sull’uliveto (15 mq)', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
 			en: [
-				'3 bedrooms',
-				'Terrace overlooking the olive grove',
-				'Kitchen with oven',
+				'Terrace overlooking the olive grove (15 sq m)',
+				'Equipped kitchen',
 				'Heating and air conditioning'
 			]
 		}
@@ -269,11 +266,11 @@ export const housesSource: HouseSource[] = [
 			]
 		},
 		highlights: {
-			it: ['Patio interno privato', 'Vista Golfo di Castellammare', '2 bagni', 'Riscaldamento e aria condizionata'],
+			it: ['Patio interno privato', 'Terrazza con vista sul Golfo di Castellammare', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
 			en: [
 				'Private interior patio',
-				'View over the Gulf of Castellammare',
-				'2 bathrooms',
+				'Terrace with view over the Gulf of Castellammare',
+        'Equipped kitchen',
 				'Heating and air conditioning'
 			]
 		}
