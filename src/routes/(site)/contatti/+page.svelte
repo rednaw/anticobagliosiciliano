@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 	import { contactCopy, housesSource, site } from '$lib/data/content';
 	import Picker from '$lib/standard/Picker.svelte';
 	import StayDates from '$lib/standard/StayDates.svelte';
@@ -24,13 +25,9 @@
 	const heading = $derived(pick(ui.requestAvailability, locale));
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
 
-	const requestedHouse = page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '';
-
 	let name = $state('');
 	let email = $state('');
-	let houseSlug = $state(
-		housesSource.some((h) => h.slug === requestedHouse) ? requestedHouse : ''
-	);
+	let houseSlug = $state('');
 	let checkIn = $state('');
 	let checkOut = $state('');
 	let adults = $state('2');
@@ -38,6 +35,11 @@
 	let message = $state('');
 	let mailLink = $state<HTMLAnchorElement | null>(null);
 	let dateError = $state('');
+
+	onMount(() => {
+		const requested = page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '';
+		if (housesSource.some((h) => h.slug === requested)) houseSlug = requested;
+	});
 
 	const selectedHouse = $derived(housesSource.find((h) => h.slug === houseSlug));
 	const houseOptions = $derived([

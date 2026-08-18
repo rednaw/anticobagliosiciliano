@@ -37,8 +37,7 @@ export default defineConfig({
 				strict: true
 			}),
 			prerender: {
-				entries: ['*'],
-				handleHttpError: 'warn'
+				entries: ['*']
 			}
 		})
 	]

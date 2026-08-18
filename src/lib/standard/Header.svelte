@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { building } from '$app/environment';
 	import { housesSource, site } from '$lib/data/content';
 	import {
 		contactHref,
@@ -119,7 +120,8 @@
 	function langHref(target: Locale) {
 		const path = stripBase(page.url.pathname).replace(/\/+$/, '') || '/';
 		if (path.endsWith('404.html')) return siteHref(target);
-		return `${withBase(counterpartHref(page.url.pathname, target))}${page.url.search}`;
+		const search = building ? '' : page.url.search;
+		return `${withBase(counterpartHref(page.url.pathname, target))}${search}`;
 	}
 </script>
 
