@@ -27,6 +27,7 @@
 				alt={t('mapAlt')}
 				width="1536"
 				height="1024"
+				fetchpriority="high"
 			/>
 			<figcaption>
 				<a href="https://www.openstreetmap.org/copyright">{t('attribution')}</a>
