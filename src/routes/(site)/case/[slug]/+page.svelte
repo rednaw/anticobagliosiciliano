@@ -115,7 +115,7 @@
 		padding-bottom: 2.5rem;
 	}
 
-	.eyebrow {
+	.copy .eyebrow {
 		color: color-mix(in srgb, var(--sun) 80%, #fff);
 	}
 
