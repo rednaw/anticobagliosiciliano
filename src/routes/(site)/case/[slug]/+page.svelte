@@ -15,7 +15,7 @@
 </script>
 
 <section class="hero">
-	<img src={imageAsset(house.image)} alt={house.name} />
+	<img src={imageAsset(house.image)} alt={house.name} width="1400" height="933" />
 	<div class="veil"></div>
 	<div class="container copy">
 		<p class="eyebrow">{pick(ui.accommodation, locale)}</p>
@@ -75,7 +75,13 @@
 			{#each others as other, i}
 				<Reveal delay={i * 70}>
 					<a href={siteHref(locale, `case/${other.slug}`)}>
-						<img src={imageAsset(other.image)} alt={other.name} loading="lazy" />
+						<img
+							src={imageAsset(other.image)}
+							alt={other.name}
+							width="1600"
+							height="1100"
+							loading="lazy"
+						/>
 						<span>{other.name}</span>
 					</a>
 				</Reveal>

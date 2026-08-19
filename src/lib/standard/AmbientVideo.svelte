@@ -103,6 +103,8 @@
 			src={imageAsset(poster)}
 			srcset={posterSrcset}
 			sizes={posterSizes}
+			width="1600"
+			height="900"
 			alt=""
 			aria-hidden="true"
 		/>
@@ -113,6 +115,8 @@
 		muted
 		playsinline
 		preload="none"
+		width="1600"
+		height="900"
 		poster={posterSrcset ? undefined : imageAsset(poster)}
 		aria-label={label}
 		onplay={() => {
@@ -153,6 +157,7 @@
 	video {
 		display: block;
 		width: 100%;
+		height: auto;
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
 		background: #000;

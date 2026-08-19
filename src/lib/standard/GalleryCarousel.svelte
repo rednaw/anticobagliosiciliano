@@ -60,7 +60,7 @@
 		aria-label={`${pick(ui.gallery, locale)} ${alt}`}
 	>
 		<div class="stage">
-			<img src={imageAsset(current)} alt={photoAlt} />
+			<img src={imageAsset(current)} alt={photoAlt} width="1600" height="1100" />
 			{#if count > 1}
 				<button
 					type="button"
@@ -96,7 +96,7 @@
 						onclick={() => go(i)}
 						onkeydown={onKeydown}
 					>
-						<img src={imageAsset(src)} alt="" loading="lazy" />
+						<img src={imageAsset(src)} alt="" width="1600" height="1100" loading="lazy" />
 					</button>
 				{/each}
 			</div>

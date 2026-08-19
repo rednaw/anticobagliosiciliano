@@ -16,7 +16,7 @@ npm run dev
 ### Dependency updates
 
 [Renovate](https://docs.renovatebot.com/) runs daily from GitHub Actions (no GitHub
-App) and opens dependency PRs. Setup: [`docs/dependency-updates.md`](docs/dependency-updates.md).
+App) and opens dependency PRs.
 
 ## Build
 

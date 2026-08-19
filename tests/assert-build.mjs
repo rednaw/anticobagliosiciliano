@@ -4,7 +4,7 @@
  * GitHub Pages refresh-404: the build succeeded while every real HTML page
  * failed to generate, so `index.html` was the NotFound document.
  */
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 

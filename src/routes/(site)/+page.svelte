@@ -32,6 +32,8 @@
 		src={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
 		alt=""
 		aria-hidden="true"
+		width="1248"
+		height="1229"
 		fetchpriority="high"
 	/>
 	<picture>
@@ -43,6 +45,8 @@
 				'/images/ambiance/hero-portone-tall.jpg'
 			)} 1248w"
 			sizes="100vw"
+			width="1248"
+			height="1690"
 			alt={home.alt.hero}
 		/>
 	</picture>
@@ -93,7 +97,13 @@
 			{#each houseList as house, i}
 				<Reveal delay={i * 80}>
 					<a class="house" href={siteHref(locale, `case/${house.slug}`)}>
-						<img src={imageAsset(house.image)} alt={house.name} loading="lazy" />
+						<img
+							src={imageAsset(house.image)}
+							alt={house.name}
+							width="1600"
+							height="1100"
+							loading="lazy"
+						/>
 						<div class="house-body">
 							<div class="house-meta">
 								<span>{house.guests}</span>
@@ -111,7 +121,13 @@
 </section>
 
 <section class="feature">
-	<img src={imageAsset('/images/ambiance/cortile.jpg')} alt={home.alt.cortile} loading="lazy" />
+	<img
+		src={imageAsset('/images/ambiance/cortile.jpg')}
+		alt={home.alt.cortile}
+		width="1400"
+		height="1867"
+		loading="lazy"
+	/>
 	<div class="feature-panel">
 		<Reveal>
 			<p class="eyebrow">{home.cortile.eyebrow}</p>
@@ -133,8 +149,20 @@
 		</Reveal>
 		<Reveal delay={100}>
 			<div class="garden-photos">
-				<img src={imageAsset('/images/ambiance/giardino.jpg')} alt={home.alt.giardino} loading="lazy" />
-				<img src={imageAsset('/images/ambiance/agrumeto.jpg')} alt={home.alt.agrumeto} loading="lazy" />
+				<img
+					src={imageAsset('/images/ambiance/giardino.jpg')}
+					alt={home.alt.giardino}
+					width="1024"
+					height="768"
+					loading="lazy"
+				/>
+				<img
+					src={imageAsset('/images/ambiance/agrumeto.jpg')}
+					alt={home.alt.agrumeto}
+					width="1600"
+					height="1067"
+					loading="lazy"
+				/>
 			</div>
 		</Reveal>
 	</div>
@@ -165,7 +193,13 @@
 			{#each awardList as award, i}
 				<Reveal delay={i * 70}>
 					<figure>
-						<img src={imageAsset(award.image)} alt={award.title} loading="lazy" />
+						<img
+							src={imageAsset(award.image)}
+							alt={award.title}
+							width="1600"
+							height="1000"
+							loading="lazy"
+						/>
 						<figcaption>
 							<strong>{award.title}</strong>
 							<span>{award.text}</span>
@@ -211,7 +245,13 @@
 			{#each placeList as place, i}
 				<Reveal delay={i * 50}>
 					<a class="place" href="{imperdibili}#{place.slug}">
-						<img src={imageAsset(place.image)} alt={place.name} loading="lazy" />
+						<img
+							src={imageAsset(place.image)}
+							alt={place.name}
+							width="1600"
+							height="1200"
+							loading="lazy"
+						/>
 						<div>
 							<span>{place.time}</span>
 							<h3>{place.name}</h3>

@@ -22,7 +22,13 @@
 		{#each placeList as place, i}
 			<Reveal delay={(i % 3) * 50}>
 				<article id={place.slug}>
-					<img src={imageAsset(place.image)} alt={place.name} loading="lazy" />
+					<img
+						src={imageAsset(place.image)}
+						alt={place.name}
+						width="1600"
+						height="1100"
+						loading="lazy"
+					/>
 					<div class="body">
 						<span class="time">{place.time}</span>
 						<h2>{place.name}</h2>
