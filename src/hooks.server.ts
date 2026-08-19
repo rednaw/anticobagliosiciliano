@@ -1,5 +1,5 @@
 import { localeFromPath } from '$lib/locale';
-import { SITE_HOSTNAME } from '$lib/site-config';
+import { SIMPLE_ANALYTICS_HOSTNAME } from '$lib/site-config';
 import type { Handle } from '@sveltejs/kit';
 
 /** Prerendered HTML must carry the right `lang` and analytics hostname. */
@@ -9,6 +9,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 		transformPageChunk: ({ html }) =>
 			html
 				.replace('<html lang="it">', `<html lang="${locale}">`)
-				.replaceAll('__SITE_HOSTNAME__', SITE_HOSTNAME)
+				.replaceAll('__SIMPLE_ANALYTICS_HOSTNAME__', SIMPLE_ANALYTICS_HOSTNAME)
 	});
 };

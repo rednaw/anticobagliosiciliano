@@ -14,10 +14,15 @@ const siteConfig = readFileSync(path.join(root, 'src/lib/site-config.ts'), 'utf8
 
 const SITE_BASE = siteConfig.match(/export const SITE_BASE = '([^']*)'/)?.[1];
 const SITE_HOSTNAME = siteConfig.match(/export const SITE_HOSTNAME = '([^']*)'/)?.[1];
+const SIMPLE_ANALYTICS_HOSTNAME = siteConfig.match(
+	/export const SIMPLE_ANALYTICS_HOSTNAME = '([^']*)'/
+)?.[1];
 const SITE_PUBLIC = /export const SITE_PUBLIC = true/.test(siteConfig);
 
-if (SITE_BASE === undefined || !SITE_HOSTNAME) {
-	console.error('Could not parse SITE_BASE / SITE_HOSTNAME from src/lib/site-config.ts');
+if (SITE_BASE === undefined || !SITE_HOSTNAME || !SIMPLE_ANALYTICS_HOSTNAME) {
+	console.error(
+		'Could not parse SITE_BASE / SITE_HOSTNAME / SIMPLE_ANALYTICS_HOSTNAME from src/lib/site-config.ts'
+	);
 	process.exit(1);
 }
 
@@ -70,8 +75,14 @@ assert(homepage.length > 0, 'build/index.html exists');
 assert(/<h1[^>]*>Antico Baglio Siciliano<\/h1>/.test(homepage), 'homepage h1 is the baglio name, not a 404');
 assert(!isNotFoundPage(homepage), 'homepage is not the NotFound document');
 assert(/<html lang="it">/.test(homepage), 'homepage html lang is it');
-assert(homepage.includes(`data-hostname="${SITE_HOSTNAME}"`), 'Simple Analytics hostname is filled in');
-assert(!homepage.includes('__SITE_HOSTNAME__'), 'prerender placeholder __SITE_HOSTNAME__ is gone');
+assert(
+	homepage.includes(`data-hostname="${SIMPLE_ANALYTICS_HOSTNAME}"`),
+	'Simple Analytics hostname is filled in'
+);
+assert(
+	!homepage.includes('__SIMPLE_ANALYTICS_HOSTNAME__'),
+	'prerender placeholder __SIMPLE_ANALYTICS_HOSTNAME__ is gone'
+);
 assert(
 	homepage.includes('scripts.simpleanalyticscdn.com/latest.js'),
 	'production HTML keeps Simple Analytics'

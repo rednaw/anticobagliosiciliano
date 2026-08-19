@@ -25,4 +25,11 @@ describe('prerender regressions', () => {
 		const beforeMount = contact.slice(0, contact.indexOf('onMount'));
 		expect(beforeMount).not.toMatch(/page\.url\.search/);
 	});
+
+	it('reports Simple Analytics under SIMPLE_ANALYTICS_HOSTNAME, not SITE_HOSTNAME', () => {
+		expect(read('src/app.html')).toContain('data-hostname="__SIMPLE_ANALYTICS_HOSTNAME__"');
+		const hooks = read('src/hooks.server.ts');
+		expect(hooks).toMatch(/replaceAll\('__SIMPLE_ANALYTICS_HOSTNAME__',\s*SIMPLE_ANALYTICS_HOSTNAME\)/);
+		expect(hooks).not.toMatch(/replaceAll\([^)]*SITE_HOSTNAME/);
+	});
 });
