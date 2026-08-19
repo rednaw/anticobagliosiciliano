@@ -2,6 +2,7 @@
 	import { tick } from 'svelte';
 	import { dismissable } from '$lib/standard/dismiss';
 	import FieldTrigger from '$lib/standard/FieldTrigger.svelte';
+	import { optionIndexAfterKey } from '$lib/standard/picker';
 
 	type Option = { value: string; label: string };
 
@@ -18,24 +19,39 @@
 	const listId = $props.id();
 
 	let open = $state(false);
+	let activeIndex = $state(0);
 	let rootEl = $state<HTMLDivElement | null>(null);
 	let triggerEl = $state<HTMLInputElement | null>(null);
 
 	const shown = $derived(options.find((option) => option.value === value)?.label ?? '');
+	const activeId = $derived(`${listId}-${activeIndex}`);
 
 	$effect(() => {
 		if (!open || !rootEl) return;
 		return dismissable(rootEl, close);
 	});
 
+	$effect(() => {
+		if (!open) return;
+		activeIndex;
+		queueMicrotask(() => {
+			rootEl?.querySelector<HTMLElement>('.option.active')?.scrollIntoView({ block: 'nearest' });
+		});
+	});
+
+	function indexOfValue() {
+		const index = options.findIndex((option) => option.value === value);
+		return index < 0 ? 0 : index;
+	}
+
 	async function toggle() {
 		if (open) {
 			close(true);
 			return;
 		}
+		activeIndex = indexOfValue();
 		open = true;
 		await tick();
-		rootEl?.querySelector<HTMLElement>('.option.selected')?.scrollIntoView({ block: 'nearest' });
 	}
 
 	function close(restoreFocus: boolean) {
@@ -47,6 +63,33 @@
 		value = option.value;
 		close(true);
 	}
+
+	function onTriggerKey(event: KeyboardEvent) {
+		if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+			event.preventDefault();
+			if (!open) {
+				activeIndex = indexOfValue();
+				open = true;
+				return;
+			}
+			const next = optionIndexAfterKey(event.key, activeIndex, options.length);
+			if (next !== null) activeIndex = next;
+			return;
+		}
+		if (!open) return;
+		const jumped = optionIndexAfterKey(event.key, activeIndex, options.length);
+		if (jumped !== null) {
+			event.preventDefault();
+			activeIndex = jumped;
+			return;
+		}
+		if (event.key === 'Enter' || event.key === ' ') {
+			const option = options[activeIndex];
+			if (!option) return;
+			event.preventDefault();
+			select(option);
+		}
+	}
 </script>
 
 <div class="picker" bind:this={rootEl}>
@@ -56,16 +99,24 @@
 		{open}
 		text={shown}
 		controls={listId}
+		haspopup="listbox"
+		activedescendant={activeId}
 		onactivate={toggle}
+		onkeydown={onTriggerKey}
 	/>
 
 	{#if open}
-		<div class="menu" id={listId} role="dialog" aria-label={label}>
-			{#each options as option}
+		<div class="menu" id={listId} role="listbox" aria-label={label}>
+			{#each options as option, i}
 				<button
+					id={`${listId}-${i}`}
 					type="button"
 					class="option"
 					class:selected={option.value === value}
+					class:active={i === activeIndex}
+					role="option"
+					tabindex="-1"
+					aria-selected={option.value === value}
 					onpointerdown={(event) => event.preventDefault()}
 					onclick={() => select(option)}
 				>
@@ -111,8 +162,14 @@
 		cursor: pointer;
 	}
 
-	.option:hover {
+	.option:hover,
+	.option.active:not(.selected) {
 		background: color-mix(in srgb, var(--sea) 8%, var(--paper));
+	}
+
+	.option.active {
+		outline: 2px solid var(--sea);
+		outline-offset: -2px;
 	}
 
 	.option.selected,

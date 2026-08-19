@@ -8,7 +8,11 @@
 		invalid = false,
 		controls,
 		describedby,
-		onactivate
+		activedescendant,
+		haspopup = 'dialog',
+		onactivate,
+		onkeydown,
+		onfocus
 	}: {
 		el?: HTMLInputElement | null;
 		label: string;
@@ -18,10 +22,16 @@
 		invalid?: boolean;
 		controls: string;
 		describedby?: string;
+		activedescendant?: string;
+		haspopup?: 'dialog' | 'listbox';
 		onactivate: () => void;
+		onkeydown?: (event: KeyboardEvent) => void;
+		onfocus?: () => void;
 	} = $props();
 
 	function onKeyDown(event: KeyboardEvent) {
+		onkeydown?.(event);
+		if (event.defaultPrevented) return;
 		if (event.key !== 'Enter' && event.key !== ' ') return;
 		event.preventDefault();
 		onactivate();
@@ -42,11 +52,13 @@
 		inputmode="none"
 		autocomplete="off"
 		role="combobox"
-		aria-haspopup="dialog"
+		aria-haspopup={haspopup}
 		aria-expanded={open}
 		aria-controls={open ? controls : undefined}
+		aria-activedescendant={open ? activedescendant : undefined}
 		aria-describedby={describedby}
 		onclick={onactivate}
+		onfocus={onfocus}
 		onkeydown={onKeyDown}
 	/>
 </label>

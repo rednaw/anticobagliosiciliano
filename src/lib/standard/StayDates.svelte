@@ -4,10 +4,14 @@
 	import FieldTrigger from '$lib/standard/FieldTrigger.svelte';
 	import {
 		applyDaySelection,
+		cursorAfterKey,
 		isoDate,
 		isDayDisabled,
+		addMonths,
+		minCheckOut,
 		monthCells,
 		monthStart,
+		nearestEnabled,
 		parseIso,
 		weekdayLabels
 	} from '$lib/standard/stay-dates';
@@ -33,6 +37,7 @@
 	let open = $state(false);
 	let picking = $state<'in' | 'out'>('in');
 	let view = $state(monthStart(new Date()));
+	let cursor = $state(today);
 	let rootEl = $state<HTMLDivElement | null>(null);
 	let inEl = $state<HTMLInputElement | null>(null);
 	let outEl = $state<HTMLInputElement | null>(null);
@@ -44,16 +49,26 @@
 		new Intl.DateTimeFormat(intlLocale, { month: 'long', year: 'numeric' }).format(view)
 	);
 	const cells = $derived(monthCells(view));
+	const weeks = $derived(
+		Array.from({ length: cells.length / 7 }, (_, week) => cells.slice(week * 7, week * 7 + 7))
+	);
 	const canPrev = $derived(view > monthStart(parseIso(today)));
+	const cursorId = $derived(`${calendarId}-${cursor}`);
 
 	$effect(() => {
 		if (!open || !rootEl) return;
 		return dismissable(rootEl, close);
 	});
 
+	function setCursor(iso: string) {
+		cursor = iso;
+		view = monthStart(parseIso(iso));
+	}
+
 	function openFor(which: 'in' | 'out') {
 		picking = which === 'out' && checkIn ? 'out' : 'in';
-		view = monthStart(parseIso((which === 'out' && checkOut) || checkIn || today));
+		const start = (which === 'out' && checkOut) || checkIn || today;
+		setCursor(nearestEnabled(start, picking, today, checkIn));
 		open = true;
 	}
 
@@ -68,8 +83,12 @@
 		checkIn = next.checkIn;
 		checkOut = next.checkOut;
 		picking = next.picking;
-		if (next.done) close(true);
-		else outEl?.focus();
+		if (next.done) {
+			close(true);
+			return;
+		}
+		setCursor(nearestEnabled(next.checkOut || minCheckOut(next.checkIn, today), 'out', today, next.checkIn));
+		outEl?.focus();
 	}
 
 	function dayDisabled(iso: string) {
@@ -85,7 +104,32 @@
 	}
 
 	function shiftMonth(delta: number) {
-		view = new Date(view.getFullYear(), view.getMonth() + delta, 1);
+		setCursor(nearestEnabled(addMonths(cursor, delta), picking, today, checkIn));
+	}
+
+	function onFocusField(which: 'in' | 'out') {
+		if (open && picking !== which) openFor(which);
+	}
+
+	function onTriggerKey(which: 'in' | 'out', event: KeyboardEvent) {
+		if (!open) {
+			if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+				event.preventDefault();
+				openFor(which);
+			}
+			return;
+		}
+		if (picking !== which) openFor(which);
+		const next = cursorAfterKey(event.key, cursor, picking, today, checkIn);
+		if (next !== null) {
+			event.preventDefault();
+			setCursor(next);
+			return;
+		}
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			if (!dayDisabled(cursor)) selectDay(cursor);
+		}
 	}
 </script>
 
@@ -100,7 +144,10 @@
 			invalid={Boolean(error)}
 			controls={calendarId}
 			describedby={error ? errorId : undefined}
+			activedescendant={cursorId}
 			onactivate={() => openFor('in')}
+			onfocus={() => onFocusField('in')}
+			onkeydown={(event) => onTriggerKey('in', event)}
 		/>
 		<FieldTrigger
 			bind:el={outEl}
@@ -111,7 +158,10 @@
 			invalid={Boolean(error)}
 			controls={calendarId}
 			describedby={error ? errorId : undefined}
+			activedescendant={cursorId}
 			onactivate={() => openFor('out')}
+			onfocus={() => onFocusField('out')}
+			onkeydown={(event) => onTriggerKey('out', event)}
 		/>
 	</div>
 
@@ -125,6 +175,7 @@
 				<button
 					type="button"
 					class="nav"
+					tabindex="-1"
 					disabled={!canPrev}
 					aria-label={t('datePrevMonth')}
 					onpointerdown={(event) => event.preventDefault()}
@@ -136,6 +187,7 @@
 				<button
 					type="button"
 					class="nav"
+					tabindex="-1"
 					aria-label={t('dateNextMonth')}
 					onpointerdown={(event) => event.preventDefault()}
 					onclick={() => shiftMonth(1)}
@@ -148,27 +200,35 @@
 					<span>{day}</span>
 				{/each}
 			</div>
-			<div class="grid">
-				{#each cells as iso}
-					{#if iso}
-						<button
-							type="button"
-							class="day"
-							class:start={iso === checkIn}
-							class:end={iso === checkOut}
-							class:range={Boolean(checkIn && checkOut && iso > checkIn && iso < checkOut)}
-							class:today={iso === today}
-							disabled={dayDisabled(iso)}
-							aria-pressed={iso === checkIn || iso === checkOut}
-							aria-label={formatDate(iso)}
-							onpointerdown={(event) => event.preventDefault()}
-							onclick={() => selectDay(iso)}
-						>
-							{Number(iso.slice(8))}
-						</button>
-					{:else}
-						<span class="pad"></span>
-					{/if}
+			<div class="grid" role="grid" aria-readonly="true">
+				{#each weeks as week}
+					<div class="week" role="row">
+						{#each week as iso}
+							{#if iso}
+								<button
+									id={`${calendarId}-${iso}`}
+									type="button"
+									class="day"
+									class:start={iso === checkIn}
+									class:end={iso === checkOut}
+									class:range={Boolean(checkIn && checkOut && iso > checkIn && iso < checkOut)}
+									class:today={iso === today}
+									class:cursor={iso === cursor}
+									tabindex="-1"
+									role="gridcell"
+									disabled={dayDisabled(iso)}
+									aria-selected={iso === checkIn || iso === checkOut}
+									aria-label={formatDate(iso)}
+									onpointerdown={(event) => event.preventDefault()}
+									onclick={() => selectDay(iso)}
+								>
+									{Number(iso.slice(8))}
+								</button>
+							{:else}
+								<span class="pad" role="gridcell"></span>
+							{/if}
+						{/each}
+					</div>
 				{/each}
 			</div>
 			<p class="hint">{t('dateMinStayHint')}</p>
@@ -245,6 +305,12 @@
 	.dow,
 	.grid {
 		display: grid;
+		gap: 0.15rem;
+	}
+
+	.dow,
+	.week {
+		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 		gap: 0.15rem;
 	}
@@ -277,6 +343,17 @@
 
 	.day.today:not(.start):not(.end) {
 		box-shadow: inset 0 0 0 1px var(--line);
+	}
+
+	.day.cursor:not(.start):not(.end) {
+		outline: 2px solid var(--sea);
+		outline-offset: -2px;
+	}
+
+	.day.cursor.start,
+	.day.cursor.end {
+		outline: 2px solid #fff;
+		outline-offset: -3px;
 	}
 
 	.day.range {

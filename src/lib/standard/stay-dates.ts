@@ -63,3 +63,77 @@ export function monthCells(month: Date): (string | null)[] {
 	while (cells.length % 7) cells.push(null);
 	return cells;
 }
+
+export function addMonths(iso: string, months: number): string {
+	const date = parseIso(iso);
+	const day = date.getDate();
+	date.setDate(1);
+	date.setMonth(date.getMonth() + months);
+	const last = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+	date.setDate(Math.min(day, last));
+	return isoDate(date);
+}
+
+function snapEnabled(
+	iso: string,
+	dir: 1 | -1,
+	picking: 'in' | 'out',
+	today: string,
+	checkIn: string
+): string | null {
+	let next = iso;
+	for (let i = 0; i < 400; i++) {
+		if (!isDayDisabled(next, picking, today, checkIn)) return next;
+		next = addDays(next, dir);
+	}
+	return null;
+}
+
+/** First selectable day on or after `iso`, else `iso` itself. */
+export function nearestEnabled(
+	iso: string,
+	picking: 'in' | 'out',
+	today: string,
+	checkIn: string
+): string {
+	return snapEnabled(iso, 1, picking, today, checkIn) ?? iso;
+}
+
+/** Next calendar cursor, or null if the key is not a calendar move. */
+export function cursorAfterKey(
+	key: string,
+	cursor: string,
+	picking: 'in' | 'out',
+	today: string,
+	checkIn: string
+): string | null {
+	const step = (delta: number) => {
+		const sign: 1 | -1 = delta >= 0 ? 1 : -1;
+		return snapEnabled(addDays(cursor, delta), sign, picking, today, checkIn) ?? cursor;
+	};
+
+	switch (key) {
+		case 'ArrowLeft':
+			return step(-1);
+		case 'ArrowRight':
+			return step(1);
+		case 'ArrowUp':
+			return step(-7);
+		case 'ArrowDown':
+			return step(7);
+		case 'PageUp':
+			return nearestEnabled(addMonths(cursor, -1), picking, today, checkIn);
+		case 'PageDown':
+			return nearestEnabled(addMonths(cursor, 1), picking, today, checkIn);
+		case 'Home': {
+			const fromMonday = (parseIso(cursor).getDay() + 6) % 7;
+			return snapEnabled(addDays(cursor, -fromMonday), 1, picking, today, checkIn) ?? cursor;
+		}
+		case 'End': {
+			const fromMonday = (parseIso(cursor).getDay() + 6) % 7;
+			return snapEnabled(addDays(cursor, 6 - fromMonday), -1, picking, today, checkIn) ?? cursor;
+		}
+		default:
+			return null;
+	}
+}

@@ -2,12 +2,15 @@ import { describe, expect, it } from 'vitest';
 import {
 	MIN_STAY,
 	addDays,
+	addMonths,
 	applyDaySelection,
+	cursorAfterKey,
 	isoDate,
 	isDayDisabled,
 	minCheckOut,
 	monthCells,
 	monthStart,
+	nearestEnabled,
 	parseIso,
 	weekdayLabels
 } from './stay-dates';
@@ -91,5 +94,40 @@ describe('weekdayLabels', () => {
 	it('starts the week on Monday in Italian and English', () => {
 		expect(weekdayLabels('it-IT')[0].toLowerCase()).toMatch(/^lun/);
 		expect(weekdayLabels('en-GB')[0].toLowerCase()).toMatch(/^mon/);
+	});
+});
+
+describe('addMonths', () => {
+	it('clamps the day when the next month is shorter', () => {
+		expect(addMonths('2026-01-31', 1)).toBe('2026-02-28');
+		expect(addMonths('2026-03-31', -1)).toBe('2026-02-28');
+	});
+});
+
+describe('nearestEnabled', () => {
+	it('skips past days and the night after check-in', () => {
+		expect(nearestEnabled('2026-08-10', 'in', today, '')).toBe('2026-08-19');
+		expect(nearestEnabled('2026-08-21', 'out', today, '2026-08-20')).toBe('2026-08-22');
+		expect(nearestEnabled('2026-08-24', 'out', today, '2026-08-20')).toBe('2026-08-24');
+	});
+});
+
+describe('cursorAfterKey', () => {
+	it('moves by day and week, and stops at today when picking check-in', () => {
+		expect(cursorAfterKey('ArrowRight', today, 'in', today, '')).toBe('2026-08-20');
+		expect(cursorAfterKey('ArrowLeft', today, 'in', today, '')).toBe(today);
+		expect(cursorAfterKey('ArrowDown', today, 'in', today, '')).toBe('2026-08-26');
+		expect(cursorAfterKey('Enter', today, 'in', today, '')).toBeNull();
+	});
+
+	it('snaps Home to the first selectable day of the week', () => {
+		expect(cursorAfterKey('Home', '2026-08-21', 'in', today, '')).toBe(today);
+		expect(cursorAfterKey('End', '2026-08-19', 'in', today, '')).toBe('2026-08-23');
+	});
+
+	it('turns the page by month without landing on a disabled day', () => {
+		expect(cursorAfterKey('PageDown', today, 'in', today, '')).toBe('2026-09-19');
+		expect(cursorAfterKey('PageUp', today, 'in', today, '')).toBe(today);
+		expect(cursorAfterKey('PageUp', '2026-09-05', 'in', today, '')).toBe(today);
 	});
 });
