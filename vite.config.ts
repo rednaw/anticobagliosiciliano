@@ -44,6 +44,11 @@ export default defineConfig({
 	],
 	test: {
 		include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],
-		environment: 'node'
+		environment: 'node',
+		coverage: {
+			provider: 'v8',
+			include: ['src/**/*.{ts,svelte}'],
+			exclude: ['src/**/*.test.ts', 'src/**/*.dom.test.ts']
+		}
 	}
 });

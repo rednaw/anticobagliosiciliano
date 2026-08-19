@@ -5,6 +5,7 @@ import {
 	contactHref,
 	counterpartHref,
 	houseSlugFromPath,
+	navLinkActive,
 	siteHref,
 	standardHref,
 	withBase
@@ -44,6 +45,21 @@ describe('contactHref', () => {
 		expect(contactHref('en', 'casa-2')).toBe(
 			`/anticobagliosiciliano/en/contatti/?${CONTACT_HOUSE_PARAM}=casa-2`
 		);
+	});
+});
+
+describe('navLinkActive', () => {
+	it('marks the current section, never the houses hash', () => {
+		expect(navLinkActive('/anticobagliosiciliano/', 'it', '')).toBe(true);
+		expect(navLinkActive('/anticobagliosiciliano/', 'it', '', '#houses')).toBe(false);
+		expect(navLinkActive('/anticobagliosiciliano/case/casa-1/', 'it', '')).toBe(false);
+		expect(navLinkActive('/anticobagliosiciliano/case/casa-1/', 'it', 'case/casa-1')).toBe(true);
+		expect(navLinkActive('/anticobagliosiciliano/imperdibili/', 'it', 'imperdibili')).toBe(true);
+		expect(navLinkActive('/anticobagliosiciliano/en/come-arrivare/', 'en', 'come-arrivare')).toBe(
+			true
+		);
+		expect(navLinkActive('/anticobagliosiciliano/en/contatti/', 'en', 'contatti')).toBe(true);
+		expect(navLinkActive('/anticobagliosiciliano/en/', 'en', '')).toBe(true);
 	});
 });
 

@@ -4,6 +4,9 @@ node_modules
 /static/images/**/*.webp
 /static/videos/**/*.webp
 
+# Vitest coverage
+/coverage
+
 # Output
 .output
 .vercel

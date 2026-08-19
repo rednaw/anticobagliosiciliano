@@ -70,6 +70,21 @@ export function siteHref(locale: Locale, subpath = '', base = SITE_BASE): string
 	return withBase(standardHref(locale, subpath), base);
 }
 
+/** Whether a header nav item matches the current path. `#houses` is never current. */
+export function navLinkActive(
+	pathname: string,
+	locale: Locale,
+	subpath: string,
+	hash = '',
+	base = SITE_BASE
+): boolean {
+	const path = stripBase(pathname, base).replace(/\/$/, '') || '/';
+	const target = standardHref(locale, subpath).replace(/\/$/, '') || '/';
+	if (hash === '#houses') return false;
+	if (!subpath) return path === target;
+	return path === target || path.startsWith(`${target}/`);
+}
+
 /** Query on `/contatti/` so the mailto names the house the guest was viewing. */
 export const CONTACT_HOUSE_PARAM = 'casa';
 

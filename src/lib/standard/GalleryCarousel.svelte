@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
+	import { indexAfterKey, photoAlt as galleryPhotoAlt, wrapIndex } from '$lib/standard/gallery';
 	import { pick, ui, type Locale } from '$lib/standard/i18n';
 
 	let {
@@ -17,15 +18,12 @@
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const count = $derived(images.length);
 	const current = $derived(images[index] ?? images[0]);
-	const photoAlt = $derived(
-		locale === 'it'
-			? `${alt} — foto ${index + 1} di ${count}`
-			: `${alt} — photo ${index + 1} of ${count}`
-	);
+	const photoAlt = $derived(galleryPhotoAlt(alt, index, count, locale));
 
 	function go(next: number) {
-		if (count === 0) return;
-		index = ((next % count) + count) % count;
+		const wrapped = wrapIndex(next, count);
+		if (wrapped === null) return;
+		index = wrapped;
 		queueMicrotask(() => scrollThumbIntoView());
 	}
 
@@ -48,19 +46,10 @@
 	}
 
 	function onKeydown(e: KeyboardEvent) {
-		if (e.key === 'ArrowLeft') {
-			e.preventDefault();
-			prev();
-		} else if (e.key === 'ArrowRight') {
-			e.preventDefault();
-			next();
-		} else if (e.key === 'Home') {
-			e.preventDefault();
-			go(0);
-		} else if (e.key === 'End') {
-			e.preventDefault();
-			go(count - 1);
-		}
+		const nextIndex = indexAfterKey(e.key, index, count);
+		if (nextIndex === null) return;
+		e.preventDefault();
+		go(nextIndex);
 	}
 </script>
 

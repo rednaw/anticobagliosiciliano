@@ -6,9 +6,9 @@
 		contactHref,
 		counterpartHref,
 		houseSlugFromPath,
+		navLinkActive,
 		pick,
 		siteHref,
-		standardHref,
 		stripBase,
 		ui,
 		withBase,
@@ -36,11 +36,7 @@
 	}
 
 	function isActive(subpath: string, hash = '') {
-		const path = stripBase(page.url.pathname).replace(/\/$/, '') || '/';
-		const target = standardHref(locale, subpath).replace(/\/$/, '') || '/';
-		if (hash === '#houses') return false;
-		if (!subpath) return path === target;
-		return path === target || path.startsWith(`${target}/`);
+		return navLinkActive(page.url.pathname, locale, subpath, hash);
 	}
 
 	function isDrawer() {
