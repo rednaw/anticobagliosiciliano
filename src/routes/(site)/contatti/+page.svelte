@@ -2,6 +2,14 @@
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import { contactCopy, housesSource, site } from '$lib/data/content';
+	import {
+		MESSAGE_MAX_LENGTH,
+		acceptedHouseSlug,
+		buildMailtoHref,
+		contactFieldError,
+		gateMailtoClick,
+		messageValidity
+	} from '$lib/standard/contact-mail';
 	import Picker from '$lib/standard/Picker.svelte';
 	import StayDates from '$lib/standard/StayDates.svelte';
 	import { CONTACT_HOUSE_PARAM, pick, ui, type Locale } from '$lib/standard/i18n';
@@ -15,11 +23,6 @@
 			return { value, label: value };
 		});
 	}
-
-	const MESSAGE_MAX_LENGTH = 500;
-	const DISALLOWED_CHARS =
-		/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u200B-\u200F\u202A-\u202E\u2066-\u2069]/;
-	const HTML_MARKUP = /<\s*\/?\s*[a-zA-Z!?]/;
 
 	const locale = $derived((page.data.locale ?? 'it') as Locale);
 	const heading = $derived(pick(ui.requestAvailability, locale));
@@ -37,68 +40,44 @@
 	let dateError = $state('');
 
 	onMount(() => {
-		const requested = page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '';
-		if (housesSource.some((h) => h.slug === requested)) houseSlug = requested;
+		houseSlug = acceptedHouseSlug(page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '');
 	});
 
-	const selectedHouse = $derived(housesSource.find((h) => h.slug === houseSlug));
 	const houseOptions = $derived([
 		{ value: '', label: t('houseAny') },
 		...housesSource.map((house) => ({ value: house.slug, label: house.name }))
 	]);
 
+	const mailtoHref = $derived(
+		buildMailtoHref({
+			locale,
+			name,
+			email,
+			houseSlug,
+			checkIn,
+			checkOut,
+			adults,
+			children,
+			message
+		})
+	);
+
 	/** Browsers phrase their own validation bubbles in the browser language, not the site's. */
-	function fieldError(el: HTMLInputElement | HTMLTextAreaElement): string {
-		if (el.validity.valueMissing) return t('fieldRequired');
-		if (el.validity.typeMismatch) return t('emailInvalid');
-		if (el.name === 'message') return messageValidity(message);
-		return '';
-	}
-
-	function messageValidity(value: string): string {
-		if (value.length > MESSAGE_MAX_LENGTH) return t('messageTooLong');
-		if (DISALLOWED_CHARS.test(value) || HTML_MARKUP.test(value)) return t('messageUnsafe');
-		return '';
-	}
-
-	const mailtoHref = $derived.by(() => {
-		const houseLabel = selectedHouse?.name ?? t('mailNoHouse');
-		const subject = encodeURIComponent(
-			selectedHouse
-				? `${heading} — ${selectedHouse.name} — ${name || t('mailGuest')}`
-				: `${heading} — ${name || t('mailGuest')}`
-		);
-		const body = encodeURIComponent(
-			[
-				`${t('mailName')}: ${name}`,
-				`${t('mailEmail')}: ${email}`,
-				`${t('mailHouse')}: ${houseLabel}`,
-				`${t('checkIn')}: ${checkIn}`,
-				`${t('checkOut')}: ${checkOut}`,
-				`${t('adults')}: ${adults}`,
-				`${t('children')}: ${children}`,
-				'',
-				message || t('mailNoMessage')
-			]
-				.join('\n')
-				.replace(/\r\n|\n|\r/g, '\r\n')
-		);
-		return `mailto:${site.email}?subject=${subject}&body=${body}`;
-	});
-
 	function onMailClick(event: MouseEvent) {
-		const form = (event.currentTarget as HTMLElement).closest('form');
-		if (!form) return;
-		for (const el of form.elements) {
-			if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-				el.setCustomValidity(fieldError(el));
+		gateMailtoClick(event, {
+			checkIn,
+			checkOut,
+			requiredMessage: t('fieldRequired'),
+			fieldError: (el) =>
+				contactFieldError(el, {
+					required: t('fieldRequired'),
+					emailInvalid: t('emailInvalid'),
+					messageError: messageValidity(message, locale)
+				}),
+			setDateError: (msg) => {
+				dateError = msg;
 			}
-		}
-		dateError = checkIn && checkOut ? '' : t('fieldRequired');
-		const valid = form.checkValidity();
-		if (valid && !dateError) return;
-		event.preventDefault();
-		if (!valid) form.reportValidity();
+		});
 	}
 
 	function submit(event: Event) {

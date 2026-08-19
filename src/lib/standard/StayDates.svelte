@@ -2,9 +2,16 @@
 	import { contactCopy } from '$lib/data/content';
 	import { dismissable } from '$lib/standard/dismiss';
 	import FieldTrigger from '$lib/standard/FieldTrigger.svelte';
+	import {
+		applyDaySelection,
+		isoDate,
+		isDayDisabled,
+		monthCells,
+		monthStart,
+		parseIso,
+		weekdayLabels
+	} from '$lib/standard/stay-dates';
 	import { pick, type Locale } from '$lib/standard/i18n';
-
-	const MIN_STAY = 2;
 
 	let {
 		checkIn = $bindable(''),
@@ -32,7 +39,6 @@
 
 	const intlLocale = $derived(locale === 'en' ? 'en-GB' : 'it-IT');
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
-	const minCheckOut = $derived(addDays(checkIn || today, MIN_STAY));
 	const weekdays = $derived(weekdayLabels(intlLocale));
 	const monthTitle = $derived(
 		new Intl.DateTimeFormat(intlLocale, { month: 'long', year: 'numeric' }).format(view)
@@ -58,19 +64,16 @@
 
 	function selectDay(iso: string) {
 		error = '';
-		if (picking === 'in') {
-			checkIn = iso;
-			if (checkOut && checkOut < addDays(iso, MIN_STAY)) checkOut = '';
-			picking = 'out';
-			outEl?.focus();
-			return;
-		}
-		checkOut = iso;
-		close(true);
+		const next = applyDaySelection(iso, picking, checkIn, checkOut);
+		checkIn = next.checkIn;
+		checkOut = next.checkOut;
+		picking = next.picking;
+		if (next.done) close(true);
+		else outEl?.focus();
 	}
 
 	function dayDisabled(iso: string) {
-		return picking === 'out' ? iso < minCheckOut : iso < today;
+		return isDayDisabled(iso, picking, today, checkIn);
 	}
 
 	function formatDate(iso: string) {
@@ -81,45 +84,8 @@
 		}).format(parseIso(iso));
 	}
 
-	function isoDate(date: Date) {
-		const month = String(date.getMonth() + 1).padStart(2, '0');
-		const day = String(date.getDate()).padStart(2, '0');
-		return `${date.getFullYear()}-${month}-${day}`;
-	}
-
-	function parseIso(iso: string) {
-		const [y, m, d] = iso.split('-').map(Number);
-		return new Date(y, m - 1, d);
-	}
-
-	function addDays(iso: string, days: number) {
-		const date = parseIso(iso);
-		date.setDate(date.getDate() + days);
-		return isoDate(date);
-	}
-
-	function monthStart(date: Date) {
-		return new Date(date.getFullYear(), date.getMonth(), 1);
-	}
-
 	function shiftMonth(delta: number) {
 		view = new Date(view.getFullYear(), view.getMonth() + delta, 1);
-	}
-
-	function weekdayLabels(tag: string) {
-		const format = new Intl.DateTimeFormat(tag, { weekday: 'short' });
-		return Array.from({ length: 7 }, (_, i) => format.format(new Date(2026, 7, 17 + i)));
-	}
-
-	/** Days of the shown month, padded with nulls so weeks start on Monday. */
-	function monthCells(month: Date) {
-		const year = month.getFullYear();
-		const index = month.getMonth();
-		const cells: (string | null)[] = Array.from({ length: (month.getDay() + 6) % 7 }, () => null);
-		const days = new Date(year, index + 1, 0).getDate();
-		for (let day = 1; day <= days; day++) cells.push(isoDate(new Date(year, index, day)));
-		while (cells.length % 7) cells.push(null);
-		return cells;
 	}
 </script>
 
