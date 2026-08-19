@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
@@ -40,5 +41,9 @@ export default defineConfig({
 				entries: ['*']
 			}
 		})
-	]
+	],
+	test: {
+		include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],
+		environment: 'node'
+	}
 });
