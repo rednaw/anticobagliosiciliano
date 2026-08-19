@@ -2,6 +2,7 @@
 	import { asset } from '$app/paths';
 	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
+	import { showAmbientControl } from '$lib/standard/ambient-video';
 	import { pick, ui } from '$lib/standard/i18n';
 
 	let {
@@ -27,8 +28,11 @@
 	let playing = $state(false);
 	let started = $state(false);
 	let reduceMotion = $state(false);
+	let playBlocked = $state(false);
 
-	const showControl = $derived(!playing && (reduceMotion || ended));
+	const showControl = $derived(
+		showAmbientControl({ playing, reduceMotion, ended, playBlocked })
+	);
 	const controlLabel = $derived(pick(ended ? ui.replayVideo : ui.playVideo, locale));
 
 	async function attemptPlay() {
@@ -36,7 +40,7 @@
 		try {
 			await el.play();
 		} catch {
-			// iOS Low Power Mode and strict autoplay policies land here: leave the poster up.
+			playBlocked = true;
 		}
 	}
 
@@ -59,7 +63,7 @@
 		try {
 			await el.play();
 		} catch {
-			/* ignore */
+			playBlocked = true;
 		}
 	}
 
@@ -122,6 +126,7 @@
 		onplay={() => {
 			playing = true;
 			started = true;
+			playBlocked = false;
 		}}
 		onpause={() => (playing = false)}
 		ontimeupdate={holdLastFrame}
