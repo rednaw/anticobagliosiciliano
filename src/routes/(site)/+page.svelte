@@ -143,7 +143,7 @@
 <section class="section band-dark">
 	<div class="container">
 		<Reveal>
-			<SectionHead eyebrow="Comfort" title={home.comfort.title} />
+			<SectionHead eyebrow={home.comfort.eyebrow} title={home.comfort.title} />
 		</Reveal>
 		<ul class="amenity-list">
 			{#each amenityList as item, i}

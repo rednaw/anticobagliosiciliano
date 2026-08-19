@@ -519,6 +519,7 @@ export const homeCopy = {
 		}
 	},
 	comfort: {
+		eyebrow: { it: 'Comfort', en: 'Comfort' },
 		title: { it: 'Accoglienza autentica, servizi chiari', en: 'A genuine welcome, clear amenities' }
 	},
 	awards: {
