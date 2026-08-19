@@ -4,11 +4,9 @@
 	import Footer from '$lib/standard/Footer.svelte';
 	import NotFound from '$lib/standard/NotFound.svelte';
 	import { localeFromPath } from '$lib/locale';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, ui } from '$lib/standard/i18n';
 
-	const locale = $derived(
-		(page.data.locale ?? localeFromPath(page.url.pathname)) as Locale
-	);
+	const locale = $derived(page.data.locale ?? localeFromPath(page.url.pathname));
 
 	$effect(() => {
 		document.documentElement.lang = locale;

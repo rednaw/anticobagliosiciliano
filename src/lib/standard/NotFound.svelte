@@ -2,13 +2,11 @@
 	import { page } from '$app/state';
 	import { site } from '$lib/data/content';
 	import { localeFromPath } from '$lib/locale';
-	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, siteHref, ui } from '$lib/standard/i18n';
 
 	let { status, head = true }: { status?: number; head?: boolean } = $props();
 
-	const locale = $derived(
-		(page.data.locale ?? localeFromPath(page.url.pathname)) as Locale
-	);
+	const locale = $derived(page.data.locale ?? localeFromPath(page.url.pathname));
 	const code = $derived(status ?? page.status);
 	const is404 = $derived(code === 404);
 	const heading = $derived(pick(is404 ? ui.notFoundTitle : ui.errorTitle, locale));

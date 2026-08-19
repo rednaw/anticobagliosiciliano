@@ -2,9 +2,9 @@
 	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
 	import { arriveCopy, baglioLocation } from '$lib/data/content';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, ui } from '$lib/standard/i18n';
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const heading = $derived(pick(ui.navArrive, locale));
 	const t = $derived((key: keyof typeof arriveCopy) => pick(arriveCopy[key], locale));
 	const coords = `${baglioLocation.lat.toFixed(5)}, ${baglioLocation.lon.toFixed(5)}`;

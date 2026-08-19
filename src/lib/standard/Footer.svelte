@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { site } from '$lib/data/content';
-	import { pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, siteHref, ui } from '$lib/standard/i18n';
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const privacy = $derived(siteHref(locale, 'privacy'));
 </script>
 

@@ -13,9 +13,9 @@
 		site,
 		testimonials
 	} from '$lib/data/content';
-	import { localize, pick, siteHref, ui, type Locale } from '$lib/standard/i18n';
+	import { localize, pick, siteHref, ui } from '$lib/standard/i18n';
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const houseList = $derived(houses(locale));
 	const placeList = $derived(places(locale));
 	const amenityList = $derived(amenities(locale));

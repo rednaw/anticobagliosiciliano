@@ -9,9 +9,9 @@ export async function loadHouse({
 	parent
 }: {
 	params: { slug: string };
-	parent: () => Promise<{ locale?: Locale }>;
+	parent: () => Promise<{ locale: Locale }>;
 }) {
-	const { locale = 'it' } = await parent();
+	const { locale } = await parent();
 	const house = getHouse(params.slug, locale);
 	if (!house) error(404, pick(ui.houseNotFound, locale));
 	return { house };

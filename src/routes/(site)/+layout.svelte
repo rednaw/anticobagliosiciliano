@@ -7,14 +7,13 @@
 		absoluteUrl,
 		counterpartHref,
 		pick,
-		ui,
-		type Locale
+		ui
 	} from '$lib/standard/i18n';
 	import { OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH, pageSeo } from '$lib/standard/seo';
 
 	let { children } = $props();
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const seo = $derived(pageSeo(page.url.pathname, locale));
 	const canonical = $derived(absoluteUrl(page.url.pathname, SITE_ORIGIN));
 	const hrefIt = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'it'), SITE_ORIGIN));
@@ -24,7 +23,7 @@
 	const ogDefaultImage = $derived(seo.image.endsWith(OG_IMAGE_PATH));
 
 	$effect(() => {
-		document.documentElement.lang = page.data.locale ?? 'it';
+		document.documentElement.lang = locale;
 	});
 </script>
 

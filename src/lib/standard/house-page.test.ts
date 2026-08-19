@@ -29,10 +29,10 @@ describe('loadHouse', () => {
 		expect(house.summary).toBe(housesSource[1].summary.en);
 	});
 
-	it('defaults to Italian when the layout has no locale', async () => {
+	it('returns the house in Italian when the layout says so', async () => {
 		const { house } = await loadHouse({
 			params: { slug: 'casa-1' },
-			parent: async () => ({})
+			parent: async () => ({ locale: 'it' as const })
 		});
 		expect(house.summary).toBe(housesSource[0].summary.it);
 	});

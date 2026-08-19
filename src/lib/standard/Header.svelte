@@ -20,7 +20,7 @@
 	let navEl: HTMLElement | undefined = $state();
 	let backdropEl: HTMLButtonElement | undefined = $state();
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 
 	const links = $derived([
 		{ subpath: '', label: pick(ui.navHome, locale), hash: '' },

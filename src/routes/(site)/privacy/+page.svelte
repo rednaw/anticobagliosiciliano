@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { privacyCopy, site } from '$lib/data/content';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, ui } from '$lib/standard/i18n';
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const heading = $derived(pick(ui.privacy, locale));
 	const t = $derived((key: keyof typeof privacyCopy) => pick(privacyCopy[key], locale));
 </script>

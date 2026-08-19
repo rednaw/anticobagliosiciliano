@@ -2,7 +2,7 @@
 	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
 	import { indexAfterKey, photoAlt as galleryPhotoAlt, wrapIndex } from '$lib/standard/gallery';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, ui } from '$lib/standard/i18n';
 
 	let {
 		images,
@@ -15,7 +15,7 @@
 	let index = $state(0);
 	let thumbsEl: HTMLDivElement | undefined = $state();
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const count = $derived(images.length);
 	const current = $derived(images[index] ?? images[0]);
 	const photoAlt = $derived(galleryPhotoAlt(alt, index, count, locale));

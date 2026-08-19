@@ -2,7 +2,7 @@
 	import { asset } from '$app/paths';
 	import { imageAsset } from '$lib/public-image';
 	import { page } from '$app/state';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, ui } from '$lib/standard/i18n';
 
 	let {
 		src,
@@ -21,7 +21,7 @@
 	let el: HTMLVideoElement | undefined = $state();
 	let wrap: HTMLDivElement | undefined = $state();
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 
 	let ended = $state(false);
 	let playing = $state(false);

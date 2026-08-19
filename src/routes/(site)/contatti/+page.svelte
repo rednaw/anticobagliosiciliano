@@ -12,7 +12,7 @@
 	} from '$lib/standard/contact-mail';
 	import Picker from '$lib/standard/Picker.svelte';
 	import StayDates from '$lib/standard/StayDates.svelte';
-	import { CONTACT_HOUSE_PARAM, pick, ui, type Locale } from '$lib/standard/i18n';
+	import { CONTACT_HOUSE_PARAM, pick, ui } from '$lib/standard/i18n';
 
 	const ADULT_OPTIONS = numberOptions(1, 20);
 	const CHILD_OPTIONS = numberOptions(0, 20);
@@ -24,7 +24,7 @@
 		});
 	}
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const heading = $derived(pick(ui.requestAvailability, locale));
 	const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
 

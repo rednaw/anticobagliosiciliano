@@ -3,9 +3,9 @@
 	import { page } from '$app/state';
 	import { imperdibiliLead, places } from '$lib/data/content';
 	import Reveal from '$lib/standard/Reveal.svelte';
-	import { pick, ui, type Locale } from '$lib/standard/i18n';
+	import { pick, ui } from '$lib/standard/i18n';
 
-	const locale = $derived((page.data.locale ?? 'it') as Locale);
+	const locale = $derived(page.data.locale);
 	const placeList = $derived(places(locale));
 	const pageTitle = $derived(pick(ui.navImperdibili, locale));
 </script>
