@@ -24,6 +24,16 @@ npm run copy:import   # applies that CSV onto copy-overrides.json
 
 The last CSV column is a stable `id`. Import accepts comma, semicolon, or tab separators (and an Excel `sep=` first line) and refuses a file whose ids do not match the site. Blank cells are left unchanged — they do not wipe site copy. Overrides win over the seed; unchanged strings stay in the seed and show up on the next export. Restart `npm run dev` after import if the running app still shows the old text.
 
+### Lodgify occupancy
+
+```sh
+npm run lodgify:sync        # writes src/lib/data/availability.json
+```
+
+Needs `LODGIFY_API_KEY` (local env, and the GitHub Actions secret of the same name). Occupied night ranges only (Casa 1–4); no guest names. One-night gaps between bookings are filled (minimum stay). If Lodgify fails, the last good JSON is left as it is.
+
+A scheduled workflow (`.github/workflows/lodgify-availability.yml`) runs `lodgify:sync` twice a day. If occupancy changed it commits `availability.json` and deploys Pages. `GITHUB_TOKEN` commits do not retrigger CI. You can also run it from **Actions → Lodgify occupancy → Run workflow**.
+
 ### Dependency updates
 
 [Renovate](https://docs.renovatebot.com/) runs daily from GitHub Actions (no GitHub

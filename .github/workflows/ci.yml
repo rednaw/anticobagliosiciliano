@@ -56,6 +56,9 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    concurrency:
+      group: pages-main
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
