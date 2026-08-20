@@ -14,7 +14,9 @@
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
 		"test:build": "node tests/assert-build.mjs",
-		"archivio:build": "node scripts/build-archivio.mjs"
+		"archivio:build": "node scripts/build-archivio.mjs",
+		"copy:export": "node scripts/export-copy.mjs",
+		"copy:import": "node scripts/import-copy.mjs"
 	},
 	"engines": {
 		"node": ">=24.19.0"

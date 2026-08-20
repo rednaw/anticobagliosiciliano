@@ -1,11 +1,9 @@
-node_modules
-
 # WebP generated before vite prerender (`npm run build --emit`)
 /static/images/**/*.webp
 /static/videos/**/*.webp
 
-# Vitest coverage
-/coverage
+# Owner copy export (`npm run copy:export`)
+/copy/*.csv
 
 # Output
 .output
@@ -14,6 +12,8 @@ node_modules
 .wrangler
 /.svelte-kit
 /build
+/coverage
+/node_modules
 
 # OS
 .DS_Store

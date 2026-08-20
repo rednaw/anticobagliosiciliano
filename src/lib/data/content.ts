@@ -1,9 +1,10 @@
+import { liveCopy } from '$lib/copy-catalog';
 import type { Locale, LocalizedString, LocalizedStrings } from '$lib/locale';
 import { localize } from '$lib/locale';
 
 /** Marketing copy. Tagline stays Italian in both languages. */
 
-export const site = {
+export const site = liveCopy('site', {
 	name: 'Antico Baglio Siciliano',
 	tagline: 'Case vacanze in Sicilia',
 	location: {
@@ -15,7 +16,7 @@ export const site = {
 		it: 'Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.',
 		en: 'In the heart of western Sicily, a genuine experience of rest and culture.'
 	} satisfies LocalizedString
-};
+});
 
 type HouseSource = {
 	slug: string;
@@ -36,7 +37,7 @@ type HouseSource = {
  * Room copy: Casa 1–2 IT from Lodgify; EN from the old WordPress rooms.
  * Casa 3–4 IT has no archive original (drafted from the English, owner-reviewed).
  */
-export const housesSource: HouseSource[] = [
+export const housesSource: HouseSource[] = liveCopy('houses', [
 	{
 		slug: 'casa-1',
 		name: 'Casa 1',
@@ -275,7 +276,7 @@ export const housesSource: HouseSource[] = [
 			]
 		}
 	}
-];
+]);
 
 export function houses(locale: Locale = 'it') {
 	return localize(housesSource, locale);
@@ -286,7 +287,7 @@ export function getHouse(slug: string, locale: Locale = 'it') {
 	return source ? localize(source, locale) : undefined;
 }
 
-const amenitiesSource = [
+export const amenitiesSource = liveCopy('amenities', [
 	{
 		title: { it: 'Wi‑Fi gratuito', en: 'Free Wi‑Fi' },
 		detail: { it: 'Connessione in tutte le case', en: 'A connection in every house' }
@@ -324,13 +325,13 @@ const amenitiesSource = [
 			en: 'Arrivals and departures to suit your times'
 		}
 	}
-] satisfies { title: LocalizedString; detail: LocalizedString }[];
+] satisfies { title: LocalizedString; detail: LocalizedString }[]);
 
 export function amenities(locale: Locale = 'it') {
 	return localize(amenitiesSource, locale);
 }
 
-const awardsSource = [
+export const awardsSource = liveCopy('awards', [
 	{
 		title: { it: 'Superhost Airbnb', en: 'Airbnb Superhost' },
 		text: {
@@ -355,14 +356,14 @@ const awardsSource = [
 		},
 		image: '/images/awards/traveller-review.png'
 	}
-] satisfies { title: LocalizedString; text: LocalizedString; image: string }[];
+] satisfies { title: LocalizedString; text: LocalizedString; image: string }[]);
 
 export function awards(locale: Locale = 'it') {
 	return localize(awardsSource, locale);
 }
 
 /** Quotes stay in the guest’s language; only the source line is localised. */
-const testimonialsSource = [
+export const testimonialsSource = liveCopy('testimonials', [
 	{
 		name: 'Carmine',
 		source: { it: 'Airbnb · 5 stelle', en: 'Airbnb · 5 stars' },
@@ -375,7 +376,7 @@ const testimonialsSource = [
 		quote:
 			'Elena’s house was an oasis of style, beauty and tranquility. We were a bit worried of staying on Sicily in winter, but the house was very warm and cosy! We enjoyed staying there a lot!'
 	}
-] satisfies { name: string; source: LocalizedString; quote: string }[];
+] satisfies { name: string; source: LocalizedString; quote: string }[]);
 
 export function testimonials(locale: Locale = 'it') {
 	return localize(testimonialsSource, locale);
@@ -390,7 +391,7 @@ type PlaceSource = {
 };
 
 /** Place texts: IT from Lodgify; EN rewritten from the old WordPress machine translation. */
-const placesSource: PlaceSource[] = [
+export const placesSource: PlaceSource[] = liveCopy('places', [
 	{
 		slug: 'tonnara-di-scopello',
 		name: { it: 'Tonnara di Scopello', en: 'Tonnara di Scopello' },
@@ -461,13 +462,13 @@ const placesSource: PlaceSource[] = [
 		},
 		image: '/images/places/erice.jpg'
 	}
-];
+]);
 
 export function places(locale: Locale = 'it') {
 	return localize(placesSource, locale);
 }
 
-export const homeCopy = {
+export const homeCopy = liveCopy('home', {
 	metaDescription: {
 		it: 'Quattro case vacanze in un antico baglio a Balestrate, Sicilia. Cortile, agrumeto e uliveto; a pochi minuti da Scopello, Segesta e lo Zingaro.',
 		en: 'Four holiday houses in a historic baglio in Balestrate, Sicily. Courtyard, citrus and olive groves; minutes from Scopello, Segesta and the Zingaro.'
@@ -562,24 +563,24 @@ export const homeCopy = {
 		},
 		video: { it: 'Il Baglio ripreso dall’alto', en: 'The baglio seen from above' }
 	}
-};
+});
 
-export const imperdibiliMeta = {
+export const imperdibiliMeta = liveCopy('imperdibili.meta', {
 	it: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano.',
 	en: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte and Erice — a few minutes from Antico Baglio Siciliano.'
-} satisfies LocalizedString;
+} satisfies LocalizedString);
 
-export const imperdibiliLead = {
+export const imperdibiliLead = liveCopy('imperdibili.lead', {
 	it: 'Grazie alla sua ottima posizione, si possono raggiungere facilmente alcuni dei più bei luoghi di mare e d’arte della Sicilia Occidentale.',
 	en: 'From the baglio you can easily reach some of the most beautiful stretches of coast and the finest art in western Sicily.'
-} satisfies LocalizedString;
+} satisfies LocalizedString);
 
 export const baglioLocation = {
 	lat: 38.0250627,
 	lon: 13.0150391,
 	map: '/images/ambiance/mappa.jpg',
 	mapSm: '/images/ambiance/mappa-sm.jpg',
-	links: [
+	links: liveCopy('arrive.maps', [
 		{
 			id: 'google',
 			href: 'https://maps.app.goo.gl/NA1BwasQVcFzn1qHA',
@@ -595,10 +596,10 @@ export const baglioLocation = {
 			href: 'https://www.openstreetmap.org/?mlat=38.0250627&mlon=13.0150391#map=16/38.0250627/13.0150391',
 			label: { it: 'Apri in OpenStreetMap', en: 'Open in OpenStreetMap' }
 		}
-	]
+	])
 };
 
-export const arriveCopy = {
+export const arriveCopy = liveCopy('arrive', {
 	metaDescription: {
 		it: 'Come arrivare all’Antico Baglio Siciliano a Balestrate: aeroporti, autostrada e una mappa statica da aprire nella tua app di mappe.',
 		en: 'How to get to Antico Baglio Siciliano in Balestrate: airports, the motorway, and a static map to open in your maps app.'
@@ -626,9 +627,9 @@ export const arriveCopy = {
 		it: 'Mappa © collaboratori di OpenStreetMap.',
 		en: 'Map © OpenStreetMap contributors.'
 	}
-} satisfies Record<string, LocalizedString>;
+} satisfies Record<string, LocalizedString>);
 
-export const contactCopy = {
+export const contactCopy = liveCopy('contact', {
 	metaDescription: {
 		it: 'Richiedi disponibilità per un soggiorno all’Antico Baglio Siciliano.',
 		en: 'Request availability for a stay at the Antico Baglio Siciliano.'
@@ -686,9 +687,9 @@ export const contactCopy = {
 	mailNoHouse: { it: '(nessuna preferenza)', en: '(no preference)' },
 	mailNoMessage: { it: '(nessun messaggio)', en: '(no message)' },
 	mailGuest: { it: 'Ospite', en: 'Guest' }
-} satisfies Record<string, LocalizedString>;
+} satisfies Record<string, LocalizedString>);
 
-export const privacyCopy = {
+export const privacyCopy = liveCopy('privacy', {
 	metaDescription: {
 		it: 'Informativa privacy dell’Antico Baglio Siciliano: come trattiamo i dati di chi visita il sito o ci scrive.',
 		en: 'Privacy notice for Antico Baglio Siciliano: how we handle data from people who visit the site or write to us.'
@@ -735,4 +736,4 @@ export const privacyCopy = {
 		it: 'Per i messaggi che ci hai inviato puoi chiedere di leggerli, correggerli o cancellarli, scrivendo all’indirizzo sopra. Non possiamo accedere ai log di GitHub Pages né a visite individuali in Simple Analytics: per quelli valgono le informative dei fornitori. Puoi presentare reclamo al Garante per la protezione dei dati personali.',
 		en: 'For messages you have sent us, you can ask us to read, correct, or delete them by writing to the address above. We cannot access GitHub Pages logs or individual Simple Analytics visits: those sit with the providers’ own policies. You can lodge a complaint with the Italian Data Protection Authority (Garante).'
 	}
-} satisfies Record<string, LocalizedString>;
+} satisfies Record<string, LocalizedString>);

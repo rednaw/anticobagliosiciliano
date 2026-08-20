@@ -1,3 +1,4 @@
+import { liveCopy } from '$lib/copy-catalog';
 import { stripBase, type Locale, type LocalizedString } from '$lib/locale';
 import { SITE_BASE, SITE_ORIGIN } from '$lib/site-config';
 
@@ -5,7 +6,7 @@ export type { Locale } from '$lib/locale';
 export { pick, localize } from '$lib/locale';
 export { stripBase };
 
-export const ui = {
+export const ui = liveCopy('ui', {
 	navHome: { it: 'Home', en: 'Home' },
 	navHouses: { it: 'Alloggi', en: 'The Houses' },
 	navImperdibili: { it: 'Imperdibili', en: 'Nearby' },
@@ -48,7 +49,7 @@ export const ui = {
 		it: 'Il tuo browser non supporta la riproduzione video.',
 		en: 'Your browser does not support video playback.'
 	}
-} satisfies Record<string, LocalizedString>;
+} satisfies Record<string, LocalizedString>);
 
 /** App path (no base). `subpath` e.g. `imperdibili`, `case/casa-1`, or ``. */
 export function standardHref(locale: Locale, subpath = ''): string {

@@ -13,6 +13,19 @@ npm install
 npm run dev
 ```
 
+### Owner copy
+
+Italiano and English seed copy lives in `src/lib/data/content.ts` and `src/lib/standard/i18n.ts`. The owner edits `copy/testi.csv`. Overrides land in `src/lib/data/copy-overrides.json`.
+
+```sh
+npm run copy:export   # writes gitignored copy/testi.csv
+npm run copy:import   # applies that CSV onto copy-overrides.json
+```
+
+The last CSV column is a stable `id`. Import accepts comma, semicolon, or tab separators (and an Excel `sep=` first line) and refuses a file whose ids do not match the site. Blank cells are left unchanged — they do not wipe site copy. Overrides win over the seed; unchanged strings stay in the seed and show up on the next export. Restart `npm run dev` after import if the running app still shows the old text.
+
+Owner letter: [copy/LEGGIMI.md](copy/LEGGIMI.md) (Italian) and [copy/README.md](copy/README.md) (English).
+
 ### Dependency updates
 
 [Renovate](https://docs.renovatebot.com/) runs daily from GitHub Actions (no GitHub
