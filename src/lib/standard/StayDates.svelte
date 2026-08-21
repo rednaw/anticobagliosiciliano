@@ -199,7 +199,7 @@
 	</div>
 
 	{#if error}
-		<p id={errorId} class="error">{error}</p>
+		<p id={errorId} class="field-error">{error}</p>
 	{/if}
 
 	{#if open}
@@ -281,12 +281,6 @@
 	.row {
 		display: grid;
 		gap: 1rem;
-	}
-
-	.error {
-		margin: 0;
-		font-size: 0.85rem;
-		color: var(--error);
 	}
 
 	.cal {

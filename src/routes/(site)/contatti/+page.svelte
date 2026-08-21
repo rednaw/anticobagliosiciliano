@@ -44,14 +44,8 @@
 	let children = $state('0');
 	let message = $state('');
 	let mailLink = $state<HTMLAnchorElement | null>(null);
-	let nameEl = $state<HTMLInputElement | null>(null);
-	let emailEl = $state<HTMLInputElement | null>(null);
-	let messageEl = $state<HTMLTextAreaElement | null>(null);
 	let dateError = $state('');
-	let nameError = $state('');
-	let emailError = $state('');
-	let messageError = $state('');
-	const uid = $props.id();
+	let errors = $state({ name: '', email: '', message: '' });
 
 	onMount(() => {
 		houseSlug = acceptedHouseSlug(page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '');
@@ -100,7 +94,6 @@
 		})
 	);
 
-	/** In-page red errors use the site language. Do not open the browser popup. */
 	function onMailClick(event: MouseEvent) {
 		gateMailtoClick(event, {
 			checkIn,
@@ -116,11 +109,21 @@
 				}),
 			setDateError: (msg) => {
 				dateError = msg;
+			},
+			setFieldErrors: (next) => {
+				errors = {
+					name: next.name ?? '',
+					email: next.email ?? '',
+					message: next.message ?? ''
+				};
 			}
 		});
-		nameError = nameEl?.validationMessage ?? '';
-		emailError = emailEl?.validationMessage ?? '';
-		messageError = messageEl?.validationMessage ?? '';
+	}
+
+	function clearFieldError(event: Event) {
+		const el = event.target;
+		if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
+		if (el.name === 'name' || el.name === 'email' || el.name === 'message') errors[el.name] = '';
 	}
 
 	function submit(event: Event) {
@@ -141,42 +144,39 @@
 			</p>
 		</div>
 
-		<form class="form" novalidate onsubmit={submit}>
+		<form class="form" novalidate onsubmit={submit} oninput={clearFieldError}>
+			{#snippet fieldError(name: 'name' | 'email' | 'message')}
+				{#if errors[name]}
+					<p id="{name}-error" class="field-error">{errors[name]}</p>
+				{/if}
+			{/snippet}
 			<label>
 				<span>{t('name')}</span>
 				<input
-					bind:this={nameEl}
 					type="text"
 					name="name"
 					bind:value={name}
-					class:invalid={Boolean(nameError)}
+					class:invalid={Boolean(errors.name)}
 					required
 					autocomplete="name"
-					aria-invalid={nameError ? true : undefined}
-					aria-describedby={nameError ? `${uid}-name-error` : undefined}
-					oninput={() => (nameError = '')}
+					aria-invalid={errors.name ? true : undefined}
+					aria-describedby={errors.name ? 'name-error' : undefined}
 				/>
-				{#if nameError}
-					<p id={`${uid}-name-error`} class="error">{nameError}</p>
-				{/if}
+				{@render fieldError('name')}
 			</label>
 			<label>
 				<span>{t('email')}</span>
 				<input
-					bind:this={emailEl}
 					type="email"
 					name="email"
 					bind:value={email}
-					class:invalid={Boolean(emailError)}
+					class:invalid={Boolean(errors.email)}
 					required
 					autocomplete="email"
-					aria-invalid={emailError ? true : undefined}
-					aria-describedby={emailError ? `${uid}-email-error` : undefined}
-					oninput={() => (emailError = '')}
+					aria-invalid={errors.email ? true : undefined}
+					aria-describedby={errors.email ? 'email-error' : undefined}
 				/>
-				{#if emailError}
-					<p id={`${uid}-email-error`} class="error">{emailError}</p>
-				{/if}
+				{@render fieldError('email')}
 			</label>
 			<Picker bind:value={houseSlug} label={t('house')} options={houseOptions} />
 			<StayDates
@@ -196,20 +196,16 @@
 			<label>
 				<span>{t('message')}</span>
 				<textarea
-					bind:this={messageEl}
 					name="message"
 					rows="5"
 					maxlength={MESSAGE_MAX_LENGTH}
 					bind:value={message}
-					class:invalid={Boolean(messageError)}
+					class:invalid={Boolean(errors.message)}
 					placeholder={t('messagePlaceholder')}
-					aria-invalid={messageError ? true : undefined}
-					aria-describedby={messageError ? `${uid}-message-error` : undefined}
-					oninput={() => (messageError = '')}
+					aria-invalid={errors.message ? true : undefined}
+					aria-describedby={errors.message ? 'message-error' : undefined}
 				></textarea>
-				{#if messageError}
-					<p id={`${uid}-message-error`} class="error">{messageError}</p>
-				{/if}
+				{@render fieldError('message')}
 				<span class="char-count">{message.length}/{MESSAGE_MAX_LENGTH}</span>
 			</label>
 			<a
@@ -281,13 +277,6 @@
 		font-weight: 500;
 		color: var(--muted);
 		justify-self: end;
-	}
-
-	.error {
-		margin: 0;
-		font-size: 0.85rem;
-		font-weight: 500;
-		color: var(--error);
 	}
 
 	input.invalid,

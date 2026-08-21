@@ -45,90 +45,92 @@ export function contactFieldError(
 /**
  * Translated validity, then either allow the mailto link or cancel it.
  * Dates are not native inputs, so they are checked separately from `form.checkValidity()`.
- * Invalid fields keep a custom message for the in-page errors; do not call `reportValidity()`
- * (that would also open the browser popup).
  */
 export function gateMailtoClick(
-	event: { preventDefault: () => void; currentTarget: EventTarget | null },
-	options: {
-		checkIn: string;
-		checkOut: string;
-		requiredMessage: string;
-		datesUnavailable?: boolean;
-		unavailableMessage?: string;
-		fieldError: (el: HTMLInputElement | HTMLTextAreaElement) => string;
-		setDateError: (message: string) => void;
-	}
+  event: { preventDefault: () => void; currentTarget: EventTarget | null },
+  options: {
+    checkIn: string;
+    checkOut: string;
+    requiredMessage: string;
+    datesUnavailable?: boolean;
+    unavailableMessage?: string;
+    fieldError: (el: HTMLInputElement | HTMLTextAreaElement) => string;
+    setDateError: (message: string) => void;
+    setFieldErrors: (errors: Record<string, string>) => void;
+  }
 ): boolean {
-	const target = event.currentTarget;
-	if (!(target instanceof Element)) return true;
-	const form = target.closest('form');
-	if (!form) return true;
+  const target = event.currentTarget;
+  if (!(target instanceof Element)) return true;
+  const form = target.closest('form');
+  if (!form) return true;
 
-	for (const el of form.elements) {
-		if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-			el.setCustomValidity(options.fieldError(el));
-		}
-	}
+  const fieldErrors: Record<string, string> = {};
+  for (const el of form.elements) {
+    if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) continue;
+    const message = options.fieldError(el);
+    el.setCustomValidity(message);
+    if (message && el.name) fieldErrors[el.name] = message;
+  }
 
-	const dateError =
-		!options.checkIn || !options.checkOut
-			? options.requiredMessage
-			: options.datesUnavailable
-				? (options.unavailableMessage ?? options.requiredMessage)
-				: '';
-	options.setDateError(dateError);
+  const dateError =
+    !options.checkIn || !options.checkOut
+      ? options.requiredMessage
+      : options.datesUnavailable
+        ? (options.unavailableMessage ?? options.requiredMessage)
+        : '';
+  options.setDateError(dateError);
+  options.setFieldErrors(fieldErrors);
 
-	const valid = form.checkValidity();
-	if (valid && !dateError) return true;
+  const valid = form.checkValidity();
+  if (valid && !dateError) return true;
 
-	event.preventDefault();
-	const firstInvalid = [...form.elements].find(
-		(el) =>
-			(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) && !el.validity.valid
-	);
-	if (firstInvalid instanceof HTMLElement) firstInvalid.focus();
-	return false;
+  event.preventDefault();
+  const firstInvalid = [...form.elements].find(
+    (el) =>
+      (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) && !el.validity.valid
+  );
+  if (firstInvalid instanceof HTMLElement) firstInvalid.focus();
+  return false;
 }
 
 function houseName(slug: string): string {
-	return housesSource.find((house) => house.slug === slug)?.name ?? slug;
+  return housesSource.find((house) => house.slug === slug)?.name ?? slug;
 }
 
 function joinHouseNames(slugs: readonly string[], locale: Locale): string {
-	const names = slugs.map(houseName);
-	if (names.length <= 1) return names[0] ?? '';
-	const last = names.at(-1)!;
-	const rest = names.slice(0, -1).join(', ');
-	return locale === 'it' ? `${rest} e ${last}` : `${rest} and ${last}`;
+  const names = slugs.map(houseName);
+  if (names.length <= 1) return names[0] ?? '';
+  const last = names.at(-1)!;
+  const rest = names.slice(0, -1).join(', ');
+  return locale === 'it' ? `${rest} e ${last}` : `${rest} and ${last}`;
 }
 
 export function housesFreeHint(locale: Locale, slugs: readonly string[]): string {
-	if (!slugs.length) return '';
-	return pick(contactCopy.housesFreeHint, locale).replace('{houses}', joinHouseNames(slugs, locale));
+  if (!slugs.length) return '';
+  return pick(contactCopy.housesFreeHint, locale).replace('{houses}', joinHouseNames(slugs, locale));
 }
 
 export function buildMailtoHref(fields: MailtoFields): string {
-	const t = (key: keyof typeof contactCopy) => pick(contactCopy[key], fields.locale);
-	const heading = pick(ui.requestAvailability, fields.locale);
-	const selectedHouse = housesSource.find((house) => house.slug === fields.houseSlug);
-	const houseLabel = selectedHouse?.name ?? t('mailNoHouse');
-	const subject = encodeURIComponent(
-		selectedHouse
-			? `${heading} — ${selectedHouse.name} — ${fields.name || t('mailGuest')}`
-			: `${heading} — ${fields.name || t('mailGuest')}`
-	);
-	const lines = [
-		`${t('mailName')}: ${fields.name}`,
-		`${t('mailEmail')}: ${fields.email}`,
-		`${t('mailHouse')}: ${houseLabel}`,
-		`${t('checkIn')}: ${fields.checkIn}`,
-		`${t('checkOut')}: ${fields.checkOut}`,
-		`${t('adults')}: ${fields.adults}`,
-		`${t('children')}: ${fields.children}`,
-		'',
-		fields.message || t('mailNoMessage')
-	];
-	const body = encodeURIComponent(lines.join('\n').replace(/\r\n|\n|\r/g, '\r\n'));
-	return `mailto:${site.email}?subject=${subject}&body=${body}`;
+  const t = (key: keyof typeof contactCopy) => pick(contactCopy[key], fields.locale);
+  const heading = pick(ui.requestAvailability, fields.locale);
+  const selectedHouse = housesSource.find((house) => house.slug === fields.houseSlug);
+  const houseLabel = selectedHouse?.name ?? t('mailNoHouse');
+  const subject = encodeURIComponent(
+    selectedHouse
+      ? `${heading} — ${selectedHouse.name} — ${fields.name || t('mailGuest')}`
+      : `${heading} — ${fields.name || t('mailGuest')}`
+  );
+  const lines = [
+    `${t('mailName')}: ${fields.name}`,
+    `${t('mailEmail')}: ${fields.email}`,
+    `${t('mailHouse')}: ${houseLabel}`,
+    `${t('checkIn')}: ${fields.checkIn}`,
+    `${t('checkOut')}: ${fields.checkOut}`,
+    `${t('adults')}: ${fields.adults}`,
+    `${t('children')}: ${fields.children}`,
+    '',
+    fields.message || t('mailNoMessage')
+  ];
+  const body = encodeURIComponent(lines.join('\n').replace(/\r\n|\n|\r/g, '\r\n'));
+  return `mailto:${site.email}?subject=${subject}&body=${body}`;
 }
