@@ -7,11 +7,10 @@
 		cursorAfterKey,
 		isoDate,
 		isDayDisabled,
-		addMonths,
 		minCheckOut,
 		monthCells,
 		monthStart,
-		nearestEnabled,
+		cursorForMonth,
 		parseIso,
 		weekdayLabels
 	} from '$lib/standard/stay-dates';
@@ -21,12 +20,14 @@
 		checkIn = $bindable(''),
 		checkOut = $bindable(''),
 		locale,
-		error = $bindable('')
+		error = $bindable(''),
+		occupiedNight = (_iso: string) => false
 	}: {
 		checkIn: string;
 		checkOut: string;
 		locale: Locale;
 		error?: string;
+		occupiedNight?: (iso: string) => boolean;
 	} = $props();
 
 	const uid = $props.id();
@@ -56,6 +57,20 @@
 	const cursorId = $derived(`${calendarId}-${cursor}`);
 
 	$effect(() => {
+		if (!open) return;
+		if (!dayDisabled(cursor)) return;
+		const next = cursorForMonth(
+			monthStart(parseIso(cursor)),
+			parseIso(cursor).getDate(),
+			picking,
+			today,
+			checkIn,
+			occupiedNight
+		);
+		if (next !== cursor) cursor = next;
+	});
+
+	$effect(() => {
 		if (!open || !rootEl) return;
 		return dismissable(rootEl, close);
 	});
@@ -68,7 +83,8 @@
 	function openFor(which: 'in' | 'out') {
 		picking = which === 'out' && checkIn ? 'out' : 'in';
 		const start = (which === 'out' && checkOut) || checkIn || today;
-		setCursor(nearestEnabled(start, picking, today, checkIn));
+		view = monthStart(parseIso(start));
+		cursor = cursorForMonth(view, parseIso(start).getDate(), picking, today, checkIn, occupiedNight);
 		open = true;
 	}
 
@@ -79,7 +95,7 @@
 
 	function selectDay(iso: string) {
 		error = '';
-		const next = applyDaySelection(iso, picking, checkIn, checkOut);
+		const next = applyDaySelection(iso, picking, checkIn, checkOut, occupiedNight);
 		checkIn = next.checkIn;
 		checkOut = next.checkOut;
 		picking = next.picking;
@@ -87,12 +103,19 @@
 			close(true);
 			return;
 		}
-		setCursor(nearestEnabled(next.checkOut || minCheckOut(next.checkIn, today), 'out', today, next.checkIn));
+		cursor = cursorForMonth(
+			view,
+			parseIso(minCheckOut(next.checkIn, today)).getDate(),
+			'out',
+			today,
+			next.checkIn,
+			occupiedNight
+		);
 		outEl?.focus();
 	}
 
 	function dayDisabled(iso: string) {
-		return isDayDisabled(iso, picking, today, checkIn);
+		return isDayDisabled(iso, picking, today, checkIn, occupiedNight);
 	}
 
 	function formatDate(iso: string) {
@@ -104,7 +127,17 @@
 	}
 
 	function shiftMonth(delta: number) {
-		setCursor(nearestEnabled(addMonths(cursor, delta), picking, today, checkIn));
+		const nextView = monthStart(new Date(view.getFullYear(), view.getMonth() + delta, 1));
+		if (nextView < monthStart(parseIso(today))) return;
+		view = nextView;
+		cursor = cursorForMonth(
+			nextView,
+			parseIso(cursor).getDate(),
+			picking,
+			today,
+			checkIn,
+			occupiedNight
+		);
 	}
 
 	function onFocusField(which: 'in' | 'out') {
@@ -120,7 +153,7 @@
 			return;
 		}
 		if (picking !== which) openFor(which);
-		const next = cursorAfterKey(event.key, cursor, picking, today, checkIn);
+		const next = cursorAfterKey(event.key, cursor, picking, today, checkIn, occupiedNight);
 		if (next !== null) {
 			event.preventDefault();
 			setCursor(next);
@@ -218,7 +251,9 @@
 									role="gridcell"
 									disabled={dayDisabled(iso)}
 									aria-selected={iso === checkIn || iso === checkOut}
-									aria-label={formatDate(iso)}
+									aria-label={dayDisabled(iso) && occupiedNight(iso)
+										? `${formatDate(iso)}, ${t('dateUnavailable')}`
+										: formatDate(iso)}
 									onpointerdown={(event) => event.preventDefault()}
 									onclick={() => selectDay(iso)}
 								>

@@ -5,6 +5,7 @@ import {
 	addMonths,
 	applyDaySelection,
 	cursorAfterKey,
+	cursorForMonth,
 	isoDate,
 	isDayDisabled,
 	minCheckOut,
@@ -37,6 +38,15 @@ describe('isDayDisabled', () => {
 		expect(isDayDisabled('2026-08-21', 'out', today, '2026-08-20')).toBe(true);
 		expect(isDayDisabled('2026-08-22', 'out', today, '2026-08-20')).toBe(false);
 	});
+
+	it('blocks occupied nights, but allows checkout on that morning', () => {
+		const occupied = (iso: string) => iso === '2026-08-22' || iso === '2026-08-23';
+		expect(isDayDisabled('2026-08-22', 'in', today, '', occupied)).toBe(true);
+		expect(isDayDisabled('2026-08-21', 'in', today, '', occupied)).toBe(false);
+		expect(isDayDisabled('2026-08-22', 'out', today, '2026-08-20', occupied)).toBe(false);
+		expect(isDayDisabled('2026-08-23', 'out', today, '2026-08-20', occupied)).toBe(true);
+		expect(isDayDisabled('2026-08-24', 'out', today, '2026-08-20', occupied)).toBe(true);
+	});
 });
 
 describe('applyDaySelection', () => {
@@ -51,6 +61,16 @@ describe('applyDaySelection', () => {
 
 	it('clears a check-out that is too close to the new check-in', () => {
 		expect(applyDaySelection('2026-08-20', 'in', '2026-08-10', '2026-08-21')).toEqual({
+			checkIn: '2026-08-20',
+			checkOut: '',
+			picking: 'out',
+			done: false
+		});
+	});
+
+	it('clears a check-out that now overlaps an occupied night', () => {
+		const occupied = (iso: string) => iso === '2026-08-22';
+		expect(applyDaySelection('2026-08-20', 'in', '2026-08-10', '2026-08-24', occupied)).toEqual({
 			checkIn: '2026-08-20',
 			checkOut: '',
 			picking: 'out',
@@ -110,6 +130,20 @@ describe('nearestEnabled', () => {
 		expect(nearestEnabled('2026-08-21', 'out', today, '2026-08-20')).toBe('2026-08-22');
 		expect(nearestEnabled('2026-08-24', 'out', today, '2026-08-20')).toBe('2026-08-24');
 	});
+
+	it('skips occupied nights when finding the next enabled day', () => {
+		const occupied = (iso: string) => iso === '2026-08-22' || iso === '2026-08-23';
+		expect(nearestEnabled('2026-08-22', 'in', today, '', occupied)).toBe('2026-08-24');
+		expect(nearestEnabled('2026-08-21', 'out', today, '2026-08-20', occupied)).toBe('2026-08-22');
+	});
+
+	it('keeps a fully occupied month instead of jumping to the next free day', () => {
+		const occupied = (iso: string) => iso >= '2026-09-01' && iso <= '2026-09-30';
+		expect(nearestEnabled('2026-09-19', 'in', today, '', occupied)).toBe('2026-10-01');
+		expect(
+			cursorForMonth(monthStart(new Date(2026, 8, 1)), 19, 'in', today, '', occupied)
+		).toBe('2026-09-19');
+	});
 });
 
 describe('cursorAfterKey', () => {
@@ -129,5 +163,16 @@ describe('cursorAfterKey', () => {
 		expect(cursorAfterKey('PageDown', today, 'in', today, '')).toBe('2026-09-19');
 		expect(cursorAfterKey('PageUp', today, 'in', today, '')).toBe(today);
 		expect(cursorAfterKey('PageUp', '2026-09-05', 'in', today, '')).toBe(today);
+	});
+
+	it('still shows a fully occupied month on PageDown', () => {
+		const occupied = (iso: string) => iso >= '2026-09-01' && iso <= '2026-09-30';
+		expect(cursorAfterKey('PageDown', today, 'in', today, '', occupied)).toBe('2026-09-19');
+	});
+
+	it('skips occupied nights with arrow keys', () => {
+		const occupied = (iso: string) => iso === '2026-08-22' || iso === '2026-08-23';
+		expect(cursorAfterKey('ArrowRight', '2026-08-21', 'in', today, '', occupied)).toBe('2026-08-24');
+		expect(cursorAfterKey('ArrowLeft', '2026-08-24', 'in', today, '', occupied)).toBe('2026-08-21');
 	});
 });

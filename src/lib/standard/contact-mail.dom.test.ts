@@ -24,7 +24,7 @@ function mountForm() {
 
 function clickMail(
 	link: HTMLAnchorElement,
-	dates: { checkIn: string; checkOut: string },
+	dates: { checkIn: string; checkOut: string; datesUnavailable?: boolean },
 	locale: 'it' | 'en' = 'it'
 ) {
 	const preventDefault = vi.fn();
@@ -35,6 +35,8 @@ function clickMail(
 			checkIn: dates.checkIn,
 			checkOut: dates.checkOut,
 			requiredMessage: pick(contactCopy.fieldRequired, locale),
+			datesUnavailable: dates.datesUnavailable,
+			unavailableMessage: pick(contactCopy.occupancyBlocked, locale),
 			fieldError: (el) =>
 				contactFieldError(el, {
 					required: pick(contactCopy.fieldRequired, locale),
@@ -101,6 +103,25 @@ describe('gateMailtoClick', () => {
 		expect(result.allowed).toBe(true);
 		expect(result.preventDefault).not.toHaveBeenCalled();
 		expect(result.dateError).toBe('');
+		expect(report).not.toHaveBeenCalled();
+	});
+
+	it('blocks a stay that overlaps occupied nights', () => {
+		const { form, link, name, email } = mountForm();
+		name.value = 'Maria';
+		email.value = 'maria@example.com';
+		const report = vi.spyOn(form, 'reportValidity');
+		const result = clickMail(
+			link,
+			{ checkIn: '2026-08-20', checkOut: '2026-08-22', datesUnavailable: true },
+			'en'
+		);
+
+		expect(result.allowed).toBe(false);
+		expect(result.preventDefault).toHaveBeenCalledOnce();
+		expect(result.dateError).toBe(
+			'These dates are unavailable. Choose another stay to request availability.'
+		);
 		expect(report).not.toHaveBeenCalled();
 	});
 });

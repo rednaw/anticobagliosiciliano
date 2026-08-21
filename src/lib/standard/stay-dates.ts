@@ -21,17 +21,35 @@ export function monthStart(date: Date): Date {
 	return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
+export type OccupiedNight = (iso: string) => boolean;
+
 export function minCheckOut(checkIn: string, today: string): string {
 	return addDays(checkIn || today, MIN_STAY);
+}
+
+/** True when `[from, to)` includes an occupied night. Checkout on that morning is `to`, so it stays free. */
+function stayHitsOccupied(
+	from: string,
+	to: string,
+	occupiedNight: OccupiedNight
+): boolean {
+	if (!from || !to || to <= from) return false;
+	for (let iso = from; iso < to; iso = addDays(iso, 1)) {
+		if (occupiedNight(iso)) return true;
+	}
+	return false;
 }
 
 export function isDayDisabled(
 	iso: string,
 	picking: 'in' | 'out',
 	today: string,
-	checkIn: string
+	checkIn: string,
+	occupiedNight: OccupiedNight = () => false
 ): boolean {
-	return picking === 'out' ? iso < minCheckOut(checkIn, today) : iso < today;
+	if (picking === 'in') return iso < today || occupiedNight(iso);
+	if (iso < minCheckOut(checkIn, today)) return true;
+	return stayHitsOccupied(checkIn, iso, occupiedNight);
 }
 
 /** After a calendar day click: next range, which end is active, and whether the popover should close. */
@@ -39,10 +57,12 @@ export function applyDaySelection(
 	iso: string,
 	picking: 'in' | 'out',
 	checkIn: string,
-	checkOut: string
+	checkOut: string,
+	occupiedNight: OccupiedNight = () => false
 ): { checkIn: string; checkOut: string; picking: 'in' | 'out'; done: boolean } {
 	if (picking === 'in') {
-		const nextOut = checkOut && checkOut < addDays(iso, MIN_STAY) ? '' : checkOut;
+		let nextOut = checkOut && checkOut < addDays(iso, MIN_STAY) ? '' : checkOut;
+		if (nextOut && stayHitsOccupied(iso, nextOut, occupiedNight)) nextOut = '';
 		return { checkIn: iso, checkOut: nextOut, picking: 'out', done: false };
 	}
 	return { checkIn, checkOut: iso, picking, done: true };
@@ -79,14 +99,54 @@ function snapEnabled(
 	dir: 1 | -1,
 	picking: 'in' | 'out',
 	today: string,
-	checkIn: string
+	checkIn: string,
+	occupiedNight: OccupiedNight
 ): string | null {
 	let next = iso;
 	for (let i = 0; i < 400; i++) {
-		if (!isDayDisabled(next, picking, today, checkIn)) return next;
+		if (!isDayDisabled(next, picking, today, checkIn, occupiedNight)) return next;
 		next = addDays(next, dir);
 	}
 	return null;
+}
+
+function sameMonth(iso: string, month: Date): boolean {
+	const date = parseIso(iso);
+	return date.getFullYear() === month.getFullYear() && date.getMonth() === month.getMonth();
+}
+
+/** First selectable day on or after `iso` that stays in that month. */
+function nearestEnabledInMonth(
+	iso: string,
+	picking: 'in' | 'out',
+	today: string,
+	checkIn: string,
+	occupiedNight: OccupiedNight = () => false
+): string | null {
+	const month = monthStart(parseIso(iso));
+	const found = snapEnabled(iso, 1, picking, today, checkIn, occupiedNight);
+	return found && sameMonth(found, month) ? found : null;
+}
+
+/** Cursor for a shown month: prefer an enabled day, otherwise stay on a day in that month. */
+export function cursorForMonth(
+	month: Date,
+	preferredDay: number,
+	picking: 'in' | 'out',
+	today: string,
+	checkIn: string,
+	occupiedNight: OccupiedNight = () => false
+): string {
+	const year = month.getFullYear();
+	const index = month.getMonth();
+	const last = new Date(year, index + 1, 0).getDate();
+	const day = Math.min(Math.max(preferredDay, 1), last);
+	const preferred = isoDate(new Date(year, index, day));
+	return (
+		nearestEnabledInMonth(preferred, picking, today, checkIn, occupiedNight) ??
+		nearestEnabledInMonth(isoDate(new Date(year, index, 1)), picking, today, checkIn, occupiedNight) ??
+		preferred
+	);
 }
 
 /** First selectable day on or after `iso`, else `iso` itself. */
@@ -94,9 +154,10 @@ export function nearestEnabled(
 	iso: string,
 	picking: 'in' | 'out',
 	today: string,
-	checkIn: string
+	checkIn: string,
+	occupiedNight: OccupiedNight = () => false
 ): string {
-	return snapEnabled(iso, 1, picking, today, checkIn) ?? iso;
+	return snapEnabled(iso, 1, picking, today, checkIn, occupiedNight) ?? iso;
 }
 
 /** Next calendar cursor, or null if the key is not a calendar move. */
@@ -105,11 +166,12 @@ export function cursorAfterKey(
 	cursor: string,
 	picking: 'in' | 'out',
 	today: string,
-	checkIn: string
+	checkIn: string,
+	occupiedNight: OccupiedNight = () => false
 ): string | null {
 	const step = (delta: number) => {
 		const sign: 1 | -1 = delta >= 0 ? 1 : -1;
-		return snapEnabled(addDays(cursor, delta), sign, picking, today, checkIn) ?? cursor;
+		return snapEnabled(addDays(cursor, delta), sign, picking, today, checkIn, occupiedNight) ?? cursor;
 	};
 
 	switch (key) {
@@ -121,17 +183,29 @@ export function cursorAfterKey(
 			return step(-7);
 		case 'ArrowDown':
 			return step(7);
-		case 'PageUp':
-			return nearestEnabled(addMonths(cursor, -1), picking, today, checkIn);
+		case 'PageUp': {
+			const prev = monthStart(parseIso(addMonths(cursor, -1)));
+			if (prev < monthStart(parseIso(today))) {
+				return nearestEnabledInMonth(today, picking, today, checkIn, occupiedNight) ?? today;
+			}
+			return cursorForMonth(prev, parseIso(cursor).getDate(), picking, today, checkIn, occupiedNight);
+		}
 		case 'PageDown':
-			return nearestEnabled(addMonths(cursor, 1), picking, today, checkIn);
+			return cursorForMonth(
+				monthStart(parseIso(addMonths(cursor, 1))),
+				parseIso(cursor).getDate(),
+				picking,
+				today,
+				checkIn,
+				occupiedNight
+			);
 		case 'Home': {
 			const fromMonday = (parseIso(cursor).getDay() + 6) % 7;
-			return snapEnabled(addDays(cursor, -fromMonday), 1, picking, today, checkIn) ?? cursor;
+			return snapEnabled(addDays(cursor, -fromMonday), 1, picking, today, checkIn, occupiedNight) ?? cursor;
 		}
 		case 'End': {
 			const fromMonday = (parseIso(cursor).getDay() + 6) % 7;
-			return snapEnabled(addDays(cursor, 6 - fromMonday), -1, picking, today, checkIn) ?? cursor;
+			return snapEnabled(addDays(cursor, 6 - fromMonday), -1, picking, today, checkIn, occupiedNight) ?? cursor;
 		}
 		default:
 			return null;

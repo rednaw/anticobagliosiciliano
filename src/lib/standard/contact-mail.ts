@@ -52,6 +52,8 @@ export function gateMailtoClick(
 		checkIn: string;
 		checkOut: string;
 		requiredMessage: string;
+		datesUnavailable?: boolean;
+		unavailableMessage?: string;
 		fieldError: (el: HTMLInputElement | HTMLTextAreaElement) => string;
 		setDateError: (message: string) => void;
 	}
@@ -67,7 +69,12 @@ export function gateMailtoClick(
 		}
 	}
 
-	const dateError = options.checkIn && options.checkOut ? '' : options.requiredMessage;
+	const dateError =
+		!options.checkIn || !options.checkOut
+			? options.requiredMessage
+			: options.datesUnavailable
+				? (options.unavailableMessage ?? options.requiredMessage)
+				: '';
 	options.setDateError(dateError);
 
 	const valid = form.checkValidity();
@@ -76,6 +83,23 @@ export function gateMailtoClick(
 	event.preventDefault();
 	if (!valid) form.reportValidity();
 	return false;
+}
+
+function houseName(slug: string): string {
+	return housesSource.find((house) => house.slug === slug)?.name ?? slug;
+}
+
+function joinHouseNames(slugs: readonly string[], locale: Locale): string {
+	const names = slugs.map(houseName);
+	if (names.length <= 1) return names[0] ?? '';
+	const last = names.at(-1)!;
+	const rest = names.slice(0, -1).join(', ');
+	return locale === 'it' ? `${rest} e ${last}` : `${rest} and ${last}`;
+}
+
+export function housesFreeHint(locale: Locale, slugs: readonly string[]): string {
+	if (!slugs.length) return '';
+	return pick(contactCopy.housesFreeHint, locale).replace('{houses}', joinHouseNames(slugs, locale));
 }
 
 export function buildMailtoHref(fields: MailtoFields): string {
@@ -88,20 +112,17 @@ export function buildMailtoHref(fields: MailtoFields): string {
 			? `${heading} — ${selectedHouse.name} — ${fields.name || t('mailGuest')}`
 			: `${heading} — ${fields.name || t('mailGuest')}`
 	);
-	const body = encodeURIComponent(
-		[
-			`${t('mailName')}: ${fields.name}`,
-			`${t('mailEmail')}: ${fields.email}`,
-			`${t('mailHouse')}: ${houseLabel}`,
-			`${t('checkIn')}: ${fields.checkIn}`,
-			`${t('checkOut')}: ${fields.checkOut}`,
-			`${t('adults')}: ${fields.adults}`,
-			`${t('children')}: ${fields.children}`,
-			'',
-			fields.message || t('mailNoMessage')
-		]
-			.join('\n')
-			.replace(/\r\n|\n|\r/g, '\r\n')
-	);
+	const lines = [
+		`${t('mailName')}: ${fields.name}`,
+		`${t('mailEmail')}: ${fields.email}`,
+		`${t('mailHouse')}: ${houseLabel}`,
+		`${t('checkIn')}: ${fields.checkIn}`,
+		`${t('checkOut')}: ${fields.checkOut}`,
+		`${t('adults')}: ${fields.adults}`,
+		`${t('children')}: ${fields.children}`,
+		'',
+		fields.message || t('mailNoMessage')
+	];
+	const body = encodeURIComponent(lines.join('\n').replace(/\r\n|\n|\r/g, '\r\n'));
 	return `mailto:${site.email}?subject=${subject}&body=${body}`;
 }

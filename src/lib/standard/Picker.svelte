@@ -4,7 +4,7 @@
 	import FieldTrigger from '$lib/standard/FieldTrigger.svelte';
 	import { optionIndexAfterKey } from '$lib/standard/picker';
 
-	type Option = { value: string; label: string };
+	type Option = { value: string; label: string; disabled?: boolean };
 
 	let {
 		value = $bindable(''),
@@ -39,6 +39,8 @@
 		});
 	});
 
+	const isDisabled = (i: number) => Boolean(options[i]?.disabled);
+
 	function indexOfValue() {
 		const index = options.findIndex((option) => option.value === value);
 		return index < 0 ? 0 : index;
@@ -60,6 +62,7 @@
 	}
 
 	function select(option: Option) {
+		if (option.disabled) return;
 		value = option.value;
 		close(true);
 	}
@@ -72,12 +75,12 @@
 				open = true;
 				return;
 			}
-			const next = optionIndexAfterKey(event.key, activeIndex, options.length);
+			const next = optionIndexAfterKey(event.key, activeIndex, options.length, isDisabled);
 			if (next !== null) activeIndex = next;
 			return;
 		}
 		if (!open) return;
-		const jumped = optionIndexAfterKey(event.key, activeIndex, options.length);
+		const jumped = optionIndexAfterKey(event.key, activeIndex, options.length, isDisabled);
 		if (jumped !== null) {
 			event.preventDefault();
 			activeIndex = jumped;
@@ -116,6 +119,7 @@
 					class:active={i === activeIndex}
 					role="option"
 					tabindex="-1"
+					disabled={option.disabled}
 					aria-selected={option.value === value}
 					onpointerdown={(event) => event.preventDefault()}
 					onclick={() => select(option)}
@@ -176,5 +180,17 @@
 	.option.selected:hover {
 		background: var(--sea);
 		color: #fff;
+	}
+
+	.option:disabled {
+		color: var(--muted);
+		cursor: default;
+		background: transparent;
+	}
+
+	.option:disabled:hover,
+	.option.active:disabled {
+		background: transparent;
+		outline: none;
 	}
 </style>

@@ -651,6 +651,15 @@ export const contactCopy = liveCopy('contact', {
 		it: 'Soggiorno minimo: due notti',
 		en: 'Minimum stay: two nights'
 	},
+	dateUnavailable: { it: 'occupata', en: 'unavailable' },
+	occupancyBlocked: {
+		it: 'Queste date sono occupate. Scegline altre per richiedere disponibilità.',
+		en: 'These dates are unavailable. Choose another stay to request availability.'
+	},
+	housesFreeHint: {
+		it: 'In queste date sono libere {houses}.',
+		en: 'These dates are free for {houses}.'
+	},
 	fieldRequired: {
 		it: 'Compila questo campo.',
 		en: 'Please fill in this field.'

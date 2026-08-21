@@ -1,8 +1,8 @@
 ---
 name: Lodgify availability snapshot
-status: in-progress
+status: completed
 saved: 2026-08-20
-overview: Keep the site static and the enquiry flow mailto-only. A scheduled GitHub Action will pull Lodgify’s unified calendar, commit a sanitized occupancy snapshot, and rebuild Pages. The contact calendar stays fully selectable, with a warning (and an extra line in the email) when the chosen stay looks booked.
+overview: Keep the site static and the enquiry flow mailto-only. A scheduled GitHub Action will pull Lodgify’s unified calendar, commit a sanitized occupancy snapshot, and rebuild Pages. Occupied nights on the contact calendar are disabled and cannot be requested.
 todos:
   - id: api-calls
     content: Confirm Lodgify HTTP calls from live probe, including 18-month window
@@ -14,11 +14,11 @@ todos:
     content: "Scheduled workflow: sync, commit if changed, test/build, deploy Pages; LODGIFY_API_KEY secret"
     status: completed
   - id: form-ux
-    content: StayDates booked styling + warning; house-option notes; mailto calendar line; contact/privacy copy
-    status: pending
+    content: Disable occupied nights; house options; no-preference free-houses hint
+    status: completed
   - id: tests
-    content: Overlap/intersection/mailto tests plus assert-build snapshot shape
-    status: pending
+    content: Occupancy overlap tests plus assert-build snapshot shape
+    status: completed
 ---
 
 # Lodgify availability on a static contact form
@@ -27,8 +27,9 @@ Stay with the owners’ manual Lodgify calendar and mailto enquiries. Availabili
 
 Decisions already made:
 
-- Dates stay selectable. Warn when the stay looks booked; say so in the mailto body.
-- With “nessuna preferenza”, a night is fully booked only when every house is occupied. After dates are chosen, note which houses still look free.
+- Occupied nights are disabled (grey). They cannot be selected or sent in the mailto.
+- Checkout on the morning of an occupied night stays allowed (`[checkIn, checkOut)`).
+- With “nessuna preferenza”, a night is blocked only when every house is occupied. After dates are chosen, houses that are occupied for that stay are disabled in the list.
 
 ```mermaid
 flowchart LR
@@ -79,7 +80,7 @@ Occupied = `available === 0` or a closed period. Occupied nights are every date 
 
 Mapping lives in a committed, non-secret module (e.g. [`src/lib/data/lodgify.ts`](../../src/lib/data/lodgify.ts)): property `129476` plus the four house rows above. Sync filters the six-room payload down to those four slugs.
 
-Next implementation step: contact form occupancy UI (not started). Snapshot script + scheduled workflow are in place.
+The contact form reads the committed snapshot. Occupied nights are disabled. Snapshot script + scheduled workflow are in place.
 
 - Write a compact public file [`src/lib/data/availability.json`](../../src/lib/data/availability.json): `generatedAt`, date span, and per-house **occupied night ranges** only.
 - If the API fails, **exit non-zero and keep the last good file**. If the JSON is unchanged, do not commit.
@@ -88,20 +89,19 @@ Next implementation step: contact form occupancy UI (not started). Snapshot scri
 
 ## Contact form behaviour
 
-Dates stay **selectable**. [`StayDates.svelte`](../../src/lib/standard/StayDates.svelte) / [`stay-dates.ts`](../../src/lib/standard/stay-dates.ts) gain occupied-night input:
+Occupied nights are **disabled**. [`StayDates.svelte`](../../src/lib/standard/StayDates.svelte) / [`stay-dates.ts`](../../src/lib/standard/stay-dates.ts) take occupied-night input:
 
-- Style booked nights (house selected → that room; **nessuna preferenza** → only nights where **every** house is occupied). Not `disabled`.
-- If the chosen `[checkIn, checkOut)` overlaps occupied nights, show a warning under the calendar (IT/EN in [`contactCopy`](../../src/lib/data/content.ts)).
-- With dates chosen, house options can note which rooms still look free for that range.
-- [`buildMailtoHref`](../../src/lib/standard/contact-mail.ts) adds a short calendar line: snapshot date + free/busy for the selected house (or which houses look free if no preference).
-- Hint copy: this is indicative, updated a couple of times a day, not a confirmation.
+- Grey out unavailable nights (house selected → that room; **nessuna preferenza** → only nights where **every** house is occupied). Not selectable.
+- Checkout on the morning of an occupied night stays allowed. A stay that would include an occupied night cannot be chosen or mailed.
+- With dates chosen, house options that are occupied for that range are disabled.
+- With **nessuna preferenza** and dates chosen, the form hints which houses are free. Mailto has no occupancy line.
 
 No rates, quotes, or Lodgify booking API.
 
 ## Privacy and tests
 
-- Privacy page: we publish **occupancy**, not guest names, from a Lodgify snapshot.
-- Unit tests for range overlap, “all houses booked” vs per-house, mailto calendar line, and a fixture snapshot so tests never hit Lodgify.
+- Privacy page stays about visitor and enquiry data (mailto, analytics, hosting). Occupancy is not a visitor’s personal data.
+- Unit tests for range overlap, disabled occupied nights, checkout-on-occupied-morning, “all houses booked” vs per-house, and a fixture snapshot so tests never hit Lodgify.
 - [`tests/assert-build.mjs`](../../tests/assert-build.mjs): prerendered contact HTML still has mailto; snapshot keys match the four house slugs.
 
 ## What you need to provide before CI

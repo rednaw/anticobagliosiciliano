@@ -8,8 +8,15 @@
 		buildMailtoHref,
 		contactFieldError,
 		gateMailtoClick,
+		housesFreeHint,
 		messageValidity
 	} from '$lib/standard/contact-mail';
+	import {
+		freeHouses,
+		nightIsOccupied,
+		occupancySnapshot,
+		stayIsOccupied
+	} from '$lib/standard/occupancy';
 	import Picker from '$lib/standard/Picker.svelte';
 	import StayDates from '$lib/standard/StayDates.svelte';
 	import { CONTACT_HOUSE_PARAM, pick, ui } from '$lib/standard/i18n';
@@ -43,10 +50,34 @@
 		houseSlug = acceptedHouseSlug(page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '');
 	});
 
+	const freeForStay = $derived(
+		checkIn && checkOut ? freeHouses(occupancySnapshot, checkIn, checkOut) : null
+	);
 	const houseOptions = $derived([
 		{ value: '', label: t('houseAny') },
-		...housesSource.map((house) => ({ value: house.slug, label: house.name }))
+		...housesSource.map((house) => ({
+			value: house.slug,
+			label: house.name,
+			disabled: Boolean(freeForStay && !freeForStay.some((slug) => slug === house.slug))
+		}))
 	]);
+
+	const stayOccupied = $derived(stayIsOccupied(occupancySnapshot, houseSlug, checkIn, checkOut));
+	const noPreferenceHint = $derived(
+		houseSlug || !freeForStay ? '' : housesFreeHint(locale, freeForStay)
+	);
+
+	$effect(() => {
+		if (!checkIn) return;
+		if (nightIsOccupied(occupancySnapshot, houseSlug, checkIn)) {
+			checkIn = '';
+			checkOut = '';
+			return;
+		}
+		if (checkOut && stayIsOccupied(occupancySnapshot, houseSlug, checkIn, checkOut)) {
+			checkOut = '';
+		}
+	});
 
 	const mailtoHref = $derived(
 		buildMailtoHref({
@@ -68,6 +99,8 @@
 			checkIn,
 			checkOut,
 			requiredMessage: t('fieldRequired'),
+			datesUnavailable: stayOccupied,
+			unavailableMessage: t('occupancyBlocked'),
 			fieldError: (el) =>
 				contactFieldError(el, {
 					required: t('fieldRequired'),
@@ -108,7 +141,16 @@
 				<input type="email" name="email" bind:value={email} required autocomplete="email" />
 			</label>
 			<Picker bind:value={houseSlug} label={t('house')} options={houseOptions} />
-			<StayDates bind:checkIn bind:checkOut bind:error={dateError} {locale} />
+			<StayDates
+				bind:checkIn
+				bind:checkOut
+				bind:error={dateError}
+				{locale}
+				occupiedNight={(iso) => nightIsOccupied(occupancySnapshot, houseSlug, iso)}
+			/>
+			{#if noPreferenceHint}
+				<p class="field-hint">{noPreferenceHint}</p>
+			{/if}
 			<div class="row">
 				<Picker bind:value={adults} label={t('adults')} options={ADULT_OPTIONS} />
 				<Picker bind:value={children} label={t('children')} options={CHILD_OPTIONS} />
@@ -221,6 +263,12 @@
 	.hint {
 		margin: 0;
 		font-size: 0.9rem;
+		color: var(--muted);
+	}
+
+	.field-hint {
+		margin: -0.45rem 0 0;
+		font-size: 0.85rem;
 		color: var(--muted);
 	}
 

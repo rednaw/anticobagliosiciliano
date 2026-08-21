@@ -109,6 +109,15 @@ assert(contact.includes('%0D%0A'), 'mailto body uses CRLF (iOS)');
 assert(/mailto:[^"]+"[^>]*target="_blank"/.test(contact) || /target="_blank"[^>]*href="mailto:/.test(contact), 'mailto opens in a new target, not window.open');
 assert(!contact.includes('window.open'), 'contact page does not use window.open');
 
+const occupancy = JSON.parse(
+	readFileSync(path.join(root, 'src/lib/data/availability.json'), 'utf8')
+);
+assert(
+	JSON.stringify(Object.keys(occupancy.houses ?? {}).sort()) ===
+		JSON.stringify(['casa-1', 'casa-2', 'casa-3', 'casa-4']),
+	'occupancy snapshot keys are the four public houses'
+);
+
 const arrive = read('come-arrivare/index.html');
 assert(arrive.includes('Come arrivare'), 'Come arrivare page prerendered in Italian');
 assert(!arrive.includes('<iframe'), 'Come arrivare does not embed a third-party map iframe');

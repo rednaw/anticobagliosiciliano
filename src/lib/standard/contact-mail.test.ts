@@ -4,6 +4,7 @@ import {
 	MESSAGE_MAX_LENGTH,
 	acceptedHouseSlug,
 	buildMailtoHref,
+	housesFreeHint,
 	messageValidity,
 	type MailtoFields
 } from './contact-mail';
@@ -105,6 +106,27 @@ describe('buildMailtoHref', () => {
 		const mail = parseMailto(buildMailtoHref(draft({ name: '', locale: 'en' })));
 		expect(mail.subject).toBe('Request availability — Guest');
 		expect(mail.body.startsWith('Name: \r\n')).toBe(true);
+	});
+
+	it('names free houses for the form when dates are set, and not for the mailto', () => {
+		expect(housesFreeHint('en', ['casa-3', 'casa-4'])).toBe(
+			'These dates are free for Casa 3 and Casa 4.'
+		);
+		expect(housesFreeHint('it', ['casa-3', 'casa-4'])).toBe(
+			'In queste date sono libere Casa 3 e Casa 4.'
+		);
+		expect(housesFreeHint('it', [])).toBe('');
+
+		const mail = parseMailto(
+			buildMailtoHref(
+				draft({
+					houseSlug: '',
+					checkIn: '2026-08-24',
+					checkOut: '2026-08-26'
+				})
+			)
+		);
+		expect(mail.body).not.toMatch(/libere|free for/);
 	});
 
 	it('keeps spaces and accents through encoding', () => {
