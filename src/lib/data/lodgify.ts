@@ -75,7 +75,9 @@ export function periodIsOccupied(period: LodgifyPeriod): boolean {
 	return period.available === 0 || period.available === false;
 }
 
-/** Merge overlapping/adjacent occupied ranges. Also fill a single free night between two bookings: that gap cannot be a stay under a 2+ night minimum, while checkout on the morning of that date still uses `[checkIn, checkOut)`. */
+/** Merge overlapping/adjacent occupied ranges. Also fill a single free night between two bookings:
+ * that gap cannot be a stay under a 2+ night minimum, while checkout on the morning of that date
+ * still uses `[checkIn, checkOut)`. */
 export function mergeOccupiedRanges(ranges: OccupiedRange[]): OccupiedRange[] {
 	const sorted = [...ranges].sort(
 		(a, b) => a.start.localeCompare(b.start) || a.end.localeCompare(b.end)
@@ -95,8 +97,34 @@ export function mergeOccupiedRanges(ranges: OccupiedRange[]): OccupiedRange[] {
 	return out;
 }
 
-export function occupancyFingerprint(snapshot: AvailabilitySnapshot): string {
-	return JSON.stringify(snapshot.houses);
+/** Inclusive clip. Ranges that do not overlap `[from, to]` are dropped. */
+export function clipOccupiedRanges(
+	ranges: OccupiedRange[],
+	from: string,
+	to: string
+): OccupiedRange[] {
+	const windowFrom = ymd(from);
+	const windowTo = ymd(to);
+	const out: OccupiedRange[] = [];
+	for (const range of ranges) {
+		const start = range.start > windowFrom ? range.start : windowFrom;
+		const end = range.end < windowTo ? range.end : windowTo;
+		if (end < start) continue;
+		out.push({ start, end });
+	}
+	return out;
+}
+
+/** Occupied nights in `[from, to]`. Sliding starts, `generatedAt`, and the stored window do not count. */
+export function occupancyFingerprint(
+	snapshot: AvailabilitySnapshot,
+	window: { from: string; to: string }
+): string {
+	const houses = {} as AvailabilitySnapshot['houses'];
+	for (const slug of LODGIFY_HOUSE_SLUGS) {
+		houses[slug] = clipOccupiedRanges(snapshot.houses[slug] ?? [], window.from, window.to);
+	}
+	return JSON.stringify(houses);
 }
 
 /** Drop bookings / guest fields. Keep occupied night ranges for the four public houses. */

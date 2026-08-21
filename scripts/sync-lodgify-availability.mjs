@@ -60,8 +60,10 @@ let occupancyChanged = true;
 if (existsSync(outPath)) {
 	try {
 		const previous = JSON.parse(readFileSync(outPath, 'utf8'));
+		const window = { from, to };
 		occupancyChanged =
-			lodgify.occupancyFingerprint(previous) !== lodgify.occupancyFingerprint(snapshot);
+			lodgify.occupancyFingerprint(previous, window) !==
+			lodgify.occupancyFingerprint(snapshot, window);
 	} catch {
 		occupancyChanged = true;
 	}
