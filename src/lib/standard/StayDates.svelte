@@ -1,11 +1,11 @@
 <script lang="ts">
   import { contactCopy } from '$lib/data/content';
+  import { calendarDateInZone } from '$lib/data/lodgify';
   import { dismissable } from '$lib/standard/dismiss';
   import FieldTrigger from '$lib/standard/FieldTrigger.svelte';
   import {
     applyDaySelection,
     cursorAfterKey,
-    isoDate,
     isDayDisabled,
     minCheckOut,
     monthCells,
@@ -33,11 +33,11 @@
   const uid = $props.id();
   const calendarId = `${uid}-calendar`;
   const errorId = `${uid}-error`;
-  const today = isoDate(new Date());
+  const today = calendarDateInZone();
 
   let open = $state(false);
   let picking = $state<'in' | 'out'>('in');
-  let view = $state(monthStart(new Date()));
+  let view = $state(monthStart(parseIso(today)));
   let cursor = $state(today);
   let rootEl = $state<HTMLDivElement | null>(null);
   let inEl = $state<HTMLInputElement | null>(null);

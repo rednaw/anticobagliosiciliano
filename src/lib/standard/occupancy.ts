@@ -1,6 +1,6 @@
 import occupancyJson from '../data/occupancy.json' with { type: 'json' };
 import {
-  addUtcDays,
+  addDays,
   LODGIFY_HOUSE_SLUGS,
   LODGIFY_ROOM_TYPE_BY_SLUG,
   type AvailabilitySnapshot,
@@ -31,7 +31,7 @@ export function nightIsOccupied(
 export function stayNights(checkIn: string, checkOut: string): string[] {
   if (!checkIn || !checkOut || checkOut <= checkIn) return [];
   const nights: string[] = [];
-  for (let iso = checkIn; iso < checkOut; iso = addUtcDays(iso, 1)) nights.push(iso);
+  for (let iso = checkIn; iso < checkOut; iso = addDays(iso, 1)) nights.push(iso);
   return nights;
 }
 

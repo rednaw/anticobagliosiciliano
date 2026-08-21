@@ -64,7 +64,8 @@ export function addUtcMonths(ymdValue: string, months: number): string {
   return next.toISOString().slice(0, 10);
 }
 
-export function addUtcDays(ymdValue: string, days: number): string {
+/** Shift a `YYYY-MM-DD` by whole days. UTC so DST cannot skip or repeat a civil date. */
+export function addDays(ymdValue: string, days: number): string {
   const day = ymd(ymdValue);
   const [year, month, date] = day.split('-').map(Number);
   const next = new Date(Date.UTC(year, month - 1, date + days));
@@ -89,7 +90,7 @@ export function mergeOccupiedRanges(ranges: OccupiedRange[]): OccupiedRange[] {
       throw new Error(`Occupied range ends before it starts: ${range.start}…${range.end}`);
     }
     const last = out.at(-1);
-    if (last && addUtcDays(last.end, 2) >= range.start) {
+    if (last && addDays(last.end, 2) >= range.start) {
       if (range.end > last.end) last.end = range.end;
       continue;
     }

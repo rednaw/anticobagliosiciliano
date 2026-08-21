@@ -1,3 +1,7 @@
+import { addDays } from '$lib/data/lodgify';
+
+export { addDays };
+
 export const MIN_STAY = 2;
 
 export function isoDate(date: Date): string {
@@ -9,12 +13,6 @@ export function isoDate(date: Date): string {
 export function parseIso(iso: string): Date {
   const [y, m, d] = iso.split('-').map(Number);
   return new Date(y, m - 1, d);
-}
-
-export function addDays(iso: string, days: number): string {
-  const date = parseIso(iso);
-  date.setDate(date.getDate() + days);
-  return isoDate(date);
 }
 
 export function monthStart(date: Date): Date {

@@ -19,7 +19,7 @@ import {
 const today = '2026-08-19';
 
 describe('isoDate / addDays', () => {
-  it('round-trips local calendar dates and crosses month ends', () => {
+  it('round-trips widget dates; addDays steps civil YYYY-MM-DD across month ends', () => {
     expect(isoDate(new Date(2026, 7, 19))).toBe('2026-08-19');
     expect(isoDate(parseIso('2026-08-19'))).toBe('2026-08-19');
     expect(addDays('2026-08-31', 2)).toBe('2026-09-02');

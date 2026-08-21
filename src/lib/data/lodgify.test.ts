@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { housesSource } from './content';
 import {
-  addUtcDays,
+  addDays,
   addUtcMonths,
+  calendarDateInZone,
   clipOccupiedRanges,
   LODGIFY_HOUSE_SLUGS,
   mergeOccupiedRanges,
@@ -33,6 +34,11 @@ function snapshot(partial: Partial<AvailabilitySnapshot>): AvailabilitySnapshot 
 }
 
 describe('lodgify occupancy snapshot', () => {
+  it('uses Europe/Rome for the calendar date, not the machine timezone', () => {
+    expect(calendarDateInZone(new Date('2026-08-21T22:00:00.000Z'))).toBe('2026-08-22');
+    expect(calendarDateInZone(new Date('2026-08-21T21:59:00.000Z'))).toBe('2026-08-21');
+  });
+
   it('covers the same houses as the public site', () => {
     expect([...LODGIFY_HOUSE_SLUGS].sort()).toEqual(
       housesSource.map((house) => house.slug).sort()
@@ -71,7 +77,7 @@ describe('lodgify occupancy snapshot', () => {
       { start: '2026-10-19', end: '2026-10-28' },
       { start: '2026-11-01', end: '2026-12-30' }
     ]);
-    expect(addUtcDays('2026-08-31', 1)).toBe('2026-09-01');
+    expect(addDays('2026-08-31', 1)).toBe('2026-09-01');
     expect(addUtcMonths('2026-08-20', 18)).toBe('2028-02-20');
   });
 
