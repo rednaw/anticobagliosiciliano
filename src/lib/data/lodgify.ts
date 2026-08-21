@@ -2,16 +2,17 @@
 
 export const LODGIFY_PROPERTY_ID = 129476;
 
-export const LODGIFY_HOUSE_SLUGS = ['casa-1', 'casa-2', 'casa-3', 'casa-4'] as const;
-export type LodgifyHouseSlug = (typeof LODGIFY_HOUSE_SLUGS)[number];
-
 /** Public site houses only. Casa #5 and Tutte are omitted on purpose. */
-export const LODGIFY_ROOM_TYPE_BY_SLUG: Record<LodgifyHouseSlug, number> = {
+export const LODGIFY_ROOM_TYPE_BY_SLUG = {
   'casa-1': 150204,
   'casa-2': 150205,
   'casa-3': 159913,
   'casa-4': 159914
-};
+} as const;
+
+export type LodgifyHouseSlug = keyof typeof LODGIFY_ROOM_TYPE_BY_SLUG;
+
+export const LODGIFY_HOUSE_SLUGS = Object.keys(LODGIFY_ROOM_TYPE_BY_SLUG) as LodgifyHouseSlug[];
 
 export type OccupiedRange = { start: string; end: string };
 

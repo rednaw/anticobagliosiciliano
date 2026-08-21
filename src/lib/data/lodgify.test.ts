@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { housesSource } from './content';
 import {
   addUtcDays,
   addUtcMonths,
   clipOccupiedRanges,
+  LODGIFY_HOUSE_SLUGS,
   mergeOccupiedRanges,
   occupancyFingerprint,
   periodIsOccupied,
@@ -15,12 +17,9 @@ function houses(
   partial: Partial<AvailabilitySnapshot['houses']>
 ): AvailabilitySnapshot['houses'] {
   return {
-    'casa-1': [],
-    'casa-2': [],
-    'casa-3': [],
-    'casa-4': [],
+    ...Object.fromEntries(LODGIFY_HOUSE_SLUGS.map((slug) => [slug, []])),
     ...partial
-  };
+  } as AvailabilitySnapshot['houses'];
 }
 
 function snapshot(partial: Partial<AvailabilitySnapshot>): AvailabilitySnapshot {
@@ -34,6 +33,12 @@ function snapshot(partial: Partial<AvailabilitySnapshot>): AvailabilitySnapshot 
 }
 
 describe('lodgify occupancy snapshot', () => {
+  it('covers the same houses as the public site', () => {
+    expect([...LODGIFY_HOUSE_SLUGS].sort()).toEqual(
+      housesSource.map((house) => house.slug).sort()
+    );
+  });
+
   it('treats available 0 and closed periods as occupied', () => {
     expect(periodIsOccupied({ available: 1, closed_period: null })).toBe(false);
     expect(periodIsOccupied({ available: 0, closed_period: null })).toBe(true);
@@ -116,7 +121,7 @@ describe('lodgify occupancy snapshot', () => {
       { generatedAt: '2026-08-20T12:00:00.000Z', from: '2026-08-20', to: '2028-02-20' }
     );
 
-    expect(Object.keys(snapshot.houses)).toEqual(['casa-1', 'casa-2', 'casa-3', 'casa-4']);
+    expect(Object.keys(snapshot.houses)).toEqual(LODGIFY_HOUSE_SLUGS);
     expect(JSON.stringify(snapshot)).not.toMatch(/bookings|user_id|150203|223104/);
     expect(snapshot.houses['casa-1']).toEqual([{ start: '2026-08-20', end: '2026-08-21' }]);
     const window = { from: '2026-08-20', to: '2028-02-20' };

@@ -2,6 +2,7 @@ import occupancyJson from '../data/occupancy.json' with { type: 'json' };
 import {
   addUtcDays,
   LODGIFY_HOUSE_SLUGS,
+  LODGIFY_ROOM_TYPE_BY_SLUG,
   type AvailabilitySnapshot,
   type LodgifyHouseSlug,
   type OccupiedRange
@@ -14,7 +15,7 @@ function nightInRanges(iso: string, ranges: OccupiedRange[]): boolean {
 }
 
 function isHouseSlug(value: string): value is LodgifyHouseSlug {
-  return (LODGIFY_HOUSE_SLUGS as readonly string[]).includes(value);
+  return value in LODGIFY_ROOM_TYPE_BY_SLUG;
 }
 
 /** House selected → that room. Empty slug → occupied only when every house is taken. */
