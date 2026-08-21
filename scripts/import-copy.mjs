@@ -51,7 +51,7 @@ const { overrides, unknown } = catalog.mergeImportedRows(
   liveById
 );
 
-writeFileSync(overridesPath, `${JSON.stringify(overrides, null, '\t')}\n`);
+writeFileSync(overridesPath, `${JSON.stringify(overrides, null, 2)}\n`);
 
 const applied = records.length - unknown.length;
 console.log(`importati ${applied} testi → ${path.relative(root, overridesPath)}`);

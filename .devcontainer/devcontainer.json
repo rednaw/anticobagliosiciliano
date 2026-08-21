@@ -20,7 +20,12 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["svelte.svelte-vscode"]
+      "extensions": ["svelte.svelte-vscode", "editorconfig.editorconfig"],
+      "settings": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false
+      }
     }
   }
 }

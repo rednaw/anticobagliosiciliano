@@ -7,6 +7,7 @@ import {
   occupancyFingerprint,
   periodIsOccupied,
   snapshotFromLodgifyAvailability,
+  stringifyAvailabilitySnapshot,
   type AvailabilitySnapshot
 } from './lodgify';
 
@@ -188,5 +189,13 @@ describe('lodgify occupancy snapshot', () => {
         to: '2028-02-20'
       })
     ).toThrow(/150204/);
+  });
+
+  it('writes occupancy json with two-space indent', () => {
+    const body = stringifyAvailabilitySnapshot(
+      snapshot({ houses: houses({ 'casa-1': [{ start: '2026-08-21', end: '2027-02-27' }] }) })
+    );
+    expect(body).toContain('\n  "generatedAt"');
+    expect(body).not.toContain('\t');
   });
 });

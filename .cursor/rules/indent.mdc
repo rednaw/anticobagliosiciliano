@@ -1,0 +1,10 @@
+---
+description: Indent with two spaces, never tabs
+alwaysApply: true
+---
+
+# Indentation
+
+Use two spaces. Do not use tab characters for indentation.
+
+JSON writers use `JSON.stringify(value, null, 2)`, not `'\t'`. A tab as a CSV delimiter is fine.

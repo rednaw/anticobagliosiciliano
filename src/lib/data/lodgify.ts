@@ -172,5 +172,5 @@ export function snapshotFromLodgifyAvailability(
 }
 
 export function stringifyAvailabilitySnapshot(snapshot: AvailabilitySnapshot): string {
-  return `${JSON.stringify(snapshot, null, '\t')}\n`;
+  return `${JSON.stringify(snapshot, null, 2)}\n`;
 }
