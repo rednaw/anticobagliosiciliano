@@ -44,7 +44,14 @@
 	let children = $state('0');
 	let message = $state('');
 	let mailLink = $state<HTMLAnchorElement | null>(null);
+	let nameEl = $state<HTMLInputElement | null>(null);
+	let emailEl = $state<HTMLInputElement | null>(null);
+	let messageEl = $state<HTMLTextAreaElement | null>(null);
 	let dateError = $state('');
+	let nameError = $state('');
+	let emailError = $state('');
+	let messageError = $state('');
+	const uid = $props.id();
 
 	onMount(() => {
 		houseSlug = acceptedHouseSlug(page.url.searchParams.get(CONTACT_HOUSE_PARAM) ?? '');
@@ -93,7 +100,7 @@
 		})
 	);
 
-	/** Browsers phrase their own validation bubbles in the browser language, not the site's. */
+	/** In-page red errors use the site language. Do not open the browser popup. */
 	function onMailClick(event: MouseEvent) {
 		gateMailtoClick(event, {
 			checkIn,
@@ -111,6 +118,9 @@
 				dateError = msg;
 			}
 		});
+		nameError = nameEl?.validationMessage ?? '';
+		emailError = emailEl?.validationMessage ?? '';
+		messageError = messageEl?.validationMessage ?? '';
 	}
 
 	function submit(event: Event) {
@@ -134,11 +144,39 @@
 		<form class="form" novalidate onsubmit={submit}>
 			<label>
 				<span>{t('name')}</span>
-				<input type="text" name="name" bind:value={name} required autocomplete="name" />
+				<input
+					bind:this={nameEl}
+					type="text"
+					name="name"
+					bind:value={name}
+					class:invalid={Boolean(nameError)}
+					required
+					autocomplete="name"
+					aria-invalid={nameError ? true : undefined}
+					aria-describedby={nameError ? `${uid}-name-error` : undefined}
+					oninput={() => (nameError = '')}
+				/>
+				{#if nameError}
+					<p id={`${uid}-name-error`} class="error">{nameError}</p>
+				{/if}
 			</label>
 			<label>
 				<span>{t('email')}</span>
-				<input type="email" name="email" bind:value={email} required autocomplete="email" />
+				<input
+					bind:this={emailEl}
+					type="email"
+					name="email"
+					bind:value={email}
+					class:invalid={Boolean(emailError)}
+					required
+					autocomplete="email"
+					aria-invalid={emailError ? true : undefined}
+					aria-describedby={emailError ? `${uid}-email-error` : undefined}
+					oninput={() => (emailError = '')}
+				/>
+				{#if emailError}
+					<p id={`${uid}-email-error`} class="error">{emailError}</p>
+				{/if}
 			</label>
 			<Picker bind:value={houseSlug} label={t('house')} options={houseOptions} />
 			<StayDates
@@ -158,12 +196,20 @@
 			<label>
 				<span>{t('message')}</span>
 				<textarea
+					bind:this={messageEl}
 					name="message"
 					rows="5"
 					maxlength={MESSAGE_MAX_LENGTH}
 					bind:value={message}
+					class:invalid={Boolean(messageError)}
 					placeholder={t('messagePlaceholder')}
+					aria-invalid={messageError ? true : undefined}
+					aria-describedby={messageError ? `${uid}-message-error` : undefined}
+					oninput={() => (messageError = '')}
 				></textarea>
+				{#if messageError}
+					<p id={`${uid}-message-error`} class="error">{messageError}</p>
+				{/if}
 				<span class="char-count">{message.length}/{MESSAGE_MAX_LENGTH}</span>
 			</label>
 			<a
@@ -235,6 +281,18 @@
 		font-weight: 500;
 		color: var(--muted);
 		justify-self: end;
+	}
+
+	.error {
+		margin: 0;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: var(--error);
+	}
+
+	input.invalid,
+	textarea.invalid {
+		border-color: var(--error);
 	}
 
 	input,

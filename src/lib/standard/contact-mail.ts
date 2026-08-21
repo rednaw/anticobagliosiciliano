@@ -45,6 +45,8 @@ export function contactFieldError(
 /**
  * Translated validity, then either allow the mailto link or cancel it.
  * Dates are not native inputs, so they are checked separately from `form.checkValidity()`.
+ * Invalid fields keep a custom message for the in-page errors; do not call `reportValidity()`
+ * (that would also open the browser popup).
  */
 export function gateMailtoClick(
 	event: { preventDefault: () => void; currentTarget: EventTarget | null },
@@ -81,7 +83,11 @@ export function gateMailtoClick(
 	if (valid && !dateError) return true;
 
 	event.preventDefault();
-	if (!valid) form.reportValidity();
+	const firstInvalid = [...form.elements].find(
+		(el) =>
+			(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) && !el.validity.valid
+	);
+	if (firstInvalid instanceof HTMLElement) firstInvalid.focus();
 	return false;
 }
 

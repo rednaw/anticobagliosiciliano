@@ -286,7 +286,7 @@
 	.error {
 		margin: 0;
 		font-size: 0.85rem;
-		color: var(--sea-deep);
+		color: var(--error);
 	}
 
 	.cal {

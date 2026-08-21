@@ -94,7 +94,7 @@
   }
 
   .trigger.invalid {
-    border-color: color-mix(in srgb, var(--sea) 40%, #8a3b2a);
+    border-color: var(--error);
   }
 
   .trigger:focus,

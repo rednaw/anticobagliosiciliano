@@ -55,14 +55,16 @@ function clickMail(
 }
 
 describe('gateMailtoClick', () => {
-	it('blocks an empty form and uses the site language for the browser bubble', () => {
+	it('blocks an empty form and uses the site language for the field error', () => {
 		const { form, link, name } = mountForm();
-		const report = vi.spyOn(form, 'reportValidity').mockImplementation(() => false);
+		const report = vi.spyOn(form, 'reportValidity');
+		const focus = vi.spyOn(name, 'focus');
 		const result = clickMail(link, { checkIn: '', checkOut: '' });
 
 		expect(result.allowed).toBe(false);
 		expect(result.preventDefault).toHaveBeenCalledOnce();
-		expect(report).toHaveBeenCalledOnce();
+		expect(report).not.toHaveBeenCalled();
+		expect(focus).toHaveBeenCalledOnce();
 		expect(name.validationMessage).toBe('Compila questo campo.');
 	});
 
@@ -70,7 +72,7 @@ describe('gateMailtoClick', () => {
 		const { form, link, name, email } = mountForm();
 		name.value = 'Maria';
 		email.value = 'maria@example.com';
-		const report = vi.spyOn(form, 'reportValidity').mockImplementation(() => true);
+		const report = vi.spyOn(form, 'reportValidity');
 		const result = clickMail(link, { checkIn: '', checkOut: '' }, 'en');
 
 		expect(result.allowed).toBe(false);
@@ -84,12 +86,12 @@ describe('gateMailtoClick', () => {
 		name.value = 'Maria';
 		email.value = 'maria@example.com';
 		message.value = '<img src=x>';
-		const report = vi.spyOn(form, 'reportValidity').mockImplementation(() => false);
+		const report = vi.spyOn(form, 'reportValidity');
 		const result = clickMail(link, { checkIn: '2026-08-20', checkOut: '2026-08-22' });
 
 		expect(result.allowed).toBe(false);
 		expect(result.preventDefault).toHaveBeenCalledOnce();
-		expect(report).toHaveBeenCalledOnce();
+		expect(report).not.toHaveBeenCalled();
 		expect(message.validationMessage).toMatch(/HTML/);
 	});
 
