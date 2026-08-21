@@ -8,11 +8,11 @@ const KEEP_JPEG = /(?:^|\/)og-share\.jpe?g$/i;
  * drops JPEG/PNG from `build/`. Dev keeps the committed originals.
  */
 export function publicImage(path: string, prod = import.meta.env.PROD): string {
-	if (!prod) return path;
-	if (KEEP_JPEG.test(path)) return path;
-	return path.replace(/\.(jpe?g|png)$/i, '.webp');
+  if (!prod) return path;
+  if (KEEP_JPEG.test(path)) return path;
+  return path.replace(/\.(jpe?g|png)$/i, '.webp');
 }
 
 export function imageAsset(path: string): string {
-	return asset(publicImage(path));
+  return asset(publicImage(path));
 }

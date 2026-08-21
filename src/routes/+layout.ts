@@ -5,5 +5,5 @@ export const prerender = true;
 export const trailingSlash = 'always';
 
 export const load: LayoutLoad = ({ url }) => {
-	return { locale: localeFromPath(url.pathname) };
+  return { locale: localeFromPath(url.pathname) };
 };

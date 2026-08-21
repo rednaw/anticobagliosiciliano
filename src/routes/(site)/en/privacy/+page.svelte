@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Page from '../../privacy/+page.svelte';
+  import Page from '../../privacy/+page.svelte';
 </script>
 
 <Page />

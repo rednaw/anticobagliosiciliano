@@ -1,41 +1,41 @@
 {
-	"name": "anticobagliosiciliano",
-	"private": true,
-	"version": "0.0.1",
-	"type": "module",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "node scripts/optimize-site-images.mjs --emit && vite build && node scripts/optimize-site-images.mjs --prune",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "vitest run",
-		"test:watch": "vitest",
-		"test:coverage": "vitest run --coverage",
-		"test:build": "node tests/assert-build.mjs",
-		"archivio:build": "node scripts/build-archivio.mjs",
-		"copy:export": "node scripts/export-copy.mjs",
-		"copy:import": "node scripts/import-copy.mjs",
-		"lodgify:sync": "node scripts/sync-lodgify-availability.mjs"
-	},
-	"engines": {
-		"node": ">=24.19.0"
-	},
-	"devDependencies": {
-		"@fontsource-variable/figtree": "^5.3.0",
-		"@fontsource-variable/fraunces": "^5.3.0",
-		"@sveltejs/adapter-static": "^3.0.10",
-		"@sveltejs/kit": "^2.70.2",
-		"@sveltejs/vite-plugin-svelte": "^7.3.0",
-		"@types/node": "^26.2.0",
-		"@vitest/coverage-v8": "^4.1.11",
-		"jsdom": "^30.0.1",
-		"sharp": "^0.35.3",
-		"svelte": "^5.56.8",
-		"svelte-check": "^4.7.5",
-		"typescript": "^6.0.3",
-		"vite": "^8.2.1",
-		"vitest": "^4.1.11"
-	}
+  "name": "anticobagliosiciliano",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "node scripts/optimize-site-images.mjs --emit && vite build && node scripts/optimize-site-images.mjs --prune",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:build": "node tests/assert-build.mjs",
+    "archivio:build": "node scripts/build-archivio.mjs",
+    "copy:export": "node scripts/export-copy.mjs",
+    "copy:import": "node scripts/import-copy.mjs",
+    "lodgify:sync": "node scripts/sync-lodgify-availability.mjs"
+  },
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "devDependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.70.2",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "jsdom": "^30.0.1",
+    "sharp": "^0.35.3",
+    "svelte": "^5.56.8",
+    "svelte-check": "^4.7.5",
+    "typescript": "^6.0.3",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.11"
+  }
 }

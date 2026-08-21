@@ -1,216 +1,216 @@
 <script lang="ts">
-	import { imageAsset } from '$lib/public-image';
-	import { page } from '$app/state';
-	import { indexAfterKey, photoAlt as galleryPhotoAlt, wrapIndex } from '$lib/standard/gallery';
-	import { pick, ui } from '$lib/standard/i18n';
+  import { imageAsset } from '$lib/public-image';
+  import { page } from '$app/state';
+  import { indexAfterKey, photoAlt as galleryPhotoAlt, wrapIndex } from '$lib/standard/gallery';
+  import { pick, ui } from '$lib/standard/i18n';
 
-	let {
-		images,
-		alt
-	}: {
-		images: string[];
-		alt: string;
-	} = $props();
+  let {
+    images,
+    alt
+  }: {
+    images: string[];
+    alt: string;
+  } = $props();
 
-	let index = $state(0);
-	let thumbsEl: HTMLDivElement | undefined = $state();
+  let index = $state(0);
+  let thumbsEl: HTMLDivElement | undefined = $state();
 
-	const locale = $derived(page.data.locale);
-	const count = $derived(images.length);
-	const current = $derived(images[index] ?? images[0]);
-	const photoAlt = $derived(galleryPhotoAlt(alt, index, count, locale));
+  const locale = $derived(page.data.locale);
+  const count = $derived(images.length);
+  const current = $derived(images[index] ?? images[0]);
+  const photoAlt = $derived(galleryPhotoAlt(alt, index, count, locale));
 
-	function go(next: number) {
-		const wrapped = wrapIndex(next, count);
-		if (wrapped === null) return;
-		index = wrapped;
-		queueMicrotask(() => scrollThumbIntoView());
-	}
+  function go(next: number) {
+    const wrapped = wrapIndex(next, count);
+    if (wrapped === null) return;
+    index = wrapped;
+    queueMicrotask(() => scrollThumbIntoView());
+  }
 
-	function prev() {
-		go(index - 1);
-	}
+  function prev() {
+    go(index - 1);
+  }
 
-	function next() {
-		go(index + 1);
-	}
+  function next() {
+    go(index + 1);
+  }
 
-	function scrollThumbIntoView() {
-		const strip = thumbsEl;
-		if (!strip) return;
-		const thumb = strip.children[index] as HTMLElement | undefined;
-		if (!thumb) return;
-		const left = thumb.offsetLeft - (strip.clientWidth - thumb.offsetWidth) / 2;
-		const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		strip.scrollTo({ left, behavior: calm ? 'auto' : 'smooth' });
-	}
+  function scrollThumbIntoView() {
+    const strip = thumbsEl;
+    if (!strip) return;
+    const thumb = strip.children[index] as HTMLElement | undefined;
+    if (!thumb) return;
+    const left = thumb.offsetLeft - (strip.clientWidth - thumb.offsetWidth) / 2;
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    strip.scrollTo({ left, behavior: calm ? 'auto' : 'smooth' });
+  }
 
-	function onKeydown(e: KeyboardEvent) {
-		const nextIndex = indexAfterKey(e.key, index, count);
-		if (nextIndex === null) return;
-		e.preventDefault();
-		go(nextIndex);
-	}
+  function onKeydown(e: KeyboardEvent) {
+    const nextIndex = indexAfterKey(e.key, index, count);
+    if (nextIndex === null) return;
+    e.preventDefault();
+    go(nextIndex);
+  }
 </script>
 
 {#if count > 0}
-	<div
-		role="region"
-		aria-roledescription="carousel"
-		aria-label={`${pick(ui.gallery, locale)} ${alt}`}
-	>
-		<div class="stage">
-			<img src={imageAsset(current)} alt={photoAlt} width="1600" height="1100" />
-			{#if count > 1}
-				<button
-					type="button"
-					class="nav prev"
-					onclick={prev}
-					onkeydown={onKeydown}
-					aria-label={pick(ui.previousPhoto, locale)}
-				>
-					‹
-				</button>
-				<button
-					type="button"
-					class="nav next"
-					onclick={next}
-					onkeydown={onKeydown}
-					aria-label={pick(ui.nextPhoto, locale)}
-				>
-					›
-				</button>
-				<p class="counter" aria-live="polite">{index + 1} / {count}</p>
-			{/if}
-		</div>
+  <div
+    role="region"
+    aria-roledescription="carousel"
+    aria-label={`${pick(ui.gallery, locale)} ${alt}`}
+  >
+    <div class="stage">
+      <img src={imageAsset(current)} alt={photoAlt} width="1600" height="1100" />
+      {#if count > 1}
+        <button
+          type="button"
+          class="nav prev"
+          onclick={prev}
+          onkeydown={onKeydown}
+          aria-label={pick(ui.previousPhoto, locale)}
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          class="nav next"
+          onclick={next}
+          onkeydown={onKeydown}
+          aria-label={pick(ui.nextPhoto, locale)}
+        >
+          ›
+        </button>
+        <p class="counter" aria-live="polite">{index + 1} / {count}</p>
+      {/if}
+    </div>
 
-		{#if count > 1}
-			<div class="thumbs" bind:this={thumbsEl} role="group" aria-label={pick(ui.thumbnails, locale)}>
-				{#each images as src, i}
-					<button
-						type="button"
-						class="thumb"
-						class:active={i === index}
-						aria-current={i === index ? 'true' : undefined}
-						aria-label={`${pick(ui.goToPhoto, locale)} ${i + 1}`}
-						onclick={() => go(i)}
-						onkeydown={onKeydown}
-					>
-						<img src={imageAsset(src)} alt="" width="1600" height="1100" loading="lazy" />
-					</button>
-				{/each}
-			</div>
-		{/if}
-	</div>
+    {#if count > 1}
+      <div class="thumbs" bind:this={thumbsEl} role="group" aria-label={pick(ui.thumbnails, locale)}>
+        {#each images as src, i}
+          <button
+            type="button"
+            class="thumb"
+            class:active={i === index}
+            aria-current={i === index ? 'true' : undefined}
+            aria-label={`${pick(ui.goToPhoto, locale)} ${i + 1}`}
+            onclick={() => go(i)}
+            onkeydown={onKeydown}
+          >
+            <img src={imageAsset(src)} alt="" width="1600" height="1100" loading="lazy" />
+          </button>
+        {/each}
+      </div>
+    {/if}
+  </div>
 {/if}
 
 <style>
-	.stage {
-		position: relative;
-		background: color-mix(in srgb, var(--ink) 6%, var(--paper));
-		overflow: hidden;
-	}
+  .stage {
+    position: relative;
+    background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+    overflow: hidden;
+  }
 
-	.stage img {
-		display: block;
-		width: 100%;
-		aspect-ratio: 16 / 11;
-		object-fit: cover;
-	}
+  .stage img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+  }
 
-	.nav {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		width: 2.5rem;
-		height: 2.5rem;
-		border: none;
-		border-radius: 999px;
-		background: color-mix(in srgb, var(--paper) 88%, transparent);
-		color: var(--sea-deep);
-		font-size: 1.6rem;
-		line-height: 1;
-		cursor: pointer;
-		display: grid;
-		place-items: center;
-		transition:
-			background 0.25s var(--ease),
-			transform 0.25s var(--ease);
-	}
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    color: var(--sea-deep);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition:
+      background 0.25s var(--ease),
+      transform 0.25s var(--ease);
+  }
 
-	.nav:hover {
-		background: #fff;
-	}
+  .nav:hover {
+    background: #fff;
+  }
 
-	.nav:active {
-		transform: translateY(-50%) scale(0.96);
-	}
+  .nav:active {
+    transform: translateY(-50%) scale(0.96);
+  }
 
-	.prev {
-		left: 0.75rem;
-	}
+  .prev {
+    left: 0.75rem;
+  }
 
-	.next {
-		right: 0.75rem;
-	}
+  .next {
+    right: 0.75rem;
+  }
 
-	.counter {
-		position: absolute;
-		right: 0.75rem;
-		bottom: 0.75rem;
-		margin: 0;
-		padding: 0.3rem 0.65rem;
-		border-radius: 999px;
-		background: color-mix(in srgb, var(--sea-deep) 72%, transparent);
-		color: #fff;
-		font-size: 0.8rem;
-		font-weight: 600;
-		letter-spacing: 0.02em;
-	}
+  .counter {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    margin: 0;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sea-deep) 72%, transparent);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
 
-	.thumbs {
-		display: flex;
-		gap: 0.5rem;
-		margin-top: 0.75rem;
-		overflow-x: auto;
-		padding-bottom: 0.25rem;
-		scroll-snap-type: x proximity;
-		scrollbar-width: thin;
-	}
+  .thumbs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
 
-	.thumb {
-		flex: 0 0 auto;
-		width: 5.5rem;
-		padding: 0;
-		border: 2px solid transparent;
-		background: transparent;
-		cursor: pointer;
-		scroll-snap-align: center;
-		opacity: 0.72;
-		transition:
-			opacity 0.25s var(--ease),
-			border-color 0.25s var(--ease);
-	}
+  .thumb {
+    flex: 0 0 auto;
+    width: 5.5rem;
+    padding: 0;
+    border: 2px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    scroll-snap-align: center;
+    opacity: 0.72;
+    transition:
+      opacity 0.25s var(--ease),
+      border-color 0.25s var(--ease);
+  }
 
-	.thumb img {
-		display: block;
-		width: 100%;
-		aspect-ratio: 16 / 11;
-		object-fit: cover;
-	}
+  .thumb img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+  }
 
-	.thumb:hover {
-		opacity: 1;
-	}
+  .thumb:hover {
+    opacity: 1;
+  }
 
-	.thumb.active {
-		opacity: 1;
-		border-color: var(--sea);
-	}
+  .thumb.active {
+    opacity: 1;
+    border-color: var(--sea);
+  }
 
-	@media (min-width: 800px) {
-		.thumb {
-			width: 6.5rem;
-		}
-	}
+  @media (min-width: 800px) {
+    .thumb {
+      width: 6.5rem;
+    }
+  }
 </style>

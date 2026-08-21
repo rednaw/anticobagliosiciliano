@@ -15,59 +15,59 @@ const siteConfig = readFileSync(path.join(root, 'src/lib/site-config.ts'), 'utf8
 const SITE_BASE = siteConfig.match(/export const SITE_BASE = '([^']*)'/)?.[1];
 const SITE_HOSTNAME = siteConfig.match(/export const SITE_HOSTNAME = '([^']*)'/)?.[1];
 const SIMPLE_ANALYTICS_HOSTNAME = siteConfig.match(
-	/export const SIMPLE_ANALYTICS_HOSTNAME = '([^']*)'/
+  /export const SIMPLE_ANALYTICS_HOSTNAME = '([^']*)'/
 )?.[1];
 const SITE_PUBLIC = /export const SITE_PUBLIC = true/.test(siteConfig);
 
 if (SITE_BASE === undefined || !SITE_HOSTNAME || !SIMPLE_ANALYTICS_HOSTNAME) {
-	console.error(
-		'Could not parse SITE_BASE / SITE_HOSTNAME / SIMPLE_ANALYTICS_HOSTNAME from src/lib/site-config.ts'
-	);
-	process.exit(1);
+  console.error(
+    'Could not parse SITE_BASE / SITE_HOSTNAME / SIMPLE_ANALYTICS_HOSTNAME from src/lib/site-config.ts'
+  );
+  process.exit(1);
 }
 
 let failed = 0;
 
 function fail(message) {
-	failed += 1;
-	console.error(`FAIL  ${message}`);
+  failed += 1;
+  console.error(`FAIL  ${message}`);
 }
 
 function ok(message) {
-	console.log(`ok    ${message}`);
+  console.log(`ok    ${message}`);
 }
 
 function assert(cond, message) {
-	if (cond) ok(message);
-	else fail(message);
+  if (cond) ok(message);
+  else fail(message);
 }
 
 function read(rel) {
-	const full = path.join(build, rel);
-	if (!existsSync(full)) {
-		fail(`missing ${rel}`);
-		return '';
-	}
-	return readFileSync(full, 'utf8');
+  const full = path.join(build, rel);
+  if (!existsSync(full)) {
+    fail(`missing ${rel}`);
+    return '';
+  }
+  return readFileSync(full, 'utf8');
 }
 
 function isNotFoundPage(html) {
-	return /<p class="eyebrow">\s*404\s*<\/p>/.test(html) || html.includes('Pagina non trovata');
+  return /<p class="eyebrow">\s*404\s*<\/p>/.test(html) || html.includes('Pagina non trovata');
 }
 
 function walk(dir, acc = []) {
-	if (!existsSync(dir)) return acc;
-	for (const ent of readdirSync(dir, { withFileTypes: true })) {
-		const full = path.join(dir, ent.name);
-		if (ent.isDirectory()) walk(full, acc);
-		else acc.push(full);
-	}
-	return acc;
+  if (!existsSync(dir)) return acc;
+  for (const ent of readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) walk(full, acc);
+    else acc.push(full);
+  }
+  return acc;
 }
 
 if (!existsSync(build)) {
-	console.error('build/ is missing — run npm run build first');
-	process.exit(1);
+  console.error('build/ is missing — run npm run build first');
+  process.exit(1);
 }
 
 const homepage = read('index.html');
@@ -76,22 +76,22 @@ assert(/<h1[^>]*>Antico Baglio Siciliano<\/h1>/.test(homepage), 'homepage h1 is 
 assert(!isNotFoundPage(homepage), 'homepage is not the NotFound document');
 assert(/<html lang="it">/.test(homepage), 'homepage html lang is it');
 assert(
-	homepage.includes(`data-hostname="${SIMPLE_ANALYTICS_HOSTNAME}"`),
-	'Simple Analytics hostname is filled in'
+  homepage.includes(`data-hostname="${SIMPLE_ANALYTICS_HOSTNAME}"`),
+  'Simple Analytics hostname is filled in'
 );
 assert(
-	!homepage.includes('__SIMPLE_ANALYTICS_HOSTNAME__'),
-	'prerender placeholder __SIMPLE_ANALYTICS_HOSTNAME__ is gone'
+  !homepage.includes('__SIMPLE_ANALYTICS_HOSTNAME__'),
+  'prerender placeholder __SIMPLE_ANALYTICS_HOSTNAME__ is gone'
 );
 assert(
-	homepage.includes('scripts.simpleanalyticscdn.com/latest.js'),
-	'production HTML keeps Simple Analytics'
+  homepage.includes('scripts.simpleanalyticscdn.com/latest.js'),
+  'production HTML keeps Simple Analytics'
 );
 assert(!/href="[^"]*\/archivio\/?["#]/.test(homepage), 'homepage does not link to /archivio/');
 assert(homepage.includes(`${SITE_BASE}/come-arrivare/`), 'homepage header can reach Come arrivare');
 assert(homepage.includes(`${SITE_BASE}/en/`), 'homepage language switcher reaches English');
 if (SITE_PUBLIC) {
-	assert(!/<meta name="robots" content="noindex/.test(homepage), 'public homepage is indexable');
+  assert(!/<meta name="robots" content="noindex/.test(homepage), 'public homepage is indexable');
 }
 
 const enHome = read('en/index.html');
@@ -110,12 +110,12 @@ assert(/mailto:[^"]+"[^>]*target="_blank"/.test(contact) || /target="_blank"[^>]
 assert(!contact.includes('window.open'), 'contact page does not use window.open');
 
 const occupancy = JSON.parse(
-	readFileSync(path.join(root, 'src/lib/data/occupancy.json'), 'utf8')
+  readFileSync(path.join(root, 'src/lib/data/occupancy.json'), 'utf8')
 );
 assert(
-	JSON.stringify(Object.keys(occupancy.houses ?? {}).sort()) ===
-		JSON.stringify(['casa-1', 'casa-2', 'casa-3', 'casa-4']),
-	'occupancy snapshot keys are the four public houses'
+  JSON.stringify(Object.keys(occupancy.houses ?? {}).sort()) ===
+    JSON.stringify(['casa-1', 'casa-2', 'casa-3', 'casa-4']),
+  'occupancy snapshot keys are the four public houses'
 );
 
 const arrive = read('come-arrivare/index.html');
@@ -150,64 +150,64 @@ while ((match = locRe.exec(sitemap))) locs.push(match[1].replace(/&amp;/g, '&'))
 assert(locs.length >= 18, `sitemap lists public pages (got ${locs.length})`);
 
 function fileForLoc(href) {
-	const url = new URL(href);
-	let pathname = url.pathname;
-	if (SITE_BASE && (pathname === SITE_BASE || pathname.startsWith(`${SITE_BASE}/`))) {
-		pathname = pathname.slice(SITE_BASE.length) || '/';
-	}
-	if (pathname.endsWith('/')) return path.join(build, pathname.slice(1), 'index.html');
-	return path.join(build, pathname.replace(/^\//, ''));
+  const url = new URL(href);
+  let pathname = url.pathname;
+  if (SITE_BASE && (pathname === SITE_BASE || pathname.startsWith(`${SITE_BASE}/`))) {
+    pathname = pathname.slice(SITE_BASE.length) || '/';
+  }
+  if (pathname.endsWith('/')) return path.join(build, pathname.slice(1), 'index.html');
+  return path.join(build, pathname.replace(/^\//, ''));
 }
 
 for (const href of locs) {
-	const file = fileForLoc(href);
-	const rel = path.relative(build, file);
-	if (!existsSync(file)) {
-		fail(`sitemap URL has no file: ${href} → ${rel}`);
-		continue;
-	}
-	const html = readFileSync(file, 'utf8');
-	if (isNotFoundPage(html)) fail(`sitemap URL prerendered as 404: ${href}`);
-	else ok(`sitemap ${rel}`);
+  const file = fileForLoc(href);
+  const rel = path.relative(build, file);
+  if (!existsSync(file)) {
+    fail(`sitemap URL has no file: ${href} → ${rel}`);
+    continue;
+  }
+  const html = readFileSync(file, 'utf8');
+  if (isNotFoundPage(html)) fail(`sitemap URL prerendered as 404: ${href}`);
+  else ok(`sitemap ${rel}`);
 }
 
 const keepJpeg = /(?:^|\/)og-share\.jpe?g$/i;
 const imageExt = /\.(jpe?g|png)$/i;
 const leaked = [];
 for (const dir of ['images', 'videos']) {
-	for (const file of walk(path.join(build, dir))) {
-		if (imageExt.test(file) && !keepJpeg.test(file)) leaked.push(path.relative(build, file));
-	}
+  for (const file of walk(path.join(build, dir))) {
+    if (imageExt.test(file) && !keepJpeg.test(file)) leaked.push(path.relative(build, file));
+  }
 }
 assert(leaked.length === 0, `build dropped marketing JPEG/PNG (leaked: ${leaked.join(', ') || 'none'})`);
 assert(existsSync(path.join(build, 'images/og-share.jpg')), 'og-share.jpg stays JPEG for crawlers');
 assert(
-	existsSync(path.join(build, 'images/ambiance/mappa.webp')) ||
-		existsSync(path.join(build, 'images/ambiance/mappa.jpg')),
-	'Come arrivare map is in the build'
+  existsSync(path.join(build, 'images/ambiance/mappa.webp')) ||
+    existsSync(path.join(build, 'images/ambiance/mappa.jpg')),
+  'Come arrivare map is in the build'
 );
 
 const required = [
-	'imperdibili/index.html',
-	'en/imperdibili/index.html',
-	'en/contatti/index.html',
-	'en/privacy/index.html',
-	'case/casa-1/index.html',
-	'case/casa-2/index.html',
-	'case/casa-3/index.html',
-	'case/casa-4/index.html',
-	'en/case/casa-1/index.html',
-	'en/case/casa-2/index.html',
-	'en/case/casa-3/index.html',
-	'en/case/casa-4/index.html'
+  'imperdibili/index.html',
+  'en/imperdibili/index.html',
+  'en/contatti/index.html',
+  'en/privacy/index.html',
+  'case/casa-1/index.html',
+  'case/casa-2/index.html',
+  'case/casa-3/index.html',
+  'case/casa-4/index.html',
+  'en/case/casa-1/index.html',
+  'en/case/casa-2/index.html',
+  'en/case/casa-3/index.html',
+  'en/case/casa-4/index.html'
 ];
 for (const rel of required) {
-	const html = read(rel);
-	assert(html.length > 0 && !isNotFoundPage(html), `${rel} prerendered as a real page`);
+  const html = read(rel);
+  assert(html.length > 0 && !isNotFoundPage(html), `${rel} prerendered as a real page`);
 }
 
 if (failed) {
-	console.error(`\n${failed} build assertion(s) failed`);
-	process.exit(1);
+  console.error(`\n${failed} build assertion(s) failed`);
+  process.exit(1);
 }
 console.log('\nbuild assertions passed');

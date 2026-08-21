@@ -14,21 +14,21 @@ const lodgify = await import(pathToFileURL(path.join(root, 'src/lib/data/lodgify
 
 const key = process.env.LODGIFY_API_KEY;
 if (!key) {
-	throw new Error('lodgify:sync: set LODGIFY_API_KEY in the environment.');
+  throw new Error('lodgify:sync: set LODGIFY_API_KEY in the environment.');
 }
 
 const outPath = path.join(root, lodgify.OCCUPANCY_JSON);
 
 async function lodgifyGet(urlPath) {
-	const response = await fetch(`https://api.lodgify.com${urlPath}`, {
-		headers: { 'X-ApiKey': key, Accept: 'application/json' },
-		signal: AbortSignal.timeout(30_000)
-	});
-	const text = await response.text();
-	if (!response.ok) {
-		throw new Error(`lodgify:sync: HTTP ${response.status} ${urlPath}: ${text.slice(0, 400)}`);
-	}
-	return JSON.parse(text);
+  const response = await fetch(`https://api.lodgify.com${urlPath}`, {
+    headers: { 'X-ApiKey': key, Accept: 'application/json' },
+    signal: AbortSignal.timeout(30_000)
+  });
+  const text = await response.text();
+  if (!response.ok) {
+    throw new Error(`lodgify:sync: HTTP ${response.status} ${urlPath}: ${text.slice(0, 400)}`);
+  }
+  return JSON.parse(text);
 }
 
 const from = lodgify.calendarDateInZone();
@@ -37,50 +37,50 @@ const urlPath = `/v2/availability/${lodgify.LODGIFY_PROPERTY_ID}?start=${from}T0
 
 let payload;
 try {
-	payload = await lodgifyGet(urlPath);
+  payload = await lodgifyGet(urlPath);
 } catch (error) {
-	console.error(error instanceof Error ? error.message : error);
-	process.exit(1);
+  console.error(error instanceof Error ? error.message : error);
+  process.exit(1);
 }
 
 let snapshot;
 try {
-	snapshot = lodgify.snapshotFromLodgifyAvailability(payload, {
-		generatedAt: new Date().toISOString(),
-		from,
-		to
-	});
+  snapshot = lodgify.snapshotFromLodgifyAvailability(payload, {
+    generatedAt: new Date().toISOString(),
+    from,
+    to
+  });
 } catch (error) {
-	console.error(error instanceof Error ? error.message : error);
-	process.exit(1);
+  console.error(error instanceof Error ? error.message : error);
+  process.exit(1);
 }
 
 const nextBody = lodgify.stringifyAvailabilitySnapshot(snapshot);
 let occupancyChanged = true;
 if (existsSync(outPath)) {
-	try {
-		const previous = JSON.parse(readFileSync(outPath, 'utf8'));
-		const window = { from, to };
-		occupancyChanged =
-			lodgify.occupancyFingerprint(previous, window) !==
-			lodgify.occupancyFingerprint(snapshot, window);
-	} catch {
-		occupancyChanged = true;
-	}
+  try {
+    const previous = JSON.parse(readFileSync(outPath, 'utf8'));
+    const window = { from, to };
+    occupancyChanged =
+      lodgify.occupancyFingerprint(previous, window) !==
+      lodgify.occupancyFingerprint(snapshot, window);
+  } catch {
+    occupancyChanged = true;
+  }
 }
 
 const counts = lodgify.LODGIFY_HOUSE_SLUGS.map(
-	(slug) => `${slug}:${snapshot.houses[slug].length}`
+  (slug) => `${slug}:${snapshot.houses[slug].length}`
 ).join(' ');
 
 if (!occupancyChanged) {
-	console.log(
-		`invariato ${path.relative(root, outPath)}  ${from}→${to}  ${counts}  occupancy unchanged`
-	);
-	process.exit(0);
+  console.log(
+    `invariato ${path.relative(root, outPath)}  ${from}→${to}  ${counts}  occupancy unchanged`
+  );
+  process.exit(0);
 }
 
 writeFileSync(outPath, nextBody);
 console.log(
-	`scritto ${path.relative(root, outPath)}  ${from}→${to}  ${counts}  occupancy changed`
+  `scritto ${path.relative(root, outPath)}  ${from}→${to}  ${counts}  occupancy changed`
 );

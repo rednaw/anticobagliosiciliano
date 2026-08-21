@@ -1,36 +1,36 @@
 <script lang="ts">
-	import { imageAsset } from '$lib/public-image';
-	import { page } from '$app/state';
-	import { arriveCopy, baglioLocation } from '$lib/data/content';
-	import { pick, ui } from '$lib/standard/i18n';
+  import { imageAsset } from '$lib/public-image';
+  import { page } from '$app/state';
+  import { arriveCopy, baglioLocation } from '$lib/data/content';
+  import { pick, ui } from '$lib/standard/i18n';
 
-	const locale = $derived(page.data.locale);
-	const heading = $derived(pick(ui.navArrive, locale));
-	const t = $derived((key: keyof typeof arriveCopy) => pick(arriveCopy[key], locale));
-	const coords = `${baglioLocation.lat.toFixed(5)}, ${baglioLocation.lon.toFixed(5)}`;
+  const locale = $derived(page.data.locale);
+  const heading = $derived(pick(ui.navArrive, locale));
+  const t = $derived((key: keyof typeof arriveCopy) => pick(arriveCopy[key], locale));
+  const coords = `${baglioLocation.lat.toFixed(5)}, ${baglioLocation.lon.toFixed(5)}`;
 </script>
 
 <section class="hero">
-	<div class="container">
-		<h1>{heading}</h1>
-		<p class="lead">{t('lead')}</p>
-	</div>
+  <div class="container">
+    <h1>{heading}</h1>
+    <p class="lead">{t('lead')}</p>
+  </div>
 </section>
 
 <section class="section map-block">
-	<div class="container">
-		<figure class="map">
-			<img
-				src={imageAsset(baglioLocation.map)}
-				srcset="{imageAsset(baglioLocation.mapSm)} 800w, {imageAsset(baglioLocation.map)} 1536w"
-				sizes="(min-width: 960px) 70rem, calc(100vw - 2.5rem)"
-				alt={t('mapAlt')}
-				width="1536"
-				height="1024"
-				fetchpriority="high"
-			/>
-			<figcaption>
-				<a href="https://www.openstreetmap.org/copyright">{t('attribution')}</a>
+  <div class="container">
+    <figure class="map">
+      <img
+        src={imageAsset(baglioLocation.map)}
+        srcset="{imageAsset(baglioLocation.mapSm)} 800w, {imageAsset(baglioLocation.map)} 1536w"
+        sizes="(min-width: 960px) 70rem, calc(100vw - 2.5rem)"
+        alt={t('mapAlt')}
+        width="1536"
+        height="1024"
+        fetchpriority="high"
+      />
+      <figcaption>
+    		<a href="https://www.openstreetmap.org/copyright">{t('attribution')}</a>
 			</figcaption>
 		</figure>
 

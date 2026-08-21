@@ -4,11 +4,11 @@ import type { Handle } from '@sveltejs/kit';
 
 /** Prerendered HTML must carry the right `lang` and analytics hostname. */
 export const handle: Handle = async ({ event, resolve }) => {
-	const locale = localeFromPath(event.url.pathname);
-	return resolve(event, {
-		transformPageChunk: ({ html }) =>
-			html
-				.replace('<html lang="it">', `<html lang="${locale}">`)
-				.replaceAll('__SIMPLE_ANALYTICS_HOSTNAME__', SIMPLE_ANALYTICS_HOSTNAME)
-	});
+  const locale = localeFromPath(event.url.pathname);
+  return resolve(event, {
+    transformPageChunk: ({ html }) =>
+      html
+        .replace('<html lang="it">', `<html lang="${locale}">`)
+        .replaceAll('__SIMPLE_ANALYTICS_HOSTNAME__', SIMPLE_ANALYTICS_HOSTNAME)
+  });
 };
