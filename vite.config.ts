@@ -7,6 +7,10 @@ import { SITE_BASE } from './src/lib/site-config.ts';
 const SA_SCRIPT =
   /<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
 
+/** Public Simple Analytics origins used by `app.html` (`latest.js` + Beacon). */
+const SA_SCRIPT_ORIGIN = 'https://scripts.simpleanalyticscdn.com';
+const SA_QUEUE_ORIGIN = 'https://queue.simpleanalyticscdn.com';
+
 /** Strip Simple Analytics in dev — production builds keep the tag in app.html. */
 function simpleAnalyticsDevPlugin(): Plugin {
   return {
@@ -39,6 +43,28 @@ export default defineConfig({
       }),
       prerender: {
         entries: ['*']
+      },
+      // GitHub Pages cannot set CSP headers. SvelteKit emits a <meta> tag and
+      // hashes the inline scripts it generates. style-src needs unsafe-inline
+      // for Reveal --delay, the app.html wrapper, and the noscript .reveal rule.
+      csp: {
+        mode: 'hash',
+        directives: {
+          'default-src': ['none'],
+          'base-uri': ['self'],
+          'form-action': ['self'],
+          'script-src': ['self', SA_SCRIPT_ORIGIN],
+          'style-src': ['self', 'unsafe-inline'],
+          'img-src': ['self', SA_QUEUE_ORIGIN],
+          'font-src': ['self'],
+          'media-src': ['self'],
+          'connect-src': ['self', SA_QUEUE_ORIGIN],
+          'frame-src': ['none'],
+          'object-src': ['none'],
+          'worker-src': ['none'],
+          'manifest-src': ['self'],
+          'upgrade-insecure-requests': true
+        }
       }
     })
   ],

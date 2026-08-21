@@ -55,6 +55,20 @@ function isNotFoundPage(html) {
   return /<p class="eyebrow">\s*404\s*<\/p>/.test(html) || html.includes('Pagina non trovata');
 }
 
+function cspContent(html) {
+  const match = html.match(/http-equiv="content-security-policy" content="([^"]+)"/i);
+  return match?.[1] ?? '';
+}
+
+function cspDirective(policy, name) {
+  return (
+    policy
+      .split(';')
+      .map((part) => part.trim())
+      .find((part) => part === name || part.startsWith(`${name} `)) ?? ''
+  );
+}
+
 function walk(dir, acc = []) {
   if (!existsSync(dir)) return acc;
   for (const ent of readdirSync(dir, { withFileTypes: true })) {
@@ -87,6 +101,31 @@ assert(
   homepage.includes('scripts.simpleanalyticscdn.com/latest.js'),
   'production HTML keeps Simple Analytics'
 );
+
+const homepageCsp = cspContent(homepage);
+assert(homepageCsp.length > 0, 'homepage has a CSP meta tag');
+assert(
+  cspDirective(homepageCsp, 'script-src').includes('https://scripts.simpleanalyticscdn.com'),
+  'CSP allows the Simple Analytics script origin'
+);
+assert(
+  !cspDirective(homepageCsp, 'script-src').includes('unsafe-inline'),
+  'script-src does not allow unsafe-inline'
+);
+assert(
+  /sha256-/.test(cspDirective(homepageCsp, 'script-src')),
+  'script-src includes hashes for SvelteKit inline scripts'
+);
+assert(
+  cspDirective(homepageCsp, 'connect-src').includes('https://queue.simpleanalyticscdn.com'),
+  'CSP allows the Simple Analytics beacon origin'
+);
+assert(
+  cspDirective(homepageCsp, 'style-src').includes('unsafe-inline'),
+  'style-src allows the inline styles the markup already uses'
+);
+assert(cspDirective(homepageCsp, 'object-src').includes("'none'"), 'object-src is none');
+assert(cspDirective(homepageCsp, 'frame-src').includes("'none'"), 'frame-src is none');
 assert(!/href="[^"]*\/archivio\/?["#]/.test(homepage), 'homepage does not link to /archivio/');
 assert(homepage.includes(`${SITE_BASE}/come-arrivare/`), 'homepage header can reach Come arrivare');
 assert(homepage.includes(`${SITE_BASE}/en/`), 'homepage language switcher reaches English');
@@ -98,10 +137,12 @@ const enHome = read('en/index.html');
 assert(/<html lang="en">/.test(enHome), 'English homepage html lang is en');
 assert(/<h1[^>]*>Antico Baglio Siciliano<\/h1>/.test(enHome), 'English homepage is not a 404');
 assert(!isNotFoundPage(enHome), 'English homepage is not the NotFound document');
+assert(cspContent(enHome).length > 0, 'English homepage has a CSP meta tag');
 
 const notFound = read('404.html');
 assert(isNotFoundPage(notFound), '404.html is the NotFound document');
 assert(notFound.includes('noindex'), '404.html is noindexed');
+assert(cspContent(notFound).length > 0, '404.html has a CSP meta tag');
 
 const contact = read('contatti/index.html');
 assert(contact.includes(`mailto:info@anticobagliosiciliano.it`), 'contact page has the mailto');

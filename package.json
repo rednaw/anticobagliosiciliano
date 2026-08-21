@@ -14,6 +14,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:build": "node tests/assert-build.mjs",
+    "test:sa": "vitest run tests/simple-analytics.integration.test.ts",
     "archivio:build": "node scripts/build-archivio.mjs",
     "copy:export": "node scripts/export-copy.mjs",
     "copy:import": "node scripts/import-copy.mjs",

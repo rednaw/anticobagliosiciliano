@@ -32,4 +32,17 @@ describe('prerender regressions', () => {
     expect(hooks).toMatch(/replaceAll\('__SIMPLE_ANALYTICS_HOSTNAME__',\s*SIMPLE_ANALYTICS_HOSTNAME\)/);
     expect(hooks).not.toMatch(/replaceAll\([^)]*SITE_HOSTNAME/);
   });
+
+  it('ships a hashed CSP that allows Simple Analytics, not inline scripts', () => {
+    const vite = read('vite.config.ts');
+    expect(vite).toMatch(/csp:\s*\{/);
+    expect(vite).toMatch(/mode:\s*'hash'/);
+    expect(vite).toContain('https://scripts.simpleanalyticscdn.com');
+    expect(vite).toContain('https://queue.simpleanalyticscdn.com');
+    expect(vite).toMatch(/'script-src':\s*\[[^\]]*'self'/);
+    expect(vite).not.toMatch(/'script-src':\s*\[[^\]]*'unsafe-inline'/);
+    expect(vite).toMatch(/'style-src':\s*\[[^\]]*'unsafe-inline'/);
+    expect(vite).toMatch(/'object-src':\s*\[[^\]]*'none'/);
+    expect(vite).toMatch(/'frame-src':\s*\[[^\]]*'none'/);
+  });
 });
