@@ -20,7 +20,7 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["svelte.svelte-vscode", "editorconfig.editorconfig"],
+      "extensions": ["svelte.svelte-vscode", "editorconfig.editorconfig", "repreng.csv"],
       "settings": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,

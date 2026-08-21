@@ -6,10 +6,9 @@ The public host is **`https://rednaw.github.io/anticobagliosiciliano/`** until t
 
 ## Develop
 
-Requires Node.js 24+.
+Open the repo in VS Code or Cursor and **Reopen in Container**. The host needs Docker and the editor. Node, npm, and extensions live in the container (`npm ci` runs on create).
 
 ```sh
-npm install
 npm run dev
 ```
 

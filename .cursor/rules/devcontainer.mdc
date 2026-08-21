@@ -1,0 +1,13 @@
+---
+description: Develop only in the Dev Container; host needs Docker and VS Code/Cursor
+alwaysApply: true
+---
+
+# Dev Container only
+
+This project is developed in `.devcontainer/`. The host needs Docker and VS Code or Cursor. Node, npm, and editor extensions are not host dependencies.
+
+- Put editor settings and extensions in `.devcontainer/devcontainer.json` (`customizations.vscode`). Do not add `.vscode/settings.json` or `.vscode/extensions.json`.
+- Do not document or assume a local Node install.
+- npm scripts run inside the container.
+- If you need a development dependency add it to .devcontainer/Dockerfile
