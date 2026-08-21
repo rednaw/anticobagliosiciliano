@@ -46,15 +46,37 @@
   const intlLocale = $derived(locale === 'en' ? 'en-GB' : 'it-IT');
   const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
   const weekdays = $derived(weekdayLabels(intlLocale));
-  const monthTitle = $derived(
-    new Intl.DateTimeFormat(intlLocale, { month: 'long', year: 'numeric' }).format(view)
+  const monthFormat = $derived(
+    new Intl.DateTimeFormat(intlLocale, { month: 'long', year: 'numeric' })
   );
-  const cells = $derived(monthCells(view));
-  const weeks = $derived(
-    Array.from({ length: cells.length / 7 }, (_, week) => cells.slice(week * 7, week * 7 + 7))
-  );
+  const nextView = $derived(monthStart(new Date(view.getFullYear(), view.getMonth() + 1, 1)));
   const canPrev = $derived(view > monthStart(parseIso(today)));
   const cursorId = $derived(`${calendarId}-${cursor}`);
+
+  function monthTitle(month: Date) {
+    return monthFormat.format(month);
+  }
+
+  function monthWeeks(month: Date) {
+    const cells = monthCells(month);
+    return Array.from({ length: cells.length / 7 }, (_, week) =>
+      cells.slice(week * 7, week * 7 + 7)
+    );
+  }
+
+  function ensureViewContains(iso: string) {
+    const month = monthStart(parseIso(iso));
+    const todayMonth = monthStart(parseIso(today));
+    if (month < view) {
+      view = month < todayMonth ? todayMonth : month;
+      return;
+    }
+    const right = monthStart(new Date(view.getFullYear(), view.getMonth() + 1, 1));
+    if (month > right) {
+      const left = monthStart(new Date(month.getFullYear(), month.getMonth() - 1, 1));
+      view = left < todayMonth ? month : left;
+    }
+  }
 
   $effect(() => {
     if (!open) return;
@@ -77,7 +99,7 @@
 
   function setCursor(iso: string) {
     cursor = iso;
-    view = monthStart(parseIso(iso));
+    ensureViewContains(iso);
   }
 
   function openFor(which: 'in' | 'out') {
@@ -103,13 +125,16 @@
       close(true);
       return;
     }
-    cursor = cursorForMonth(
-      view,
-      parseIso(minCheckOut(next.checkIn, today)).getDate(),
-      'out',
-      today,
-      next.checkIn,
-      occupiedNight
+    const minOut = minCheckOut(next.checkIn, today);
+    setCursor(
+      cursorForMonth(
+        monthStart(parseIso(minOut)),
+        parseIso(minOut).getDate(),
+        'out',
+        today,
+        next.checkIn,
+        occupiedNight
+      )
     );
     outEl?.focus();
   }
@@ -203,6 +228,49 @@
   {/if}
 
   {#if open}
+    {#snippet monthPane(month: Date)}
+      <div class="month">
+        <p class="cal-title">{monthTitle(month)}</p>
+        <div class="dow" aria-hidden="true">
+          {#each weekdays as day}
+            <span>{day}</span>
+          {/each}
+        </div>
+        <div class="grid" role="grid" aria-readonly="true" aria-label={monthTitle(month)}>
+          {#each monthWeeks(month) as week}
+            <div class="week" role="row">
+              {#each week as iso}
+                {#if iso}
+                  <button
+                    id={`${calendarId}-${iso}`}
+                    type="button"
+                    class="day"
+                    class:start={iso === checkIn}
+                    class:end={iso === checkOut}
+                    class:range={Boolean(checkIn && checkOut && iso > checkIn && iso < checkOut)}
+                    class:today={iso === today}
+                    class:cursor={iso === cursor}
+                    tabindex="-1"
+                    role="gridcell"
+                    disabled={dayDisabled(iso)}
+                    aria-selected={iso === checkIn || iso === checkOut}
+                    aria-label={dayDisabled(iso) && occupiedNight(iso)
+                      ? `${formatDate(iso)}, ${t('dateUnavailable')}`
+                      : formatDate(iso)}
+                    onpointerdown={(event) => event.preventDefault()}
+                    onclick={() => selectDay(iso)}
+                  >
+                    {Number(iso.slice(8))}
+                  </button>
+                {:else}
+                  <span class="pad" role="gridcell"></span>
+                {/if}
+              {/each}
+            </div>
+          {/each}
+        </div>
+      </div>
+    {/snippet}
     <div id={calendarId} class="cal" role="dialog" aria-label={t('dateCalendar')}>
       <div class="cal-nav">
         <button
@@ -216,7 +284,6 @@
         >
           ‹
         </button>
-        <p class="cal-title">{monthTitle}</p>
         <button
           type="button"
           class="nav"
@@ -228,43 +295,9 @@
           ›
         </button>
       </div>
-      <div class="dow" aria-hidden="true">
-        {#each weekdays as day}
-          <span>{day}</span>
-        {/each}
-      </div>
-      <div class="grid" role="grid" aria-readonly="true">
-        {#each weeks as week}
-          <div class="week" role="row">
-            {#each week as iso}
-              {#if iso}
-                <button
-                  id={`${calendarId}-${iso}`}
-                  type="button"
-                  class="day"
-                  class:start={iso === checkIn}
-                  class:end={iso === checkOut}
-                  class:range={Boolean(checkIn && checkOut && iso > checkIn && iso < checkOut)}
-                  class:today={iso === today}
-                  class:cursor={iso === cursor}
-                  tabindex="-1"
-                  role="gridcell"
-                  disabled={dayDisabled(iso)}
-                  aria-selected={iso === checkIn || iso === checkOut}
-                  aria-label={dayDisabled(iso) && occupiedNight(iso)
-                    ? `${formatDate(iso)}, ${t('dateUnavailable')}`
-                    : formatDate(iso)}
-                  onpointerdown={(event) => event.preventDefault()}
-                  onclick={() => selectDay(iso)}
-                >
-                  {Number(iso.slice(8))}
-                </button>
-              {:else}
-                <span class="pad" role="gridcell"></span>
-              {/if}
-            {/each}
-          </div>
-        {/each}
+      <div class="months">
+        {@render monthPane(view)}
+        {@render monthPane(nextView)}
       </div>
       <p class="hint">{t('dateMinStayHint')}</p>
     </div>
@@ -289,7 +322,7 @@
     top: calc(100% + 0.45rem);
     left: 0;
     right: 0;
-    padding: 1rem 1rem 0.85rem;
+    padding: 0.85rem 1rem 0.85rem;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -297,15 +330,19 @@
   }
 
   .cal-nav {
-    display: grid;
-    grid-template-columns: 2.25rem 1fr 2.25rem;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.35rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .months {
+    display: grid;
+    gap: 1.25rem;
   }
 
   .cal-title {
-    margin: 0;
+    margin: 0 0 0.75rem;
     text-align: center;
     font-family: var(--font-display);
     font-size: 1.05rem;
@@ -413,6 +450,16 @@
   @media (min-width: 720px) {
     .row {
       grid-template-columns: 1fr 1fr;
+    }
+
+    .cal {
+      left: auto;
+      width: min(42rem, calc(100vw - 2.5rem));
+    }
+
+    .months {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
     }
   }
 </style>
