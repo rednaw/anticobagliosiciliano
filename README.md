@@ -27,12 +27,12 @@ The last CSV column is a stable `id`. Import accepts comma, semicolon, or tab se
 ### Lodgify occupancy
 
 ```sh
-npm run lodgify:sync        # writes src/lib/data/availability.json
+npm run lodgify:sync        # writes src/lib/data/occupancy.json
 ```
 
 Needs `LODGIFY_API_KEY` (local env, and the GitHub Actions secret of the same name). Occupied night ranges only (Casa 1–4); no guest names. One-night gaps between bookings are filled (minimum stay). If Lodgify fails, the last good JSON is left as it is.
 
-A scheduled workflow (`.github/workflows/lodgify-availability.yml`) runs `lodgify:sync` twice a day. If occupancy changed it commits `availability.json` and deploys Pages. `GITHUB_TOKEN` commits do not retrigger CI. You can also run it from **Actions → Lodgify occupancy → Run workflow**.
+A scheduled workflow (`.github/workflows/lodgify-availability.yml`) runs `lodgify:sync` twice a day. If occupancy changed it commits `occupancy.json` and deploys Pages. `GITHUB_TOKEN` commits do not retrigger CI. You can also run it from **Actions → Lodgify occupancy → Run workflow**.
 
 ### Dependency updates
 

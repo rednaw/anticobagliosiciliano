@@ -110,7 +110,7 @@ assert(/mailto:[^"]+"[^>]*target="_blank"/.test(contact) || /target="_blank"[^>]
 assert(!contact.includes('window.open'), 'contact page does not use window.open');
 
 const occupancy = JSON.parse(
-	readFileSync(path.join(root, 'src/lib/data/availability.json'), 'utf8')
+	readFileSync(path.join(root, 'src/lib/data/occupancy.json'), 'utf8')
 );
 assert(
 	JSON.stringify(Object.keys(occupancy.houses ?? {}).sort()) ===

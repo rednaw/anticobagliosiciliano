@@ -39,7 +39,7 @@ jobs:
       - name: Detect occupancy change
         id: diff
         run: |
-          git add src/lib/data/availability.json
+          git add src/lib/data/occupancy.json
           if git diff --cached --quiet; then
             echo 'deploy=false' >> "$GITHUB_OUTPUT"
             echo 'Occupancy unchanged; skipping commit and deploy.'

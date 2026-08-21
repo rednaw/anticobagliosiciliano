@@ -8,7 +8,7 @@ todos:
     content: Confirm Lodgify HTTP calls from live probe, including 18-month window
     status: completed
   - id: sync-script
-    content: Lodgify mapping module, sanitized availability.json schema, sync script with fail-closed behaviour
+    content: Lodgify mapping module, sanitized occupancy.json schema, sync script with fail-closed behaviour
     status: completed
   - id: workflow
     content: "Scheduled workflow: sync, commit if changed, test/build, deploy Pages; LODGIFY_API_KEY secret"
@@ -35,7 +35,7 @@ Decisions already made:
 flowchart LR
   Lodgify["Lodgify calendar API"]
   Sync["Scheduled GH Action"]
-  JSON["availability.json"]
+  JSON["occupancy.json"]
   CI["Build and Pages deploy"]
   Form["Contact calendar"]
   Mail["Mailto draft"]
@@ -82,7 +82,7 @@ Mapping lives in a committed, non-secret module (e.g. [`src/lib/data/lodgify.ts`
 
 The contact form reads the committed snapshot. Occupied nights are disabled. Snapshot script + scheduled workflow are in place.
 
-- Write a compact public file [`src/lib/data/availability.json`](../../src/lib/data/availability.json): `generatedAt`, date span, and per-house **occupied night ranges** only.
+- Write a compact public file [`src/lib/data/occupancy.json`](../../src/lib/data/occupancy.json): `generatedAt`, date span, and per-house **occupied night ranges** only.
 - If the API fails, **exit non-zero and keep the last good file**. If the JSON is unchanged, do not commit.
 
 `GITHUB_TOKEN` commits do not retrigger [`ci.yml`](../../.github/workflows/ci.yml), so a new workflow (e.g. `.github/workflows/lodgify-availability.yml`) should: sync → commit if changed → `npm test` / `npm run build` / `npm run test:build` → upload + deploy Pages (same concurrency idea as CI so a code push and a calendar sync cannot clobber each other). Schedule: twice daily + `workflow_dispatch`. Secret: **`LODGIFY_API_KEY`** only (`env: LODGIFY_API_KEY: ${{ secrets.LODGIFY_API_KEY }}`).

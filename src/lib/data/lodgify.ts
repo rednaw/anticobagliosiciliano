@@ -35,7 +35,7 @@ type LodgifyRoomAvailability = {
 	periods?: LodgifyPeriod[];
 };
 
-export const AVAILABILITY_JSON = 'src/lib/data/availability.json';
+export const OCCUPANCY_JSON = 'src/lib/data/occupancy.json';
 export const LODGIFY_HORIZON_MONTHS = 18;
 export const LODGIFY_TIME_ZONE = 'Europe/Rome';
 

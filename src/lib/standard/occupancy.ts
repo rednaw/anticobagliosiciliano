@@ -1,4 +1,4 @@
-import occupancyJson from '../data/availability.json' with { type: 'json' };
+import occupancyJson from '../data/occupancy.json' with { type: 'json' };
 import {
 	addUtcDays,
 	LODGIFY_HOUSE_SLUGS,

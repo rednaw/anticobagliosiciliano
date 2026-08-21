@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Pull Lodgify occupancy and write src/lib/data/availability.json.
+ * Pull Lodgify occupancy and write src/lib/data/occupancy.json.
  * Fail closed: on error, leave the last good file alone.
  *
  *   LODGIFY_API_KEY=… npm run lodgify:sync
@@ -17,7 +17,7 @@ if (!key) {
 	throw new Error('lodgify:sync: set LODGIFY_API_KEY in the environment.');
 }
 
-const outPath = path.join(root, lodgify.AVAILABILITY_JSON);
+const outPath = path.join(root, lodgify.OCCUPANCY_JSON);
 
 async function lodgifyGet(urlPath) {
 	const response = await fetch(`https://api.lodgify.com${urlPath}`, {
