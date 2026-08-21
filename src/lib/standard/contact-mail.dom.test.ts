@@ -7,13 +7,13 @@ import { contactFieldError, gateMailtoClick, messageValidity } from './contact-m
 
 function mountForm() {
   document.body.innerHTML = `
-		<form>
-			<input name="name" required />
-			<input name="email" type="email" required />
-			<textarea name="message"></textarea>
-			<a href="mailto:info@anticobagliosiciliano.it">Apri in email</a>
-		</form>
-	`;
+    <form>
+      <input name="name" required />
+      <input name="email" type="email" required />
+      <textarea name="message"></textarea>
+      <a href="mailto:info@anticobagliosiciliano.it">Apri in email</a>
+    </form>
+  `;
   const form = document.querySelector('form')!;
   const link = form.querySelector('a')!;
   const name = form.querySelector<HTMLInputElement>('[name="name"]')!;
