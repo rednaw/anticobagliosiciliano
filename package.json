@@ -21,7 +21,7 @@
     "lodgify:sync": "node scripts/sync-lodgify-availability.mjs"
   },
   "engines": {
-    "node": ">=24.19.0"
+    "node": ">=24.20.0"
   },
   "devDependencies": {
     "@fontsource-variable/figtree": "^5.3.0",
