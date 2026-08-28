@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { baglioLocation } from '$lib/data/content';
-import { ARRIVE_MAP } from './arrive-map';
+import { ARRIVE_MAP, arriveMinZoomForView } from './arrive-map';
 
 function inBounds(lat: number, lon: number) {
   const [[south, west], [north, east]] = ARRIVE_MAP.bounds;
@@ -16,5 +16,11 @@ describe('arrive map', () => {
     expect(inBounds(37.075, 15.287)).toBe(true);
     expect(inBounds(36.68, 15.13)).toBe(true);
     expect(inBounds(41.9, 12.5)).toBe(false);
+  });
+
+  it('lets a phone-sized map zoom out far enough to see Sicily', () => {
+    expect(arriveMinZoomForView(1120, 747)).toBe(ARRIVE_MAP.minZoom);
+    expect(arriveMinZoomForView(390, 260)).toBeLessThan(ARRIVE_MAP.minZoom);
+    expect(arriveMinZoomForView(320, 213)).toBe(6);
   });
 });

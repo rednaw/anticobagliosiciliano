@@ -4,7 +4,7 @@
   import { baglioLocation, site } from '$lib/data/content';
   import type { Map as LeafletMap } from 'leaflet';
   import 'leaflet/dist/leaflet.css';
-  import { ARRIVE_MAP } from './arrive-map';
+  import { ARRIVE_MAP, arriveMinZoomForView } from './arrive-map';
 
   let {
     alt,
@@ -34,7 +34,7 @@
       map = L.map(mapEl, {
         center,
         zoom: ARRIVE_MAP.zoom,
-        minZoom: ARRIVE_MAP.minZoom,
+        minZoom: arriveMinZoomForView(mapEl.clientWidth, mapEl.clientHeight),
         maxZoom: ARRIVE_MAP.maxZoom,
         maxBounds: ARRIVE_MAP.bounds,
         maxBoundsViscosity: 0.85,
@@ -44,6 +44,13 @@
         markerZoomAnimation: !calm
       });
       map.attributionControl.setPrefix(false);
+
+      function applyMinZoom() {
+        if (!map) return;
+        const min = arriveMinZoomForView(map.getSize().x, map.getSize().y);
+        map.setMinZoom(min);
+        if (map.getZoom() < min) map.setZoom(min);
+      }
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: `<a href="https://www.openstreetmap.org/copyright">${escapeHtml(attribution)}</a>`,
@@ -88,9 +95,12 @@
         if (cancelled) return;
         ready = true;
         requestAnimationFrame(() => {
-          if (!cancelled) map?.invalidateSize();
+          if (cancelled || !map) return;
+          map.invalidateSize();
+          applyMinZoom();
         });
       });
+      map.on('resize', applyMinZoom);
     })();
 
     return () => {
