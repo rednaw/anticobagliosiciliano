@@ -1,6 +1,6 @@
 # Original site archive (anticobagliosiciliano.it)
 
-Scraped from the self-hosted (“new”) WordPress site. Not used by the SvelteKit build.
+Scraped from the later WordPress.com site on `.it`. Not used by the SvelteKit build.
 
 - **Images:** high-res originals (Git LFS); see `manifest.json`
 - **Texts:** `text/nuova-homepage.md` — Italian homepage sections; `text/imperdibili.md` — English (identical to wordpress.com)

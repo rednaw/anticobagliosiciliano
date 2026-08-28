@@ -1,7 +1,7 @@
 # Room descriptions (wordpress.com)
 
 English originals from the `hotels_room` CPT under `/room/casa-N/`.
-Same wording as the later self-hosted `.it` Casa pages.
+Same wording as the later `.it` Casa pages.
 
 Four houses for rent: Casa #1–#4. Casa #5 = Agrumeto (archived only).
 
