@@ -11,6 +11,13 @@ const SA_SCRIPT =
 const SA_SCRIPT_ORIGIN = 'https://scripts.simpleanalyticscdn.com';
 const SA_QUEUE_ORIGIN = 'https://queue.simpleanalyticscdn.com';
 
+/** Leaflet raster tiles on Come arrivare (`{s}.tile.openstreetmap.org`). */
+const OSM_TILE_ORIGINS = [
+  'https://a.tile.openstreetmap.org',
+  'https://b.tile.openstreetmap.org',
+  'https://c.tile.openstreetmap.org'
+] as const;
+
 /** Strip Simple Analytics in dev — production builds keep the tag in app.html. */
 function simpleAnalyticsDevPlugin(): Plugin {
   return {
@@ -55,7 +62,7 @@ export default defineConfig({
           'form-action': ['self'],
           'script-src': ['self', SA_SCRIPT_ORIGIN],
           'style-src': ['self', 'unsafe-inline'],
-          'img-src': ['self', SA_QUEUE_ORIGIN],
+          'img-src': ['self', SA_QUEUE_ORIGIN, ...OSM_TILE_ORIGINS],
           'font-src': ['self'],
           'media-src': ['self'],
           'connect-src': ['self', SA_QUEUE_ORIGIN],

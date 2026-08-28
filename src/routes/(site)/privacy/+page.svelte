@@ -35,6 +35,11 @@
       {t('hosting')}<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection">{t('hostingPolicy')}</a>.
     </p>
 
+    <h2>{t('mapsTitle')}</h2>
+    <p>
+      {t('maps')}<a href="https://osmfoundation.org/wiki/Privacy_Policy">{t('mapsPolicy')}</a>.
+    </p>
+
     <h2>{t('rightsTitle')}</h2>
     <p>{t('rights')}</p>
   </div>

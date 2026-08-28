@@ -126,6 +126,10 @@ assert(
 );
 assert(cspDirective(homepageCsp, 'object-src').includes("'none'"), 'object-src is none');
 assert(cspDirective(homepageCsp, 'frame-src').includes("'none'"), 'frame-src is none');
+assert(
+  cspDirective(homepageCsp, 'img-src').includes('https://a.tile.openstreetmap.org'),
+  'img-src allows OpenStreetMap tiles for Come arrivare'
+);
 assert(!/href="[^"]*\/archivio\/?["#]/.test(homepage), 'homepage does not link to /archivio/');
 assert(homepage.includes(`${SITE_BASE}/come-arrivare/`), 'homepage header can reach Come arrivare');
 assert(homepage.includes(`${SITE_BASE}/en/`), 'homepage language switcher reaches English');
@@ -172,6 +176,10 @@ assert(/<html lang="en">/.test(arriveEn), 'English Come arrivare html lang is en
 
 const privacy = read('privacy/index.html');
 assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');
+assert(
+  privacy.includes('osmfoundation.org/wiki/Privacy_Policy'),
+  'privacy page links the OpenStreetMap Foundation privacy policy'
+);
 
 const archivio = read('archivio/index.html');
 assert(archivio.includes('noindex'), 'archivio is noindexed');

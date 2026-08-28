@@ -44,5 +44,6 @@ describe('prerender regressions', () => {
     expect(vite).toMatch(/'style-src':\s*\[[^\]]*'unsafe-inline'/);
     expect(vite).toMatch(/'object-src':\s*\[[^\]]*'none'/);
     expect(vite).toMatch(/'frame-src':\s*\[[^\]]*'none'/);
+    expect(vite).toContain('https://a.tile.openstreetmap.org');
   });
 });

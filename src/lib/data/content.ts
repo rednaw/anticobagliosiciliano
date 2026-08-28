@@ -601,8 +601,8 @@ export const baglioLocation = {
 
 export const arriveCopy = liveCopy('arrive', {
   metaDescription: {
-    it: 'Come arrivare all’Antico Baglio Siciliano a Balestrate: aeroporti, autostrada e una mappa statica da aprire nella tua app di mappe.',
-    en: 'How to get to Antico Baglio Siciliano in Balestrate: airports, the motorway, and a static map to open in your maps app.'
+    it: 'Come arrivare all’Antico Baglio Siciliano a Balestrate: aeroporti, autostrada e una mappa da aprire nella tua app di mappe.',
+    en: 'How to get to Antico Baglio Siciliano in Balestrate: airports, the motorway, and a map to open in your maps app.'
   },
   lead: {
     it: 'Il baglio è nelle campagne di Balestrate, sul Golfo di Castellammare, tra Palermo e Trapani.',
@@ -612,7 +612,6 @@ export const arriveCopy = liveCopy('arrive', {
     it: 'Mappa della campagna di Balestrate con l’Antico Baglio Siciliano segnalato a sud del paese, vicino all’uscita A29',
     en: 'Map of the Balestrate countryside with Antico Baglio Siciliano marked south of the town, near the A29 exit'
   },
-  coordsLabel: { it: 'Coordinate', en: 'Coordinates' },
   airTitle: { it: 'In aereo', en: 'By air' },
   air: {
     it: 'L’aeroporto di Palermo (Punta Raisi) è a circa 20 minuti di auto, quello di Trapani a 35. In entrambi potete noleggiare un’auto.',
@@ -739,6 +738,15 @@ export const privacyCopy = liveCopy('privacy', {
   hostingPolicy: {
     it: 'nota di GitHub Pages sulla raccolta dati',
     en: 'GitHub Pages note on data collection'
+  },
+  mapsTitle: { it: 'Mappa', en: 'Map' },
+  maps: {
+    it: 'Sulla pagina Come arrivare la mappa chiede le immagini a OpenStreetMap. Il browser si collega ai loro server; OpenStreetMap può vedere l’indirizzo IP di chi guarda quella pagina. Vedi l’',
+    en: 'On the Getting here page the map loads images from OpenStreetMap. Your browser connects to their servers; OpenStreetMap may see the IP address of people who view that page. See the '
+  },
+  mapsPolicy: {
+    it: 'informativa sulla privacy di OpenStreetMap',
+    en: 'OpenStreetMap privacy policy'
   },
   rightsTitle: { it: 'I tuoi diritti', en: 'Your rights' },
   rights: {

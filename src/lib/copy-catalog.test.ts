@@ -57,6 +57,7 @@ describe('copy catalog', () => {
     expect(ids).toContain('places.segesta.name');
     expect(ids).toContain('arrive.maps.google.label');
     expect(ids).toContain('contact.email');
+    expect(ids).toContain('privacy.mapsTitle');
     expect(ids).toContain('ui.gallery');
     expect(ids).not.toContain('site.email');
   });
