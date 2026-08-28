@@ -65,7 +65,8 @@ export default defineConfig({
           'img-src': ['self', SA_QUEUE_ORIGIN, ...OSM_TILE_ORIGINS],
           'font-src': ['self'],
           'media-src': ['self'],
-          'connect-src': ['self', SA_QUEUE_ORIGIN],
+          // Script origin is for DevTools fetching latest.js.map.
+          'connect-src': ['self', SA_QUEUE_ORIGIN, SA_SCRIPT_ORIGIN],
           'frame-src': ['none'],
           'object-src': ['none'],
           'worker-src': ['none'],

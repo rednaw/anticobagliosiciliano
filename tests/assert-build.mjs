@@ -121,6 +121,14 @@ assert(
   'CSP allows the Simple Analytics beacon origin'
 );
 assert(
+  cspDirective(homepageCsp, 'connect-src').includes('https://scripts.simpleanalyticscdn.com'),
+  'CSP allows Simple Analytics source maps from the script origin'
+);
+assert(
+  /rel="icon"[^>]*href="(?!data:)[^"]+\.svg"/.test(homepage),
+  'favicon is a same-origin svg file, not an inline data URL'
+);
+assert(
   cspDirective(homepageCsp, 'style-src').includes('unsafe-inline'),
   'style-src allows the inline styles the markup already uses'
 );

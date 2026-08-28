@@ -1,6 +1,6 @@
 <script lang="ts">
   import '../app.css';
-  import favicon from '$lib/assets/favicon.svg';
+  import favicon from '$lib/assets/favicon.svg?no-inline';
   import figtree from '@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url';
   import fraunces from '@fontsource-variable/fraunces/files/fraunces-latin-standard-normal.woff2?url';
   import { site } from '$lib/data/content';
