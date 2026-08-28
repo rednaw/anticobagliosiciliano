@@ -91,11 +91,17 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
       ]
     },
     highlights: {
-      it: ['Terrazza sull’uliveto (15 mq)', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
+      it: [
+        'Terrazza sull’uliveto (15 mq)',
+        'Cucina attrezzata',
+        'Riscaldamento e aria condizionata',
+        'Wi‑Fi gratuito'
+      ],
       en: [
         'Terrace overlooking the olive grove (15 sq m)',
         'Equipped kitchen',
-        'Heating and air conditioning'
+        'Heating and air conditioning',
+        'Free Wi‑Fi'
       ]
     }
   },
@@ -153,11 +159,17 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
       ]
     },
     highlights: {
-      it: ['Terrazza sull’uliveto (15 mq)', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
+      it: [
+        'Terrazza sull’uliveto (15 mq)',
+        'Cucina attrezzata',
+        'Riscaldamento e aria condizionata',
+        'Wi‑Fi gratuito'
+      ],
       en: [
         'Terrace overlooking the olive grove (15 sq m)',
         'Equipped kitchen',
-        'Heating and air conditioning'
+        'Heating and air conditioning',
+        'Free Wi‑Fi'
       ]
     }
   },
@@ -205,11 +217,17 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
       ]
     },
     highlights: {
-      it: ['Terrazza sull’uliveto (15 mq)', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
+      it: [
+        'Terrazza sull’uliveto (15 mq)',
+        'Cucina attrezzata',
+        'Riscaldamento e aria condizionata',
+        'Wi‑Fi gratuito'
+      ],
       en: [
         'Terrace overlooking the olive grove (15 sq m)',
         'Equipped kitchen',
-        'Heating and air conditioning'
+        'Heating and air conditioning',
+        'Free Wi‑Fi'
       ]
     }
   },
@@ -267,12 +285,19 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
       ]
     },
     highlights: {
-      it: ['Patio interno privato', 'Terrazza con vista sul Golfo di Castellammare', 'Cucina attrezzata', 'Riscaldamento e aria condizionata'],
+      it: [
+        'Patio interno privato',
+        'Terrazza con vista sul Golfo di Castellammare',
+        'Cucina attrezzata',
+        'Riscaldamento e aria condizionata',
+        'Wi‑Fi gratuito'
+      ],
       en: [
         'Private interior patio',
         'Terrace with view over the Gulf of Castellammare',
         'Equipped kitchen',
-        'Heating and air conditioning'
+        'Heating and air conditioning',
+        'Free Wi‑Fi'
       ]
     }
   }
