@@ -143,6 +143,11 @@ assert(homepage.includes(`${SITE_BASE}/come-arrivare/`), 'homepage header can re
 assert(homepage.includes(`${SITE_BASE}/en/`), 'homepage language switcher reaches English');
 if (SITE_PUBLIC) {
   assert(!/<meta name="robots" content="noindex/.test(homepage), 'public homepage is indexable');
+} else {
+  assert(
+    /<meta name="robots" content="noindex, nofollow"/.test(homepage),
+    'pre-launch homepage is noindexed'
+  );
 }
 
 const enHome = read('en/index.html');

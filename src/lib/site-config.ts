@@ -26,4 +26,4 @@ export const SITE_BASE = '/anticobagliosiciliano';
 export const SITE_ORIGIN = `https://${SITE_HOSTNAME}`;
 
 /** Flip to `true` on launch so search engines can index the site. */
-export const SITE_PUBLIC = true;
+export const SITE_PUBLIC = false;
