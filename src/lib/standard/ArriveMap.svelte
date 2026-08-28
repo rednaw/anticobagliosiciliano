@@ -46,7 +46,8 @@
       map.attributionControl.setPrefix(false);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: `<a href="https://www.openstreetmap.org/copyright">${escapeHtml(attribution)}</a>`
+        attribution: `<a href="https://www.openstreetmap.org/copyright">${escapeHtml(attribution)}</a>`,
+        detectRetina: true
       }).addTo(map);
 
       L.marker(center, {
@@ -110,18 +111,18 @@
 
 <div class="frame">
   <div class="leaflet" bind:this={mapEl} role="region" aria-label={alt}></div>
-  <img
-    class="fallback"
-    class:gone={ready}
-    src={imageAsset(baglioLocation.map)}
-    srcset="{imageAsset(baglioLocation.mapSm)} 800w, {imageAsset(baglioLocation.map)} 1536w"
-    sizes="(min-width: 960px) 70rem, calc(100vw - 2.5rem)"
-    alt={ready ? '' : alt}
-    width="1536"
-    height="1024"
-    fetchpriority="high"
-    aria-hidden={ready ? true : undefined}
-  />
+  {#if !ready}
+    <img
+      class="fallback"
+      src={imageAsset(baglioLocation.map)}
+      srcset="{imageAsset(baglioLocation.mapSm)} 800w, {imageAsset(baglioLocation.map)} 1536w"
+      sizes="(min-width: 960px) 70rem, calc(100vw - 2.5rem)"
+      alt={alt}
+      width="1536"
+      height="1024"
+      fetchpriority="high"
+    />
+  {/if}
 </div>
 
 <style>
@@ -148,12 +149,6 @@
     object-fit: cover;
     object-position: center;
     z-index: 2;
-    transition: opacity 0.35s var(--ease);
-  }
-
-  .fallback.gone {
-    opacity: 0;
-    pointer-events: none;
   }
 
   :global(.arrive-pin) {
@@ -202,11 +197,5 @@
   :global(.leaflet-bar a) {
     color: var(--sea);
     border-radius: var(--radius);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .fallback {
-      transition: none;
-    }
   }
 </style>
