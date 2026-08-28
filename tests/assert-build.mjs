@@ -196,6 +196,11 @@ const robots = read('robots.txt');
 assert(robots.includes(`Disallow: ${SITE_BASE}/archivio/`), 'robots.txt disallows archivio');
 assert(robots.includes(`Sitemap: https://${SITE_HOSTNAME}${SITE_BASE}/sitemap.xml`), 'robots.txt points at the sitemap');
 
+assert(
+  existsSync(path.join(build, 'google3e4b083f6284aa55.html')),
+  'Search Console HTML verification file is in the build'
+);
+
 const sitemap = read('sitemap.xml');
 assert(sitemap.includes('xmlns:xhtml'), 'sitemap has hreflang alternates');
 assert(!sitemap.includes('/archivio'), 'sitemap does not list archivio');
