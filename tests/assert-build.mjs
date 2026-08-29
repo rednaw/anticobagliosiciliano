@@ -190,7 +190,7 @@ assert(/<html lang="en">/.test(arriveEn), 'English Come arrivare html lang is en
 const privacy = read('privacy/index.html');
 assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');
 assert(
-  privacy.includes('osmfoundation.org/wiki/Privacy_Policy'),
+  privacy.includes('osmfoundation.org/wiki/Privacy_Policy#Personal_data_we_receive_automatically'),
   'privacy page links the OpenStreetMap Foundation privacy policy'
 );
 

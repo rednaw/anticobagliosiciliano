@@ -812,6 +812,14 @@ export const privacyCopy = liveCopy('privacy', {
     it: 'Questa pagina spiega in modo sintetico quali dati riguardano chi visita il sito o ci chiede disponibilità.',
     en: 'This page explains, in short, what data is involved when you visit the site or ask about availability.'
   },
+  groupContact: {
+    it: 'Quando ci scrivi',
+    en: 'When you contact us'
+  },
+  groupBrowse: {
+    it: 'Quando visiti il sito',
+    en: 'When you browse the site'
+  },
   controllerTitle: { it: 'Titolare', en: 'Controller' },
   controller: {
     it: 'Il titolare del trattamento è Antico Baglio Siciliano. Puoi scriverci a',
@@ -824,8 +832,8 @@ export const privacyCopy = liveCopy('privacy', {
   },
   analyticsTitle: { it: 'Statistiche di visita', en: 'Visit statistics' },
   analytics: {
-    it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics. ',
-    en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics. '
+    it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics, che funziona senza cookie. ',
+    en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics, which works without cookies. '
   },
   analyticsPolicy: {
     it: 'Vedi quali dati vengono raccolti',
@@ -833,8 +841,8 @@ export const privacyCopy = liveCopy('privacy', {
   },
   cookiesTitle: { it: 'Cookie', en: 'Cookies' },
   cookies: {
-    it: 'Il sito non imposta cookie propri di profilazione o di marketing.',
-    en: 'The site does not set its own profiling or marketing cookies.'
+    it: 'Non usiamo cookie di profilazione o di marketing.',
+    en: 'We do not use profiling or marketing cookies.'
   },
   hostingTitle: { it: 'Ospitalità del sito', en: 'Site hosting' },
   hosting: {
