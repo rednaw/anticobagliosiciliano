@@ -668,8 +668,8 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       }
     },
     text: {
-      it: 'Nella notte fra il 14 e il 15 gennaio 1968 il terremoto del Belice rase al suolo Gibellina, ricostruita poi una ventina di chilometri più a ovest. Sulle macerie del vecchio paese Alberto Burri ha steso un immenso sudario di cemento bianco: blocchi alti quanto un uomo, separati da fenditure che ricalcano le strade di un tempo. Si cammina dentro la pianta di un paese scomparso, fra le colline coltivate del Belice, in una delle più grandi opere di land art al mondo.',
-      en: 'On the night of 14 January 1968 the Belice earthquake razed Gibellina to the ground; the town was later rebuilt some twenty kilometres to the west. Over the rubble of the old town Alberto Burri laid an immense shroud of white concrete: blocks about the height of a person, separated by fissures that follow the streets as they once ran. You walk through the plan of a vanished town, among the cultivated hills of the Belice, inside one of the largest works of land art in the world.'
+      it: 'Nella notte fra il 14 e il 15 gennaio 1968 il terremoto del Belice rase al suolo Gibellina, ricostruita poi una ventina di chilometri più a ovest. Sulle macerie del vecchio paese Alberto Burri ha steso un immenso sudario di cemento bianco: blocchi alti quanto un uomo, separati da fenditure che ricalcano le strade di un tempo. Si cammina dentro la pianta di un paese scomparso, fra le colline coltivate del Belice, in una delle più grandi opere di Land Art al mondo.',
+      en: 'On the night of 14 January 1968 the Belice earthquake razed Gibellina to the ground; the town was later rebuilt some twenty kilometres to the west. Over the rubble of the old town Alberto Burri laid an immense shroud of white concrete: blocks about the height of a person, separated by fissures that follow the streets as they once ran. You walk through the plan of a vanished town, among the cultivated hills of the Belice, inside one of the largest works of Land Art in the world.'
     },
     image: '/images/places/ruderi-di-gibellina.jpg',
     imageCredit: {
