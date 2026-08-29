@@ -6,7 +6,7 @@
  *            Source files stay as-is. Generated `.webp` are gitignored.
  *   --prune  Drop JPEG/PNG from `build/` after Vite copies them (keep `og-share.jpg`).
  *
- * Skips `og-share.jpg` (Open Graph) and never touches `archivio/`.
+ * Skips `og-share.jpg` (Open Graph).
  *
  * Usage:
  *   node scripts/optimize-site-images.mjs --emit

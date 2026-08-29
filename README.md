@@ -64,11 +64,13 @@ Production only. The script is stripped during `npm run dev`. Page views are col
 
 Update `email` in `src/lib/data/content.ts` if needed (used by the contact form / mailto).
 
-## Archivio
+## Archive
 
-`/archivio/` is an unlinked owner archive of photos and texts from previous sites (not in the public nav). Regenerate thumbs after `archive/` changes (requires LFS files locally):
+Owner archive under `archive/` (LFS source photos, local browser in `archive/browser/`). Not deployed.
 
 ```sh
-npm run archivio:build
+npm run archive:dev       # http://localhost:5174 — generates thumbs on first run
 ```
+
+See [archive/README.md](archive/README.md).
 

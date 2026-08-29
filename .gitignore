@@ -14,6 +14,9 @@
 /build
 /coverage
 /node_modules
+/archive/browser/node_modules
+/archive/browser/dist
+/archive/browser/public
 
 # OS
 .DS_Store

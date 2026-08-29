@@ -1,4 +1,3 @@
-import { SITE_BASE } from '$lib/site-config';
 import { absoluteUrl } from '$lib/standard/i18n';
 import type { RequestHandler } from './$types';
 
@@ -8,7 +7,6 @@ export const trailingSlash = 'never';
 export const GET: RequestHandler = () => {
   const body = `User-agent: *
 Allow: /
-Disallow: ${SITE_BASE}/archivio/
 
 Sitemap: ${absoluteUrl('/sitemap.xml')}
 `;

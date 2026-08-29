@@ -10,12 +10,16 @@
     "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,readonly,consistency=cached",
     "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,readonly,consistency=cached"
   ],
-  "postCreateCommand": "npm ci",
-  "forwardPorts": [5173],
+  "postCreateCommand": "npm ci && npm ci --prefix archive/browser",
+  "forwardPorts": [5173, 5174],
   "portsAttributes": {
     "5173": {
-      "label": "Vite dev server",
+      "label": "Marketing site (Vite)",
       "onAutoForward": "notify"
+    },
+    "5174": {
+      "label": "Archivio (local only)",
+      "onAutoForward": "silent"
     }
   },
   "customizations": {

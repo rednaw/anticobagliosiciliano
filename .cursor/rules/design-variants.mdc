@@ -1,0 +1,10 @@
+---
+description: Public site vs unlinked owner archive.
+alwaysApply: true
+---
+
+# Site vs archive
+
+The marketing site lives at `/` (Italian) and `/en/` (English). It owns the public chrome (header, footer, styles).
+
+The owner archive lives under `archive/` (LFS source assets + local browser in `archive/browser/`). It is not deployed and must not appear in nav, footer, sitemap, or any public page.

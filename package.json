@@ -15,7 +15,9 @@
     "test:coverage": "vitest run --coverage",
     "test:build": "node tests/assert-build.mjs",
     "test:sa": "vitest run tests/simple-analytics.integration.test.ts",
-    "archivio:build": "node scripts/build-archivio.mjs",
+    "archive:build": "node archive/browser/scripts/build.mjs",
+    "archive:dev": "node archive/browser/scripts/build.mjs && npm run dev --prefix archive/browser",
+    "archive:install": "npm ci --prefix archive/browser",
     "copy:export": "node scripts/export-copy.mjs",
     "copy:import": "node scripts/import-copy.mjs",
     "lodgify:sync": "node scripts/sync-lodgify-availability.mjs"

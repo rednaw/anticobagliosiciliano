@@ -138,7 +138,7 @@ assert(
   cspDirective(homepageCsp, 'img-src').includes('https://a.tile.openstreetmap.org'),
   'img-src allows OpenStreetMap tiles for Come arrivare'
 );
-assert(!/href="[^"]*\/archivio\/?["#]/.test(homepage), 'homepage does not link to /archivio/');
+assert(!/href="[^"]*\/archivio\/?["#]/.test(homepage), 'homepage does not link to archivio');
 assert(homepage.includes(`${SITE_BASE}/come-arrivare/`), 'homepage header can reach Come arrivare');
 assert(homepage.includes(`${SITE_BASE}/en/`), 'homepage language switcher reaches English');
 if (SITE_PUBLIC) {
@@ -194,11 +194,11 @@ assert(
   'privacy page links the OpenStreetMap Foundation privacy policy'
 );
 
-const archivio = read('archivio/index.html');
-assert(archivio.includes('noindex'), 'archivio is noindexed');
+const archivioHtml = path.join(build, 'archivio', 'index.html');
+assert(!existsSync(archivioHtml), 'archivio is not in the production build');
+assert(!existsSync(path.join(build, 'archivio')), 'archivio static assets are not in the production build');
 
 const robots = read('robots.txt');
-assert(robots.includes(`Disallow: ${SITE_BASE}/archivio/`), 'robots.txt disallows archivio');
 assert(robots.includes(`Sitemap: https://${SITE_HOSTNAME}${SITE_BASE}/sitemap.xml`), 'robots.txt points at the sitemap');
 
 assert(
