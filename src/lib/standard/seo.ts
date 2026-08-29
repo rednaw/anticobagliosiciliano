@@ -4,6 +4,7 @@ import {
   homeCopy,
   arriveCopy,
   imperdibiliMeta,
+  imperdibiliPhotoCreditsCopy,
   privacyCopy,
   site
 } from '$lib/data/content';
@@ -53,6 +54,16 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
       description: pick(imperdibiliMeta, locale),
       image,
       imageAlt
+    };
+  }
+
+  if (key === '/imperdibili/crediti-foto') {
+    return {
+      title: `${pick(ui.photoCredits, locale)} · ${site.name}`,
+      description: pick(imperdibiliPhotoCreditsCopy.metaDescription, locale),
+      image,
+      imageAlt,
+      robots: 'noindex, follow'
     };
   }
 

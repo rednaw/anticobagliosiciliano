@@ -43,6 +43,8 @@ export const ui = liveCopy('ui', {
   nextPhoto: { it: 'Foto successiva', en: 'Next photo' },
   thumbnails: { it: 'Anteprime', en: 'Thumbnails' },
   goToPhoto: { it: 'Vai alla foto', en: 'Go to photo' },
+  photoCredit: { it: 'Foto', en: 'Photo' },
+  photoCredits: { it: 'Crediti fotografici', en: 'Photo credits' },
   replayVideo: { it: 'Rivedi il video', en: 'Replay the video' },
   playVideo: { it: 'Riproduci il video', en: 'Play the video' },
   videoUnsupported: {

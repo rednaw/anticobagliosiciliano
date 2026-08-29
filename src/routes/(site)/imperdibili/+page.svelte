@@ -3,11 +3,13 @@
   import { page } from '$app/state';
   import { imperdibiliLead, places } from '$lib/data/content';
   import Reveal from '$lib/standard/Reveal.svelte';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { pick, siteHref, ui } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
   const placeList = $derived(places(locale));
   const pageTitle = $derived(pick(ui.navImperdibili, locale));
+  const photoCredits = $derived(siteHref(locale, 'imperdibili/crediti-foto'));
+  const hasPhotoCredits = $derived(placeList.some((place) => place.imageCredit));
 </script>
 
 <section class="hero">
@@ -22,13 +24,15 @@
     {#each placeList as place, i}
       <Reveal delay={(i % 3) * 50}>
         <article id={place.slug}>
-          <img
-            src={imageAsset(place.image)}
-            alt={place.name}
-            width="1600"
-            height="1100"
-            loading="lazy"
-          />
+          <figure class="media">
+            <img
+              src={imageAsset(place.image)}
+              alt={place.name}
+              width="1600"
+              height="1100"
+              loading="lazy"
+            />
+          </figure>
           <div class="body">
             <span class="time">{place.time}</span>
             <h2>{place.name}</h2>
@@ -39,6 +43,14 @@
     {/each}
   </div>
 </section>
+
+{#if hasPhotoCredits}
+  <section class="credits-link">
+    <div class="container">
+      <p><a href={photoCredits}>{pick(ui.photoCredits, locale)}</a></p>
+    </div>
+  </section>
+{/if}
 
 <style>
   .hero {
@@ -70,7 +82,11 @@
     scroll-margin-top: calc(var(--header-h) + 1.25rem);
   }
 
-  article img {
+  .media {
+    margin: 0;
+  }
+
+  .media img {
     width: 100%;
     aspect-ratio: 16 / 11;
     object-fit: cover;
@@ -102,6 +118,28 @@
     font-size: 1.02rem;
   }
 
+  .credits-link {
+    padding: 0 0 clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .credits-link p {
+    margin: 0;
+    text-align: center;
+    font-size: 0.78rem;
+  }
+
+  .credits-link a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
+    padding-bottom: 0.05rem;
+  }
+
+  .credits-link a:hover {
+    color: var(--sea);
+    border-bottom-color: var(--sea);
+  }
+
   @media (min-width: 800px) {
     .list {
       gap: 3.5rem;
@@ -113,7 +151,7 @@
       align-items: center;
     }
 
-    .list :global(.reveal:nth-child(even) img) {
+    .list :global(.reveal:nth-child(even) .media) {
       order: 2;
     }
   }

@@ -24,6 +24,12 @@ describe('pageSeo', () => {
     );
   });
 
+  it('noindexes the photo credits page', () => {
+    const seo = pageSeo('/anticobagliosiciliano/imperdibili/crediti-foto/', 'it');
+    expect(seo.robots).toBe('noindex, follow');
+    expect(seo.title).toMatch(/Crediti fotografici/i);
+  });
+
   it('does not noindex public pages', () => {
     expect(pageSeo('/anticobagliosiciliano/', 'it').robots).toBeUndefined();
     expect(pageSeo('/anticobagliosiciliano/en/come-arrivare/', 'en').robots).toBeUndefined();

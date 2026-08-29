@@ -31,6 +31,7 @@ export type CopySources = {
   testimonialsSource: unknown;
   imperdibiliMeta: unknown;
   imperdibiliLead: unknown;
+  imperdibiliPhotoCreditsCopy: unknown;
   placesSource: Array<{ slug: string }>;
   arriveCopy: unknown;
   baglioLocation: { links: unknown };
@@ -39,6 +40,7 @@ export type CopySources = {
 };
 
 function skipKey(key: string, value: unknown): boolean {
+  if (key === 'imageCredit') return true;
   if (typeof value === 'function' || typeof value === 'number') return true;
   if (typeof value === 'string' && SKIP_STRING.has(key)) return true;
   return key === 'gallery' && Array.isArray(value);
@@ -146,6 +148,7 @@ export function collectPagineRows(content: CopySources, overrides: CopyOverrides
   collect(rows, content.testimonialsSource, '/', 'testimonials', overrides);
   collect(rows, content.imperdibiliMeta, '/imperdibili/', 'imperdibili.meta', overrides);
   collect(rows, content.imperdibiliLead, '/imperdibili/', 'imperdibili.lead', overrides);
+  collect(rows, content.imperdibiliPhotoCreditsCopy, '/imperdibili/crediti-foto/', 'imperdibili.photoCredits', overrides);
 
   for (const place of content.placesSource) {
     collect(rows, place, `/imperdibili/#${place.slug}`, `places.${place.slug}`, overrides);

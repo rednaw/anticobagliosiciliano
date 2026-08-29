@@ -407,12 +407,20 @@ export function testimonials(locale: Locale = 'it') {
   return localize(testimonialsSource, locale);
 }
 
+type PlaceImageCredit = {
+  author: string;
+  sourceUrl: string;
+  licenseUrl: string;
+  license: string;
+};
+
 type PlaceSource = {
   slug: string;
   name: LocalizedString;
   time: string;
   text: LocalizedString;
   image: string;
+  imageCredit?: PlaceImageCredit;
 };
 
 /** Place texts: IT from Lodgify; EN rewritten from the old WordPress machine translation. */
@@ -425,7 +433,14 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'La Tonnara è un piccolo gioiello architettonico incastonato all’interno di un contesto paesaggistico di particolare bellezza. Ai piedi del borgo di Scopello, con i suoi splendidi faraglioni ed i ricchi fondali, assolutamente da non perdere un tuffo nelle sue acque. Nel suo territorio sorgeva la mitica città di Cetaria (terra dei tonni), citata nelle opere di Tolomeo e di Plinio per l’eccezionale abbondanza di tonni presenti nel suo mare. L’ultima stagione di pesca è stata nel 1984.',
       en: 'The Tonnara is a small architectural gem set in a landscape of exceptional beauty. It lies at the foot of the village of Scopello, where towering rocks rise straight out of the sea and the waters are so rich that a swim is hard to resist. This was the site of the mythical city of Cetaria — the land of tuna — mentioned in the works of Ptolemy and Pliny for the exceptional abundance of tuna in its sea. The last fishing season was in 1984.'
     },
-    image: '/images/places/scopello.jpg'
+    image: '/images/places/scopello.jpg',
+    imageCredit: {
+      author: 'Michal Osmenda',
+      sourceUrl:
+        'https://commons.wikimedia.org/wiki/File:La_Tonnara_di_Scopello,_Sicily,_Italy_(4894098021).jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
+      license: 'CC BY-SA 2.0'
+    }
   },
   {
     slug: 'segesta',
@@ -435,7 +450,13 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'Sito archeologico di rara bellezza. Si visita il tempio, posto su un poggio alle cui spalle si sviluppa un canyon, e il Teatro in cima al monte Barbaro da cui si gode un bellissimo panorama sul golfo.',
       en: 'An archaeological site of rare beauty. You can visit the temple, which stands on a hill with a canyon opening up behind it, and the theatre at the top of Mount Barbaro, where you can enjoy a beautiful view over the gulf.'
     },
-    image: '/images/places/segesta.jpg'
+    image: '/images/places/segesta.jpg',
+    imageCredit: {
+      author: 'Paul Stephenson',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Temple_of_Segesta,_Sicily.jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+      license: 'CC BY 2.0'
+    }
   },
   {
     slug: 'riserva-dello-zingaro',
@@ -445,7 +466,13 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'Zona di costa protetta. Calette di ciotoli con acqua cristallina. Divieto alle imbarcazioni e alla pesca. Nella stagione meno calda è affascinante percorre il sentiero che congiunge i due ingressi della riserva. Panorami mozzafiato e profumi della macchia mediterranea.',
       en: 'A protected stretch of coastline, with pebble coves and crystal clear water. Boats and fishing are not allowed. Outside the hottest months, the path linking the two entrances of the reserve makes a wonderful walk, with breathtaking views and the scents of the Mediterranean scrub.'
     },
-    image: '/images/places/zingaro.jpg'
+    image: '/images/places/zingaro.jpg',
+    imageCredit: {
+      author: 'Daniele Pugliesi',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Riserva_dello_Zingaro_18.jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+      license: 'CC BY-SA 4.0'
+    }
   },
   {
     slug: 'duomo-di-monreale',
@@ -455,7 +482,14 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'Visita immancabile. Uno dei gioielli più rari del patrimonio artistico italiano, sorprendente riuscita dell’incontro degli universi culturali islamico, bizantino, romanico: il Duomo normanno coi mosaici siculo-veneziani e il chiostro benedettino. Dal Belvedere vista sulla valle dell’Oreto e sulla Conca d’Oro.',
       en: 'A must-see. One of the rarest jewels of Italy’s artistic heritage and a remarkable meeting of the Islamic, Byzantine and Romanesque worlds: the Norman cathedral with its Sicilian-Venetian mosaics, and the Benedictine cloister. From the Belvedere there is a view over the Oreto valley and the Conca d’Oro.'
     },
-    image: '/images/places/monreale.jpg'
+    image: '/images/places/monreale.jpg',
+    imageCredit: {
+      author: 'Berthold Werner',
+      sourceUrl:
+        'https://commons.wikimedia.org/wiki/File:Monreale_Cathedral_BW_2025-04-29_16-01-19_hdr.jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+      license: 'CC BY-SA 4.0'
+    }
   },
   {
     slug: 'cappella-palatina',
@@ -465,7 +499,14 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'Capolavoro dell’Arte Normanna. La Cappella Palatina di Palermo è l’esempio più elevato, dal punto di vista storico-artistico, della convivenza tra culture, religioni e modi di pensare apparentemente inconciliabili. Nella sua costruzione furono coinvolte maestranze bizantine, latine e musulmane, queste ultime eseguirono il soffitto a muqarnas, pregevole ed unico esempio al mondo di decorazioni pittoriche islamiche con rappresentazioni di figure umane all’interno di un luogo di culto.',
       en: 'A masterpiece of Norman art. The Palatine Chapel in Palermo is the finest expression, historically and artistically, of coexistence between cultures, religions and ways of thinking that seemed irreconcilable. Byzantine, Latin and Muslim craftsmen all worked on it, and it was the last of these who created the muqarnas ceiling — a precious and, in the world, unique example of Islamic decorative painting depicting human figures inside a place of worship.'
     },
-    image: '/images/places/cappella-palatina.jpg'
+    image: '/images/places/cappella-palatina.jpg',
+    imageCredit: {
+      author: 'TeKappa',
+      sourceUrl:
+        'https://commons.wikimedia.org/wiki/File:Palermo_-_Cappella_Palatina_-_2025-09-24_14-49-26_001.jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+      license: 'CC BY-SA 4.0'
+    }
   },
   {
     slug: 'selinunte',
@@ -475,7 +516,13 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'Uno dei maggiori centri archeologici siciliani. L’area da visitare è molto vasta. Comprende vari templi, resti di mura, strade ed edifici monumentali testimoni della grande ricchezza raggiunta da Selinunte. L’acropoli domina la splendida spiaggia, dove nel 650 a.C., sbarcarono i coloni di Megara Hyblaea, città greca della Sicilia orientale, i quali fondarono l’avamposto ellenico più a occidente di tutta l’isola.',
       en: 'One of the major archaeological sites in Sicily, covering a very large area. It includes several temples along with the remains of walls, streets and monumental buildings that testify to the great wealth Selinunte once reached. The acropolis looks out over the beautiful beach where, in 650 BC, settlers from Megara Hyblaea — a Greek city in eastern Sicily — came ashore and founded the westernmost Greek outpost on the island.'
     },
-    image: '/images/places/selinunte.jpg'
+    image: '/images/places/selinunte.jpg',
+    imageCredit: {
+      author: 'Evan Erickson',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Selinunte-Temple_E_04.JPG',
+      licenseUrl: 'https://commons.wikimedia.org/wiki/Public_domain',
+      license: 'Public domain'
+    }
   },
   {
     slug: 'erice',
@@ -485,7 +532,30 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
       it: 'Suggestivo borgo fondato dagli Elimi, posto in cima al monte Sant’Angelo a circa 800 metri, da cui è possibile ammirare panorami sulle isole Egadi, sulle saline e sulla città di Trapani. L’affascinante atmosfera dei tortuosi vicoli lastricati, delle chiese e dei cortiletti fioriti è resa ancora più unica dall’irreale momentanea nebbia, creata da nuvole di passaggio, che spesso ammanta la città.',
       en: 'A charming village founded by the Elymians, perched on top of Mount Sant’Angelo at about 800 metres, from which you can admire views of the Egadi Islands, the salt marshes and the city of Trapani. The atmosphere of its steep cobbled streets, churches and flower-filled courtyards is made even more singular by the fleeting, unreal mist that passing clouds often draw over the town.'
     },
-    image: '/images/places/erice.jpg'
+    image: '/images/places/erice.jpg',
+    imageCredit: {
+      author: 'Krzysztof Popławski',
+      sourceUrl:
+        'https://commons.wikimedia.org/wiki/File:Streets_of_Erice,_Sicilia,_Italy_,_july_2023,_KP477.jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+      license: 'CC BY 4.0'
+    }
+  },
+  {
+    slug: 'ruderi-di-gibellina',
+    name: { it: 'Ruderi di Gibellina', en: 'The Ruins of Gibellina' },
+    time: '1 h',
+    text: {
+      it: 'Nella notte fra il 14 e il 15 gennaio 1968 il terremoto del Belice rase al suolo Gibellina, ricostruita poi una ventina di chilometri più a ovest. Sulle macerie del vecchio paese Alberto Burri ha steso un immenso sudario di cemento bianco: blocchi alti quanto un uomo, separati da fenditure che ricalcano le strade di un tempo. Si cammina dentro la pianta di un paese scomparso, fra le colline coltivate del Belice, in una delle più grandi opere di land art al mondo.',
+      en: 'On the night of 14 January 1968 the Belice earthquake razed Gibellina to the ground; the town was later rebuilt some twenty kilometres to the west. Over the rubble of the old town Alberto Burri laid an immense shroud of white concrete: blocks about the height of a person, separated by fissures that follow the streets as they once ran. You walk through the plan of a vanished town, among the cultivated hills of the Belice, inside one of the largest works of land art in the world.'
+    },
+    image: '/images/places/ruderi-di-gibellina.jpg',
+    imageCredit: {
+      author: 'Boobax',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Ruderi_di_Gibellina.jpg',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+      license: 'CC BY-SA 3.0'
+    }
   }
 ]);
 
@@ -599,6 +669,17 @@ export const imperdibiliLead = liveCopy('imperdibili.lead', {
   it: 'Grazie alla sua ottima posizione, si possono raggiungere facilmente alcuni dei più bei luoghi di mare e d’arte della Sicilia Occidentale.',
   en: 'From the baglio you can easily reach some of the most beautiful stretches of coast and the finest art in western Sicily.'
 } satisfies LocalizedString);
+
+export const imperdibiliPhotoCreditsCopy = liveCopy('imperdibili.photoCredits', {
+  metaDescription: {
+    it: 'Attribuzione delle fotografie usate nella pagina Imperdibili.',
+    en: 'Attribution for photographs used on the Nearby page.'
+  },
+  lead: {
+    it: 'Le immagini della pagina Imperdibili provengono da Wikimedia Commons o sono di dominio pubblico; sono state ritagliate per adattarle al layout del sito. Di seguito l’attribuzione per ciascuna fotografia.',
+    en: 'The images on the Nearby page come from Wikimedia Commons or are in the public domain; they were cropped to fit the site layout. Attribution for each photograph is listed below.'
+  }
+});
 
 export const baglioLocation = {
   lat: 38.0250627,
