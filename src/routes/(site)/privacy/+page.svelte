@@ -26,10 +26,7 @@
 
     <section class="block">
       <h2>{t('groupContact')}</h2>
-      <article class="item">
-        <h3>{t('contactTitle')}</h3>
-        <p>{t('contact')}</p>
-      </article>
+      <p>{t('contact')}</p>
     </section>
 
     <section class="block">

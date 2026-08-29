@@ -825,7 +825,6 @@ export const privacyCopy = liveCopy('privacy', {
     it: 'Il titolare del trattamento è Antico Baglio Siciliano. Puoi scriverci a',
     en: 'The data controller is Antico Baglio Siciliano. You can write to us at'
   },
-  contactTitle: { it: 'Richieste di disponibilità', en: 'Availability requests' },
   contact: {
     it: 'Il modulo contatti non invia i dati a un server: apre il tuo programma di posta con un messaggio già compilato (nome, email, alloggio, date, numero di ospiti e l’eventuale testo). Riceviamo solo ciò che ci invii tu. Usiamo questi dati per rispondere e organizzare il soggiorno, e non li cediamo a terzi per marketing.',
     en: 'The contact form does not post data to a server: it opens your email program with a message already filled in (name, email, accommodation, dates, number of guests, and any note). We only receive what you send us. We use it to reply and arrange the stay, and we do not pass it to third parties for marketing.'
