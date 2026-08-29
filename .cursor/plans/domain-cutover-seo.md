@@ -2,124 +2,162 @@
 name: Domain cutover SEO
 status: pending
 saved: 2026-08-28
-overview: When this site becomes anticobagliosiciliano.it, keep one public host and one URL per page. 301 old WordPress, Lodgify, wordpress.com, and github.io shapes onto the new paths. Do not rank two sites at once.
+overview: One public host. github.io stays noindex until .it serves this site. Then DNS to Pages, flip SITE_*, submit the .it sitemap. Old hosts each get one host-wide 301 to the apex.
 todos:
   - id: noindex-github
-    content: Keep github.io noindex (SITE_PUBLIC false) until the night .it serves this site
-    status: pending
+    content: SITE_PUBLIC false; github.io URL Inspection shows noindex
+    status: completed
+  - id: gsc-github
+    content: github.io URL-prefix property verified; do not submit its sitemap in GSC
+    status: completed
   - id: freeze-ia
-    content: Freeze public slugs and write the redirect table before cutover
+    content: Confirm the public slug list below is final
     status: pending
-  - id: search-console
-    content: Add a Search Console domain property for anticobagliosiciliano.it
-    status: pending
+  - id: decide-host
+    content: Canonical host is apex https://anticobagliosiciliano.it/; www 301s to it
+    status: completed
+  - id: wp-en
+    content: WordPress /en/ is replaced by this site’s /en/; no special redirect
+    status: completed
   - id: citations
-    content: List Google Business, Maps, social, and booking website URLs to update in the cutover week
+    content: Fill the citation table (Business, Maps, social, booking) before cutover week
     status: pending
-  - id: cutover-canonicals
-    content: Flip SITE_HOSTNAME to anticobagliosiciliano.it and SITE_BASE to '' so canonicals, hreflang, OG, and sitemap match the live host
+  - id: cutover-code
+    content: Same release as DNS/Pages custom domain — SITE_HOSTNAME anticobagliosiciliano.it, SITE_BASE '', SITE_PUBLIC true
     status: pending
   - id: redirects
-    content: Turn on 301s from old URL shapes (exact page or 410). Keep them for years
+    content: Host-wide 301 of .com, wordpress.com, www, and github.io to the apex
+    status: pending
+  - id: gsc-sitemap-it
+    content: Submit sitemap.xml on the .it property only after SITE_PUBLIC is true
     status: pending
 ---
 
-# SEO when this site becomes anticobagliosiciliano.it
+# SEO cutover runbook
 
-Not DNS or GitHub Pages setup. This is how search engines, maps listings, and old URLs should behave.
+This file is the checklist for making this rebuild the only public site at `anticobagliosiciliano.it`. It covers the frozen github.io state, public slugs, citations, DNS records at cutover, and the `SITE_*` flips.
 
-Treat the launch as **one public site, one URL per page**. Everything else 301s (or 410s) onto that. Canonicals, hreflang, and the sitemap must already emit the public `.it` URLs in the same release as the swap.
+Who can click: **one owner conversation**, once — `.cursor/plans/owner-access.md`. Remote (two countries): they grant access; **you** do every technical step. Occupancy API already works and is not that conversation. Do not put login asks here.
 
-## What is moving
+One public site. Do not rank github.io and `.it` at the same time. Code to flip is in `src/lib/site-config.ts`. Simple Analytics already uses `anticobagliosiciliano.it` — leave `SIMPLE_ANALYTICS_HOSTNAME` alone. Old hosts get one 301 each; see Redirects.
 
-| Today | Role | Typical old paths |
-|---|---|---|
-| `anticobagliosiciliano.it` | Live WordPress (the domain to keep) | `/`, `/en/`, `/casa-1/`…`/casa-4/`, `/informazioni/imperdibili/` |
-| `rednaw.github.io/anticobagliosiciliano/` | This rebuild | `/anticobagliosiciliano/…` |
-| `anticobagliosiciliano.com` | Lodgify | `/it/591433/imperdibili`, old “Mastro …” house URLs |
-| `anticobagliosiciliano.wordpress.com` | Oldest brochure (English-first) | `/room/casa-1/`, `/about/`, `/testimonials/` |
+## Now (frozen)
 
-New paths do **not** match WordPress (`/casa-1/` vs `/case/casa-1/`). Italian is the default; English is `/en/…` with `hreflang` `x-default` on Italian. `/archivio/` stays unlinked and `noindex`.
+This is the live state of the rebuild as of 28 Aug 2026. It exists so you do not accidentally undo `noindex`, submit the github.io sitemap, or point citations at github.io before `.it` is this site. Treat every row as a constraint until the cutover night.
 
-If you are not careful, Google sees **two** URL changes at once: host and path. Plan them as one cutover, not two public launches.
-
-## Principle
-
-Google follows **301 + matching canonical + sitemap**. Dumping every old URL on the homepage looks like a soft 404 and throws the equity away. Map each old URL to the **same house or topic**, or to a real 410 if that page should die (Casa 5 / agrumeto, empty `/informazioni/`, blog posts you are not bringing back).
-
-Keep those 301s for **years**, not weeks. Citations (Google Business, maps, Instagram, printed cards) should be updated in the same week as the swap, or they keep sending people and crawlers to ghosts.
-
-## Before the domain is yours
-
-Do not let two indexable sites compete. Right now the rebuild can be indexed on github.io (`SITE_PUBLIC` in `src/lib/site-config.ts`) while WordPress still owns `.it`. Pick one:
-
-- **Preferred:** keep github.io **noindex** (`SITE_PUBLIC = false`) until the night you flip `.it`. Canonicals can already *say* `.it` only if that host already serves this site; otherwise they would point at a WordPress page. Until cutover, canonicals stay on github.io **and** the pages stay `noindex`.
-- **If github.io is already indexed:** recoverable (the project URL can 301 onto the custom domain), but you then rely on a second hop from `/anticobagliosiciliano/come-arrivare/` to `/come-arrivare/`. Avoid adding more public links to github.io (Google Business, Instagram, email).
-
-Meanwhile:
-
-1. **Freeze the public IA.** No slug changes after the redirect map is written.
-2. **Write the redirect table** (below) and decide www vs apex once; the other host 301s to it.
-3. **Search Console:** a **domain** property for `anticobagliosiciliano.it` (covers www and the old WordPress URLs). Add the github.io URL-prefix property only so you can watch it empty out.
-4. **Inventory inbound links** you control: Google Business website field, the Google Maps listing used on Come arrivare, Apple/OSM if they exist, Lodgify “website”, social bios, Booking.com/Airbnb if they list a site URL.
-5. Simple Analytics is already named `anticobagliosiciliano.it` (`SIMPLE_ANALYTICS_HOSTNAME`). Leave it; the dashboard should not be renamed at cutover.
-
-## Cutover (one window)
-
-On `.it`, the new site is the only document Google should see. In the same release:
-
-1. Set `SITE_HOSTNAME` to `anticobagliosiciliano.it` and `SITE_BASE` to `''` so **canonical, hreflang, Open Graph, and sitemap** all emit `https://anticobagliosiciliano.it/come-arrivare/` (and `/en/…`). That is the switch Google actually trusts; redirects without matching canonicals lag.
-2. Submit the new sitemap in Search Console. Leave `/archivio/` out (already the case).
-3. Turn **301s** on for every old shape you still control. One hop to the final URL, HTTPS, trailing slash to match this site.
-
-### WordPress `.it` → new `.it`
-
-| From | To |
+| Item | Value |
 |---|---|
-| `/` | `/` |
-| `/en/` | `/en/` only if that URL was really English. Today’s `/en/` is still Italian “Nuova Homepage” — if it never was English, send it to `/` and let hreflang do the rest |
-| `/casa-1/` … `/casa-4/` | `/case/casa-1/` … `/case/casa-4/` |
-| `/informazioni/imperdibili/` | `/imperdibili/` |
-| `/informazioni/` | `/` only if you must; a **410** is cleaner (it is a WordPress stub) |
-| unknown leftovers | real 404/410, not a blanket homepage 301 |
+| Live rebuild | `https://rednaw.github.io/anticobagliosiciliano/` |
+| `SITE_HOSTNAME` | `rednaw.github.io` |
+| `SITE_BASE` | `/anticobagliosiciliano` |
+| `SITE_PUBLIC` | `false` → every page `noindex, nofollow` |
+| GSC github.io | URL-prefix `https://rednaw.github.io/anticobagliosiciliano/` — verified 28 Aug 2026 |
+| Sitemap file | Live at `/sitemap.xml`. **Do not** add it under GSC **Sitemaps** on github.io |
+| `robots.txt` | `Allow: /`, `Disallow` only `/archivio/`. Indexing is blocked by the meta tag, not by Disallow |
+| Canonicals | Still github.io (must match the host that serves the HTML) |
+| WordPress `.it` | Still the indexed public site |
 
-### github.io → `.it`
+Do not add github.io to Google Business, Instagram, email, or print.
 
-Strip the repo prefix, keep the rest of the path:
+## Do next (before you own the cutover window)
 
-`https://rednaw.github.io/anticobagliosiciliano/en/case/casa-1/` → `https://anticobagliosiciliano.it/en/case/casa-1/`
+Work you can finish while WordPress still owns `.it`. None of it puts the rebuild in the index. The public host is already decided (apex). What remains here is freeze URLs and list citations. Access (who can open the panels) is the other file, one conversation. Tick the YAML todos as you finish.
 
-### wordpress.com (English-first, if still controlled)
+### 1. Freeze public slugs
 
-| From | To |
+This is the public URL inventory. These paths must not change after cutover. Confirm the list is final; `/archivio/` is not in it and stays unlinked and `noindex` forever.
+
+Italian (also `hreflang` x-default): `/` `/imperdibili/` `/come-arrivare/` `/contatti/` `/privacy/` `/case/casa-1/` `/case/casa-2/` `/case/casa-3/` `/case/casa-4/`
+
+English: `/en/` plus the same suffixes.
+
+### 2. Public host (decided)
+
+Canonical host is the apex: `https://anticobagliosiciliano.it/`. `www.anticobagliosiciliano.it` only exists to 301 to apex (HTTPS, same path, trailing slash to match this site). Cutover `SITE_HOSTNAME` is `anticobagliosiciliano.it`. This matches Simple Analytics (`SIMPLE_ANALYTICS_HOSTNAME`) and the email domain.
+
+- [x] Apex `https://anticobagliosiciliano.it/`
+- [x] `https://www.anticobagliosiciliano.it/…` → 301 → `https://anticobagliosiciliano.it/…`
+
+### 3. Fill citations (update these URLs in the cutover week)
+
+This is the list of places that still send people and crawlers to a URL. Fill current values now so that, in the same week as the swap, you can point them at `https://anticobagliosiciliano.it/` instead of WordPress, Lodgify, or github.io. Google Maps is already a live inbound: change that field in the same week even if wordpress.com also 301s.
+
+| Place | Current URL | New URL | Done |
+|---|---|---|---|
+| Google Business / Maps (`https://maps.app.goo.gl/NA1BwasQVcFzn1qHA`) | `http://anticobagliosiciliano.wordpress.com/` | `https://anticobagliosiciliano.it/` | |
+| Instagram (`https://www.instagram.com/anticobagliosiciliano/`, Elena Delitala) | `https://www.airbnb.it/users/26312991/listings` | `https://anticobagliosiciliano.it/` | |
+| Facebook (`https://www.facebook.com/AnticoBaglioSiciliano/`) | `http://anticobagliosiciliano.wordpress.com/` | `https://anticobagliosiciliano.it/` | |
+| Lodgify website (`https://anticobagliosiciliano.com/`) | `https://anticobagliosiciliano.com/` | `https://anticobagliosiciliano.it/` | |
+| Booking.com (`https://www.booking.com/hotel/it/antico-baglio-siciliano.html`) | none — GDT forbids website/social links in listing content | — | |
+| Airbnb (host [Elena Delitala](https://www.airbnb.it/users/show/26312991), four houses) | none — off-platform links in listings/messages are prohibited | — | |
+| Printed cards / email footer | | | |
+
+## DNS (you edit as Technical Administrator)
+
+Registrar is Register.it. You already have the panel from the owner conversation. You type the records; they do not paste them.
+
+Cutover (same night as the `SITE_*` release):
+
+- Apex **A** and **AAAA** → GitHub Pages IPs
+- `www` **301** → `https://anticobagliosiciliano.it/` (HTTPS, same path, trailing slash to match this site)
+- Leave **MX** (and mailbox CNAMEs) untouched
+
+Search Console: you add the `.it` **domain** property in *your* GSC; you publish the TXT in this zone; you click Verify. The owners do not use Search Console.
+
+Same zone later (no new owner conversation):
+
+- GitHub Pages `_github-pages-challenge-…` TXT when the custom domain is attached
+- Another **A**/**AAAA** change if the host ever leaves Pages
+- **SPF** / **DKIM** / **DMARC** if `info@` changes provider
+- Other **TXT**/**CNAME** proofs (Bing, Meta, extra Google products, Apple Pay)
+- Extra **subdomains** (`staging.`, `book.`, …)
+- **DNS-01** TXT if TLS is ever terminated off Pages
+- **Auth-code** only if they later choose to transfer the domain
+
+Do **not** transfer `.it` to TransIP.
+
+## Cutover night (one release)
+
+This is the single window where `.it` starts serving this site and github.io stops being a competing document. **You** take WordPress offline on `.it` and turn on the host-wide 301s (Lodgify `.com`, wordpress.com). DNS records are the section above. The three `site-config.ts` flips and the `.it` sitemap submit belong in the same release. Do not flip canonicals to `.it` while github.io is still the document Google fetches.
+
+1. Pages → Custom domain = `anticobagliosiciliano.it` (apex).
+2. In `src/lib/site-config.ts`:
+   - `SITE_HOSTNAME` → `anticobagliosiciliano.it`
+   - `SITE_BASE` → `''`
+   - `SITE_PUBLIC` → `true`
+3. Deploy. Spot-check a live page: canonical, hreflang, and OG must be `https://anticobagliosiciliano.it/come-arrivare/` (no `/anticobagliosiciliano/` prefix).
+4. In *your* Search Console, on the `.it` **domain** property (verified after you publish the TXT) → **Sitemaps** → submit `sitemap.xml`.
+5. Host-wide 301s the same night: Lodgify `.com` and wordpress.com → `https://anticobagliosiciliano.it/`.
+
+## Redirects (decided: host-wide only)
+
+Every old host is one 301 to `https://anticobagliosiciliano.it/`. No per-path table. Apex `.it` is the destination: old WordPress paths there (`/casa-1/`, blog, hotel plugin, WPML) become **404**. Do not catch-all those onto `/`.
+
+| Host | Do |
 |---|---|
-| `/room/casa-1/` … `/casa-4/` | `/en/case/casa-1/` … |
-| `/informazioni/imperdibili/` | `/en/imperdibili/` |
-| `/about/`, `/testimonials/` | `/en/` |
-| `/room/casa-5/` | **410** or `/en/`, never Casa 4 |
+| `www.anticobagliosiciliano.it` | DNS 301 → apex (same path; this is the live site’s www) |
+| `anticobagliosiciliano.com` | One host-wide 301 → `https://anticobagliosiciliano.it/` |
+| `anticobagliosiciliano.wordpress.com` | One host-wide 301 → `https://anticobagliosiciliano.it/` |
+| `rednaw.github.io` (project URL) | Pages custom-domain enforcement |
 
-### `.com` Lodgify (if still controlled)
+## After (same week, then watch)
 
-- Map the four current houses by *identity*, not the old “Mastro …” names.
-- Imperdibili / contact-ish URLs → `/imperdibili/`, `/contatti/`.
-- Agrumeto / retired units → 410.
-- Do not 301 machine-translated Lodgify `/en/` menu junk onto `/en/` unless the destination is clearly the same page.
+This is the follow-through once `.it` is the live site. Citations must match the new canonical host in the same week, then Search Console tells you which old URLs were missed. Do not retitle or reslug while Google is transferring the house-page queries.
 
-New URLs with no ancestor (`/come-arrivare/`, `/privacy/`, `/contatti/`) only need the sitemap and internal links. Do not invent fake “equivalent” 301s from unrelated old pages.
+- [ ] Update every row in the citation table the same week as the swap.
+- [ ] GSC `.it`: 404s. Do not rewrite titles or slugs for the first weeks.
+- [ ] GSC github.io: confirm URLs stay `noindex` / empty out. After `.it` is live, do not keep indexing the project URL.
+- [ ] **Change of address** only if you also had a URL-prefix property for the old WordPress site, and only when this site is already live on `.it`. A domain property on your account is enough; the owners do not need Search Console.
+- Expect a noisy fortnight. Brand queries recover faster than house queries.
 
-## After
+## Do not
 
-- Watch Search Console for 404s and “Duplicate without user-selected canonical”. Fix missed maps; do not rewrite titles or slugs in the first weeks.
-- Update citations in that same week so Google Business and Maps agree with the canonical host.
-- If you used URL-prefix properties, use **Change of address** from the old `.it` WordPress property to the new one only when the new site is already live on that host. A domain property makes this less fussy.
-- Expect a noisy fortnight, then a slow transfer of house-page queries (`casa 1 balestrate`, etc.). Brand queries usually recover faster than long-tail if 301s are exact.
+These are the failure modes that create two indexable sites, hide `noindex` from Google, or throw old-page equity at the homepage. If a step below would do one of these, stop.
 
-## What not to do
-
-- Soft-launch on `.it` while WordPress is still answering the same paths.
-- Change canonicals to `.it` while github.io is still the thing that actually serves the HTML.
-- 301 every obsolete URL to the homepage.
-- Index `/archivio/` or the github.io copy after `.it` is live.
-- Treat wordpress.com language as the same as the new `/en/` prefix without checking the page language.
-
-The SEO-critical code change at cutover is small: `SITE_HOSTNAME` / `SITE_BASE` so every absolute URL in the head and sitemap is already the public `.it` URL. The SEO-critical *work* is the redirect table and not ranking two hosts at once.
+- Soft-launch on `.it` while WordPress still answers those paths.
+- `Disallow` the whole site in `robots.txt` instead of `noindex` (hides the tag from Google).
+- Submit the github.io sitemap in GSC.
+- Index `/archivio/`.
+- Treat wordpress.com copy as the new `/en/` without checking the page language.
+- Configure per-path 301s (houses, Lodgify ids, WPML, blog).
+- Catch-all old `.it` WordPress paths onto `/`.
