@@ -31,6 +31,7 @@ export type CopySources = {
   testimonialsSource: unknown;
   imperdibiliMeta: unknown;
   imperdibiliLead: unknown;
+  imperdibiliRouteCopy: unknown;
   imperdibiliPhotoCreditsCopy: unknown;
   placesSource: Array<{ slug: string }>;
   arriveCopy: unknown;
@@ -148,6 +149,7 @@ export function collectPagineRows(content: CopySources, overrides: CopyOverrides
   collect(rows, content.testimonialsSource, '/', 'testimonials', overrides);
   collect(rows, content.imperdibiliMeta, '/imperdibili/', 'imperdibili.meta', overrides);
   collect(rows, content.imperdibiliLead, '/imperdibili/', 'imperdibili.lead', overrides);
+  collect(rows, content.imperdibiliRouteCopy, '/imperdibili/', 'imperdibili.route', overrides);
   collect(rows, content.imperdibiliPhotoCreditsCopy, '/imperdibili/crediti-foto/', 'imperdibili.photoCredits', overrides);
 
   for (const place of content.placesSource) {

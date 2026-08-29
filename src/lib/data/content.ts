@@ -421,31 +421,32 @@ type PlaceSource = {
   text: LocalizedString;
   image: string;
   imageCredit?: PlaceImageCredit;
+  location?: { lat: number; lon: number };
+  directionsLabel?: LocalizedString;
+  website?: { href: LocalizedString; label: LocalizedString };
 };
 
 /** Place texts: IT from Lodgify; EN rewritten from the old WordPress machine translation. */
 export const placesSource: PlaceSource[] = liveCopy('places', [
   {
-    slug: 'tonnara-di-scopello',
-    name: { it: 'Tonnara di Scopello', en: 'Tonnara di Scopello' },
-    time: '20 min',
-    text: {
-      it: 'La Tonnara è un piccolo gioiello architettonico incastonato all’interno di un contesto paesaggistico di particolare bellezza. Ai piedi del borgo di Scopello, con i suoi splendidi faraglioni ed i ricchi fondali, assolutamente da non perdere un tuffo nelle sue acque. Nel suo territorio sorgeva la mitica città di Cetaria (terra dei tonni), citata nelle opere di Tolomeo e di Plinio per l’eccezionale abbondanza di tonni presenti nel suo mare. L’ultima stagione di pesca è stata nel 1984.',
-      en: 'The Tonnara is a small architectural gem set in a landscape of exceptional beauty. It lies at the foot of the village of Scopello, where towering rocks rise straight out of the sea and the waters are so rich that a swim is hard to resist. This was the site of the mythical city of Cetaria — the land of tuna — mentioned in the works of Ptolemy and Pliny for the exceptional abundance of tuna in its sea. The last fishing season was in 1984.'
-    },
-    image: '/images/places/scopello.jpg',
-    imageCredit: {
-      author: 'Michal Osmenda',
-      sourceUrl:
-        'https://commons.wikimedia.org/wiki/File:La_Tonnara_di_Scopello,_Sicily,_Italy_(4894098021).jpg',
-      licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
-      license: 'CC BY-SA 2.0'
-    }
-  },
-  {
     slug: 'segesta',
     name: { it: 'Segesta', en: 'Segesta' },
     time: '20 min',
+    location: { lat: 37.9478139, lon: 12.827791 },
+    directionsLabel: {
+      it: 'Parcheggio Segesta, Calatafimi Segesta',
+      en: 'Segesta car park, Calatafimi Segesta'
+    },
+    website: {
+      href: {
+        it: 'https://www.parcodisegesta.com/home',
+        en: 'https://www.parcodisegesta.com/home'
+      },
+      label: {
+        it: 'Sito ufficiale del Parco Archeologico di Segesta',
+        en: 'Official Segesta Archaeological Park website (Italian only)'
+      }
+    },
     text: {
       it: 'Sito archeologico di rara bellezza. Si visita il tempio, posto su un poggio alle cui spalle si sviluppa un canyon, e il Teatro in cima al monte Barbaro da cui si gode un bellissimo panorama sul golfo.',
       en: 'An archaeological site of rare beauty. You can visit the temple, which stands on a hill with a canyon opening up behind it, and the theatre at the top of Mount Barbaro, where you can enjoy a beautiful view over the gulf.'
@@ -462,6 +463,21 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
     slug: 'riserva-dello-zingaro',
     name: { it: 'Riserva dello Zingaro', en: 'Zingaro Nature Reserve' },
     time: '30 min',
+    location: { lat: 38.0818609, lon: 12.8080923 },
+    directionsLabel: {
+      it: 'Ingresso sud Riserva dello Zingaro, Scopello',
+      en: 'Zingaro Nature Reserve south entrance, Scopello'
+    },
+    website: {
+      href: {
+        it: 'https://www.riservazingaro.it/',
+        en: 'https://www.riservazingaro.it/en/'
+      },
+      label: {
+        it: 'Sito ufficiale della Riserva dello Zingaro',
+        en: 'Official Zingaro Nature Reserve website'
+      }
+    },
     text: {
       it: 'Zona di costa protetta. Calette di ciotoli con acqua cristallina. Divieto alle imbarcazioni e alla pesca. Nella stagione meno calda è affascinante percorre il sentiero che congiunge i due ingressi della riserva. Panorami mozzafiato e profumi della macchia mediterranea.',
       en: 'A protected stretch of coastline, with pebble coves and crystal clear water. Boats and fishing are not allowed. Outside the hottest months, the path linking the two entrances of the reserve makes a wonderful walk, with breathtaking views and the scents of the Mediterranean scrub.'
@@ -478,6 +494,21 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
     slug: 'duomo-di-monreale',
     name: { it: 'Duomo di Monreale', en: 'Cathedral of Monreale' },
     time: '40 min',
+    location: { lat: 38.0840913, lon: 13.2934427 },
+    directionsLabel: {
+      it: 'Parcheggio Duomo, Monreale',
+      en: 'Parking Duomo, Monreale'
+    },
+    website: {
+      href: {
+        it: 'https://www.duomomonreale.com/duomo-di-monreale/',
+        en: 'https://www.duomomonreale.com/en/duomo-di-monreale/'
+      },
+      label: {
+        it: 'Sito ufficiale del Duomo di Monreale',
+        en: 'Official Monreale Cathedral website (Italian only)'
+      }
+    },
     text: {
       it: 'Visita immancabile. Uno dei gioielli più rari del patrimonio artistico italiano, sorprendente riuscita dell’incontro degli universi culturali islamico, bizantino, romanico: il Duomo normanno coi mosaici siculo-veneziani e il chiostro benedettino. Dal Belvedere vista sulla valle dell’Oreto e sulla Conca d’Oro.',
       en: 'A must-see. One of the rarest jewels of Italy’s artistic heritage and a remarkable meeting of the Islamic, Byzantine and Romanesque worlds: the Norman cathedral with its Sicilian-Venetian mosaics, and the Benedictine cloister. From the Belvedere there is a view over the Oreto valley and the Conca d’Oro.'
@@ -493,8 +524,23 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
   },
   {
     slug: 'cappella-palatina',
-    name: { it: 'Cappella Palatina, Palermo', en: 'Palatine Chapel, Palermo' },
+    name: { it: 'Cappella Palatina', en: 'Palatine Chapel' },
     time: '40 min',
+    location: { lat: 38.1116821, lon: 13.3540374 },
+    directionsLabel: {
+      it: 'Palazzo Reale di Palermo',
+      en: 'Royal Palace of Palermo'
+    },
+    website: {
+      href: {
+        it: 'https://www.federicosecondo.org/',
+        en: 'https://www.federicosecondo.org/en/home-english/'
+      },
+      label: {
+        it: 'Sito ufficiale del Palazzo Reale',
+        en: 'Official Royal Palace website'
+      }
+    },
     text: {
       it: 'Capolavoro dell’Arte Normanna. La Cappella Palatina di Palermo è l’esempio più elevato, dal punto di vista storico-artistico, della convivenza tra culture, religioni e modi di pensare apparentemente inconciliabili. Nella sua costruzione furono coinvolte maestranze bizantine, latine e musulmane, queste ultime eseguirono il soffitto a muqarnas, pregevole ed unico esempio al mondo di decorazioni pittoriche islamiche con rappresentazioni di figure umane all’interno di un luogo di culto.',
       en: 'A masterpiece of Norman art. The Palatine Chapel in Palermo is the finest expression, historically and artistically, of coexistence between cultures, religions and ways of thinking that seemed irreconcilable. Byzantine, Latin and Muslim craftsmen all worked on it, and it was the last of these who created the muqarnas ceiling — a precious and, in the world, unique example of Islamic decorative painting depicting human figures inside a place of worship.'
@@ -512,6 +558,21 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
     slug: 'selinunte',
     name: { it: 'Selinunte', en: 'Selinunte' },
     time: '45 min',
+    location: { lat: 37.5856685, lon: 12.8376692 },
+    directionsLabel: {
+      it: 'Parcheggio ingresso est, Parco Archeologico di Selinunte, Marinella di Selinunte',
+      en: 'East entrance car park, Selinunte Archaeological Park, Marinella di Selinunte'
+    },
+    website: {
+      href: {
+        it: 'https://parchiarcheologici.regione.sicilia.it/selinunte-cave-cusa-pantelleria/',
+        en: 'https://parchiarcheologici.regione.sicilia.it/selinunte-cave-cusa-pantelleria/'
+      },
+      label: {
+        it: 'Sito ufficiale del Parco Archeologico di Selinunte',
+        en: 'Official Selinunte Archaeological Park website (Italian only)'
+      }
+    },
     text: {
       it: 'Uno dei maggiori centri archeologici siciliani. L’area da visitare è molto vasta. Comprende vari templi, resti di mura, strade ed edifici monumentali testimoni della grande ricchezza raggiunta da Selinunte. L’acropoli domina la splendida spiaggia, dove nel 650 a.C., sbarcarono i coloni di Megara Hyblaea, città greca della Sicilia orientale, i quali fondarono l’avamposto ellenico più a occidente di tutta l’isola.',
       en: 'One of the major archaeological sites in Sicily, covering a very large area. It includes several temples along with the remains of walls, streets and monumental buildings that testify to the great wealth Selinunte once reached. The acropolis looks out over the beautiful beach where, in 650 BC, settlers from Megara Hyblaea — a Greek city in eastern Sicily — came ashore and founded the westernmost Greek outpost on the island.'
@@ -525,9 +586,55 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
     }
   },
   {
+    slug: 'saline-di-trapani',
+    name: { it: 'Saline di Trapani e Paceco', en: 'Trapani and Paceco salt pans' },
+    time: '45 min',
+    location: { lat: 37.996514, lon: 12.535508 },
+    directionsLabel: {
+      it: 'Centro visite Mulino Maria Stella, Saline di Trapani e Paceco',
+      en: 'Mulino Maria Stella visitor centre, Trapani and Paceco salt pans'
+    },
+    website: {
+      href: {
+        it: 'https://wwfsalineditrapani.it/',
+        en: 'https://wwfsalineditrapani.it/?lang=en'
+      },
+      label: {
+        it: 'Sito ufficiale della Riserva Naturale Saline di Trapani e Paceco',
+        en: 'Official Trapani and Paceco salt pans nature reserve website'
+      }
+    },
+    text: {
+      it: 'Riserva naturale gestita dal WWF: vasche di sale ancora attive, mulini a vento, fenicotteri e migrazioni d’autunno. I sentieri esterni si percorrono liberamente; visite guidate su prenotazione.',
+      en: 'A WWF-managed nature reserve with still-working salt pans, windmills, flamingos and autumn migrations. Outdoor paths are free to walk; guided tours by booking.'
+    },
+    image: '/images/places/saline-di-trapani.jpg',
+    imageCredit: {
+      author: 'Renato Raimondo',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Saline_trapani_-_Mulino_a_vento.JPG',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+      license: 'CC BY-SA 3.0'
+    }
+  },
+  {
     slug: 'erice',
     name: { it: 'Erice', en: 'Erice' },
     time: '50 min',
+    location: { lat: 38.0385483, lon: 12.5835615 },
+    directionsLabel: {
+      it: 'Parcheggio Porta Trapani, Erice',
+      en: 'Porta Trapani car park, Erice'
+    },
+    website: {
+      href: {
+        it: 'https://www.fondazioneericearte.org/',
+        en: 'https://www.fondazioneericearte.org/'
+      },
+      label: {
+        it: 'Monumenti e Erice Card',
+        en: 'Monuments and Erice Card (Italian only)'
+      }
+    },
     text: {
       it: 'Suggestivo borgo fondato dagli Elimi, posto in cima al monte Sant’Angelo a circa 800 metri, da cui è possibile ammirare panorami sulle isole Egadi, sulle saline e sulla città di Trapani. L’affascinante atmosfera dei tortuosi vicoli lastricati, delle chiese e dei cortiletti fioriti è resa ancora più unica dall’irreale momentanea nebbia, creata da nuvole di passaggio, che spesso ammanta la città.',
       en: 'A charming village founded by the Elymians, perched on top of Mount Sant’Angelo at about 800 metres, from which you can admire views of the Egadi Islands, the salt marshes and the city of Trapani. The atmosphere of its steep cobbled streets, churches and flower-filled courtyards is made even more singular by the fleeting, unreal mist that passing clouds often draw over the town.'
@@ -545,6 +652,21 @@ export const placesSource: PlaceSource[] = liveCopy('places', [
     slug: 'ruderi-di-gibellina',
     name: { it: 'Ruderi di Gibellina', en: 'The Ruins of Gibellina' },
     time: '1 h',
+    location: { lat: 37.7869315, lon: 12.974021 },
+    directionsLabel: {
+      it: 'Parcheggio Cretto di Burri, Gibellina Vecchia',
+      en: 'Cretto di Burri car park, Gibellina Vecchia'
+    },
+    website: {
+      href: {
+        it: 'https://www.macgibellina.it/il-grande-cretto',
+        en: 'https://www.macgibellina.it/il-grande-cretto'
+      },
+      label: {
+        it: 'Il Grande Cretto — MAC Gibellina',
+        en: 'Grande Cretto di Burri (Italian only)'
+      }
+    },
     text: {
       it: 'Nella notte fra il 14 e il 15 gennaio 1968 il terremoto del Belice rase al suolo Gibellina, ricostruita poi una ventina di chilometri più a ovest. Sulle macerie del vecchio paese Alberto Burri ha steso un immenso sudario di cemento bianco: blocchi alti quanto un uomo, separati da fenditure che ricalcano le strade di un tempo. Si cammina dentro la pianta di un paese scomparso, fra le colline coltivate del Belice, in una delle più grandi opere di land art al mondo.',
       en: 'On the night of 14 January 1968 the Belice earthquake razed Gibellina to the ground; the town was later rebuilt some twenty kilometres to the west. Over the rubble of the old town Alberto Burri laid an immense shroud of white concrete: blocks about the height of a person, separated by fissures that follow the streets as they once ran. You walk through the plan of a vanished town, among the cultivated hills of the Belice, inside one of the largest works of land art in the world.'
@@ -565,8 +687,8 @@ export function places(locale: Locale = 'it') {
 
 export const homeCopy = liveCopy('home', {
   metaDescription: {
-    it: 'Quattro case vacanze in un antico baglio a Balestrate, Sicilia. Cortile, agrumeto e uliveto; a pochi minuti da Scopello, Segesta e lo Zingaro.',
-    en: 'Four holiday houses in a historic baglio in Balestrate, Sicily. Courtyard, citrus and olive groves; minutes from Scopello, Segesta and the Zingaro.'
+    it: 'Quattro case vacanze in un antico baglio a Balestrate, Sicilia. Cortile, agrumeto e uliveto; a pochi minuti da Segesta e lo Zingaro.',
+    en: 'Four holiday houses in a historic baglio in Balestrate, Sicily. Courtyard, citrus and olive groves; minutes from Segesta and the Zingaro.'
   },
   chiSiamo: {
     title: { it: 'Chi siamo', en: 'About us' },
@@ -631,8 +753,8 @@ export const homeCopy = liveCopy('home', {
       en: 'Balestrate and its surroundings: between sea, nature, and authentic villages'
     },
     lead: {
-      it: 'A pochi minuti dal baglio — da Scopello a Segesta, dallo Zingaro a Monreale.',
-      en: 'A few minutes from the baglio — from Scopello to Segesta, from the Zingaro to Monreale.'
+      it: 'A pochi minuti dal baglio — da Segesta allo Zingaro, da Monreale a Erice.',
+      en: 'A few minutes from the baglio — from Segesta to the Zingaro, from Monreale to Erice.'
     }
   },
   cta: {
@@ -661,14 +783,19 @@ export const homeCopy = liveCopy('home', {
 });
 
 export const imperdibiliMeta = liveCopy('imperdibili.meta', {
-  it: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte ed Erice — a pochi minuti dall’Antico Baglio Siciliano.',
-  en: 'Segesta, Scopello, Zingaro, Monreale, Palermo, Selinunte and Erice — a few minutes from Antico Baglio Siciliano.'
+  it: 'Segesta, Zingaro, Monreale, Palermo, Selinunte, le Saline di Trapani ed Erice — a pochi minuti dall’Antico Baglio Siciliano.',
+  en: 'Segesta, Zingaro, Monreale, Palermo, Selinunte, the Trapani salt pans and Erice — a few minutes from Antico Baglio Siciliano.'
 } satisfies LocalizedString);
 
 export const imperdibiliLead = liveCopy('imperdibili.lead', {
   it: 'Grazie alla sua ottima posizione, si possono raggiungere facilmente alcuni dei più bei luoghi di mare e d’arte della Sicilia Occidentale.',
   en: 'From the baglio you can easily reach some of the most beautiful stretches of coast and the finest art in western Sicily.'
 } satisfies LocalizedString);
+
+export const imperdibiliRouteCopy = liveCopy('imperdibili.route', {
+  routeTitle: { it: 'Come arrivare', en: 'How to get there' },
+  moreInfoTitle: { it: 'Ulteriori informazioni', en: 'More information' }
+});
 
 export const imperdibiliPhotoCreditsCopy = liveCopy('imperdibili.photoCredits', {
   metaDescription: {
@@ -684,6 +811,15 @@ export const imperdibiliPhotoCreditsCopy = liveCopy('imperdibili.photoCredits', 
 export const baglioLocation = {
   lat: 38.0250627,
   lon: 13.0150391,
+  /** Public-road point for driving directions (not the courtyard pin). */
+  directionsOrigin: {
+    lat: 38.026081,
+    lon: 13.017571
+  },
+  directionsOriginLabel: liveCopy('arrive.directionsOrigin', {
+    it: 'Antico Baglio Siciliano, Balestrate PA, Italia',
+    en: 'Antico Baglio Siciliano, Balestrate PA, Italy'
+  }),
   map: '/images/ambiance/mappa.jpg',
   mapSm: '/images/ambiance/mappa-sm.jpg',
   links: liveCopy('arrive.maps', [
@@ -691,11 +827,6 @@ export const baglioLocation = {
       id: 'google',
       href: 'https://maps.app.goo.gl/NA1BwasQVcFzn1qHA',
       label: { it: 'Apri in Google Maps', en: 'Open in Google Maps' }
-    },
-    {
-      id: 'apple',
-      href: 'https://maps.apple.com/?ll=38.0250627,13.0150391&q=Antico%20Baglio%20Siciliano',
-      label: { it: 'Apri in Apple Maps', en: 'Open in Apple Maps' }
     },
     {
       id: 'osm',

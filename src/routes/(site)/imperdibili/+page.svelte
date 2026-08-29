@@ -1,7 +1,8 @@
 <script lang="ts">
   import { imageAsset } from '$lib/public-image';
   import { page } from '$app/state';
-  import { imperdibiliLead, places } from '$lib/data/content';
+  import { baglioLocation, imperdibiliLead, imperdibiliRouteCopy, places } from '$lib/data/content';
+  import { placeDirectionApps } from '$lib/standard/place-directions';
   import Reveal from '$lib/standard/Reveal.svelte';
   import { pick, siteHref, ui } from '$lib/standard/i18n';
 
@@ -10,6 +11,24 @@
   const pageTitle = $derived(pick(ui.navImperdibili, locale));
   const photoCredits = $derived(siteHref(locale, 'imperdibili/crediti-foto'));
   const hasPhotoCredits = $derived(placeList.some((place) => place.imageCredit));
+  const routeTitle = $derived(pick(imperdibiliRouteCopy.routeTitle, locale));
+  const moreInfoTitle = $derived(pick(imperdibiliRouteCopy.moreInfoTitle, locale));
+  const mapLabels = $derived(
+    Object.fromEntries(baglioLocation.links.map((link) => [link.id, pick(link.label, locale)]))
+  );
+  const directionsFrom = $derived({
+    lat: baglioLocation.directionsOrigin.lat,
+    lon: baglioLocation.directionsOrigin.lon,
+    label: pick(baglioLocation.directionsOriginLabel, locale)
+  });
+
+  function directionsTo(place: (typeof placeList)[number]) {
+    return {
+      lat: place.location!.lat,
+      lon: place.location!.lon,
+      label: place.directionsLabel
+    };
+  }
 </script>
 
 <section class="hero">
@@ -37,6 +56,40 @@
             <span class="time">{place.time}</span>
             <h2>{place.name}</h2>
             <p>{place.text}</p>
+            {#if place.location || place.website}
+              <div class="route">
+                <div class="route-cols">
+                  {#if place.location}
+                    <div class="route-col">
+                      <h3>{routeTitle}</h3>
+                      <ul class="links">
+                        {#each placeDirectionApps as app}
+                          <li>
+                            <a
+                              href={app.href(directionsFrom, directionsTo(place))}
+                              rel="noopener noreferrer"
+                              target="_blank">{mapLabels[app.id]}</a
+                            >
+                          </li>
+                        {/each}
+                      </ul>
+                    </div>
+                  {/if}
+                  {#if place.website}
+                    <div class="route-col">
+                      <h3>{moreInfoTitle}</h3>
+                      <ul class="links">
+                        <li>
+                          <a href={place.website.href} rel="noopener noreferrer" target="_blank"
+                            >{place.website.label}</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  {/if}
+                </div>
+              </div>
+            {/if}
           </div>
         </article>
       </Reveal>
@@ -116,6 +169,52 @@
     color: var(--ink-soft);
     line-height: 1.65;
     font-size: 1.02rem;
+  }
+
+  .route {
+    margin-top: 1.5rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .route h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--olive);
+  }
+
+  .route-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 2rem;
+  }
+
+  .route-cols:has(> :only-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .links a {
+    color: var(--sea);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--sea) 25%, transparent);
+    padding-bottom: 0.05rem;
+    font-size: 0.92rem;
+  }
+
+  .links a:hover {
+    border-bottom-color: var(--sea);
   }
 
   .credits-link {
