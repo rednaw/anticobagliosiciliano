@@ -17,6 +17,7 @@
     google: pick(imperdibiliRouteCopy.googleLabel, locale),
     osm: pick(imperdibiliRouteCopy.osmLabel, locale)
   });
+  const directionApps = $derived(placeDirectionApps(locale));
   const directionsFrom = $derived({
     lat: baglioLocation.directionsOrigin.lat,
     lon: baglioLocation.directionsOrigin.lon,
@@ -64,7 +65,7 @@
                     <div class="route-col">
                       <h3>{routeTitle}</h3>
                       <ul class="links">
-                        {#each placeDirectionApps as app}
+                        {#each directionApps as app}
                           <li>
                             <a
                               href={app.href(directionsFrom, directionsTo(place))}

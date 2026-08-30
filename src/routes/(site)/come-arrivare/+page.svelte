@@ -2,11 +2,16 @@
   import { page } from '$app/state';
   import { arriveCopy, baglioLocation } from '$lib/data/content';
   import ArriveMap from '$lib/standard/ArriveMap.svelte';
+  import { googleMapsLinkWithLocale } from '$lib/standard/place-directions';
   import { pick, ui } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
   const heading = $derived(pick(ui.navArrive, locale));
   const t = $derived((key: keyof typeof arriveCopy) => pick(arriveCopy[key], locale));
+
+  function mapLinkHref(link: (typeof baglioLocation.links)[number]) {
+    return link.id === 'google' ? googleMapsLinkWithLocale(link.href, locale) : link.href;
+  }
 </script>
 
 <section class="arrive">
@@ -29,7 +34,9 @@
     <ul class="apps">
       {#each baglioLocation.links as link}
         <li>
-          <a href={link.href} rel="noopener noreferrer" target="_blank">{pick(link.label, locale)}</a>
+          <a href={mapLinkHref(link)} rel="noopener noreferrer" target="_blank"
+            >{pick(link.label, locale)}</a
+          >
         </li>
       {/each}
     </ul>
