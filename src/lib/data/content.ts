@@ -794,7 +794,9 @@ export const imperdibiliLead = liveCopy('imperdibili.lead', {
 
 export const imperdibiliRouteCopy = liveCopy('imperdibili.route', {
   routeTitle: { it: 'Come arrivare', en: 'How to get there' },
-  moreInfoTitle: { it: 'Ulteriori informazioni', en: 'More information' }
+  moreInfoTitle: { it: 'Ulteriori informazioni', en: 'More information' },
+  googleLabel: { it: 'Indicazioni su Google Maps', en: 'Directions on Google Maps' },
+  osmLabel: { it: 'Indicazioni su OpenStreetMap', en: 'Directions on OpenStreetMap' }
 });
 
 export const imperdibiliPhotoCreditsCopy = liveCopy('imperdibili.photoCredits', {

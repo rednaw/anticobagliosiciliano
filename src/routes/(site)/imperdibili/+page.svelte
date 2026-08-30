@@ -13,9 +13,10 @@
   const hasPhotoCredits = $derived(placeList.some((place) => place.imageCredit));
   const routeTitle = $derived(pick(imperdibiliRouteCopy.routeTitle, locale));
   const moreInfoTitle = $derived(pick(imperdibiliRouteCopy.moreInfoTitle, locale));
-  const mapLabels = $derived(
-    Object.fromEntries(baglioLocation.links.map((link) => [link.id, pick(link.label, locale)]))
-  );
+  const mapLabels = $derived({
+    google: pick(imperdibiliRouteCopy.googleLabel, locale),
+    osm: pick(imperdibiliRouteCopy.osmLabel, locale)
+  });
   const directionsFrom = $derived({
     lat: baglioLocation.directionsOrigin.lat,
     lon: baglioLocation.directionsOrigin.lon,
