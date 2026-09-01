@@ -10,87 +10,159 @@
     homeCopy,
     houses,
     places,
-    site,
-    testimonials
+    site
   } from '$lib/data/content';
   import { localize, pick, siteHref, ui } from '$lib/standard/i18n';
+  import { PORTRAIT_ASPECT_QUERY, REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
 
+  /** Portone hero, then aerial video; desktop adds a scroll-driven Chi siamo card. */
   const locale = $derived(page.data.locale);
   const houseList = $derived(houses(locale));
   const placeList = $derived(places(locale));
   const amenityList = $derived(amenities(locale));
   const awardList = $derived(awards(locale));
-  const quoteList = $derived(testimonials(locale));
   const contatti = $derived(siteHref(locale, 'contatti'));
   const imperdibili = $derived(siteHref(locale, 'imperdibili'));
   const home = $derived(localize(homeCopy, locale));
+
+  let videoPlaying = $state(false);
+  let videoEnded = $state(false);
+  let videoStageReady = $state(false);
+  let reduceMotion = $state(false);
+  let portraitMobile = $state(false);
+  let cinemaStageEl = $state<HTMLElement | null>(null);
+
+  const cinemaActive = $derived(!reduceMotion);
+  const cinemaScroll = $derived(cinemaActive && !portraitMobile);
+  const cinemaPinned = $derived(cinemaScroll && (videoPlaying || videoEnded));
+  const showAboutSection = $derived(reduceMotion || portraitMobile);
+
+  $effect(() => subscribeMediaQuery(REDUCE_MOTION_QUERY, (matches) => {
+    reduceMotion = matches;
+  }));
+
+  $effect(() => subscribeMediaQuery(PORTRAIT_ASPECT_QUERY, (matches) => {
+    portraitMobile = matches;
+  }));
+
+  $effect(() => {
+    const el = cinemaStageEl;
+    if (!el || !cinemaActive) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) videoStageReady = true;
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  });
 </script>
 
-<section class="hero">
-  <img
-    class="hero-backdrop"
-    src={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
-    alt=""
-    aria-hidden="true"
-    width="1248"
-    height="1229"
-    fetchpriority="high"
-  />
-  <picture>
-    <source media="(min-aspect-ratio: 7 / 10)" srcset={imageAsset('/images/ambiance/hero-portone-wide.jpg')} />
-    <img
-      class="hero-media"
-      src={imageAsset('/images/ambiance/hero-portone-tall.jpg')}
-      srcset="{imageAsset('/images/ambiance/hero-portone-tall-sm.jpg')} 763w, {imageAsset(
-        '/images/ambiance/hero-portone-tall.jpg'
-      )} 1248w"
-      sizes="100vw"
-      width="1248"
-      height="1690"
-      alt={home.alt.hero}
-    />
-  </picture>
-  <div class="hero-veil"></div>
-  <div class="hero-copy">
-    <h1>{site.name}</h1>
-    <p class="hero-lead">{pick(site.description, locale)}</p>
-    <div class="hero-actions">
-      <a class="btn btn-light" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
-      <a class="btn btn-ghost" href="#houses">{pick(ui.discoverHouses, locale)}</a>
+{#snippet chiSiamo()}
+  <h2>{home.chiSiamo.title}</h2>
+  <p>{home.chiSiamo.body}</p>
+{/snippet}
+
+<section class="cinema">
+  <div class="gate-chapter">
+    <div class="gate">
+      <img
+        class="gate-backdrop"
+        src={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
+        alt=""
+        aria-hidden="true"
+        width="1248"
+        height="1229"
+        fetchpriority="high"
+      />
+      <picture>
+        <source
+          media="(min-aspect-ratio: 7 / 10)"
+          srcset={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
+        />
+        <img
+          class="gate-media"
+          src={imageAsset('/images/ambiance/hero-portone-tall.jpg')}
+          srcset="{imageAsset('/images/ambiance/hero-portone-tall-sm.jpg')} 763w, {imageAsset(
+            '/images/ambiance/hero-portone-tall.jpg'
+          )} 1248w"
+          sizes="100vw"
+          width="1248"
+          height="1690"
+          alt={home.alt.hero}
+        />
+      </picture>
+    </div>
+    <div class="gate-veil"></div>
+    <div class="hero-copy">
+      <h1>{site.name}</h1>
+      <p class="hero-lead">{pick(site.description, locale)}</p>
     </div>
   </div>
-</section>
 
-<section class="section about band-dark">
-  <div class="container about-grid">
-    <Reveal>
-      <div>
-        <h2>{home.chiSiamo.title}</h2>
-        <p>{home.chiSiamo.body}</p>
+  {#if cinemaActive}
+    <div
+      class="cinema-stage"
+      class:cinema-stage--live={cinemaPinned}
+      class:cinema-stage--portrait={portraitMobile}
+      bind:this={cinemaStageEl}
+    >
+      <div class="cinema-pin">
+        <AmbientVideo
+          fill
+          playOnce
+          ready={videoStageReady}
+          bind:playing={videoPlaying}
+          bind:ended={videoEnded}
+          src="/videos/baglio-720.mp4"
+          poster="/videos/baglio-poster.jpg"
+          posterSrcset="{imageAsset('/videos/baglio-poster-sm.jpg')} 744w, {imageAsset(
+            '/videos/baglio-poster.jpg'
+          )} 1004w"
+          posterSizes="100vw"
+          label={home.alt.video}
+        />
       </div>
-    </Reveal>
-    <Reveal delay={120}>
-      <AmbientVideo
-        src="/videos/baglio-720.mp4"
-        poster="/videos/baglio-poster.jpg"
-        posterSrcset="{imageAsset('/videos/baglio-poster-sm.jpg')} 744w, {imageAsset(
-          '/videos/baglio-poster.jpg'
-        )} 1004w"
-        posterSizes="(min-width: 960px) 58vw, calc(100vw - 2.5rem)"
-        label={home.alt.video}
-      />
-    </Reveal>
-  </div>
+
+      {#if cinemaPinned}
+        <div class="cinema-script">
+          <div class="cinema-step cinema-step--breathe" aria-hidden="true"></div>
+
+          <div class="cinema-step cinema-step--about">
+            <div class="cinema-card">
+              {@render chiSiamo()}
+            </div>
+          </div>
+        </div>
+      {/if}
+    </div>
+  {/if}
 </section>
 
-<section id="houses" class="section">
+{#if showAboutSection}
+  <section class="section about band-dark">
+    <div class="container about-inner">
+      <Reveal>
+        <div>
+          {@render chiSiamo()}
+        </div>
+      </Reveal>
+    </div>
+  </section>
+{/if}
+
+<section id="houses" class="section houses-section">
   <div class="container">
     <Reveal>
-      <SectionHead
-        eyebrow={pick(ui.ourHouses, locale)}
-        title={home.houses.title}
-        lead={home.houses.lead}
-      />
+      <div id="houses-intro">
+        <SectionHead
+          eyebrow={pick(ui.ourHouses, locale)}
+          title={home.houses.title}
+          lead={home.houses.lead}
+        />
+      </div>
     </Reveal>
 
     <div class="house-list">
@@ -187,54 +259,6 @@
 <section class="section">
   <div class="container">
     <Reveal>
-      <SectionHead eyebrow={pick(ui.awards, locale)} title={home.awards.title} />
-    </Reveal>
-    <div class="award-grid">
-      {#each awardList as award, i}
-        <Reveal delay={i * 70}>
-          <figure>
-            <img
-              src={imageAsset(award.image)}
-              alt={award.title}
-              width="1600"
-              height="1000"
-              loading="lazy"
-            />
-            <figcaption>
-              <strong>{award.title}</strong>
-              <span>{award.text}</span>
-            </figcaption>
-          </figure>
-        </Reveal>
-      {/each}
-    </div>
-  </div>
-</section>
-
-<section class="section band-dark">
-  <div class="container">
-    <Reveal>
-      <SectionHead eyebrow={home.quotes.eyebrow} title={home.quotes.title} />
-    </Reveal>
-    <div class="quote-grid">
-      {#each quoteList as t, i}
-        <Reveal delay={i * 90}>
-          <blockquote>
-            <p>“{t.quote}”</p>
-            <footer>
-              <strong>{t.name}</strong>
-              <span>{t.source}</span>
-            </footer>
-          </blockquote>
-        </Reveal>
-      {/each}
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <Reveal>
       <SectionHead
         eyebrow={pick(ui.navImperdibili, locale)}
         title={home.places.title}
@@ -263,6 +287,33 @@
   </div>
 </section>
 
+<section class="section band-dark">
+  <div class="container">
+    <Reveal>
+      <SectionHead eyebrow={pick(ui.awards, locale)} title={home.awards.title} />
+    </Reveal>
+    <div class="award-grid">
+      {#each awardList as award, i}
+        <Reveal delay={i * 70}>
+          <figure>
+            <img
+              src={imageAsset(award.image)}
+              alt={award.title}
+              width="1600"
+              height="1000"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>{award.title}</strong>
+              <span>{award.text}</span>
+            </figcaption>
+          </figure>
+        </Reveal>
+      {/each}
+    </div>
+  </div>
+</section>
+
 <section class="cta">
   <div class="container cta-inner">
     <Reveal>
@@ -274,19 +325,30 @@
 </section>
 
 <style>
-  .hero {
+  .cinema {
     position: relative;
-    min-height: min(92vh, 54rem);
-    display: grid;
-    align-items: end;
-    overflow: hidden;
+    margin-top: calc(-1 * var(--header-h));
     color: #fff;
     background: var(--sea-deep);
   }
 
-  /* Fills the frame at any aspect ratio; the sharp image sits on top of it.
-     Stays scaled up so the blurred edges never reach the hero border. */
-  .hero-backdrop {
+  .gate-chapter {
+    position: relative;
+    min-height: 100svh;
+    padding-top: var(--header-h);
+    overflow: hidden;
+    display: grid;
+    align-items: end;
+    background: var(--sea-deep);
+  }
+
+  .gate {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .gate-backdrop {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -294,10 +356,10 @@
     object-fit: cover;
     object-position: center;
     filter: blur(2.5rem) brightness(0.82) saturate(1.1);
-    animation: backdrop-zoom 8s var(--ease) both;
+    animation: gate-backdrop-zoom 8s var(--ease) both;
   }
 
-  @keyframes backdrop-zoom {
+  @keyframes gate-backdrop-zoom {
     from {
       transform: scale(1.24);
     }
@@ -306,8 +368,7 @@
     }
   }
 
-  /* `contain` keeps the whole portone — sky above, road below — visible on wide screens. */
-  .hero-media {
+  .gate-media {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -317,16 +378,17 @@
     animation: soft-fade 1.2s var(--ease) both;
   }
 
-  /* Taller than the photo: fill the frame, the portone stays centred. */
   @media (max-aspect-ratio: 7 / 10) {
-    .hero-media {
+    .gate-media {
       object-fit: cover;
     }
   }
 
-  .hero-veil {
+  .gate-veil {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    pointer-events: none;
     background:
       linear-gradient(180deg, color-mix(in srgb, var(--sea-deep) 42%, transparent) 0%, transparent 38%),
       linear-gradient(
@@ -337,17 +399,161 @@
       );
   }
 
+  .gate-chapter .hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cinema-stage {
+    position: relative;
+    background: var(--sea-deep);
+  }
+
+  .cinema-pin {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .cinema-stage--live .cinema-pin {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+  }
+
+  .cinema-script {
+    position: relative;
+    margin-top: -100svh;
+    z-index: 2;
+    pointer-events: auto;
+  }
+
+  .cinema-step {
+    min-height: 100svh;
+    padding: var(--header-h) 0 clamp(3rem, 8vh, 5rem);
+    display: grid;
+    align-items: center;
+    justify-items: start;
+  }
+
+  .cinema-step--breathe {
+    min-height: 18svh;
+  }
+
+  .cinema-step--about {
+    --cinema-card-h: clamp(18rem, 48vh, 32rem);
+    display: block;
+    min-height: auto;
+    padding: 0;
+  }
+
+  /* Scroll room before and after the card: bottom entry, top hold. */
+  .cinema-step--about::before,
+  .cinema-step--about::after {
+    content: '';
+    display: block;
+    height: calc(100svh - var(--cinema-card-h));
+  }
+
+  .cinema-step--about .cinema-card {
+    position: sticky;
+    top: clamp(2rem, 8vh, 3.5rem);
+    width: min(15rem, calc(24vw - 0.75rem));
+    max-width: calc(100% - 2.5rem);
+    margin: 0 auto 0 clamp(1rem, 2.5vw, 1.75rem);
+    padding: clamp(1.5rem, 4vh, 2.35rem) clamp(1rem, 2.2vw, 1.25rem);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--sea-deep) 68%, transparent);
+    -webkit-backdrop-filter: blur(14px) brightness(0.88);
+    backdrop-filter: blur(14px) brightness(0.88);
+    box-shadow: 0 1rem 3rem color-mix(in srgb, var(--sea-deep) 35%, transparent);
+  }
+
+  /* Portrait: short aerial chapter, then Chi siamo below (no traveling card). */
+  @media (max-aspect-ratio: 7 / 10) {
+    .cinema-stage--portrait .cinema-pin {
+      height: 65svh;
+    }
+
+    .cinema-stage--portrait.cinema-stage--live .cinema-pin {
+      position: sticky;
+      top: 0;
+    }
+
+    .cinema-stage--portrait :global(.ambient.fill video),
+    .cinema-stage--portrait :global(.ambient.fill .poster) {
+      object-fit: cover;
+      object-position: 50% 28%;
+    }
+  }
+
+  .cinema-step--about .cinema-card h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.55rem, 2.8vw, 2rem);
+    line-height: 1.15;
+    max-width: 14ch;
+  }
+
+  .cinema-step--about .cinema-card p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: color-mix(in srgb, #fff 82%, transparent);
+    max-width: none;
+  }
+
+  @supports (animation-range: exit 0% exit 100%) {
+    @media (prefers-reduced-motion: no-preference) {
+      .cinema-script .cinema-step--about .cinema-card {
+        animation: cinema-card-exit auto ease-in-out both;
+        animation-timeline: view();
+        animation-range: exit 0% exit 85%;
+      }
+    }
+  }
+
+  @keyframes cinema-card-exit {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-1.75rem);
+    }
+  }
+
+  .cinema-script .cinema-step--about {
+    pointer-events: auto;
+  }
+
+  .houses-section {
+    position: relative;
+    z-index: 3;
+    background: var(--paper);
+    box-shadow: 0 -1.5rem 2.5rem color-mix(in srgb, var(--sea-deep) 12%, transparent);
+  }
+
+  #houses-intro {
+    scroll-margin-top: var(--header-h);
+  }
+
   .hero-copy {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     width: min(1120px, calc(100% - 2.5rem));
     margin: 0 auto;
     padding: clamp(5rem, 12vh, 8rem) 0 clamp(3rem, 7vh, 4.5rem);
     animation: fade-up 1s var(--ease) both;
     text-shadow: 0 2px 24px color-mix(in srgb, var(--sea-deep) 45%, transparent);
+    pointer-events: auto;
+    background: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 0;
   }
 
-  .hero h1 {
+  .hero-copy h1 {
     margin: 0 0 0.85rem;
     font-size: clamp(2.8rem, 8vw, 5.4rem);
     max-width: 12ch;
@@ -361,16 +567,8 @@
     opacity: 0.95;
   }
 
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .about-grid {
-    display: grid;
-    gap: 2rem;
-    align-items: center;
+  .about-inner {
+    max-width: 40rem;
   }
 
   .about h2 {
@@ -564,16 +762,11 @@
     color: color-mix(in srgb, #fff 68%, transparent);
   }
 
-  .band-dark blockquote {
-    background: color-mix(in srgb, #fff 8%, transparent);
-    border-left-color: var(--sun);
-  }
-
-  .band-dark blockquote strong {
+  .band-dark .award-grid strong {
     color: #fff;
   }
 
-  .band-dark blockquote footer {
+  .band-dark .award-grid span {
     color: color-mix(in srgb, #fff 68%, transparent);
   }
 
@@ -610,37 +803,6 @@
 
   .award-grid span {
     color: var(--ink-soft);
-  }
-
-  .quote-grid {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  blockquote {
-    margin: 0;
-    padding: 1.75rem;
-    background: #fff;
-    border-left: 3px solid var(--olive);
-  }
-
-  blockquote p {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    line-height: 1.45;
-    margin-bottom: 1.25rem;
-  }
-
-  blockquote footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-
-  blockquote strong {
-    color: var(--ink);
   }
 
   .place-grid {
@@ -731,21 +893,12 @@
       grid-template-columns: repeat(3, 1fr);
     }
 
-    .quote-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
     .place-grid {
       grid-template-columns: 1fr 1fr;
     }
   }
 
   @media (min-width: 960px) {
-    .about-grid {
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 3.5rem;
-    }
-
     .feature {
       grid-template-columns: 1.1fr 0.9fr;
       min-height: 32rem;

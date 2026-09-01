@@ -34,7 +34,6 @@ describe('copy:export / copy:import', () => {
     expect(new Set(ids).size).toBe(ids.length);
     expect(ids).toContain('houses.casa-1.tagline');
     expect(ids).toContain('ui.navHouses');
-    expect(ids).toContain('testimonials.0.name');
     expect(csv.rows.some((row) => row.pagina === '/case/casa-1/')).toBe(true);
     expect(csv.rows.some((row) => row.italiano.includes('Spaziosa, luminosa'))).toBe(true);
     expect(csv.rows.some((row) => row.italiano.includes('/images/'))).toBe(false);

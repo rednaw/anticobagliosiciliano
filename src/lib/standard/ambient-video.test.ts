@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { showAmbientControl } from './ambient-video';
+import { afterEach, describe, expect, it } from 'vitest';
+import { homeCinemaSession, parkVideoAtEnd, showAmbientControl } from './ambient-video';
 
 describe('showAmbientControl', () => {
   const idle = { playing: false, reduceMotion: false, ended: false, playBlocked: false };
@@ -22,5 +22,53 @@ describe('showAmbientControl', () => {
   it('shows for reduced motion and after the clip ends', () => {
     expect(showAmbientControl({ ...idle, reduceMotion: true })).toBe(true);
     expect(showAmbientControl({ ...idle, ended: true })).toBe(true);
+  });
+
+  it('shows when a play-once session was already spent', () => {
+    expect(showAmbientControl({ ...idle, sessionSpent: true })).toBe(true);
+  });
+});
+
+describe('homeCinemaSession', () => {
+  afterEach(() => {
+    homeCinemaSession.reset();
+  });
+
+  it('tracks started and finished phases', () => {
+    expect(homeCinemaSession.spent()).toBe(false);
+    expect(homeCinemaSession.finished()).toBe(false);
+
+    homeCinemaSession.markStarted();
+    expect(homeCinemaSession.spent()).toBe(true);
+    expect(homeCinemaSession.finished()).toBe(false);
+
+    homeCinemaSession.markFinished();
+    expect(homeCinemaSession.spent()).toBe(true);
+    expect(homeCinemaSession.finished()).toBe(true);
+  });
+
+  it('does not downgrade from finished to started', () => {
+    homeCinemaSession.markFinished();
+    homeCinemaSession.markStarted();
+    expect(homeCinemaSession.finished()).toBe(true);
+  });
+});
+
+describe('parkVideoAtEnd', () => {
+  it('seeks near the end and pauses', () => {
+    const video = {
+      duration: 10,
+      currentTime: 0,
+      pause: () => {}
+    } as HTMLVideoElement;
+
+    let paused = false;
+    video.pause = () => {
+      paused = true;
+    };
+
+    parkVideoAtEnd(video);
+    expect(video.currentTime).toBeCloseTo(9.95);
+    expect(paused).toBe(true);
   });
 });

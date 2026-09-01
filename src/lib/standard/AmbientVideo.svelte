@@ -2,7 +2,12 @@
   import { asset } from '$app/paths';
   import { imageAsset } from '$lib/public-image';
   import { page } from '$app/state';
-  import { showAmbientControl } from '$lib/standard/ambient-video';
+  import {
+    homeCinemaSession,
+    parkVideoAtEnd,
+    showAmbientControl
+  } from '$lib/standard/ambient-video';
+  import { REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
   import { pick, ui } from '$lib/standard/i18n';
 
   let {
@@ -10,13 +15,28 @@
     poster,
     posterSrcset,
     posterSizes,
-    label
+    label,
+    fill = false,
+    fetchPriority,
+    playing = $bindable(false),
+    ended = $bindable(false),
+    ready = true,
+    /** Persist playback off-screen; with homepage cinema, also once per SPA session. */
+    playOnce = false
   }: {
     src: string;
     poster: string;
     posterSrcset?: string;
     posterSizes?: string;
     label: string;
+    /** Cover the parent box edge-to-edge (hero). */
+    fill?: boolean;
+    fetchPriority?: 'high' | 'low' | 'auto';
+    playing?: boolean;
+    ended?: boolean;
+    /** When false, the clip stays paused until the parent sets this (gate-then-video intro). */
+    ready?: boolean;
+    playOnce?: boolean;
   } = $props();
 
   let el: HTMLVideoElement | undefined = $state();
@@ -24,19 +44,24 @@
 
   const locale = $derived(page.data.locale);
 
-  let ended = $state(false);
-  let playing = $state(false);
   let started = $state(false);
   let reduceMotion = $state(false);
   let playBlocked = $state(false);
 
+  const sessionSpent = $derived(playOnce && homeCinemaSession.spent());
+
   const showControl = $derived(
-    showAmbientControl({ playing, reduceMotion, ended, playBlocked })
+    showAmbientControl({ playing, reduceMotion, ended, playBlocked, sessionSpent })
   );
   const controlLabel = $derived(pick(ended ? ui.replayVideo : ui.playVideo, locale));
 
+  function syncEnded() {
+    ended = true;
+    playing = false;
+  }
+
   async function attemptPlay() {
-    if (!el || ended) return;
+    if (!el || ended || (playOnce && homeCinemaSession.spent())) return;
     try {
       await el.play();
     } catch {
@@ -44,14 +69,11 @@
     }
   }
 
-  function holdLastFrame() {
+  function finishPlayback() {
     if (!el || ended) return;
-    const duration = el.duration;
-    if (!Number.isFinite(duration) || duration <= 0) return;
-    if (duration - el.currentTime > 0.1) return;
-    ended = true;
-    playing = false;
-    el.pause();
+    parkVideoAtEnd(el);
+    syncEnded();
+    if (playOnce) homeCinemaSession.markFinished();
   }
 
   async function playFromControl() {
@@ -67,39 +89,50 @@
     }
   }
 
+  $effect(() => subscribeMediaQuery(REDUCE_MOTION_QUERY, (matches) => {
+    reduceMotion = matches;
+  }));
+
   $effect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    reduceMotion = mq.matches;
-    const onChange = () => {
-      reduceMotion = mq.matches;
+    const video = el;
+    if (!video || !playOnce || !homeCinemaSession.finished()) return;
+
+    const restore = () => {
+      parkVideoAtEnd(video);
+      syncEnded();
+      started = true;
     };
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
+
+    if (video.readyState >= 1) restore();
+    else video.addEventListener('loadedmetadata', restore, { once: true });
   });
 
   $effect(() => {
     const video = el;
     const container = wrap;
-    if (!video || !container) return;
+    if (!video || !container || !ready) return;
 
     if (reduceMotion) {
       video.pause();
       return;
     }
 
+    if (playOnce && homeCinemaSession.spent()) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) attemptPlay();
-        else video.pause();
+        else if (!playOnce) video.pause();
       },
-      { threshold: 0.35 }
+      { threshold: fill ? 0 : 0.35 }
     );
     observer.observe(container);
+    if (fill) attemptPlay();
     return () => observer.disconnect();
   });
 </script>
 
-<div class="ambient" bind:this={wrap}>
+<div class="ambient" class:fill bind:this={wrap}>
   {#if posterSrcset}
     <img
       class="poster"
@@ -111,6 +144,7 @@
       height="900"
       alt=""
       aria-hidden="true"
+      fetchpriority={fetchPriority}
     />
   {/if}
   <!-- svelte-ignore a11y_media_has_caption -->
@@ -118,7 +152,7 @@
     bind:this={el}
     muted
     playsinline
-    preload="none"
+    preload={fill ? 'metadata' : 'none'}
     width="1600"
     height="900"
     poster={posterSrcset ? undefined : imageAsset(poster)}
@@ -127,9 +161,10 @@
       playing = true;
       started = true;
       playBlocked = false;
+      if (playOnce) homeCinemaSession.markStarted();
     }}
     onpause={() => (playing = false)}
-    ontimeupdate={holdLastFrame}
+    onended={finishPlayback}
   >
     <source src={asset(src)} type="video/mp4" />
     {pick(ui.videoUnsupported, locale)}
@@ -159,6 +194,13 @@
     box-shadow: var(--shadow);
   }
 
+  .ambient.fill {
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   video {
     display: block;
     width: 100%;
@@ -166,6 +208,14 @@
     aspect-ratio: 16 / 9;
     object-fit: cover;
     background: #000;
+  }
+
+  .fill video,
+  .fill .poster {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+    object-fit: cover;
   }
 
   .poster {
@@ -202,6 +252,10 @@
   .control:hover,
   .control:focus-visible {
     background: var(--sea-deep);
+  }
+
+  .fill .control {
+    z-index: 2;
   }
 
   svg {

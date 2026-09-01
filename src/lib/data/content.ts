@@ -387,26 +387,6 @@ export function awards(locale: Locale = 'it') {
   return localize(awardsSource, locale);
 }
 
-/** Quotes stay in the guest’s language; only the source line is localised. */
-export const testimonialsSource = liveCopy('testimonials', [
-  {
-    name: 'Carmine',
-    source: { it: 'Airbnb · 5 stelle', en: 'Airbnb · 5 stars' },
-    quote:
-      'Bellissimo baglio e gentilissima ospitalità. Ritorniamo volentieri. Grazie tante a Marilena ed Elena.'
-  },
-  {
-    name: 'Varvara',
-    source: { it: 'Airbnb · 5 stelle', en: 'Airbnb · 5 stars' },
-    quote:
-      'Elena’s house was an oasis of style, beauty and tranquility. We were a bit worried of staying on Sicily in winter, but the house was very warm and cosy! We enjoyed staying there a lot!'
-  }
-] satisfies { name: string; source: LocalizedString; quote: string }[]);
-
-export function testimonials(locale: Locale = 'it') {
-  return localize(testimonialsSource, locale);
-}
-
 type PlaceImageCredit = {
   author: string;
   sourceUrl: string;
@@ -742,10 +722,6 @@ export const homeCopy = liveCopy('home', {
   },
   awards: {
     title: { it: 'Ospitalità riconosciuta', en: 'Recognised hospitality' }
-  },
-  quotes: {
-    eyebrow: { it: 'Dicono di noi', en: 'Testimonials' },
-    title: { it: 'Parole degli ospiti', en: 'In our guests’ words' }
   },
   places: {
     title: {

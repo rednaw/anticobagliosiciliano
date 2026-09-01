@@ -23,8 +23,7 @@ import {
   imperdibiliRouteCopy,
   placesSource,
   privacyCopy,
-  site,
-  testimonialsSource
+  site
 } from './data/content';
 import { ui } from './standard/i18n';
 
@@ -34,7 +33,6 @@ const content = {
   amenitiesSource,
   awardsSource,
   housesSource,
-  testimonialsSource,
   imperdibiliMeta,
   imperdibiliLead,
   imperdibiliPhotoCreditsCopy,
@@ -66,13 +64,12 @@ describe('copy catalog', () => {
     expect(ids).not.toContain('site.email');
   });
 
-  it('keys page rows by Italian URLs and keeps guest quotes as-is', () => {
+  it('keys page rows by Italian URLs', () => {
     const byId = Object.fromEntries(pagine.map((row) => [row.id, row]));
     expect(byId['site.name'].pagina).toBe('tutto il sito');
     expect(byId['site.description'].pagina).toBe('/');
     expect(byId['houses.casa-1.tagline'].pagina).toBe('/case/casa-1/');
     expect(byId['places.segesta.name'].pagina).toBe('/imperdibili/#segesta');
-    expect(byId['testimonials.0.name'].italiano).toBe('Carmine');
     expect(pagine.some((row) => row.italiano.includes('/images/'))).toBe(false);
   });
 
