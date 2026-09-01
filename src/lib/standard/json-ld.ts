@@ -54,7 +54,6 @@ function lodgingBusiness(locale: Locale) {
     geo: geoCoordinates(),
     address: postalAddress(),
     sameAs: lodgingSameAs(),
-    inLanguage: locale,
     containsPlace: housesSource.map((house) => ({ '@id': rentalId(house.slug, locale) }))
   };
 }
@@ -73,7 +72,6 @@ function vacationRental(slug: string, locale: Locale) {
     url: absoluteUrl(standardHref(locale, `case/${slug}`), SITE_ORIGIN),
     image: absoluteUrl(publicImage(house.image), SITE_ORIGIN),
     containedInPlace: { '@id': lodgingId(locale) },
-    inLanguage: locale,
     occupancy: {
       '@type': 'QuantitativeValue',
       minValue: capacity.guestMin,

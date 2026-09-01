@@ -25,7 +25,6 @@ describe('pageJsonLd', () => {
     expect(data?.name).toBe(site.name);
     expect(data?.description).toBe(homeCopy.metaDescription.it);
     expect(data?.email).toBe(site.email);
-    expect(data?.inLanguage).toBe('it');
     expect(data?.geo).toEqual({
       '@type': 'GeoCoordinates',
       latitude: baglioLocation.lat,
@@ -42,6 +41,7 @@ describe('pageJsonLd', () => {
     expect((data?.containsPlace as Array<{ '@id': string }>)?.[0]).toEqual({
       '@id': rentalId('casa-1', 'it')
     });
+    expect(data).not.toHaveProperty('inLanguage');
   });
 
   it('repeats the same lodging entity on Contatti and Come arrivare', () => {
@@ -88,7 +88,8 @@ describe('pageJsonLd', () => {
     const en = pageJsonLd(`${base}/en/case/${house.slug}/`, 'en');
     const enRental = (en?.['@graph'] as Record<string, unknown>[])?.[0];
     expect(enRental?.description).toBe(house.summary.en);
-    expect(enRental?.inLanguage).toBe('en');
+    expect(enRental?.url).toBe(`https://rednaw.github.io${base}/en/case/${house.slug}/`);
+    expect(enRental).not.toHaveProperty('inLanguage');
   });
 
   it('skips pages that are not entity pages', () => {
@@ -103,10 +104,12 @@ describe('pageJsonLd', () => {
     expect(rentalId('casa-2', 'en')).toMatch(new RegExp(`${RENTAL_ID_FRAGMENT}$`));
   });
 
-  it('localizes the English homepage lodging description', () => {
+  it('localizes the English homepage lodging description and url', () => {
     const data = pageJsonLd(`${base}/en/`, 'en');
     expect(data?.description).toBe(homeCopy.metaDescription.en);
-    expect(data?.inLanguage).toBe('en');
+    expect(data?.url).toBe(`https://rednaw.github.io${base}/en/`);
+    expect(data?.['@id']).toBe(lodgingId('en'));
+    expect(data).not.toHaveProperty('inLanguage');
   });
 });
 

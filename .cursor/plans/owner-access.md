@@ -2,10 +2,10 @@
 name: Owner access (one conversation)
 status: pending
 saved: 2026-08-28
-overview: Remote (two countries). One ask for access to Register.it, WordPress, and Lodgify. You do every technical step. Cutover how-to is the SEO runbook.
+overview: Remote (two countries). One ask for access to Register.it, WordPress, Lodgify, and Google Business Profile. You do every technical step. Cutover how-to is the SEO runbook.
 todos:
   - id: conversation
-    content: Request access once — Register.it TA, WordPress Administrator, Lodgify owner login
+    content: Request access once — Register.it TA, WordPress Administrator, Lodgify owner login, Google Business Profile manager
     status: pending
 ---
 
@@ -13,7 +13,7 @@ todos:
 
 You and the owners are in different countries. There is no shared keyboard and no “they click while you watch.”
 
-**Shape:** (1) you request access to all three systems, once; (2) you do every technical step. Occupancy API (`LODGIFY_API_KEY`) already works and is not this conversation.
+**Shape:** (1) you request access to all four systems, once; (2) you do every technical step. Occupancy API (`LODGIFY_API_KEY`) already works and is not this conversation.
 
 What to type in DNS, which URLs 301, and when to flip `SITE_*` live in `.cursor/plans/domain-cutover-seo.md`. Do not grow this file into that checklist.
 
@@ -42,6 +42,17 @@ The owners already offered their username and password. Take that offer. Do not 
 
 - [ ] Owner login they already offered
 
+## Google Business Profile
+
+The site links to their Maps listing (`https://maps.app.goo.gl/NA1BwasQVcFzn1qHA`) in Come arrivare and JSON-LD `sameAs`. The listing website field still points at WordPress; you change it to `https://anticobagliosiciliano.it/` in the cutover week.
+
+You need **Manager** access on the listing for Antico Baglio Siciliano — not just the share link you created from Maps. They invite you in [Google Business Profile](https://business.google.com/) (their login → Business → Users → Add user → Manager). Your own Google account; they can remove you.
+
+While you have access, confirm: (1) this is the only listing for the baglio near Balestrate (no duplicate); (2) the pin matches the site coordinates; (3) you can edit website, hours, and photos.
+
+- [ ] Manager on the Antico Baglio Siciliano listing
+- [ ] Listing share link matches `maps.app.goo.gl/NA1BwasQVcFzn1qHA` (or update `baglioLocation.links` if theirs differs)
+
 ## After this conversation
 
-You have the three accesses. Stop. You run cutover from the other file.
+You have the four accesses. Stop. You run cutover from the other file.
