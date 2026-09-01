@@ -61,7 +61,7 @@ describe('pageJsonLd', () => {
     expect(data?.['@graph']).toHaveLength(2);
 
     const rental = (data?.['@graph'] as Record<string, unknown>[])?.[0];
-    expect(rental?.['@type']).toBe('VacationRental');
+    expect(rental?.['@type']).toEqual(['VacationRental', 'Accommodation']);
     expect(rental?.['@id']).toBe(rentalId(house.slug, 'it'));
     expect(rental?.name).toBe(house.name);
     expect(rental?.description).toBe(house.summary.it);

@@ -224,7 +224,10 @@ assert(
 const casa1 = read('case/casa-1/index.html');
 assert(casa1.includes('application/ld+json'), 'house page ships JSON-LD');
 assert(
-  casa1.includes('"@type":"VacationRental"') || casa1.includes('"@type": "VacationRental"'),
+  casa1.includes('"@type":["VacationRental","Accommodation"]') ||
+    casa1.includes('"@type": ["VacationRental", "Accommodation"]') ||
+    casa1.includes('"@type":"VacationRental"') ||
+    casa1.includes('"@type": "VacationRental"'),
   'house page JSON-LD describes a VacationRental'
 );
 assert(

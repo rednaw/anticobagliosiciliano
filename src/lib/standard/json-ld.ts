@@ -65,7 +65,7 @@ function vacationRental(slug: string, locale: Locale) {
 
   const { capacity } = source;
   return {
-    '@type': 'VacationRental',
+    '@type': ['VacationRental', 'Accommodation'],
     '@id': rentalId(slug, locale),
     name: house.name,
     description: house.summary,
