@@ -363,6 +363,11 @@ export const awardsSource = liveCopy('awards', [
       it: 'Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta qualità e recensioni eccellenti da parte degli ospiti.',
       en: 'Awarded by Airbnb for excellence in hospitality, for stays of a consistently high standard and excellent guest reviews.'
     },
+    proofUrl: {
+      it: 'https://www.airbnb.it/users/show/26312991',
+      en: 'https://www.airbnb.com/users/show/26312991'
+    },
+    proofLabel: { it: 'Profilo host su Airbnb', en: 'Airbnb host profile' },
     image: '/images/awards/superhost.png'
   },
   {
@@ -381,7 +386,13 @@ export const awardsSource = liveCopy('awards', [
     },
     image: '/images/awards/traveller-review.png'
   }
-] satisfies { title: LocalizedString; text: LocalizedString; image: string }[]);
+] satisfies {
+  title: LocalizedString;
+  text: LocalizedString;
+  image: string;
+  proofUrl?: LocalizedString;
+  proofLabel?: LocalizedString;
+}[]);
 
 export function awards(locale: Locale = 'it') {
   return localize(awardsSource, locale);

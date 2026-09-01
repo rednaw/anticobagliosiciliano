@@ -306,6 +306,16 @@
             <figcaption>
               <strong>{award.title}</strong>
               <span>{award.text}</span>
+              {#if award.proofUrl && award.proofLabel}
+                <a
+                  class="award-proof"
+                  href={award.proofUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {award.proofLabel}
+                </a>
+              {/if}
             </figcaption>
           </figure>
         </Reveal>
@@ -770,6 +780,14 @@
     color: color-mix(in srgb, #fff 68%, transparent);
   }
 
+  .band-dark .award-proof {
+    color: color-mix(in srgb, #fff 82%, var(--sun));
+  }
+
+  .band-dark .award-proof:hover {
+    color: #fff;
+  }
+
   .award-grid {
     display: grid;
     gap: 1.5rem;
@@ -803,6 +821,14 @@
 
   .award-grid span {
     color: var(--ink-soft);
+  }
+
+  .award-proof {
+    width: fit-content;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
   }
 
   .place-grid {
