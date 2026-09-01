@@ -736,12 +736,12 @@ export const homeCopy = liveCopy('home', {
   },
   places: {
     title: {
-      it: 'Balestrate e dintorni: tra mare, natura e borghi autentici',
-      en: 'Balestrate and its surroundings: between sea, nature, and authentic villages'
+      it: 'Un buon punto per esplorare',
+      en: 'A good base for exploring'
     },
     lead: {
-      it: 'A pochi minuti dal baglio — da Segesta allo Zingaro, da Monreale a Erice.',
-      en: 'A few minutes from the baglio — from Segesta to the Zingaro, from Monreale to Erice.'
+      it: 'Antichi templi, arte, riserve naturali, borghi medievali e la costa — tutto vicino.',
+      en: 'Ancient temples, art, nature reserves, medieval towns and the coast — all close by.'
     }
   },
   cta: {

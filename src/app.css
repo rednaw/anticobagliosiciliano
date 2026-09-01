@@ -128,7 +128,6 @@ p {
   color: var(--ink-soft);
   margin: 0;
   font-size: 1.125rem;
-  max-width: 40rem;
 }
 
 .field-error {

@@ -326,7 +326,7 @@
 </section>
 
 <section class="cta">
-  <div class="container cta-inner">
+  <div class="container">
     <Reveal>
       <h2>{home.cta.title}</h2>
       <p>{home.cta.body}</p>
@@ -891,10 +891,6 @@
       linear-gradient(135deg, color-mix(in srgb, var(--sea) 92%, #000), var(--olive)),
       var(--sea);
     color: #fff;
-  }
-
-  .cta-inner {
-    max-width: 40rem;
   }
 
   .cta h2 {
