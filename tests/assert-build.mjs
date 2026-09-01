@@ -141,6 +141,20 @@ assert(
 assert(!/href="[^"]*\/archivio\/?["#]/.test(homepage), 'homepage does not link to archivio');
 assert(homepage.includes(`${SITE_BASE}/come-arrivare/`), 'homepage header can reach Come arrivare');
 assert(homepage.includes(`${SITE_BASE}/en/`), 'homepage language switcher reaches English');
+assert(
+  homepage.includes('application/ld+json'),
+  'homepage ships JSON-LD structured data'
+);
+assert(
+  homepage.includes('"@type":"LodgingBusiness"') ||
+    homepage.includes('"@type": "LodgingBusiness"'),
+  'homepage JSON-LD describes a LodgingBusiness'
+);
+assert(homepage.includes('#lodging'), 'homepage lodging entity has a stable @id fragment');
+assert(
+  homepage.includes('maps.app.goo.gl'),
+  'homepage lodging JSON-LD includes Google Maps in sameAs'
+);
 if (SITE_PUBLIC) {
   assert(!/<meta name="robots" content="noindex/.test(homepage), 'public homepage is indexable');
 } else {
@@ -163,6 +177,13 @@ assert(cspContent(notFound).length > 0, '404.html has a CSP meta tag');
 
 const contact = read('contatti/index.html');
 assert(contact.includes(`mailto:info@anticobagliosiciliano.it`), 'contact page has the mailto');
+assert(contact.includes('application/ld+json'), 'contact page ships JSON-LD');
+assert(contact.includes('#lodging'), 'contact page repeats the lodging @id');
+assert(
+  contact.includes('"@type":"LodgingBusiness"') ||
+    contact.includes('"@type": "LodgingBusiness"'),
+  'contact page JSON-LD describes a LodgingBusiness'
+);
 assert(contact.includes('%0D%0A'), 'mailto body uses CRLF (iOS)');
 assert(/mailto:[^"]+"[^>]*target="_blank"/.test(contact) || /target="_blank"[^>]*href="mailto:/.test(contact), 'mailto opens in a new target, not window.open');
 assert(!contact.includes('window.open'), 'contact page does not use window.open');
@@ -178,6 +199,8 @@ assert(
 
 const arrive = read('come-arrivare/index.html');
 assert(arrive.includes('Come arrivare'), 'Come arrivare page prerendered in Italian');
+assert(arrive.includes('application/ld+json'), 'Come arrivare page ships JSON-LD');
+assert(arrive.includes('#lodging'), 'Come arrivare page repeats the lodging @id');
 assert(!arrive.includes('<iframe'), 'Come arrivare does not embed a third-party map iframe');
 assert(arrive.includes('maps.app.goo.gl'), 'Come arrivare keeps the Google business listing as a click-out');
 assert(/fetchpriority="high"/.test(arrive), 'map image is fetchpriority=high');
@@ -190,9 +213,26 @@ assert(/<html lang="en">/.test(arriveEn), 'English Come arrivare html lang is en
 const privacy = read('privacy/index.html');
 assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');
 assert(
+  !privacy.includes('application/ld+json'),
+  'privacy page does not ship JSON-LD'
+);
+assert(
   privacy.includes('osmfoundation.org/wiki/Privacy_Policy#Personal_data_we_receive_automatically'),
   'privacy page links the OpenStreetMap Foundation privacy policy'
 );
+
+const casa1 = read('case/casa-1/index.html');
+assert(casa1.includes('application/ld+json'), 'house page ships JSON-LD');
+assert(
+  casa1.includes('"@type":"VacationRental"') || casa1.includes('"@type": "VacationRental"'),
+  'house page JSON-LD describes a VacationRental'
+);
+assert(
+  casa1.includes('"@type":"BreadcrumbList"') || casa1.includes('"@type": "BreadcrumbList"'),
+  'house page JSON-LD includes breadcrumbs'
+);
+assert(casa1.includes('#rental'), 'house page rental entity has a stable @id fragment');
+assert(casa1.includes('#lodging'), 'house page links the rental to the lodging @id');
 
 const archivioHtml = path.join(build, 'archivio', 'index.html');
 assert(!existsSync(archivioHtml), 'archivio is not in the production build');

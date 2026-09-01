@@ -10,11 +10,14 @@
     ui
   } from '$lib/standard/i18n';
   import { OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH, pageSeo } from '$lib/standard/seo';
+  import { jsonLdScriptContent, pageJsonLd } from '$lib/standard/json-ld';
 
   let { children } = $props();
 
   const locale = $derived(page.data.locale);
   const seo = $derived(pageSeo(page.url.pathname, locale));
+  const jsonLd = $derived(pageJsonLd(page.url.pathname, locale));
+  const jsonLdText = $derived(jsonLd ? jsonLdScriptContent(jsonLd) : '');
   const canonical = $derived(absoluteUrl(page.url.pathname, SITE_ORIGIN));
   const hrefIt = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'it'), SITE_ORIGIN));
   const hrefEn = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'en'), SITE_ORIGIN));
@@ -50,6 +53,9 @@
   {#if ogDefaultImage}
     <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
     <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+  {/if}
+  {#if jsonLdText}
+    {@html `<script type="application/ld+json">${jsonLdText}</script>`}
   {/if}
 </svelte:head>
 

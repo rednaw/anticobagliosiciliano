@@ -18,6 +18,14 @@ export const site = liveCopy('site', {
   } satisfies LocalizedString
 });
 
+type HouseCapacity = {
+  guestMin: number;
+  guestMax: number;
+  bedroomCount: number;
+  bathroomCount: number;
+  floorAreaSqm: number;
+};
+
 type HouseSource = {
   slug: string;
   name: string;
@@ -27,6 +35,7 @@ type HouseSource = {
   size: string;
   bedrooms: LocalizedString;
   bathrooms: LocalizedString;
+  capacity: HouseCapacity;
   image: string;
   gallery: string[];
   paragraphs: LocalizedStrings;
@@ -53,6 +62,13 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
     size: '100 m²',
     bedrooms: { it: '2 camere + soppalco', en: '2 bedrooms + loft' },
     bathrooms: { it: '2 bagni', en: '2 bathrooms' },
+    capacity: {
+      guestMin: 4,
+      guestMax: 6,
+      bedroomCount: 2,
+      bathroomCount: 2,
+      floorAreaSqm: 100
+    },
     image: '/images/houses/casa-1/00-img_6532.jpg',
     gallery: [
       '/images/houses/casa-1/01-img_6807.jpg',
@@ -120,6 +136,13 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
     size: '65 m²',
     bedrooms: { it: '1 camera + soppalco', en: '1 bedroom + mezzanine' },
     bathrooms: { it: '1 bagno', en: '1 bathroom' },
+    capacity: {
+      guestMin: 2,
+      guestMax: 4,
+      bedroomCount: 1,
+      bathroomCount: 1,
+      floorAreaSqm: 65
+    },
     image: '/images/houses/casa-2/00-img_6783.jpg',
     gallery: [
       '/images/houses/casa-2/01-img_65581.jpg',
@@ -188,6 +211,13 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
     size: '110+ m²',
     bedrooms: { it: '3 camere', en: '3 bedrooms' },
     bathrooms: { it: '2 bagni', en: '2 bathrooms' },
+    capacity: {
+      guestMin: 4,
+      guestMax: 8,
+      bedroomCount: 3,
+      bathroomCount: 2,
+      floorAreaSqm: 110
+    },
     image: '/images/houses/casa-3/00-soggiorno-2.jpg',
     gallery: [
       '/images/houses/casa-3/01-ingresso-soggiorno.jpg',
@@ -246,6 +276,13 @@ export const housesSource: HouseSource[] = liveCopy('houses', [
     size: '110+ m²',
     bedrooms: { it: '2 camere', en: '2 bedrooms' },
     bathrooms: { it: '2 bagni', en: '2 bathrooms' },
+    capacity: {
+      guestMin: 4,
+      guestMax: 7,
+      bedroomCount: 2,
+      bathroomCount: 2,
+      floorAreaSqm: 110
+    },
     image: '/images/houses/casa-4/00-patio-3.jpg',
     gallery: [
       '/images/houses/casa-4/01-porta-sul-cortile.jpg',

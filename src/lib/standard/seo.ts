@@ -27,7 +27,7 @@ export type PageSeo = {
 };
 
 /** Path without locale prefix, no trailing slash (`/`, `/contatti`, `/case/casa-1`). */
-function routeKey(pathname: string): string {
+export function routeKey(pathname: string): string {
   const path = stripBase(pathname).replace(/\/+$/, '') || '/';
   const withoutLocale = path.replace(/^\/en(?=\/|$)/, '') || '/';
   return withoutLocale.startsWith('/') ? withoutLocale : `/${withoutLocale}`;
