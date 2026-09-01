@@ -32,8 +32,7 @@
   let portraitMobile = $state(false);
   let cinemaStageEl = $state<HTMLElement | null>(null);
 
-  const cinemaActive = $derived(!reduceMotion);
-  const cinemaScroll = $derived(cinemaActive && !portraitMobile);
+  const cinemaScroll = $derived(!reduceMotion && !portraitMobile);
   const cinemaPinned = $derived(cinemaScroll && (videoPlaying || videoEnded));
   const showAboutSection = $derived(reduceMotion || portraitMobile);
 
@@ -47,7 +46,7 @@
 
   $effect(() => {
     const el = cinemaStageEl;
-    if (!el || !cinemaActive) return;
+    if (!el || reduceMotion) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -102,43 +101,43 @@
     </div>
   </div>
 
-  {#if cinemaActive}
-    <div
-      class="cinema-stage"
-      class:cinema-stage--live={cinemaPinned}
-      class:cinema-stage--portrait={portraitMobile}
-      bind:this={cinemaStageEl}
-    >
-      <div class="cinema-pin">
-        <AmbientVideo
-          fill
-          playOnce
-          ready={videoStageReady}
-          bind:playing={videoPlaying}
-          bind:ended={videoEnded}
-          src="/videos/baglio-720.mp4"
-          poster="/videos/baglio-poster.jpg"
-          posterSrcset="{imageAsset('/videos/baglio-poster-sm.jpg')} 744w, {imageAsset(
-            '/videos/baglio-poster.jpg'
-          )} 1004w"
-          posterSizes="100vw"
-          label={home.alt.video}
-        />
-      </div>
+  <div
+    class="cinema-stage"
+    class:cinema-stage--live={cinemaPinned}
+    class:cinema-stage--portrait={portraitMobile}
+    bind:this={cinemaStageEl}
+  >
+    <div class="cinema-pin">
+      <AmbientVideo
+        fill
+        playOnce
+        posterOnly={reduceMotion}
+        ready={videoStageReady}
+        bind:playing={videoPlaying}
+        bind:ended={videoEnded}
+        src="/videos/baglio-720.mp4"
+        poster="/videos/baglio-poster.jpg"
+        posterEnd="/videos/baglio-poster-end.jpg"
+        posterSrcset="{imageAsset('/videos/baglio-poster-sm.jpg')} 744w, {imageAsset(
+          '/videos/baglio-poster.jpg'
+        )} 1004w"
+        posterSizes="100vw"
+        label={home.alt.video}
+      />
+    </div>
 
-      {#if cinemaPinned}
-        <div class="cinema-script">
-          <div class="cinema-step cinema-step--breathe" aria-hidden="true"></div>
+    {#if cinemaPinned}
+      <div class="cinema-script">
+        <div class="cinema-step cinema-step--breathe" aria-hidden="true"></div>
 
-          <div class="cinema-step cinema-step--about">
-            <div class="cinema-card">
-              {@render chiSiamo()}
-            </div>
+        <div class="cinema-step cinema-step--about">
+          <div class="cinema-card">
+            {@render chiSiamo()}
           </div>
         </div>
-      {/if}
-    </div>
-  {/if}
+      </div>
+    {/if}
+  </div>
 </section>
 
 {#if showAboutSection}

@@ -13,6 +13,7 @@
   let {
     src,
     poster,
+    posterEnd,
     posterSrcset,
     posterSizes,
     label,
@@ -21,11 +22,15 @@
     playing = $bindable(false),
     ended = $bindable(false),
     ready = true,
+    /** Still image only — no video fetch or playback (e.g. prefers-reduced-motion). */
+    posterOnly = false,
     /** Persist playback off-screen; with homepage cinema, also once per SPA session. */
     playOnce = false
   }: {
     src: string;
     poster: string;
+    /** Last frame still for posterOnly (e.g. reduced motion); falls back to poster. */
+    posterEnd?: string;
     posterSrcset?: string;
     posterSizes?: string;
     label: string;
@@ -36,6 +41,7 @@
     ended?: boolean;
     /** When false, the clip stays paused until the parent sets this (gate-then-video intro). */
     ready?: boolean;
+    posterOnly?: boolean;
     playOnce?: boolean;
   } = $props();
 
@@ -89,11 +95,17 @@
     }
   }
 
-  $effect(() => subscribeMediaQuery(REDUCE_MOTION_QUERY, (matches) => {
-    reduceMotion = matches;
-  }));
+  const stillPoster = $derived(posterEnd ?? poster);
 
   $effect(() => {
+    if (posterOnly) return;
+    return subscribeMediaQuery(REDUCE_MOTION_QUERY, (matches) => {
+      reduceMotion = matches;
+    });
+  });
+
+  $effect(() => {
+    if (posterOnly) return;
     const video = el;
     if (!video || !playOnce || !homeCinemaSession.finished()) return;
 
@@ -108,6 +120,7 @@
   });
 
   $effect(() => {
+    if (posterOnly) return;
     const video = el;
     const container = wrap;
     if (!video || !container || !ready) return;
@@ -133,6 +146,16 @@
 </script>
 
 <div class="ambient" class:fill bind:this={wrap}>
+  {#if posterOnly}
+    <img
+      class="poster"
+      src={imageAsset(stillPoster)}
+      width="1280"
+      height="720"
+      alt={label}
+      fetchpriority={fetchPriority}
+    />
+  {:else}
   {#if posterSrcset}
     <img
       class="poster"
@@ -183,6 +206,7 @@
         {/if}
       </svg>
     </button>
+  {/if}
   {/if}
 </div>
 
