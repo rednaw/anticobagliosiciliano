@@ -48,7 +48,7 @@
     width: 2rem;
     height: 2px;
     margin-bottom: 0.85rem;
-    background: var(--sun);
+    background: var(--olive);
   }
 
   .brand {

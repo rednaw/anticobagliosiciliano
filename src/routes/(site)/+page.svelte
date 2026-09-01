@@ -202,9 +202,11 @@
   />
   <div class="feature-panel">
     <Reveal>
-      <p class="eyebrow">{home.cortile.eyebrow}</p>
-      <h2>{home.cortile.title}</h2>
-      <p class="lead">{home.cortile.lead}</p>
+      <SectionHead
+        eyebrow={home.cortile.eyebrow}
+        title={home.cortile.title}
+        lead={home.cortile.lead}
+      />
       <p>{home.cortile.body}</p>
     </Reveal>
   </div>
@@ -213,8 +215,7 @@
 <section class="section garden">
   <div class="container garden-grid">
     <Reveal>
-      <p class="eyebrow">{home.giardino.eyebrow}</p>
-      <h2>{home.giardino.title}</h2>
+      <SectionHead eyebrow={home.giardino.eyebrow} title={home.giardino.title} />
       <p>{home.giardino.p1}</p>
       <p>{home.giardino.p2}</p>
       <p>{home.giardino.p3}</p>
@@ -669,17 +670,24 @@
     align-content: center;
   }
 
-  .feature .eyebrow {
-    color: color-mix(in srgb, var(--sun) 85%, #fff);
+  .feature :global(.section-head) {
+    margin-bottom: 1rem;
   }
 
-  .feature h2 {
+  .feature :global(.eyebrow),
+  .band-dark :global(.eyebrow) {
+    color: color-mix(in srgb, #fff 72%, transparent);
+  }
+
+  .feature :global(.section-head h2) {
     margin: 0 0 0.75rem;
     font-size: clamp(2rem, 4vw, 3rem);
   }
 
-  .feature .lead {
+  .feature :global(.section-head p) {
+    max-width: 34rem;
     font-size: 1.15rem;
+    color: color-mix(in srgb, #fff 88%, transparent);
     opacity: 0.95;
   }
 
@@ -712,9 +720,8 @@
     aspect-ratio: 3 / 2;
   }
 
-  .garden h2 {
-    margin: 0 0 1rem;
-    font-size: clamp(2rem, 4vw, 2.8rem);
+  .garden :global(.section-head) {
+    margin-bottom: 0.25rem;
   }
 
   .garden p {
@@ -752,10 +759,6 @@
     color: #fff;
   }
 
-  .band-dark :global(.eyebrow) {
-    color: color-mix(in srgb, var(--sun) 85%, #fff);
-  }
-
   .band-dark :global(.section-head p) {
     color: color-mix(in srgb, #fff 78%, transparent);
   }
@@ -781,7 +784,7 @@
   }
 
   .band-dark .award-proof {
-    color: color-mix(in srgb, #fff 82%, var(--sun));
+    color: color-mix(in srgb, #fff 78%, transparent);
   }
 
   .band-dark .award-proof:hover {

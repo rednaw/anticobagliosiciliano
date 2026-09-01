@@ -29,7 +29,6 @@
   --sea: #0e3a47;
   --sea-deep: #0a2c36;
   --olive: #3f5a3c;
-  --sun: #d4a84b;
   --error: #9f2f1c;
   --line: color-mix(in srgb, var(--ink) 12%, transparent);
   --shadow: 0 24px 60px color-mix(in srgb, var(--sea) 18%, transparent);

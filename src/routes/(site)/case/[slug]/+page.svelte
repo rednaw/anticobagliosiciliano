@@ -121,8 +121,8 @@
     padding-bottom: 2.5rem;
   }
 
-  .copy .eyebrow {
-    color: color-mix(in srgb, var(--sun) 80%, #fff);
+  .hero .eyebrow {
+    color: color-mix(in srgb, #fff 72%, transparent);
   }
 
   h1 {

@@ -184,7 +184,7 @@
     left: 50%;
     width: 0.5rem;
     height: 0.5rem;
-    background: var(--sun);
+    background: #fff;
     border-radius: 50%;
     transform: translate(-50%, -50%);
   }
