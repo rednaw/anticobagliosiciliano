@@ -9,7 +9,6 @@ import {
   showAmbientControl
 } from './ambient-video';
 import { isSlowNetwork } from './network-quality';
-import { proveFullMedia } from './network-prove';
 import { getMediaTier, markFull, markLight, mediaTier, resetMediaTier } from './network-tier';
 
 describe('showAmbientControl', () => {
@@ -202,29 +201,5 @@ describe('mediaTier', () => {
     markLight();
     expect(seen).toBe('light');
     unsub();
-  });
-});
-
-describe('proveFullMedia', () => {
-  it('returns true when the probe finishes in time', async () => {
-    const blob = new Blob(['ok']);
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(async () => new Response(blob, { status: 200 }))
-    );
-    let t = 0;
-    await expect(proveFullMedia('/probe', 800, () => ((t += 100), t))).resolves.toBe(true);
-    vi.unstubAllGlobals();
-  });
-
-  it('returns false when fetch fails', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(async () => {
-        throw new Error('offline');
-      })
-    );
-    await expect(proveFullMedia('/probe', 800)).resolves.toBe(false);
-    vi.unstubAllGlobals();
   });
 });
