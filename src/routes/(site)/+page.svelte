@@ -33,8 +33,12 @@
   let cinemaStageEl = $state<HTMLElement | null>(null);
 
   const cinemaScroll = $derived(!reduceMotion && !portraitMobile);
-  const cinemaPinned = $derived(cinemaScroll && (videoPlaying || videoEnded));
-  const showAboutSection = $derived(reduceMotion || portraitMobile);
+  const cinemaDesktopStill = $derived(reduceMotion && !portraitMobile);
+  const cinemaPinned = $derived(
+    cinemaDesktopStill || (cinemaScroll && (videoPlaying || videoEnded))
+  );
+  /** Narrow viewport: Chi siamo below the short aerial chapter (layout). */
+  const showAboutSection = $derived(portraitMobile);
 
   $effect(() => subscribeMediaQuery(REDUCE_MOTION_QUERY, (matches) => {
     reduceMotion = matches;
@@ -124,9 +128,14 @@
         posterSizes="100vw"
         label={home.alt.video}
       />
+      {#if cinemaDesktopStill}
+        <div class="cinema-card cinema-card--hold">
+          {@render chiSiamo()}
+        </div>
+      {/if}
     </div>
 
-    {#if cinemaPinned}
+    {#if cinemaPinned && cinemaScroll}
       <div class="cinema-script">
         <div class="cinema-step cinema-step--breathe" aria-hidden="true"></div>
 
@@ -465,18 +474,30 @@
     height: calc(100svh - var(--cinema-card-h));
   }
 
-  .cinema-step--about .cinema-card {
-    position: sticky;
-    top: clamp(2rem, 8vh, 3.5rem);
+  .cinema-step--about .cinema-card,
+  .cinema-card--hold {
     width: min(15rem, calc(24vw - 0.75rem));
     max-width: calc(100% - 2.5rem);
-    margin: 0 auto 0 clamp(1rem, 2.5vw, 1.75rem);
     padding: clamp(1.5rem, 4vh, 2.35rem) clamp(1rem, 2.2vw, 1.25rem);
     border-radius: var(--radius);
     background: color-mix(in srgb, var(--sea-deep) 68%, transparent);
     -webkit-backdrop-filter: blur(14px) brightness(0.88);
     backdrop-filter: blur(14px) brightness(0.88);
     box-shadow: 0 1rem 3rem color-mix(in srgb, var(--sea-deep) 35%, transparent);
+  }
+
+  .cinema-step--about .cinema-card {
+    position: sticky;
+    top: clamp(2rem, 8vh, 3.5rem);
+    margin: 0 clamp(1rem, 2.5vw, 1.75rem) 0 auto;
+  }
+
+  .cinema-card--hold {
+    position: absolute;
+    top: clamp(2rem, 8vh, 3.5rem);
+    right: clamp(1rem, 2.5vw, 1.75rem);
+    z-index: 2;
+    pointer-events: auto;
   }
 
   /* Portrait: short aerial chapter, then Chi siamo below (no traveling card). */
@@ -497,14 +518,16 @@
     }
   }
 
-  .cinema-step--about .cinema-card h2 {
+  .cinema-step--about .cinema-card h2,
+  .cinema-card--hold h2 {
     margin: 0 0 0.85rem;
     font-size: clamp(1.55rem, 2.8vw, 2rem);
     line-height: 1.15;
     max-width: 14ch;
   }
 
-  .cinema-step--about .cinema-card p {
+  .cinema-step--about .cinema-card p,
+  .cinema-card--hold p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.55;

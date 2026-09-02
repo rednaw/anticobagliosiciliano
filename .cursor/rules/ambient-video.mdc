@@ -19,8 +19,8 @@ For all other audiences and circumstances (like low bandwidth) it should gracefu
 
 ## Graceful degradation
 
-- **`prefers-reduced-motion`**: cinema stage stays visible with `posterEnd` (last MP4 frame) via `posterOnly` — no video fetch or autoplay; no scroll pin; Chi siamo as a normal section below.
-- **Portrait / narrow aspect** (`PORTRAIT_ASPECT_QUERY`): shorter pin (65svh), no scroll cinema; Chi siamo below the clip.
+- **`prefers-reduced-motion`**: cinema stage stays visible with `posterEnd` (last MP4 frame) via `posterOnly` — no video fetch or autoplay. **Desktop landscape:** sticky pin + Chi siamo card overlay top-right (`cinema-card--hold`), matching the scroll cinema end state. **Portrait:** Chi siamo below the short clip (`portraitMobile` only).
+- **Portrait / narrow aspect** (`PORTRAIT_ASPECT_QUERY`): shorter pin (65svh), no scroll cinema; Chi siamo below the clip — orthogonal to reduced motion.
 - **`play()` blocked** or session already spent: poster + play/replay control (`showAmbientControl`).
 - Never block page content or navigation on video load; never autoplay with sound.
 
