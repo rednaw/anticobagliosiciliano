@@ -987,8 +987,8 @@ export const privacyCopy = liveCopy('privacy', {
   },
   analyticsTitle: { it: 'Statistiche di visita', en: 'Visit statistics' },
   analytics: {
-    it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics, che funziona senza cookie. ',
-    en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics, which works without cookies. '
+    it: 'Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit da pubblicità. Per questo usiamo Simple Analytics. ',
+    en: 'We count how many people visit the site and which pages they look at, so we can tell whether the information is clear. We do not know who you are: no name, email, or advertising profile. That is why we use Simple Analytics. '
   },
   analyticsPolicy: {
     it: 'Vedi quali dati vengono raccolti',
@@ -996,8 +996,8 @@ export const privacyCopy = liveCopy('privacy', {
   },
   cookiesTitle: { it: 'Cookie', en: 'Cookies' },
   cookies: {
-    it: 'Non usiamo cookie di profilazione o di marketing.',
-    en: 'We do not use profiling or marketing cookies.'
+    it: 'Non usiamo cookie — né di profilazione, né di marketing, né di statistica — e non lo fanno nemmeno i servizi descritti qui sotto.',
+    en: 'We do not use cookies — not for profiling, marketing, or analytics — and neither do the services described below.'
   },
   hostingTitle: { it: 'Ospitalità del sito', en: 'Site hosting' },
   hosting: {
@@ -1017,9 +1017,43 @@ export const privacyCopy = liveCopy('privacy', {
     it: 'informativa sulla privacy di OpenStreetMap',
     en: 'OpenStreetMap privacy policy'
   },
+  weatherTitle: { it: 'Meteo', en: 'Weather' },
+  weather: {
+    it: 'Sulla pagina Come arrivare, quando la connessione lo consente, il browser chiede le condizioni attuali al baglio a Open-Meteo (solo le coordinate pubbliche del luogo). Il browser si collega ai loro server; Open-Meteo può vedere l’indirizzo IP di chi fa la richiesta. Vedi l’',
+    en: 'On the Getting here page, when the connection allows it, the browser requests current conditions at the baglio from Open-Meteo (only the place’s public coordinates). Your browser connects to their servers; Open-Meteo may see the IP address of whoever makes the request. See the '
+  },
+  weatherPolicy: {
+    it: 'informativa sulla privacy di Open-Meteo',
+    en: 'Open-Meteo privacy policy'
+  },
   rightsTitle: { it: 'I tuoi diritti', en: 'Your rights' },
   rights: {
     it: 'Per i messaggi che ci hai inviato puoi chiedere di leggerli, correggerli o cancellarli, scrivendo all’indirizzo sopra. Non possiamo accedere ai log di GitHub Pages né a visite individuali in Simple Analytics: per quelli valgono le informative dei fornitori. Puoi presentare reclamo al Garante per la protezione dei dati personali.',
     en: 'For messages you have sent us, you can ask us to read, correct, or delete them by writing to the address above. We cannot access GitHub Pages logs or individual Simple Analytics visits: those sit with the providers’ own policies. You can lodge a complaint with the Italian Data Protection Authority (Garante).'
   }
+} satisfies Record<string, LocalizedString>);
+
+export const weatherCopy = liveCopy('weather', {
+  place: {
+    it: 'Meteo attuale',
+    en: 'Current weather'
+  },
+  line: {
+    it: '{temp}° · {condition}',
+    en: '{temp}° · {condition}'
+  },
+  aria: {
+    it: 'Meteo al baglio: {temp} gradi, {condition}',
+    en: 'Weather at the baglio: {temp} degrees, {condition}'
+  },
+  credit: {
+    it: 'Meteo © Open-Meteo',
+    en: 'Weather © Open-Meteo'
+  },
+  clear: { it: 'sereno', en: 'clear' },
+  cloudy: { it: 'nuvoloso', en: 'cloudy' },
+  fog: { it: 'nebbia', en: 'fog' },
+  rain: { it: 'pioggia', en: 'rain' },
+  snow: { it: 'neve', en: 'snow' },
+  storm: { it: 'temporale', en: 'storm' }
 } satisfies Record<string, LocalizedString>);

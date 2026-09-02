@@ -23,7 +23,8 @@ import {
   imperdibiliRouteCopy,
   placesSource,
   privacyCopy,
-  site
+  site,
+  weatherCopy
 } from './data/content';
 import { ui } from './standard/i18n';
 
@@ -41,7 +42,8 @@ const content = {
   arriveCopy,
   baglioLocation,
   contactCopy,
-  privacyCopy
+  privacyCopy,
+  weatherCopy
 };
 
 describe('copy catalog', () => {

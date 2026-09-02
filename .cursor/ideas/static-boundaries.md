@@ -46,9 +46,9 @@ Untapped: `tel:` links, a WhatsApp deep link carrying the same prefilled enquiry
 
 The browser can call someone else's server. The site stays static; the third party carries the dynamic load. Each addition costs a CSP entry and a privacy review.
 
-In use: Simple Analytics (cookieless page views), OSM tile servers (full-tier map).
+In use: Simple Analytics (cookieless page views), OSM tile servers (full-tier map), Open-Meteo current conditions on Come arrivare ([docs/weather.md](../../docs/weather.md)).
 
-Untapped, in roughly ascending order of paradigm strain: open-meteo weather (free, no key, CORS-open — a "sunny in Balestrate" touch), giscus-style comments backed by GitHub issues (wrong audience here), Stripe Payment Links for deposits (real money movement with zero backend — the link is static, Stripe is the dynamic part), a hosted booking widget.
+Untapped, in roughly ascending order of paradigm strain: giscus-style comments backed by GitHub issues (wrong audience here), Stripe Payment Links for deposits (real money movement with zero backend — the link is static, Stripe is the dynamic part), a hosted booking widget.
 
 ## Where the boundary actually is
 
@@ -87,7 +87,7 @@ Ordered roughly by feats-per-effort. None are commitments.
 
 **Seasonal build.** The build knows the date. A monthly scheduled rebuild could swap hero imagery or highlight seasonal imperdibili (Zingaro in swimming season, Erice in autumn light) with zero runtime cost. Time-shifted compute where the "external system" is the calendar itself.
 
-**Weather touch.** Client-direct open-meteo fetch for "24° and sunny in Balestrate". Free, keyless, one CSP origin. The first idea on this list that adds a runtime third party — which is exactly why it is listed and not built.
+**Weather touch.** Shipped — see [docs/weather.md](../../docs/weather.md). Client-direct Open-Meteo on Come arrivare, full tier only.
 
 **Offline PWA.** Service worker, cache the site shell and one house gallery. A rental site that works in airplane mode is a nice trick; the audit cost (cache invalidation vs. twice-daily occupancy deploys) is the real price, not the code.
 

@@ -63,6 +63,13 @@
           >.
         </p>
       </article>
+
+      <article class="item">
+        <h3>{t('weatherTitle')}</h3>
+        <p>
+          {t('weather')}<a href="https://open-meteo.com/en/license">{t('weatherPolicy')}</a>.
+        </p>
+      </article>
     </section>
 
     <section class="block">

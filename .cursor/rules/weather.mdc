@@ -1,0 +1,19 @@
+---
+description: Come arrivare weather chip — Open-Meteo edit constraints
+globs: docs/weather.md,src/lib/standard/weather*,src/lib/standard/WeatherChip.svelte,src/routes/(site)/come-arrivare/**,src/routes/(site)/en/come-arrivare/**,vite.config.ts,tests/assert-build.mjs
+alwaysApply: false
+---
+
+# Weather
+
+Narrative and code map: [docs/weather.md](../../docs/weather.md). Read it before changing this area.
+
+## Must preserve
+
+- Client-direct Open-Meteo only — no weather snapshot in git, no API key.
+- Fetch and show only on network tier `full`; light = no request, no chrome.
+- Soft-fail to nothing; never block Come arrivare; never call `markLight()` for weather.
+- Show CC BY credit whenever weather is visible (`https://open-meteo.com/`).
+- Vendor only Meteocons **monochrome** SVGs under `static/images/weather/` (MIT LICENSE); paint via CSS mask/`currentColor`, not fill art or per-condition backdrops.
+- Use `baglioLocation` courtyard coords; keep CSP `connect-src` including `https://api.open-meteo.com`.
+- Unit tests use fixtures — no live Open-Meteo in CI.

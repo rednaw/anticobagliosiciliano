@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Project docs
 
-`docs/` holds durable write-ups of shipped domain systems (design intent, how they work, code maps). Start with `docs/occupancy.md`, `docs/network-tier.md`, and `docs/email.md`. Architecture explorations and option spaces live in `.cursor/ideas/` (see `ideas.mdc`) — not here.
+`docs/` holds durable write-ups of shipped domain systems (design intent, how they work, code maps). Start with `docs/occupancy.md`, `docs/network-tier.md`, `docs/email.md`, and `docs/weather.md`. Architecture explorations and option spaces live in `.cursor/ideas/` (see `ideas.mdc`) — not here.
 
 ## How to treat them
 

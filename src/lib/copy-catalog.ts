@@ -37,6 +37,7 @@ export type CopySources = {
   baglioLocation: { links: unknown };
   contactCopy: unknown;
   privacyCopy: unknown;
+  weatherCopy: unknown;
 };
 
 function skipKey(key: string, value: unknown): boolean {
@@ -156,6 +157,7 @@ export function collectPagineRows(content: CopySources, overrides: CopyOverrides
 
   collect(rows, content.arriveCopy, '/come-arrivare/', 'arrive', overrides);
   collect(rows, content.baglioLocation.links, '/come-arrivare/', 'arrive.maps', overrides);
+  collect(rows, content.weatherCopy, '/come-arrivare/', 'weather', overrides);
   collect(rows, content.contactCopy, '/contatti/', 'contact', overrides);
   collect(rows, content.privacyCopy, '/privacy/', 'privacy', overrides);
 

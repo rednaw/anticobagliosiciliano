@@ -18,6 +18,9 @@ const OSM_TILE_ORIGINS = [
   'https://c.tile.openstreetmap.org'
 ] as const;
 
+/** Open-Meteo current conditions on Come arrivare (full tier only). */
+const OPEN_METEO_ORIGIN = 'https://api.open-meteo.com';
+
 /** Strip Simple Analytics in dev — production builds keep the tag in app.html. */
 function simpleAnalyticsDevPlugin(): Plugin {
   return {
@@ -66,7 +69,7 @@ export default defineConfig({
           'font-src': ['self'],
           'media-src': ['self'],
           // Script origin is for DevTools fetching latest.js.map.
-          'connect-src': ['self', SA_QUEUE_ORIGIN, SA_SCRIPT_ORIGIN],
+          'connect-src': ['self', SA_QUEUE_ORIGIN, SA_SCRIPT_ORIGIN, OPEN_METEO_ORIGIN],
           'frame-src': ['none'],
           'object-src': ['none'],
           'worker-src': ['none'],

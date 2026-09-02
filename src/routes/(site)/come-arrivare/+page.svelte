@@ -2,6 +2,7 @@
   import { page } from '$app/state';
   import { arriveCopy, baglioLocation } from '$lib/data/content';
   import ArriveMap from '$lib/standard/ArriveMap.svelte';
+  import WeatherChip from '$lib/standard/WeatherChip.svelte';
   import { googleMapsLinkWithLocale } from '$lib/standard/place-directions';
   import { pick, ui } from '$lib/standard/i18n';
 
@@ -20,7 +21,10 @@
     <p class="lead">{t('lead')}</p>
 
     <div class="map">
-      <ArriveMap alt={t('mapAlt')} attribution={t('attribution')} />
+      <div class="map-stage">
+        <ArriveMap alt={t('mapAlt')} attribution={t('attribution')} />
+        <WeatherChip />
+      </div>
     </div>
 
     <div class="copy">
@@ -63,6 +67,10 @@
 
   .map {
     margin: 0 0 2rem;
+  }
+
+  .map-stage {
+    position: relative;
   }
 
   .copy {

@@ -125,6 +125,10 @@ assert(
   'CSP allows Simple Analytics source maps from the script origin'
 );
 assert(
+  cspDirective(homepageCsp, 'connect-src').includes('https://api.open-meteo.com'),
+  'CSP allows Open-Meteo for Come arrivare weather'
+);
+assert(
   /rel="icon"[^>]*href="(?!data:)[^"]+\.svg"/.test(homepage),
   'favicon is a same-origin svg file, not an inline data URL'
 );
@@ -212,6 +216,10 @@ assert(/<html lang="en">/.test(arriveEn), 'English Come arrivare html lang is en
 
 const privacy = read('privacy/index.html');
 assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');
+assert(
+  privacy.includes('open-meteo.com'),
+  'privacy page mentions Open-Meteo weather'
+);
 assert(
   !privacy.includes('application/ld+json'),
   'privacy page does not ship JSON-LD'
@@ -335,6 +343,24 @@ const tierSpotChecks = [
 for (const rel of tierSpotChecks) {
   assert(existsSync(path.join(build, rel)), `media tier spot check: ${rel}`);
 }
+
+const weatherIcons = [
+  'images/weather/clear-day.svg',
+  'images/weather/clear-night.svg',
+  'images/weather/cloudy.svg',
+  'images/weather/fog.svg',
+  'images/weather/rain.svg',
+  'images/weather/snow.svg',
+  'images/weather/thunderstorms.svg',
+  'images/weather/LICENSE'
+];
+for (const rel of weatherIcons) {
+  assert(existsSync(path.join(build, rel)), `weather icon spot check: ${rel}`);
+}
+assert(
+  !existsSync(path.join(build, 'images/weather/preview.html')),
+  'weather icon preview.html is not shipped'
+);
 
 const required = [
   'imperdibili/index.html',
