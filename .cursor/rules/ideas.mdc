@@ -1,0 +1,16 @@
+---
+description: .cursor/ideas/ — exploration and options, not shipped facts or pending work
+globs: .cursor/ideas/**/*.md
+alwaysApply: false
+---
+
+# Ideas files
+
+`.cursor/ideas/` holds **ideas** docs: architecture explorations, option spaces, wild proposals. They frame thinking; they are not specs to implement.
+
+When creating or editing `.cursor/ideas/`:
+
+- **Options, not commitments.** Mark speculative items clearly. Do not write them as if shipped or as a todo list.
+- **Not plans.** Actionable unfinished work belongs in `.cursor/plans/`. Promoting an idea means opening or updating a plan — do not turn the ideas file into a backlog.
+- **Not docs.** Shipped system design (how it works today, code maps) belongs in `docs/`. Ideas may link to `docs/` for grounding; do not duplicate those write-ups here.
+- **Stay useful.** Keep the decision frame (constraints, tests, trade-offs) current when the project’s real boundaries change; prune ideas that are no longer relevant.
