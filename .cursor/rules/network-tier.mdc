@@ -1,0 +1,19 @@
+---
+description: Network tier — high-end images/cinema with light-path resilience
+globs: docs/network-tier.md,src/lib/public-image.ts,src/lib/standard/network-*.ts,src/lib/standard/ambient-video*,src/lib/standard/AmbientVideo.svelte,src/lib/standard/media-query.ts,src/lib/standard/ArriveMap.svelte,src/lib/standard/GalleryCarousel.svelte,src/routes/(site)/+layout.svelte,src/routes/(site)/+page.svelte,scripts/optimize-site-images.mjs,tests/assert-build.mjs
+alwaysApply: false
+---
+
+# Network tier
+
+Narrative and code map: [docs/network-tier.md](../../docs/network-tier.md). Read it before changing this area.
+
+## Must preserve
+
+- **Product goal:** high-end experience (full WebPs, aerial cinema) when the connection allows it.
+- **Resilience:** light path (`-light.webp`, static cinema, no MP4) must stay usable on constrained bandwidth / devices. Do not break it when polishing the full path.
+- Session **`full` | `light`**. Runtime defaults unknown → light; `markLight()` locks; upgrade only via prove/`markFull()`. No site-wide `srcset` yet.
+- Build: full WebP (1600) + `-light.webp` (800), q80; emit then prune around `vite build`.
+- Cinema: never block the page; never autoplay with sound. Stall/timeout → light → static end poster.
+- Keep tier/prove in `network-*.ts`; buffer/session in `ambient-video.ts`; cinema layout in `+page.svelte`.
+- Update `ambient-video.test.ts`, `network-tier.test.ts`, `network-prove.test.ts` when tier, buffer, or control rules change.

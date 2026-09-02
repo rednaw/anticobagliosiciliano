@@ -1,0 +1,17 @@
+---
+description: Occupancy snapshot — edit constraints
+globs: docs/occupancy.md,src/lib/data/lodgify.ts,src/lib/data/occupancy.json,src/lib/standard/occupancy*,src/lib/standard/stay-dates*,src/lib/standard/StayDates.svelte,src/lib/standard/contact-mail*,**/contatti/**,scripts/sync-lodgify-availability.mjs,tests/assert-build.mjs,.github/workflows/lodgify*
+alwaysApply: false
+---
+
+# Occupancy
+
+Narrative and code map: [docs/occupancy.md](../../docs/occupancy.md). Read it before changing this area.
+
+## Must preserve
+
+- Site stays **static**; enquiries **mailto-only**. Snapshot in `occupancy.json` — not a live booking check. No rates/quotes/booking API.
+- Public houses only (`casa-1`…`casa-4`). Omit Casa #5 and Tutte. Map lives in `lodgify.ts`; API key never in git.
+- Fail closed on sync errors; unchanged fingerprint → no commit. Strip guest/booking fields from public JSON.
+- Occupied nights disabled in the calendar; checkout morning of an occupied night stays allowed (`[checkIn, checkOut)`).
+- Tests use fixtures — never hit Lodgify. `assert-build` keeps mailto + four house snapshot keys.

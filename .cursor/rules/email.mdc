@@ -1,0 +1,17 @@
+---
+description: Mailto-only contact email — edit constraints
+globs: docs/email.md,src/lib/standard/contact-mail*,src/routes/(site)/contatti/**,src/routes/(site)/en/contatti/**,src/lib/standard/Footer.svelte,src/routes/(site)/privacy/**,src/routes/(site)/en/privacy/**,tests/assert-build.mjs
+alwaysApply: false
+---
+
+# Email
+
+Narrative and code map: [docs/email.md](../../docs/email.md). Read it before changing this area.
+
+## Must preserve
+
+- Enquiries are **mailto-only** — no server POST, no mail API, no `window.open` for send.
+- Single inbox: `site.email` in `content.ts` (footer, privacy, JSON-LD, form).
+- Gate invalid fields/dates before the link navigates; message max length and unsafe markup checks stay.
+- Mailto body uses CRLF; assert-build expects `mailto:info@…` and no `window.open` on the contact page.
+- Occupancy may disable nights in the UI; do not put occupancy status into the mailto body.
