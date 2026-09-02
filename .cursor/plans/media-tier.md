@@ -1,151 +1,108 @@
 ---
 name: Media tier (viewport + network)
-status: pending
+status: done
 saved: 2026-09-02
-overview: Session full|light tier for images and cinema; build -light.webp and ffmpeg movie-end sync; slow-link detection and buffer-gated autoplay. Viewport layout and reduced motion stay orthogonal.
-todos:
-  - id: cinema-movie-stills-build
-    content: Ffmpeg steps for baglio-movie-start.jpg (frame 0) and baglio-movie-end.jpg in optimize-site-images.mjs; skip when MP4 mtime ≤ JPEG mtime
-    status: pending
-  - id: build-light-webp
-    content: Extend optimize-site-images.mjs — full WebP + -light.webp (orientation-aware, LIGHT_MAX_EDGE ~800)
-    status: pending
-  - id: verify-light-output
-    content: Add npm run images:verify-light — dimensions/spot-checks for -light emit
-    status: pending
-  - id: responsive-image-helper
-    content: Add responsiveImage() in public-image.ts (tier full|light, optional sizes/srcset)
-    status: pending
-  - id: network-quality-module
-    content: Add network-quality.ts (Network Information API — saveData, effectiveType)
-    status: pending
-  - id: buffer-gated-autoplay
-    content: AmbientVideo — deferred source, preload none, 6s abort, abortVideoLoad
-    status: pending
-  - id: network-tier-store
-    content: network-tier.ts — sessionStorage full|light; earliest pessimistic signal wins
-    status: pending
-  - id: wire-video-tier
-    content: posterOnly when tier === light; posterEnd; keep reduceMotion as separate trigger
-    status: pending
-  - id: roll-out-images
-    content: Migrate portone, map, houses, imperdibili, GalleryCarousel to responsiveImage()
-    status: pending
-  - id: update-ambient-video-rule
-    content: Document slow-link path in ambient-video.mdc
-    status: pending
+overview: Session full|light; pessimistic until proven (prove fetch + Network API). -light.webp build; buffer-gated cinema; light cinema = reduced-motion UX. Viewport srcset deferred.
+todos: []
 ---
 
 # Media tier
 
-Session **`full` | `light`** for images; cinema uses **`baglio-movie-start.jpg`** (loading) vs **`baglio-movie-end.jpg`** (static). Viewport (`srcset`, `<picture>`) and network tier are **orthogonal** — no 2×2 matrix.
+Session **`full` | `light`**. **Viewport and tier are orthogonal** — portone `<picture>` (wide/tall) only; no site-wide `srcset` yet.
 
-See `.cursor/rules/ambient-video.mdc` for cinema layout and reduced-motion behaviour.
+**Strategy:** Viewport `srcset`/`sizes` usually saves mobile bandwidth by matching layout width. We use **network tier** first: on slow links / Save-Data → `-light.webp`, static cinema, no MP4. Responsive srcsets may come later (tier picks file family; srcset picks width within it).
 
----
-
-## Rollout
-
-1. **Build** — ffmpeg `baglio-movie-start.jpg` + `baglio-movie-end.jpg`, `-light.webp` emit, `images:verify-light`.
-2. **Slow-link video** — `network-quality.ts`, buffer-gated autoplay, `network-tier.ts`, wire `posterOnly` for light tier.
-3. **Site-wide images** — `responsiveImage()`, migrate listing/gallery pages, update `ambient-video.mdc`.
+See `.cursor/rules/ambient-video.mdc` for cinema layout.
 
 ---
 
-## Bandwidth → `tier = 'light'`
+## Cinema
 
-| Signal | Mechanism |
-|--------|-----------|
-| Network Information API | `saveData` or `effectiveType` slow-2g / 2g / 3g |
-| Autoplay prep timeout | 6s without ~2s buffer on `baglio-movie.mp4` → abort fetch, play control |
-| Hero throughput *(optional)* | Resource Timing on portone still |
-
-Earliest pessimistic signal wins. DevTools throttling does not update `navigator.connection` — rely on the timeout path for tests.
-
----
-
-## Cinema assets
-
-`baglio-movie.mp4` — 1280×720, ~4.5 MB. Start and end stills match frame 0 and last frame.
-
-| File | Role |
-|------|------|
+| Asset | Runtime role |
+|-------|----------------|
 | `baglio-movie.mp4` | Premium autoplay |
-| `baglio-movie-start.jpg` | First frame; video `poster` while loading |
-| `baglio-movie-end.jpg` | Last frame; `posterEnd` when `posterOnly` (reduced motion **or** light tier) |
+| `baglio-movie-start.jpg` | `<video poster>` while loading |
+| `baglio-movie-end.jpg` | `posterEnd` when static cinema |
 
-```ts
-poster="/videos/baglio-movie-start.jpg"
-posterEnd="/videos/baglio-movie-end.jpg"
-posterOnly={reduceMotion || tier === 'light'}  // separate triggers
-```
+Start/end are normal JPEGs under `static/videos/` — same build emit (`.webp`, `-light.webp`) as everything in `static/images/` and `static/videos/`. When the MP4 is replaced, re-export both stills (ffmpeg frame 0 / last frame); no separate pipeline.
 
-Light tier: no MP4 until opt-in play. Never use `baglio-movie-start.jpg` on the static path.
+### Static cinema (`reduceMotion || tier === 'light'`)
 
----
+Same UX for both triggers — shared `staticCinema` in `+page.svelte`:
 
-## Naming
+- `posterOnly` + `posterEnd` — no MP4, **no play control**
+- Desktop landscape: sticky pin + Chi siamo hold card (`cinema-card--hold`)
+- Portrait: Chi siamo below clip (`portraitMobile` only)
+- Never `baglio-movie-start.jpg` on this path
 
-| Suffix | Meaning | Example |
-|--------|---------|---------|
-| `-movie` | Cinema MP4 | `baglio-movie.mp4` |
-| `-movie-start` | First MP4 frame (build-synced) | `baglio-movie-start.jpg` |
-| `-movie-end` | Last MP4 frame (build-synced) | `baglio-movie-end.jpg` |
-| `-light` | Network tier WebP (build) | `cortile-light.webp` |
-
-Do not reintroduce `-sm`, `-763w`, `-744w`, `-mobile`, or hand size variants.
+Premium path earns the end frame via playback; static path skips to it.
 
 ---
 
-## Build
+## Tier — pessimistic until proven
 
-```bash
-ffmpeg -y -i static/videos/baglio-movie.mp4 -frames:v 1 -q:v 2 static/videos/baglio-movie-start.jpg
-ffmpeg -sseof -0.1 -i static/videos/baglio-movie.mp4 -frames:v 1 -q:v 2 static/videos/baglio-movie-end.jpg
-```
+Default / unknown session is **`light`**. Upgrade with `markFull()` only after proof; `markLight()` **locks** for the session (no upgrade).
 
-- Full WebP: existing walk of `static/images/`, `static/videos/` at `MAX_EDGE` 1600.
-- Light WebP: `{basename}-light.webp`, orientation-aware `LIGHT_MAX_EDGE` (~800).
+| Signal | Rule |
+|--------|------|
+| sessionStorage `light` | Restore light (locked) |
+| sessionStorage `full` | Restore full |
+| Network API slow | `saveData` or `effectiveType` ∈ slow-2g / 2g / 3g → `markLight()` *(3g — revisit)* |
+| Throughput prove | Cache-busted fetch of `mappa` light asset within 800ms → `markFull()`; else `markLight()` |
+| Buffer stall / timeout | Abort MP4 → `markLight()` → static cinema |
+
+Deep links use the same init path (no dependency on homepage cinema). DevTools throttling often leaves `navigator.connection` optimistic — the prove fetch still fails closed to light.
+
+### Buffer gate (`ambient-video.ts`)
+
+`MIN_BUFFER_AHEAD_S = 2`, `AUTOPLAY_PREPARE_MS = 6_000`.
+
+1. No `<source>` until cinema `ready` and tier `full`; `preload="none"`; video visually hidden (no start poster) until play / recovery UI
+2. On intersect: attach source, `preload="auto"`, `video.load()`
+3. `hasMinimumBuffer`: `readyState >= 4`, or `>= 3` and ≥2s ahead in `video.buffered`
+4. Autoplay only when buffered; clear timeouts on success
+5. Stall: 2s with no buffer progress → abort → `markLight()` → static cinema
+6. Timeout: 6s without minimum buffer → abort → `markLight()` → static cinema
 
 ---
 
-## Runtime helper
+## Images
 
-```ts
-responsiveImage(path, { tier?: 'full' | 'light', sizes?: string })
-```
+### Build
 
-Reads tier from `network-tier.ts` (`sessionStorage`). Until store + emit exist, pages keep `imageAsset()`.
+Walk `static/images/` and `static/videos/` — all JPEG/PNG treated alike:
 
-When `light`: cinema → `posterOnly` + `posterEnd`; images → `-light.webp`.
+- Full: `MAX_EDGE` 1600, `QUALITY` 80 → `.webp`
+- Light: `LIGHT_MAX_EDGE` ~800, `LIGHT_QUALITY` 80 → `-light.webp`
+
+`npm run images:verify-light` after emit.
+
+### `responsiveImage(path, { tier? })`
+
+- Tier-only — no `sizes`/`srcset` in this plan
+- Pass `{ tier: $mediaTier }` (or page `tier`) so URLs update on downgrade
+- **Dev:** always committed JPEG/PNG (tier affects cinema only)
+- **Prod:** `full` → `.webp`; `light` → `-light.webp` (all page images incl. galleries)
+- **First paint:** client starts `light` until prove/`markFull`; prerendered markup may still show full URLs until hydration — acceptable
+- **SEO/OG/JSON-LD:** always full via `publicImage()` — not tiered
+- **Come arrivare:** light tier keeps the static map image only (`ArriveMap`) — no Leaflet / OSM tiles
+
+### Naming
+
+`-light` suffix = network-tier WebP (build). No `-sm` or hand width variants. Cinema filenames (`baglio-movie-*`) are convention only, not a separate tier.
 
 ---
 
 ## Files
 
-| Area | Touch |
-|------|-------|
-| Build | `scripts/optimize-site-images.mjs`, `package.json` |
-| Video | `AmbientVideo.svelte`, `ambient-video.ts`, `+page.svelte` |
-| Network | `network-quality.ts`, `network-tier.ts` (new) |
-| Images | `public-image.ts` |
-| Rules | `ambient-video.mdc` |
+`optimize-site-images.mjs`, `public-image.ts`, `network-quality.ts`, `network-prove.ts`, `network-tier.ts`, `ambient-video.ts`, `AmbientVideo.svelte`, `ArriveMap.svelte`, `+page.svelte`, `+layout.svelte`, `ambient-video.mdc`
 
 ---
 
-## Open decisions
+## Out of scope / follow-ups
 
-1. **`LIGHT_QUALITY`** — 80 or lower?
-2. **`baglio-movie-start.jpg` / `-end.jpg` in git** — committed alongside build step, or build-only?
-3. **Play on tap (light)** — start poster then video, or MP4 from end still?
-4. **Hero throughput probe** — phase 2 or defer?
-5. **Galleries** — light tier for all slides or lead only?
-6. **Dev fallback** — full JPEG when `-light.webp` missing?
-
----
-
-## Out of scope
-
-- Network × orientation file matrix.
-- Replacing portone wide vs tall `<picture>`.
-- Single flag for reduced motion, portrait, and slow link.
+- Site-wide viewport `srcset`
+- Replacing portone `<picture>`
+- Merging reduced motion, portrait, and slow link into one flag
+- Revisit whether `3g` → light is too aggressive
+- Tune `PROVE_FULL_MAX_MS` / probe asset after real-network samples

@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { imageAsset } from '$lib/public-image';
+  import { responsiveImage } from '$lib/public-image';
   import { page } from '$app/state';
   import { baglioLocation, imperdibiliLead, imperdibiliRouteCopy, places } from '$lib/data/content';
   import { placeDirectionApps } from '$lib/standard/place-directions';
   import Reveal from '$lib/standard/Reveal.svelte';
   import { pick, siteHref, ui } from '$lib/standard/i18n';
+  import { mediaTier } from '$lib/standard/network-tier';
 
   const locale = $derived(page.data.locale);
+  const tier = $derived($mediaTier);
   const placeList = $derived(places(locale));
   const pageTitle = $derived(pick(ui.navImperdibili, locale));
   const photoCredits = $derived(siteHref(locale, 'imperdibili/crediti-foto'));
@@ -47,7 +49,7 @@
         <article id={place.slug}>
           <figure class="media">
             <img
-              src={imageAsset(place.image)}
+              src={responsiveImage(place.image, { tier })}
               alt={place.name}
               width="1600"
               height="1100"

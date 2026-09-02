@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/optimize-site-images.mjs --emit && vite build && node scripts/optimize-site-images.mjs --prune",
+    "build": "node scripts/optimize-site-images.mjs && vite build && node scripts/optimize-site-images.mjs prune",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

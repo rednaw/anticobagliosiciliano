@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { imageAsset } from '$lib/public-image';
+  import { responsiveImage } from '$lib/public-image';
   import AmbientVideo from '$lib/standard/AmbientVideo.svelte';
   import Reveal from '$lib/standard/Reveal.svelte';
   import SectionHead from '$lib/standard/SectionHead.svelte';
@@ -14,6 +14,7 @@
   } from '$lib/data/content';
   import { localize, pick, siteHref, ui } from '$lib/standard/i18n';
   import { PORTRAIT_ASPECT_QUERY, REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
+  import { mediaTier } from '$lib/standard/network-tier';
 
   /** Portone hero, then aerial video; desktop adds a scroll-driven Chi siamo card. */
   const locale = $derived(page.data.locale);
@@ -24,6 +25,7 @@
   const contatti = $derived(siteHref(locale, 'contatti'));
   const imperdibili = $derived(siteHref(locale, 'imperdibili'));
   const home = $derived(localize(homeCopy, locale));
+  const tier = $derived($mediaTier);
 
   let videoPlaying = $state(false);
   let videoEnded = $state(false);
@@ -32,8 +34,10 @@
   let portraitMobile = $state(false);
   let cinemaStageEl = $state<HTMLElement | null>(null);
 
-  const cinemaScroll = $derived(!reduceMotion && !portraitMobile);
-  const cinemaDesktopStill = $derived(reduceMotion && !portraitMobile);
+  /** Shared static-cinema outcome: reduced motion or light network tier. */
+  const staticCinema = $derived(reduceMotion || tier === 'light');
+  const cinemaScroll = $derived(!staticCinema && !portraitMobile);
+  const cinemaDesktopStill = $derived(staticCinema && !portraitMobile);
   const cinemaPinned = $derived(
     cinemaDesktopStill || (cinemaScroll && (videoPlaying || videoEnded))
   );
@@ -50,7 +54,7 @@
 
   $effect(() => {
     const el = cinemaStageEl;
-    if (!el || reduceMotion) return;
+    if (!el || staticCinema) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -73,7 +77,7 @@
     <div class="gate">
       <img
         class="gate-backdrop"
-        src={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
+        src={responsiveImage('/images/ambiance/hero-portone-wide.jpg', { tier })}
         alt=""
         aria-hidden="true"
         width="1248"
@@ -83,11 +87,11 @@
       <picture>
         <source
           media="(min-aspect-ratio: 7 / 10)"
-          srcset={imageAsset('/images/ambiance/hero-portone-wide.jpg')}
+          srcset={responsiveImage('/images/ambiance/hero-portone-wide.jpg', { tier })}
         />
         <img
           class="gate-media"
-          src={imageAsset('/images/ambiance/hero-portone-tall.jpg')}
+          src={responsiveImage('/images/ambiance/hero-portone-tall.jpg', { tier })}
           width="1248"
           height="1690"
           alt={home.alt.hero}
@@ -111,7 +115,7 @@
       <AmbientVideo
         fill
         playOnce
-        posterOnly={reduceMotion}
+        posterOnly={staticCinema}
         ready={videoStageReady}
         bind:playing={videoPlaying}
         bind:ended={videoEnded}
@@ -170,7 +174,7 @@
         <Reveal delay={i * 80}>
           <a class="house" href={siteHref(locale, `case/${house.slug}`)}>
             <img
-              src={imageAsset(house.image)}
+              src={responsiveImage(house.image, { tier })}
               alt={house.name}
               width="1600"
               height="1100"
@@ -194,7 +198,7 @@
 
 <section class="feature">
   <img
-    src={imageAsset('/images/ambiance/cortile.jpg')}
+    src={responsiveImage('/images/ambiance/cortile.jpg', { tier })}
     alt={home.alt.cortile}
     width="1400"
     height="1867"
@@ -223,14 +227,14 @@
     <Reveal delay={100}>
       <div class="garden-photos">
         <img
-          src={imageAsset('/images/ambiance/giardino.jpg')}
+          src={responsiveImage('/images/ambiance/giardino.jpg', { tier })}
           alt={home.alt.giardino}
           width="1024"
           height="768"
           loading="lazy"
         />
         <img
-          src={imageAsset('/images/ambiance/agrumeto.jpg')}
+          src={responsiveImage('/images/ambiance/agrumeto.jpg', { tier })}
           alt={home.alt.agrumeto}
           width="1600"
           height="1067"
@@ -271,7 +275,7 @@
         <Reveal delay={i * 50}>
           <a class="place" href="{imperdibili}#{place.slug}">
             <img
-              src={imageAsset(place.image)}
+              src={responsiveImage(place.image, { tier })}
               alt={place.name}
               width="1600"
               height="1200"
@@ -298,7 +302,7 @@
         <Reveal delay={i * 70}>
           <figure>
             <img
-              src={imageAsset(award.image)}
+              src={responsiveImage(award.image, { tier })}
               alt={award.title}
               width="1600"
               height="1000"

@@ -1,12 +1,18 @@
 <script lang="ts">
   import { asset } from '$app/paths';
-  import { imageAsset } from '$lib/public-image';
+  import { responsiveImage } from '$lib/public-image';
   import { page } from '$app/state';
   import {
+    AUTOPLAY_PREPARE_MS,
+    AUTOPLAY_STALL_MS,
+    abortVideoLoad,
+    hasBufferProgress,
+    hasMinimumBuffer,
     homeCinemaSession,
     parkVideoAtEnd,
     showAmbientControl
   } from '$lib/standard/ambient-video';
+  import { mediaTier, markLight } from '$lib/standard/network-tier';
   import { REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
   import { pick, ui } from '$lib/standard/i18n';
 
@@ -20,14 +26,14 @@
     playing = $bindable(false),
     ended = $bindable(false),
     ready = true,
-    /** Still image only — no video fetch or playback (e.g. prefers-reduced-motion). */
+    /** Still image only — no video fetch or playback (reduced motion or light tier). */
     posterOnly = false,
     /** Persist playback off-screen; with homepage cinema, also once per SPA session. */
     playOnce = false
   }: {
     src: string;
     poster: string;
-    /** Last frame still for posterOnly (e.g. reduced motion); falls back to poster. */
+    /** Last frame still for posterOnly; falls back to poster. */
     posterEnd?: string;
     label: string;
     /** Cover the parent box edge-to-edge (hero). */
@@ -43,8 +49,10 @@
 
   let el: HTMLVideoElement | undefined = $state();
   let wrap: HTMLDivElement | undefined = $state();
+  let sourceAttached = $state(false);
 
   const locale = $derived(page.data.locale);
+  const tier = $derived($mediaTier);
 
   let reduceMotion = $state(false);
   let playBlocked = $state(false);
@@ -55,6 +63,9 @@
     showAmbientControl({ playing, reduceMotion, ended, playBlocked, sessionSpent })
   );
   const controlLabel = $derived(pick(ended ? ui.replayVideo : ui.playVideo, locale));
+  const stillPoster = $derived(posterEnd ?? poster);
+  /** Hide the element (and its start poster) until playback or a recovery UI is needed. */
+  const awaitingPlayback = $derived(!playing && !ended && !playBlocked && !sessionSpent);
 
   function syncEnded() {
     ended = true;
@@ -90,7 +101,11 @@
     }
   }
 
-  const stillPoster = $derived(posterEnd ?? poster);
+  function failPrepareToLight(video: HTMLVideoElement) {
+    abortVideoLoad(video);
+    sourceAttached = false;
+    markLight();
+  }
 
   $effect(() => {
     if (posterOnly) return;
@@ -113,11 +128,12 @@
     else video.addEventListener('loadedmetadata', restore, { once: true });
   });
 
+  /** Buffer-gated attach + autoplay when cinema is ready and tier is full. */
   $effect(() => {
-    if (posterOnly) return;
+    if (posterOnly || !ready || tier === 'light') return;
     const video = el;
     const container = wrap;
-    if (!video || !container || !ready) return;
+    if (!video || !container) return;
 
     if (reduceMotion) {
       video.pause();
@@ -126,16 +142,75 @@
 
     if (playOnce && homeCinemaSession.spent()) return;
 
+    let cancelled = false;
+    let prepareStarted = false;
+    let prepareTimer: ReturnType<typeof setTimeout> | undefined;
+    let stallTimer: ReturnType<typeof setTimeout> | undefined;
+    let intersecting = fill;
+
+    const clearTimers = () => {
+      if (prepareTimer !== undefined) clearTimeout(prepareTimer);
+      if (stallTimer !== undefined) clearTimeout(stallTimer);
+      prepareTimer = undefined;
+      stallTimer = undefined;
+    };
+
+    const onProgress = () => {
+      if (cancelled) return;
+      if (hasBufferProgress(video) && stallTimer !== undefined) {
+        clearTimeout(stallTimer);
+        stallTimer = undefined;
+      }
+      if (!hasMinimumBuffer(video)) return;
+      clearTimers();
+      video.removeEventListener('progress', onProgress);
+      video.removeEventListener('canplaythrough', onProgress);
+      void attemptPlay();
+    };
+
+    const startPrepare = () => {
+      if (cancelled || prepareStarted) return;
+      prepareStarted = true;
+      sourceAttached = true;
+      video.preload = 'auto';
+
+      queueMicrotask(() => {
+        if (cancelled || !el) return;
+        video.load();
+        stallTimer = setTimeout(() => {
+          if (cancelled || hasBufferProgress(video) || hasMinimumBuffer(video)) return;
+          clearTimers();
+          failPrepareToLight(video);
+        }, AUTOPLAY_STALL_MS);
+        prepareTimer = setTimeout(() => {
+          if (cancelled || hasMinimumBuffer(video)) return;
+          clearTimers();
+          failPrepareToLight(video);
+        }, AUTOPLAY_PREPARE_MS);
+        video.addEventListener('progress', onProgress);
+        video.addEventListener('canplaythrough', onProgress);
+        if (hasMinimumBuffer(video)) onProgress();
+      });
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) attemptPlay();
+        intersecting = entry.isIntersecting;
+        if (entry.isIntersecting) startPrepare();
         else if (!playOnce) video.pause();
       },
       { threshold: fill ? 0 : 0.35 }
     );
     observer.observe(container);
-    if (fill) attemptPlay();
-    return () => observer.disconnect();
+    if (intersecting) startPrepare();
+
+    return () => {
+      cancelled = true;
+      clearTimers();
+      video.removeEventListener('progress', onProgress);
+      video.removeEventListener('canplaythrough', onProgress);
+      observer.disconnect();
+    };
   });
 </script>
 
@@ -143,7 +218,7 @@
   {#if posterOnly}
     <img
       class="poster"
-      src={imageAsset(stillPoster)}
+      src={responsiveImage(stillPoster, { tier })}
       width="1280"
       height="720"
       alt={label}
@@ -153,12 +228,13 @@
   <!-- svelte-ignore a11y_media_has_caption -->
   <video
     bind:this={el}
+    class:awaiting-playback={awaitingPlayback}
     muted
     playsinline
-    preload={fill ? 'metadata' : 'none'}
+    preload="none"
     width="1600"
     height="900"
-    poster={imageAsset(poster)}
+    poster={playBlocked ? responsiveImage(poster, { tier }) : undefined}
     aria-label={label}
     onplay={() => {
       playing = true;
@@ -168,7 +244,9 @@
     onpause={() => (playing = false)}
     onended={finishPlayback}
   >
-    <source src={asset(src)} type="video/mp4" />
+    {#if sourceAttached}
+      <source src={asset(src)} type="video/mp4" />
+    {/if}
     {pick(ui.videoUnsupported, locale)}
   </video>
 
@@ -211,6 +289,11 @@
     aspect-ratio: 16 / 9;
     object-fit: cover;
     background: #000;
+  }
+
+  video.awaiting-playback {
+    opacity: 0;
+    background: transparent;
   }
 
   .fill video,

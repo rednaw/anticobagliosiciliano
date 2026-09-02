@@ -1,4 +1,4 @@
-# WebP generated before vite prerender (`npm run build --emit`)
+# WebP generated before vite prerender
 /static/images/**/*.webp
 /static/videos/**/*.webp
 

@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { imageAsset } from '$lib/public-image';
+  import { responsiveImage } from '$lib/public-image';
   import { baglioLocation, site } from '$lib/data/content';
   import type { Map as LeafletMap } from 'leaflet';
-  import 'leaflet/dist/leaflet.css';
   import { ARRIVE_MAP, arriveMinZoomForView } from './arrive-map';
+  import { mediaTier } from '$lib/standard/network-tier';
 
   let {
     alt,
@@ -16,14 +15,26 @@
 
   let mapEl: HTMLDivElement | undefined = $state();
   let ready = $state(false);
+  const tier = $derived($mediaTier);
+  /** Light tier: static map image only — no Leaflet / OSM tiles. */
+  const staticOnly = $derived(tier === 'light');
 
-  onMount(() => {
+  $effect(() => {
+    if (staticOnly) {
+      ready = false;
+      return;
+    }
+
+    const el = mapEl;
+    if (!el) return;
+
     let map: LeafletMap | undefined;
     let cancelled = false;
     const stop: Array<() => void> = [];
 
     void (async () => {
       const leaflet = await import('leaflet');
+      await import('leaflet/dist/leaflet.css');
       const L = leaflet.default ?? leaflet;
       if (cancelled || !mapEl) return;
 
@@ -31,10 +42,10 @@
       const coarse = window.matchMedia('(pointer: coarse)').matches;
       const center: [number, number] = [baglioLocation.lat, baglioLocation.lon];
 
-      map = L.map(mapEl, {
+      map = L.map(el, {
         center,
         zoom: ARRIVE_MAP.zoom,
-        minZoom: arriveMinZoomForView(mapEl.clientWidth, mapEl.clientHeight),
+        minZoom: arriveMinZoomForView(el.clientWidth, el.clientHeight),
         maxZoom: ARRIVE_MAP.maxZoom,
         maxBounds: ARRIVE_MAP.bounds,
         maxBoundsViscosity: 0.85,
@@ -105,6 +116,7 @@
 
     return () => {
       cancelled = true;
+      ready = false;
       for (const off of stop) off();
       map?.remove();
     };
@@ -120,16 +132,27 @@
 </script>
 
 <div class="frame">
-  <div class="leaflet" bind:this={mapEl} role="region" aria-label={alt}></div>
-  {#if !ready}
+  {#if staticOnly}
     <img
       class="fallback"
-      src={imageAsset(baglioLocation.map)}
+      src={responsiveImage(baglioLocation.map, { tier })}
       alt={alt}
       width="1536"
       height="1024"
       fetchpriority="high"
     />
+  {:else}
+    <div class="leaflet" bind:this={mapEl} role="region" aria-label={alt}></div>
+    {#if !ready}
+      <img
+        class="fallback"
+        src={responsiveImage(baglioLocation.map, { tier })}
+        alt={alt}
+        width="1536"
+        height="1024"
+        fetchpriority="high"
+      />
+    {/if}
   {/if}
 </div>
 

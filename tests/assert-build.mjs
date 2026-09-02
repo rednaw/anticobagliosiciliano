@@ -289,11 +289,52 @@ for (const dir of ['images', 'videos']) {
   }
 }
 assert(leaked.length === 0, `build dropped marketing JPEG/PNG (leaked: ${leaked.join(', ') || 'none'})`);
-assert(
-  existsSync(path.join(build, 'images/ambiance/mappa.webp')) ||
-    existsSync(path.join(build, 'images/ambiance/mappa.jpg')),
-  'Come arrivare map is in the build'
-);
+
+/** Full `.webp` → `{basename}-light.webp` (media tier emit). */
+function lightWebpFor(fullPath) {
+  return fullPath.replace(/\.webp$/i, '-light.webp');
+}
+
+const mediaRoots = ['images', 'videos'].map((d) => path.join(build, d));
+/** @type {string[]} */
+const fullWebps = [];
+for (const dir of mediaRoots) {
+  for (const file of walk(dir)) {
+    if (!/\.webp$/i.test(file) || /-light\.webp$/i.test(file)) continue;
+    fullWebps.push(file);
+  }
+}
+assert(fullWebps.length > 0, 'build has full-tier WebP assets');
+
+let missingLight = 0;
+for (const full of fullWebps) {
+  const light = lightWebpFor(full);
+  if (existsSync(light)) ok(`light ${path.relative(build, light)}`);
+  else {
+    missingLight += 1;
+    fail(`missing light WebP for ${path.relative(build, full)}`);
+  }
+}
+assert(missingLight === 0, `every full WebP has a -light sibling (${fullWebps.length} checked)`);
+
+const tierSpotChecks = [
+  'images/ambiance/mappa.webp',
+  'images/ambiance/mappa-light.webp',
+  'images/ambiance/hero-portone-wide.webp',
+  'images/ambiance/hero-portone-wide-light.webp',
+  'images/ambiance/hero-portone-tall.webp',
+  'images/ambiance/hero-portone-tall-light.webp',
+  'images/houses/casa-1/00-img_6532.webp',
+  'images/houses/casa-1/00-img_6532-light.webp',
+  'videos/baglio-movie-start.webp',
+  'videos/baglio-movie-start-light.webp',
+  'videos/baglio-movie-end.webp',
+  'videos/baglio-movie-end-light.webp',
+  'videos/baglio-movie.mp4'
+];
+for (const rel of tierSpotChecks) {
+  assert(existsSync(path.join(build, rel)), `media tier spot check: ${rel}`);
+}
 
 const required = [
   'imperdibili/index.html',

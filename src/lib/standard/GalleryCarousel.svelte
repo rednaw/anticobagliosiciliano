@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { imageAsset } from '$lib/public-image';
+  import { responsiveImage } from '$lib/public-image';
   import { page } from '$app/state';
   import { indexAfterKey, photoAlt as galleryPhotoAlt, wrapIndex } from '$lib/standard/gallery';
   import { pick, ui } from '$lib/standard/i18n';
+  import { mediaTier } from '$lib/standard/network-tier';
 
   let {
     images,
@@ -16,6 +17,7 @@
   let thumbsEl: HTMLDivElement | undefined = $state();
 
   const locale = $derived(page.data.locale);
+  const tier = $derived($mediaTier);
   const count = $derived(images.length);
   const current = $derived(images[index] ?? images[0]);
   const photoAlt = $derived(galleryPhotoAlt(alt, index, count, locale));
@@ -60,7 +62,7 @@
     aria-label={`${pick(ui.gallery, locale)} ${alt}`}
   >
     <div class="stage">
-      <img src={imageAsset(current)} alt={photoAlt} width="1600" height="1100" />
+      <img src={responsiveImage(current, { tier })} alt={photoAlt} width="1600" height="1100" />
       {#if count > 1}
         <button
           type="button"
@@ -96,7 +98,7 @@
             onclick={() => go(i)}
             onkeydown={onKeydown}
           >
-            <img src={imageAsset(src)} alt="" width="1600" height="1100" loading="lazy" />
+            <img src={responsiveImage(src, { tier })} alt="" width="1600" height="1100" loading="lazy" />
           </button>
         {/each}
       </div>

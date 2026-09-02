@@ -12,6 +12,7 @@
   import { publicImage } from '$lib/public-image';
   import { OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH, pageSeo } from '$lib/standard/seo';
   import { jsonLdScriptContent, pageJsonLd } from '$lib/standard/json-ld';
+  import { initMediaTier } from '$lib/standard/network-tier';
 
   let { children } = $props();
 
@@ -30,6 +31,10 @@
 
   $effect(() => {
     document.documentElement.lang = locale;
+  });
+
+  $effect(() => {
+    void initMediaTier();
   });
 </script>
 

@@ -1,21 +1,23 @@
 <script lang="ts">
-  import { imageAsset } from '$lib/public-image';
+  import { responsiveImage } from '$lib/public-image';
   import { page } from '$app/state';
   import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
   import Reveal from '$lib/standard/Reveal.svelte';
   import SectionHead from '$lib/standard/SectionHead.svelte';
   import { houses } from '$lib/data/content';
   import { contactHref, pick, siteHref, ui } from '$lib/standard/i18n';
+  import { mediaTier } from '$lib/standard/network-tier';
 
   let { data } = $props();
   const locale = $derived(page.data.locale);
+  const tier = $derived($mediaTier);
   const house = $derived(data.house);
   const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
   const contatti = $derived(contactHref(locale, house.slug));
 </script>
 
 <section class="hero">
-  <img src={imageAsset(house.image)} alt={house.name} width="1400" height="933" />
+  <img src={responsiveImage(house.image, { tier })} alt={house.name} width="1400" height="933" />
   <div class="veil"></div>
   <div class="container copy">
     <p class="eyebrow">{pick(ui.accommodation, locale)}</p>
@@ -76,7 +78,7 @@
         <Reveal delay={i * 70}>
           <a href={siteHref(locale, `case/${other.slug}`)}>
             <img
-              src={imageAsset(other.image)}
+              src={responsiveImage(other.image, { tier })}
               alt={other.name}
               width="1600"
               height="1100"
