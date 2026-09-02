@@ -65,10 +65,11 @@ describe('homeCinemaSession', () => {
 });
 
 describe('parkVideoAtEnd', () => {
-  it('seeks near the end and pauses', () => {
+  it('seeks near the end and pauses when not already ended', () => {
     const video = {
       duration: 10,
       currentTime: 0,
+      ended: false,
       pause: () => {}
     } as HTMLVideoElement;
 
@@ -79,6 +80,24 @@ describe('parkVideoAtEnd', () => {
 
     parkVideoAtEnd(video);
     expect(video.currentTime).toBeCloseTo(9.95);
+    expect(paused).toBe(true);
+  });
+
+  it('pauses without seeking when the element already ended', () => {
+    const video = {
+      duration: 10,
+      currentTime: 10,
+      ended: true,
+      pause: () => {}
+    } as HTMLVideoElement;
+
+    let paused = false;
+    video.pause = () => {
+      paused = true;
+    };
+
+    parkVideoAtEnd(video);
+    expect(video.currentTime).toBe(10);
     expect(paused).toBe(true);
   });
 });

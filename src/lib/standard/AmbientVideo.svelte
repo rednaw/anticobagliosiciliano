@@ -83,8 +83,10 @@
 
   function finishPlayback() {
     if (!el || ended) return;
+    // Mark ended before pause/seek so the parent cinema pin does not drop for a frame.
+    ended = true;
+    playing = false;
     parkVideoAtEnd(el);
-    syncEnded();
     if (playOnce) homeCinemaSession.markFinished();
   }
 
@@ -241,7 +243,15 @@
       playBlocked = false;
       if (playOnce) homeCinemaSession.markStarted();
     }}
-    onpause={() => (playing = false)}
+    onpause={() => {
+      // Reaching the natural end often fires pause before ended; finish first so
+      // `playing` is not cleared while `ended` is still false (cinema unpin flash).
+      if (el?.ended) {
+        finishPlayback();
+        return;
+      }
+      playing = false;
+    }}
     onended={finishPlayback}
   >
     {#if sourceAttached}

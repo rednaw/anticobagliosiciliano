@@ -37,10 +37,13 @@ export function showAmbientControl({
   return !playing && (reduceMotion || ended || playBlocked || sessionSpent);
 }
 
-/** Seek to the last frame and sync bindable ended/playing state. */
+/** Seek to the last frame and pause. Skip seek when already `ended` — seeking
+ * back from the natural end often flashes a blank frame. */
 export function parkVideoAtEnd(video: HTMLVideoElement): void {
   if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-  video.currentTime = Math.max(0, video.duration - 0.05);
+  if (!video.ended) {
+    video.currentTime = Math.max(0, video.duration - 0.05);
+  }
   video.pause();
 }
 
