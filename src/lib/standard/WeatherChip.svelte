@@ -14,13 +14,7 @@
   const locale = $derived(page.data.locale);
   const tier = $derived($mediaTier);
 
-  /** Gap between Open-Meteo pill and OSM attribution (map shows through). */
-  const ATTRIB_GAP_PX = 12;
-
   let reading = $state<WeatherReading | null>(null);
-  let stageEl = $state<HTMLElement | null>(null);
-  /** Distance from the right edge so the credit sits clear of Leaflet’s attribution. */
-  let creditInsetPx = $state(180);
 
   $effect(() => {
     if (tier !== 'full') {
@@ -38,48 +32,6 @@
     return () => {
       cancelled = true;
       controller.abort();
-    };
-  });
-
-  $effect(() => {
-    const root = stageEl;
-    const show = Boolean(reading && tier === 'full');
-    if (!root || !show) return;
-
-    const stage = root.closest('.map-stage') ?? root.parentElement;
-    if (!stage) return;
-    const host = stage;
-
-    let attrib: Element | null = null;
-    let observer: ResizeObserver | undefined;
-    let timer: ReturnType<typeof setInterval> | undefined;
-    let cancelled = false;
-
-    function syncInset() {
-      if (!attrib || !(attrib instanceof HTMLElement)) return;
-      creditInsetPx = attrib.offsetWidth + ATTRIB_GAP_PX;
-    }
-
-    function watch(): boolean {
-      attrib = host.querySelector('.leaflet-control-attribution');
-      if (!attrib) return false;
-      syncInset();
-      observer = new ResizeObserver(syncInset);
-      observer.observe(attrib);
-      return true;
-    }
-
-    if (!watch()) {
-      timer = setInterval(() => {
-        if (cancelled) return;
-        if (watch() && timer !== undefined) clearInterval(timer);
-      }, 100);
-    }
-
-    return () => {
-      cancelled = true;
-      if (timer !== undefined) clearInterval(timer);
-      observer?.disconnect();
     };
   });
 
@@ -108,7 +60,7 @@
   );
 </script>
 
-<div class="weather-root" bind:this={stageEl}>
+<div class="weather-root">
   {#if reading}
     <p class="weather" aria-label={label}>
       <span
@@ -126,8 +78,7 @@
       class="credit"
       href="https://open-meteo.com/"
       rel="noopener noreferrer"
-      target="_blank"
-      style:right="{creditInsetPx}px">{pick(weatherCopy.credit, locale)}</a
+      target="_blank">{pick(weatherCopy.credit, locale)}</a
     >
   {/if}
 </div>
@@ -198,6 +149,7 @@
     pointer-events: auto;
     position: absolute;
     bottom: 0;
+    left: 0;
     margin: 0;
     padding: 0 0.4rem;
     font-family: var(--font-body);

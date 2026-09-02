@@ -71,6 +71,7 @@
 
   .map-stage {
     position: relative;
+    z-index: 0;
   }
 
   .copy {
