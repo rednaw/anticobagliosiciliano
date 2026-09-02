@@ -1,20 +1,13 @@
 #!/usr/bin/env node
 /**
- * Production image pipeline (two steps around `vite build`):
+ * Production image pipeline around `vite build`:
  *
- *   --emit   Write WebP next to JPEG/PNG in `static/` so prerender can fetch them.
- *            Source files stay as-is. Generated `.webp` are gitignored.
- *   --prune  Drop JPEG/PNG from `build/` after Vite copies them.
- *   --verify-light  Spot-check that every convertible source has a -light.webp
- *            within LIGHT_MAX_EDGE (after --emit).
+ *   (default)  Emit full + light WebP next to JPEG/PNG in `static/`.
+ *   prune      Drop JPEG/PNG from `build/` after Vite copies them.
  *
  * Usage:
- *   node scripts/optimize-site-images.mjs --emit
- *   node scripts/optimize-site-images.mjs --prune [build-dir]
- *   node scripts/optimize-site-images.mjs --verify-light
- *
- * Env: MAX_EDGE (default 1600), QUALITY (default 80),
- *      LIGHT_MAX_EDGE (default 800), LIGHT_QUALITY (default 80)
+ *   node scripts/optimize-site-images.mjs
+ *   node scripts/optimize-site-images.mjs prune
  */
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -25,17 +18,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 const SOURCE_EXT = new Set(['.jpg', '.jpeg', '.png']);
-const MAX_EDGE = Number(process.env.MAX_EDGE ?? 1600);
-const QUALITY = Number(process.env.QUALITY ?? 80);
-const LIGHT_MAX_EDGE = Number(process.env.LIGHT_MAX_EDGE ?? 800);
-const LIGHT_QUALITY = Number(process.env.LIGHT_QUALITY ?? 80);
+const FULL_MAX_EDGE = 1600;
+const LIGHT_MAX_EDGE = 800;
+const QUALITY = 80;
 const CONCURRENCY = 8;
 
-const args = process.argv.slice(2);
-const emit = args.includes('--emit');
-const prune = args.includes('--prune');
-const verifyLight = args.includes('--verify-light');
-const positional = args.filter((a) => !a.startsWith('--'));
+const mode = process.argv[2] ?? 'emit';
 
 /**
  * @param {string} dir
@@ -78,32 +66,17 @@ async function mapPool(items, limit, fn) {
   return Promise.all(results);
 }
 
-/** @param {string} src */
-function destFull(src) {
-  return src.replace(/\.(jpe?g|png)$/i, '.webp');
-}
-
-/** @param {string} src */
-function destLight(src) {
-  return src.replace(/\.(jpe?g|png)$/i, '-light.webp');
-}
-
 /** @param {string} file */
 function isConvertible(file) {
-  const ext = path.extname(file).toLowerCase();
-  return SOURCE_EXT.has(ext);
+  return SOURCE_EXT.has(path.extname(file).toLowerCase());
 }
 
 /**
  * @param {string} src
  * @param {string} dest
  * @param {number} maxEdge
- * @param {number} quality
- * @returns {Promise<{ src: string, dest: string, before: number, after: number } | { skipped: true, src: string, dest: string } | null>}
  */
-async function emitOne(src, dest, maxEdge, quality) {
-  if (!isConvertible(src)) return null;
-
+async function emitOne(src, dest, maxEdge) {
   const before = (await fs.stat(src)).size;
 
   try {
@@ -124,7 +97,7 @@ async function emitOne(src, dest, maxEdge, quality) {
       fit: 'inside',
       withoutEnlargement: true
     })
-    .webp({ quality })
+    .webp({ quality: QUALITY })
     .toFile(dest);
 
   const after = (await fs.stat(dest)).size;
@@ -142,13 +115,15 @@ async function collectSources() {
 async function runEmit() {
   const files = await collectSources();
 
-  /** @type {Exclude<Awaited<ReturnType<typeof emitOne>>, null>[]} */
+  /** @type {Awaited<ReturnType<typeof emitOne>>[]} */
   const results = [];
   await mapPool(files, CONCURRENCY, async (file) => {
-    const full = await emitOne(file, destFull(file), MAX_EDGE, QUALITY);
-    if (full) results.push(full);
-    const light = await emitOne(file, destLight(file), LIGHT_MAX_EDGE, LIGHT_QUALITY);
-    if (light) results.push(light);
+    results.push(
+      await emitOne(file, file.replace(/\.(jpe?g|png)$/i, '.webp'), FULL_MAX_EDGE)
+    );
+    results.push(
+      await emitOne(file, file.replace(/\.(jpe?g|png)$/i, '-light.webp'), LIGHT_MAX_EDGE)
+    );
   });
 
   const converted = results.filter((r) => !('skipped' in r));
@@ -171,48 +146,13 @@ async function runEmit() {
     console.log(
       'optimize-site-images: image payload ' +
         `${(bytesBefore / 1048576).toFixed(2)} MiB → ${(bytesAfter / 1048576).toFixed(2)} MiB ` +
-        `(full max ${MAX_EDGE}px q${QUALITY}; light max ${LIGHT_MAX_EDGE}px q${LIGHT_QUALITY})`
+        `(full max ${FULL_MAX_EDGE}px; light max ${LIGHT_MAX_EDGE}px; q${QUALITY})`
     );
   }
 }
 
-async function runVerifyLight() {
-  const files = await collectSources();
-  let failed = 0;
-
-  for (const src of files) {
-    const dest = destLight(src);
-    const rel = path.relative(path.join(root, 'static'), src);
-    try {
-      await fs.stat(dest);
-    } catch {
-      console.error(`FAIL  missing ${path.relative(path.join(root, 'static'), dest)} (from ${rel})`);
-      failed += 1;
-      continue;
-    }
-
-    const meta = await sharp(dest).metadata();
-    const w = meta.width ?? 0;
-    const h = meta.height ?? 0;
-    if (w > LIGHT_MAX_EDGE || h > LIGHT_MAX_EDGE) {
-      console.error(
-        `FAIL  ${path.basename(dest)} is ${w}×${h}, exceeds LIGHT_MAX_EDGE ${LIGHT_MAX_EDGE}`
-      );
-      failed += 1;
-      continue;
-    }
-    console.log(`ok    ${path.relative(path.join(root, 'static'), dest)} (${w}×${h})`);
-  }
-
-  if (failed) {
-    console.error(`optimize-site-images: verify-light failed=${failed}`);
-    process.exit(1);
-  }
-  console.log(`optimize-site-images: verify-light ok count=${files.length}`);
-}
-
 async function runPrune() {
-  const siteDir = path.resolve(root, positional[0] ?? 'build');
+  const siteDir = path.join(root, 'build');
   const searchRoots = [path.join(siteDir, 'images'), path.join(siteDir, 'videos')];
   /** @type {string[]} */
   const files = [];
@@ -225,20 +165,18 @@ async function runPrune() {
     removed += 1;
   }
 
-  console.log(`optimize-site-images: prune removed=${removed} jpeg/png from ${path.relative(root, siteDir)}`);
+  console.log(
+    `optimize-site-images: prune removed=${removed} jpeg/png from ${path.relative(root, siteDir)}`
+  );
 }
 
 async function main() {
-  const modes = [emit, prune, verifyLight].filter(Boolean).length;
-  if (modes !== 1) {
-    console.error(
-      'Usage: node scripts/optimize-site-images.mjs --emit | --prune [build-dir] | --verify-light'
-    );
+  if (mode === 'emit') await runEmit();
+  else if (mode === 'prune') await runPrune();
+  else {
+    console.error('Usage: node scripts/optimize-site-images.mjs [emit|prune]');
     process.exit(1);
   }
-  if (emit) await runEmit();
-  else if (verifyLight) await runVerifyLight();
-  else await runPrune();
 }
 
 main().catch((err) => {

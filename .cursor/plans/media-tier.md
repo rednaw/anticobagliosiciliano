@@ -72,10 +72,10 @@ Deep links use the same init path (no dependency on homepage cinema). DevTools t
 
 Walk `static/images/` and `static/videos/` — all JPEG/PNG treated alike:
 
-- Full: `MAX_EDGE` 1600, `QUALITY` 80 → `.webp`
-- Light: `LIGHT_MAX_EDGE` ~800, `LIGHT_QUALITY` 80 → `-light.webp`
+- Full: max edge 1600, quality 80 → `.webp`
+- Light: max edge 800, quality 80 → `-light.webp`
 
-`npm run images:verify-light` after emit.
+`optimize-site-images.mjs` emit (default) then `prune` around `vite build`. Light pairs are asserted in `npm run test:build`.
 
 ### `responsiveImage(path, { tier? })`
 
