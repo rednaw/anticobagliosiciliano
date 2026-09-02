@@ -1,0 +1,14 @@
+---
+description: Keep .cursor/plans forward-looking — pending work only, no history
+globs: .cursor/plans/**/*.md
+alwaysApply: false
+---
+
+# Plan files
+
+When creating or editing `.cursor/plans/`:
+
+- **Todos:** pending items only. When work ships, remove completed todos on the next plan edit — do not accumulate a done list.
+- **Body:** spec for remaining work and decisions. No "done on main", phase-0 retrospectives, or success-criteria checkboxes for shipped items.
+- **State as facts, not changelog:** reference current paths and behaviour the implementer needs; do not narrate what changed or when.
+- **Same session:** after completing plan work, update the plan before finishing the task.

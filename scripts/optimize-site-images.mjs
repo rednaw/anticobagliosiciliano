@@ -4,9 +4,7 @@
  *
  *   --emit   Write WebP next to JPEG/PNG in `static/` so prerender can fetch them.
  *            Source files stay as-is. Generated `.webp` are gitignored.
- *   --prune  Drop JPEG/PNG from `build/` after Vite copies them (keep `og-share.jpg`).
- *
- * Skips `og-share.jpg` (Open Graph).
+ *   --prune  Drop JPEG/PNG from `build/` after Vite copies them.
  *
  * Usage:
  *   node scripts/optimize-site-images.mjs --emit
@@ -23,7 +21,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 const SOURCE_EXT = new Set(['.jpg', '.jpeg', '.png']);
-const SKIP_NAMES = new Set(['og-share.jpg', 'og-share.jpeg']);
 const MAX_EDGE = Number(process.env.MAX_EDGE ?? 1600);
 const QUALITY = Number(process.env.QUALITY ?? 80);
 const CONCURRENCY = 8;
@@ -82,9 +79,7 @@ function destFor(src) {
 /** @param {string} file */
 function isConvertible(file) {
   const ext = path.extname(file).toLowerCase();
-  if (!SOURCE_EXT.has(ext)) return false;
-  if (SKIP_NAMES.has(path.basename(file).toLowerCase())) return false;
-  return true;
+  return SOURCE_EXT.has(ext);
 }
 
 /**

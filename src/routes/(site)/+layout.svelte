@@ -9,6 +9,7 @@
     pick,
     ui
   } from '$lib/standard/i18n';
+  import { publicImage } from '$lib/public-image';
   import { OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH, pageSeo } from '$lib/standard/seo';
   import { jsonLdScriptContent, pageJsonLd } from '$lib/standard/json-ld';
 
@@ -23,7 +24,9 @@
   const hrefEn = $derived(absoluteUrl(counterpartHref(page.url.pathname, 'en'), SITE_ORIGIN));
   const ogLocale = $derived(locale === 'en' ? 'en_GB' : 'it_IT');
   const ogLocaleAlt = $derived(locale === 'en' ? 'it_IT' : 'en_GB');
-  const ogDefaultImage = $derived(seo.image.endsWith(OG_IMAGE_PATH));
+  const ogDefaultImage = $derived(
+    seo.image === absoluteUrl(publicImage(OG_IMAGE_PATH), SITE_ORIGIN)
+  );
 
   $effect(() => {
     document.documentElement.lang = locale;

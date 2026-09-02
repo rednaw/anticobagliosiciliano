@@ -281,16 +281,14 @@ for (const href of locs) {
   else ok(`sitemap ${rel}`);
 }
 
-const keepJpeg = /(?:^|\/)og-share\.jpe?g$/i;
 const imageExt = /\.(jpe?g|png)$/i;
 const leaked = [];
 for (const dir of ['images', 'videos']) {
   for (const file of walk(path.join(build, dir))) {
-    if (imageExt.test(file) && !keepJpeg.test(file)) leaked.push(path.relative(build, file));
+    if (imageExt.test(file)) leaked.push(path.relative(build, file));
   }
 }
 assert(leaked.length === 0, `build dropped marketing JPEG/PNG (leaked: ${leaked.join(', ') || 'none'})`);
-assert(existsSync(path.join(build, 'images/og-share.jpg')), 'og-share.jpg stays JPEG for crawlers');
 assert(
   existsSync(path.join(build, 'images/ambiance/mappa.webp')) ||
     existsSync(path.join(build, 'images/ambiance/mappa.jpg')),

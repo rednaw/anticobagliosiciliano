@@ -88,10 +88,6 @@
         <img
           class="gate-media"
           src={imageAsset('/images/ambiance/hero-portone-tall.jpg')}
-          srcset="{imageAsset('/images/ambiance/hero-portone-tall-sm.jpg')} 763w, {imageAsset(
-            '/images/ambiance/hero-portone-tall.jpg'
-          )} 1248w"
-          sizes="100vw"
           width="1248"
           height="1690"
           alt={home.alt.hero}
@@ -119,13 +115,9 @@
         ready={videoStageReady}
         bind:playing={videoPlaying}
         bind:ended={videoEnded}
-        src="/videos/baglio-720.mp4"
-        poster="/videos/baglio-poster.jpg"
-        posterEnd="/videos/baglio-poster-end.jpg"
-        posterSrcset="{imageAsset('/videos/baglio-poster-sm.jpg')} 744w, {imageAsset(
-          '/videos/baglio-poster.jpg'
-        )} 1004w"
-        posterSizes="100vw"
+        src="/videos/baglio-movie.mp4"
+        poster="/videos/baglio-movie-start.jpg"
+        posterEnd="/videos/baglio-movie-end.jpg"
         label={home.alt.video}
       />
       {#if cinemaDesktopStill}

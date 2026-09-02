@@ -13,10 +13,10 @@ import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
 import { absoluteUrl, pick, ui } from '$lib/standard/i18n';
 
-/** Default share card: 1200×630 crop of the baglio gate. */
-export const OG_IMAGE_PATH = '/images/og-share.jpg';
-export const OG_IMAGE_WIDTH = 1200;
-export const OG_IMAGE_HEIGHT = 630;
+/** Default share card — same wide portone still as the homepage gate. */
+export const OG_IMAGE_PATH = '/images/ambiance/hero-portone-wide.jpg';
+export const OG_IMAGE_WIDTH = 1248;
+export const OG_IMAGE_HEIGHT = 1229;
 
 export type PageSeo = {
   title: string;
@@ -35,7 +35,7 @@ export function routeKey(pathname: string): string {
 
 export function pageSeo(pathname: string, locale: Locale): PageSeo {
   const key = routeKey(pathname);
-  const image = absoluteUrl(OG_IMAGE_PATH, SITE_ORIGIN);
+  const image = absoluteUrl(publicImage(OG_IMAGE_PATH), SITE_ORIGIN);
   const imageAlt = pick(homeCopy.alt.hero, locale);
 
   if (key === '/404.html') {

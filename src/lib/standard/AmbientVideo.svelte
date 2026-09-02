@@ -14,8 +14,6 @@
     src,
     poster,
     posterEnd,
-    posterSrcset,
-    posterSizes,
     label,
     fill = false,
     fetchPriority,
@@ -31,8 +29,6 @@
     poster: string;
     /** Last frame still for posterOnly (e.g. reduced motion); falls back to poster. */
     posterEnd?: string;
-    posterSrcset?: string;
-    posterSizes?: string;
     label: string;
     /** Cover the parent box edge-to-edge (hero). */
     fill?: boolean;
@@ -50,7 +46,6 @@
 
   const locale = $derived(page.data.locale);
 
-  let started = $state(false);
   let reduceMotion = $state(false);
   let playBlocked = $state(false);
 
@@ -112,7 +107,6 @@
     const restore = () => {
       parkVideoAtEnd(video);
       syncEnded();
-      started = true;
     };
 
     if (video.readyState >= 1) restore();
@@ -156,20 +150,6 @@
       fetchpriority={fetchPriority}
     />
   {:else}
-  {#if posterSrcset}
-    <img
-      class="poster"
-      class:hide={started}
-      src={imageAsset(poster)}
-      srcset={posterSrcset}
-      sizes={posterSizes}
-      width="1600"
-      height="900"
-      alt=""
-      aria-hidden="true"
-      fetchpriority={fetchPriority}
-    />
-  {/if}
   <!-- svelte-ignore a11y_media_has_caption -->
   <video
     bind:this={el}
@@ -178,11 +158,10 @@
     preload={fill ? 'metadata' : 'none'}
     width="1600"
     height="900"
-    poster={posterSrcset ? undefined : imageAsset(poster)}
+    poster={imageAsset(poster)}
     aria-label={label}
     onplay={() => {
       playing = true;
-      started = true;
       playBlocked = false;
       if (playOnce) homeCinemaSession.markStarted();
     }}
@@ -249,10 +228,6 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-  }
-
-  .poster.hide {
-    visibility: hidden;
   }
 
   .control {

@@ -17,7 +17,7 @@ export const COPY_CSV_FILE = 'testi.csv';
 export const copyOverrides = copyOverridesJson as CopyOverrides;
 
 const LOC_KEYS = new Set(['it', 'en']);
-const SKIP_STRING = new Set(['image', 'slug', 'href', 'map', 'mapSm', 'size', 'time', 'id', 'email']);
+const SKIP_STRING = new Set(['image', 'slug', 'href', 'map', 'size', 'time', 'id', 'email']);
 
 type LocString = { it: string; en: string };
 type LocList = { it: string[]; en: string[] };

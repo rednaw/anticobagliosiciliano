@@ -125,8 +125,6 @@
     <img
       class="fallback"
       src={imageAsset(baglioLocation.map)}
-      srcset="{imageAsset(baglioLocation.mapSm)} 800w, {imageAsset(baglioLocation.map)} 1536w"
-      sizes="(min-width: 960px) 70rem, calc(100vw - 2.5rem)"
       alt={alt}
       width="1536"
       height="1024"

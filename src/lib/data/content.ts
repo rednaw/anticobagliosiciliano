@@ -847,7 +847,6 @@ export const baglioLocation = {
     en: 'Antico Baglio Siciliano, Balestrate PA, Italy'
   }),
   map: '/images/ambiance/mappa.jpg',
-  mapSm: '/images/ambiance/mappa-sm.jpg',
   links: liveCopy('arrive.maps', [
     {
       id: 'google',

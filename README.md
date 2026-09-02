@@ -45,7 +45,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` writes WebP next to marketing JPEG/PNG in `static/` (gitignored), then Vite prerenders, then JPEG/PNG are dropped from `build/` except `og-share.jpg`. Check the result with `npm run preview`, not `vite dev`.
+`npm run build` writes WebP next to marketing JPEG/PNG in `static/` (gitignored), then Vite prerenders, then JPEG/PNG are dropped from `build/`. Check the result with `npm run preview`, not `vite dev`.
 
 ## Deploy
 

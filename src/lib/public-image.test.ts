@@ -27,10 +27,6 @@ describe('publicImage', () => {
     expect(publicImage('/images/mappa.webp', true)).toBe('/images/mappa.webp');
   });
 
-  it('leaves the Open Graph share card as JPEG', () => {
-    expect(publicImage('/images/og-share.jpg', true)).toBe('/images/og-share.jpg');
-    expect(publicImage('/images/og-share.jpeg', true)).toBe('/images/og-share.jpeg');
-  });
 });
 
 describe('imageAsset', () => {
