@@ -128,7 +128,7 @@
     height: 2.5rem;
     border: none;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    background: var(--wash);
     color: var(--sea-deep);
     font-size: 1.6rem;
     line-height: 1;
@@ -141,7 +141,7 @@
   }
 
   .nav:hover {
-    background: #fff;
+    background: var(--surface);
   }
 
   .nav:active {
@@ -164,7 +164,7 @@
     padding: 0.3rem 0.65rem;
     border-radius: 999px;
     background: color-mix(in srgb, var(--sea-deep) 72%, transparent);
-    color: #fff;
+    color: var(--on-sea);
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.02em;

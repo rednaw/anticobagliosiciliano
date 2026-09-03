@@ -205,7 +205,7 @@
     left: 50%;
     width: 0.5rem;
     height: 0.5rem;
-    background: #fff;
+    background: var(--on-sea);
     border-radius: 50%;
     transform: translate(-50%, -50%);
   }
@@ -217,7 +217,7 @@
 
   :global(.leaflet-control-attribution) {
     font-size: 0.72rem;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    background: var(--wash);
     color: var(--muted);
   }
 

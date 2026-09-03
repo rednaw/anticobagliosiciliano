@@ -335,7 +335,7 @@
     border: none;
     border-radius: 999px;
     background: color-mix(in srgb, var(--sea-deep) 68%, transparent);
-    color: #fff;
+    color: var(--on-sea);
     cursor: pointer;
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);

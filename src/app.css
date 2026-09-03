@@ -26,11 +26,14 @@
   --muted: #6b7168;
   --paper: #f6f5f1;
   --paper-deep: #ebe8e1;
+  --surface: #fff;
   --sea: #0e3a47;
   --sea-deep: #0a2c36;
+  --on-sea: #fff;
   --olive: #3f5a3c;
   --error: #9f2f1c;
   --line: color-mix(in srgb, var(--ink) 12%, transparent);
+  --wash: color-mix(in srgb, var(--paper) 88%, transparent);
   --shadow: 0 24px 60px color-mix(in srgb, var(--sea) 18%, transparent);
   --font-display: 'Fraunces Variable', Georgia, serif;
   --font-body: 'Figtree Variable', system-ui, sans-serif;
@@ -146,7 +149,7 @@ p {
   border: 1px solid transparent;
   border-radius: var(--radius);
   background: var(--sea);
-  color: #fff;
+  color: var(--on-sea);
   font-weight: 600;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -165,17 +168,17 @@ p {
 
 .btn-ghost {
   background: transparent;
-  color: #fff;
-  border-color: color-mix(in srgb, #fff 55%, transparent);
+  color: var(--on-sea);
+  border-color: color-mix(in srgb, var(--on-sea) 55%, transparent);
 }
 
 .btn-ghost:hover {
-  background: color-mix(in srgb, #fff 12%, transparent);
+  background: color-mix(in srgb, var(--on-sea) 12%, transparent);
   box-shadow: none;
 }
 
 .btn-light {
-  background: #fff;
+  background: var(--surface);
   color: var(--sea);
 }
 
@@ -202,13 +205,26 @@ p {
   top: 0.5rem;
   z-index: 100;
   background: var(--sea);
-  color: #fff;
+  color: var(--on-sea);
   padding: 0.5rem 0.85rem;
   text-decoration: none;
 }
 
 .skip:focus {
   left: 0.5rem;
+}
+
+.band-dark {
+  background: color-mix(in srgb, var(--sea-deep) 92%, black);
+  color: var(--on-sea);
+}
+
+.band-dark .eyebrow {
+  color: color-mix(in srgb, var(--on-sea) 72%, transparent);
+}
+
+.band-dark .section-head p {
+  color: color-mix(in srgb, var(--on-sea) 78%, transparent);
 }
 
 main {

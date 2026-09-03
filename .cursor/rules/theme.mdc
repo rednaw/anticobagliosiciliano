@@ -1,0 +1,18 @@
+---
+description: Marketing site theme — tokens and surface constraints
+globs: docs/theme.md,src/app.css,src/routes/(site)/**/*.svelte,src/lib/standard/Header.svelte,src/lib/standard/Footer.svelte,src/lib/standard/WeatherChip.svelte,src/lib/standard/ArriveMap.svelte,src/lib/standard/GalleryCarousel.svelte,src/lib/standard/AmbientVideo.svelte,src/lib/standard/StayDates.svelte,src/lib/standard/FieldTrigger.svelte,src/lib/standard/Picker.svelte
+alwaysApply: false
+---
+
+# Theme
+
+Narrative and token roles: [docs/theme.md](../../docs/theme.md). Read it before changing site chrome or colors.
+
+## Must preserve
+
+- Prefer existing CSS variables in `src/app.css` — do not invent new hex accents for site UI.
+- Keep the Sicilian estate triad: paper ground, `--sea` action, `--olive` meta; Fraunces + Figtree; `--radius: 2px`.
+- Text on sea / dark bands uses `--on-sea`; raised interactive tiles use `--surface`; soft media overlays use `--wash`.
+- Cards only for interactive affordances (house tiles, forms) — not default editorial layout.
+- Pills (`999px`) only for media controls; do not theme the archive browser.
+- No dark mode, no palette redesign, no purple / cream-terracotta / broadsheet restyle.

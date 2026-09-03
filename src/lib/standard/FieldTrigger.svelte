@@ -101,6 +101,6 @@
   .trigger.open {
     outline: 2px solid color-mix(in srgb, var(--sea) 45%, transparent);
     outline-offset: 1px;
-    background: #fff;
+    background: var(--surface);
   }
 </style>

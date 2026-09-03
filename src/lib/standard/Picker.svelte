@@ -147,7 +147,7 @@
     overflow: auto;
     overscroll-behavior: contain;
     padding: 0.35rem;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -179,7 +179,7 @@
   .option.selected,
   .option.selected:hover {
     background: var(--sea);
-    color: #fff;
+    color: var(--on-sea);
   }
 
   .option:disabled {

@@ -98,7 +98,7 @@
     min-height: min(68vh, 36rem);
     display: grid;
     align-items: end;
-    color: #fff;
+    color: var(--on-sea);
     overflow: hidden;
   }
 
@@ -124,7 +124,7 @@
   }
 
   .hero .eyebrow {
-    color: color-mix(in srgb, #fff 72%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 72%, transparent);
   }
 
   h1 {
@@ -154,7 +154,7 @@
   .stats span {
     padding: 0.45rem 0.75rem;
     border: 1px solid var(--line);
-    background: #fff;
+    background: var(--surface);
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--olive);
@@ -168,7 +168,7 @@
 
   .panel {
     padding: 1.5rem;
-    background: color-mix(in srgb, var(--olive) 8%, #fff);
+    background: color-mix(in srgb, var(--olive) 8%, var(--surface));
     border: 1px solid var(--line);
   }
 

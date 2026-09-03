@@ -362,7 +362,7 @@
   .nav-cta {
     margin-top: 0.5rem;
     background: var(--sea);
-    color: #fff !important;
+    color: var(--on-sea) !important;
     text-align: center;
     border-radius: var(--radius);
   }

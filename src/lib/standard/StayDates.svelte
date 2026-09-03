@@ -323,7 +323,7 @@
     left: 0;
     right: 0;
     padding: 0.85rem 1rem 0.85rem;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -418,7 +418,7 @@
 
   .day.cursor.start,
   .day.cursor.end {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--on-sea);
     outline-offset: -3px;
   }
 
@@ -430,7 +430,7 @@
   .day.start,
   .day.end {
     background: var(--sea);
-    color: #fff;
+    color: var(--on-sea);
   }
 
   .day:disabled {

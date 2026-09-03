@@ -257,7 +257,7 @@
     display: grid;
     gap: 1rem;
     padding: 1.5rem;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--line);
   }
 
@@ -299,7 +299,7 @@
   textarea:focus {
     outline: 2px solid color-mix(in srgb, var(--sea) 45%, transparent);
     outline-offset: 1px;
-    background: #fff;
+    background: var(--surface);
   }
 
   .row {

@@ -104,9 +104,9 @@
     max-width: min(16rem, calc(100% - 1.5rem));
     margin: 0;
     padding: 0.4rem 0.85rem 0.4rem 0.55rem;
-    border: 2px solid rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
-    background: #fff;
+    background: var(--wash);
     line-height: 1.25;
     color: var(--ink);
   }
@@ -135,7 +135,7 @@
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.04em;
-    color: color-mix(in srgb, var(--ink) 72%, #fff);
+    color: var(--ink-soft);
   }
 
   .reading {
@@ -156,14 +156,14 @@
     font-size: 0.72rem;
     font-weight: 400;
     line-height: 1.4;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    color: #0078a8;
+    background: var(--wash);
+    color: var(--muted);
     text-decoration: none;
     white-space: nowrap;
   }
 
   .credit:hover {
-    color: #005d82;
+    color: var(--ink-soft);
     text-decoration: underline;
   }
 </style>

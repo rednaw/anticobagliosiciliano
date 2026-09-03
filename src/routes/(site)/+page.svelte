@@ -343,7 +343,7 @@
   .cinema {
     position: relative;
     margin-top: calc(-1 * var(--header-h));
-    color: #fff;
+    color: var(--on-sea);
     background: var(--sea-deep);
   }
 
@@ -527,7 +527,7 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.55;
-    color: color-mix(in srgb, #fff 82%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 82%, transparent);
     max-width: none;
   }
 
@@ -608,7 +608,7 @@
   .about p {
     margin: 0;
     font-size: 1.15rem;
-    color: color-mix(in srgb, #fff 80%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 80%, transparent);
     max-width: 36rem;
   }
 
@@ -620,7 +620,7 @@
   .house {
     display: grid;
     text-decoration: none;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--line);
     overflow: hidden;
     transition:
@@ -672,7 +672,7 @@
   .feature {
     display: grid;
     background: var(--sea-deep);
-    color: #fff;
+    color: var(--on-sea);
   }
 
   .feature img {
@@ -692,9 +692,8 @@
     margin-bottom: 1rem;
   }
 
-  .feature :global(.eyebrow),
-  .band-dark :global(.eyebrow) {
-    color: color-mix(in srgb, #fff 72%, transparent);
+  .feature :global(.eyebrow) {
+    color: color-mix(in srgb, var(--on-sea) 72%, transparent);
   }
 
   .feature :global(.section-head h2) {
@@ -705,13 +704,13 @@
   .feature :global(.section-head p) {
     max-width: 34rem;
     font-size: 1.15rem;
-    color: color-mix(in srgb, #fff 88%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 88%, transparent);
     opacity: 0.95;
   }
 
   .feature p {
     max-width: 34rem;
-    color: color-mix(in srgb, #fff 88%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 88%, transparent);
   }
 
   .garden-grid {
@@ -772,41 +771,32 @@
     color: var(--muted);
   }
 
-  .band-dark {
-    background: color-mix(in srgb, var(--sea-deep) 92%, black);
-    color: #fff;
-  }
-
-  .band-dark :global(.section-head p) {
-    color: color-mix(in srgb, #fff 78%, transparent);
-  }
-
   .band-dark .amenity-list {
-    border-top-color: color-mix(in srgb, #fff 18%, transparent);
+    border-top-color: color-mix(in srgb, var(--on-sea) 18%, transparent);
   }
 
   .band-dark .amenity-list :global(li) {
-    border-bottom-color: color-mix(in srgb, #fff 18%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--on-sea) 18%, transparent);
   }
 
   .band-dark .amenity-list span {
-    color: color-mix(in srgb, #fff 68%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 68%, transparent);
   }
 
   .band-dark .award-grid strong {
-    color: #fff;
+    color: var(--on-sea);
   }
 
   .band-dark .award-grid span {
-    color: color-mix(in srgb, #fff 68%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 68%, transparent);
   }
 
   .band-dark .award-proof {
-    color: color-mix(in srgb, #fff 78%, transparent);
+    color: color-mix(in srgb, var(--on-sea) 78%, transparent);
   }
 
   .band-dark .award-proof:hover {
-    color: #fff;
+    color: var(--on-sea);
   }
 
   .award-grid {
@@ -824,7 +814,7 @@
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: contain;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--line);
     padding: 1rem;
   }
@@ -863,7 +853,7 @@
     display: block;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    color: #fff;
+    color: var(--on-sea);
     text-decoration: none;
   }
 
@@ -908,7 +898,7 @@
     background:
       linear-gradient(135deg, color-mix(in srgb, var(--sea) 92%, #000), var(--olive)),
       var(--sea);
-    color: #fff;
+    color: var(--on-sea);
   }
 
   .cta h2 {
