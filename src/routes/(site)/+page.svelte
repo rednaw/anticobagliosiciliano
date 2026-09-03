@@ -73,7 +73,7 @@
 {/snippet}
 
 <section class="cinema">
-  <div class="gate-chapter">
+  <div class="gate-chapter" class:gate-chapter--portrait={portraitMobile}>
     <div class="gate">
       <picture>
         <source
@@ -348,6 +348,26 @@
     background: var(--sea-deep);
   }
 
+  /* Portrait: portone fills a short frame; title card sits below (like video → Chi siamo). */
+  .gate-chapter--portrait {
+    min-height: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible;
+  }
+
+  .gate-chapter--portrait .gate {
+    position: relative;
+    inset: auto;
+    height: 65svh;
+    flex-shrink: 0;
+  }
+
+  .gate-chapter--portrait .hero-copy {
+    margin: clamp(1.25rem, 4vh, 2rem) 1.25rem clamp(2rem, 5vh, 3rem);
+  }
+
   .gate {
     position: absolute;
     inset: 0;
@@ -367,13 +387,38 @@
   /* Wide/desktop: pull back slightly so cover crops less of the portone. */
   @media (min-aspect-ratio: 7 / 10) {
     .gate-media {
-      transform: scale(0.9);
+      transform: scale(1.0);
     }
   }
 
   .gate-chapter .hero-copy {
     position: relative;
     z-index: 2;
+    width: min(36rem, calc(100% - 2.5rem));
+    margin: 0 auto clamp(2rem, 5vh, 3.5rem) 1.25rem;
+    padding: clamp(1.5rem, 4vh, 2.35rem) clamp(1.25rem, 3vw, 2rem);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--sea-deep) 68%, transparent);
+    -webkit-backdrop-filter: blur(14px) brightness(0.88);
+    backdrop-filter: blur(14px) brightness(0.88);
+    box-shadow: 0 1rem 3rem color-mix(in srgb, var(--sea-deep) 35%, transparent);
+    animation: fade-up 1s var(--ease) both;
+    pointer-events: auto;
+  }
+
+  .hero-copy h1 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    max-width: 12ch;
+    text-wrap: balance;
+  }
+
+  .hero-lead {
+    margin: 0;
+    max-width: 28rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--on-sea) 82%, transparent);
   }
 
   .cinema-stage {
@@ -397,7 +442,8 @@
     position: relative;
     margin-top: -100svh;
     z-index: 2;
-    pointer-events: auto;
+    /* Let clicks reach the sticky video controls; only the card is interactive. */
+    pointer-events: none;
   }
 
   .cinema-step {
@@ -443,6 +489,7 @@
     position: sticky;
     top: clamp(2rem, 8vh, 3.5rem);
     margin: 0 clamp(1rem, 2.5vw, 1.75rem) 0 auto;
+    pointer-events: auto;
   }
 
   .cinema-card--hold {
@@ -510,7 +557,7 @@
   }
 
   .cinema-script .cinema-step--about {
-    pointer-events: auto;
+    pointer-events: none;
   }
 
   .houses-section {
@@ -522,35 +569,6 @@
 
   #houses-intro {
     scroll-margin-top: var(--header-h);
-  }
-
-  .hero-copy {
-    position: relative;
-    z-index: 2;
-    width: min(1120px, calc(100% - 2.5rem));
-    margin: 0 auto;
-    padding: clamp(5rem, 12vh, 8rem) 0 clamp(3rem, 7vh, 4.5rem);
-    animation: fade-up 1s var(--ease) both;
-    text-shadow: 0 2px 24px color-mix(in srgb, var(--sea-deep) 45%, transparent);
-    pointer-events: auto;
-    background: none;
-    backdrop-filter: none;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .hero-copy h1 {
-    margin: 0 0 0.85rem;
-    font-size: clamp(2.8rem, 8vw, 5.4rem);
-    max-width: 12ch;
-    text-wrap: balance;
-  }
-
-  .hero-lead {
-    margin: 0 0 1.75rem;
-    max-width: 28rem;
-    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-    opacity: 0.95;
   }
 
   .about-inner {
