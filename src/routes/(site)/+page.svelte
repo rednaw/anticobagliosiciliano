@@ -364,6 +364,13 @@
     animation: soft-fade 1.2s var(--ease) both;
   }
 
+  /* Wide/desktop: pull back slightly so cover crops less of the portone. */
+  @media (min-aspect-ratio: 7 / 10) {
+    .gate-media {
+      transform: scale(0.9);
+    }
+  }
+
   .gate-chapter .hero-copy {
     position: relative;
     z-index: 2;
