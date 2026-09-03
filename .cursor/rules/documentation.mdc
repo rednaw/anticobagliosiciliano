@@ -1,0 +1,34 @@
+---
+description: Agent documentation — rules-only, no stale prose
+globs: .cursor/rules/**/*.mdc
+alwaysApply: false
+---
+
+# Documentation (agents)
+
+**Single source:** glob-scoped `.cursor/rules/<topic>.mdc` — not `docs/`, not duplicated narratives.
+
+## What goes in a topic rule
+
+- **Must preserve** — invariants the code must not break (match tests / `assert-build` where possible).
+- **Stable reference** — ids, mappings, thresholds that rarely change (e.g. Lodgify room ids).
+- **Layout / flow** — only while a UI is still settling; remove once obvious from one component.
+
+## What does NOT go in rules
+
+- **Code maps** (file → concern tables) — drift immediately; use search.
+- **Pipeline prose** longer than one line — infer from scripts and workflows.
+- **A second doc file** for the same topic — guarantees staleness.
+
+## Other locations
+
+| Location | Purpose |
+|---|---|
+| `README.md` | Operator commands (dev, sync, deploy) |
+| `.cursor/plans/` | Pending actionable work only |
+| `.cursor/ideas/` | Options and explorations — not shipped truth |
+| Tests / `assert-build.mjs` | Executable behaviour contracts |
+
+## When you change a domain
+
+Edit **one** `.mdc` rule in the same session. If an invariant moved into tests, delete it from the rule. Do not add or update `docs/<topic>.md`.

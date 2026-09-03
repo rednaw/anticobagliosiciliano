@@ -1,19 +1,27 @@
 ---
-description: Come arrivare weather chip — Open-Meteo edit constraints
-globs: docs/weather.md,src/lib/standard/weather*,src/lib/standard/WeatherChip.svelte,src/routes/(site)/come-arrivare/**,src/routes/(site)/en/come-arrivare/**,vite.config.ts,tests/assert-build.mjs
+description: Come arrivare weather — Open-Meteo edit constraints and layout flow
+globs: src/lib/standard/weather*,src/lib/standard/WeatherChip.svelte,src/routes/(site)/come-arrivare/**,src/routes/(site)/en/come-arrivare/**,vite.config.ts,tests/assert-build.mjs
 alwaysApply: false
 ---
 
 # Weather
 
-Narrative and code map: [docs/weather.md](../../docs/weather.md). Read it before changing this area.
+Client-direct Open-Meteo — no snapshot in git, no API key. Full tier only; light = no fetch, no UI. Soft-fail to nothing; never `markLight()`.
 
 ## Must preserve
 
-- Client-direct Open-Meteo only — no weather snapshot in git, no API key.
-- Fetch and show only on network tier `full`; light = no request, no chrome.
-- Soft-fail to nothing; never block Come arrivare; never call `markLight()` for weather.
-- Show CC BY credit whenever weather is visible (`https://open-meteo.com/`).
-- Vendor only Meteocons **monochrome** SVGs under `static/images/weather/` (MIT LICENSE); paint via CSS mask/`currentColor`, not fill art or per-condition backdrops.
-- Use `baglioLocation` courtyard coords; keep CSP `connect-src` including `https://api.open-meteo.com`.
+- Coords: `baglioLocation` courtyard lat/lon. CSP `connect-src` includes `https://api.open-meteo.com`.
+- CC BY credit on the map whenever weather shows (`https://open-meteo.com/`).
+- Meteocons **monochrome** SVGs in `static/images/weather/`; paint via CSS mask / `currentColor`.
 - Unit tests use fixtures — no live Open-Meteo in CI.
+- **One component, one fetch** in `WeatherChip.svelte` — do not split across context/children (Svelte 5 reactivity breaks).
+
+## Layout (`portraitMobile` from `PORTRAIT_ASPECT_QUERY`, same as homepage Chi siamo)
+
+| | Landscape | Portrait |
+|---|---|---|
+| Chip | Overlay top-center on map | Block below map |
+| Open-Meteo credit | Bottom-left on map | Bottom-left on map |
+| OSM credit | Bottom-right (Leaflet) | Bottom-right (Leaflet) |
+
+Attribution labels short (`© Open-Meteo`, `© OpenStreetMap`); fuller text in `title` only.

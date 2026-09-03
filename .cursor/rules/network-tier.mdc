@@ -1,19 +1,31 @@
 ---
 description: Network tier — high-end images/cinema with light-path resilience
-globs: docs/network-tier.md,src/lib/public-image.ts,src/lib/standard/network-*.ts,src/lib/standard/ambient-video*,src/lib/standard/AmbientVideo.svelte,src/lib/standard/media-query.ts,src/lib/standard/ArriveMap.svelte,src/lib/standard/GalleryCarousel.svelte,src/routes/(site)/+layout.svelte,src/routes/(site)/+page.svelte,scripts/optimize-site-images.mjs,tests/assert-build.mjs
+globs: src/lib/public-image.ts,src/lib/standard/network-*.ts,src/lib/standard/ambient-video*,src/lib/standard/AmbientVideo.svelte,src/lib/standard/media-query.ts,src/lib/standard/ArriveMap.svelte,src/lib/standard/GalleryCarousel.svelte,src/routes/(site)/+layout.svelte,src/routes/(site)/+page.svelte,scripts/optimize-site-images.mjs,tests/assert-build.mjs
 alwaysApply: false
 ---
 
 # Network tier
 
-Narrative and code map: [docs/network-tier.md](../../docs/network-tier.md). Read it before changing this area.
+**Goal:** full WebPs + aerial cinema when earned. **Resilience:** light path must stay usable (`-light.webp`, static cinema, no MP4).
 
 ## Must preserve
 
-- **Product goal:** high-end experience (full WebPs, aerial cinema) when the connection allows it.
-- **Resilience:** light path (`-light.webp`, static cinema, no MP4) must stay usable on constrained bandwidth / devices. Do not break it when polishing the full path.
-- Session **`full` | `light`**. Runtime defaults unknown → light; `markLight()` locks; upgrade only via prove/`markFull()`. No site-wide `srcset` yet.
+- Session `full` | `light`. Unknown → light; `markLight()` locks; upgrade only via prove / restored `full`.
 - Build: full WebP (1600) + `-light.webp` (800), q80; emit then prune around `vite build`.
-- Cinema: never block the page; never autoplay with sound. Stall/timeout → light → static end poster.
-- Keep tier/prove in `network-*.ts`; buffer/session in `ambient-video.ts`; cinema layout in `+page.svelte`.
-- Update `ambient-video.test.ts`, `network-tier.test.ts`, `network-prove.test.ts` when tier, buffer, or control rules change.
+- Dev: committed JPEG/PNG; tier still drives cinema. SEO/OG/JSON-LD: always full via `publicImage()`.
+- Come arrivare light: static map only — no Leaflet/OSM tiles.
+- Cinema: never block page; never autoplay with sound. Stall/timeout → light → static end poster.
+- Reduced motion shares static cinema UX with light tier (triggers stay separate in code).
+- No site-wide `srcset` yet. Keep tier/prove in `network-*.ts`; buffer/session in `ambient-video.ts`; cinema layout in homepage `+page.svelte`.
+- Update `ambient-video.test.ts`, `network-tier.test.ts`, `network-prove.test.ts` when tier/buffer/control rules change.
+
+## Tier signals
+
+| Signal | Result |
+|---|---|
+| sessionStorage `light` / `full` | Restore (`light` locked) |
+| Save-Data or slow-2g / 2g / 3g | `markLight()` |
+| Prove: `mappa` light fetch ≤ 800ms | `markFull()` else `markLight()` |
+| MP4 buffer stall / prepare timeout | abort → `markLight()` → static cinema |
+
+`initMediaTier()` in site layout on client.

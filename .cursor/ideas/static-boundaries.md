@@ -20,7 +20,7 @@ Every dynamic-feeling feature on a static site uses one of these. This project a
 
 Run the dynamic part on a schedule, commit the result, redeploy. The CDN serves a stale-but-fresh-enough view.
 
-In use: **occupancy** ([docs/occupancy.md](../../docs/occupancy.md)). A twice-daily Action pulls Lodgify, sanitizes, commits, deploys.
+In use: **occupancy** (`.cursor/rules/occupancy.mdc`). A twice-daily Action pulls Lodgify, sanitizes, commits, deploys.
 
 The generalized rule: **any read-only view of a slow-moving external system can be made static** if (a) it changes slower than your rebuild cadence, and (b) it is public-safe after sanitization. The sync script is the security perimeter — sanitize at write time, not render time.
 
@@ -30,7 +30,7 @@ The freshness dial is real and measurable. GitHub Actions cron on a public repo 
 
 The browser is a full runtime that arrives free with every visitor. Anything computable from shipped data plus local state is fair game.
 
-In use: calendar disable logic (all occupancy math runs client-side on the shipped JSON), **network tier proving** ([docs/network-tier.md](../../docs/network-tier.md)) — the client measures its own connection and picks an asset family, which is per-user adaptivity with zero server involvement.
+In use: calendar disable logic (all occupancy math runs client-side on the shipped JSON), **network tier proving** (`.cursor/rules/network-tier.mdc`) — the client measures its own connection and picks an asset family, which is per-user adaptivity with zero server involvement.
 
 Untapped: client-side search over a committed index (Pagefind-style), date-aware rendering (the client knows what day it is — prerender 18 months of calendar and let JS pick "today"), personalization in `localStorage` (remembered house preference, language), a service worker for offline reading on the flight to Palermo.
 
@@ -38,7 +38,7 @@ Untapped: client-side search over a committed index (Pagefind-style), date-aware
 
 The guest already owns writable channels: a mail client, a phone, a calendar, WhatsApp. The site composes an *intent* and hands it over; the user's agent does the write.
 
-In use: **mailto** ([docs/email.md](../../docs/email.md)). The form is a mailto composer; the guest's mail client is the transport; the owner's inbox is the database.
+In use: **mailto** (`.cursor/rules/email.mdc`). The form is a mailto composer; the guest's mail client is the transport; the owner's inbox is the database.
 
 Untapped: `tel:` links, a WhatsApp deep link carrying the same prefilled enquiry body, a client-generated `.ics` file ("hold these dates" — a data-URL download, no server), `geo:`/Maps deep links for directions (partially in use), the Web Share API.
 
@@ -46,7 +46,7 @@ Untapped: `tel:` links, a WhatsApp deep link carrying the same prefilled enquiry
 
 The browser can call someone else's server. The site stays static; the third party carries the dynamic load. Each addition costs a CSP entry and a privacy review.
 
-In use: Simple Analytics (cookieless page views), OSM tile servers (full-tier map), Open-Meteo current conditions on Come arrivare ([docs/weather.md](../../docs/weather.md)).
+In use: Simple Analytics (cookieless page views), OSM tile servers (full-tier map), Open-Meteo current conditions on Come arrivare (`.cursor/rules/weather.mdc`).
 
 Untapped, in roughly ascending order of paradigm strain: giscus-style comments backed by GitHub issues (wrong audience here), Stripe Payment Links for deposits (real money movement with zero backend — the link is static, Stripe is the dynamic part), a hosted booking widget.
 
@@ -87,7 +87,7 @@ Ordered roughly by feats-per-effort. None are commitments.
 
 **Seasonal build.** The build knows the date. A monthly scheduled rebuild could swap hero imagery or highlight seasonal imperdibili (Zingaro in swimming season, Erice in autumn light) with zero runtime cost. Time-shifted compute where the "external system" is the calendar itself.
 
-**Weather touch.** Shipped — see [docs/weather.md](../../docs/weather.md). Client-direct Open-Meteo on Come arrivare, full tier only.
+**Weather touch.** Client-direct Open-Meteo on Come arrivare, full tier only — `.cursor/rules/weather.mdc`.
 
 **Offline PWA.** Service worker, cache the site shell and one house gallery. A rental site that works in airplane mode is a nice trick; the audit cost (cache invalidation vs. twice-daily occupancy deploys) is the real price, not the code.
 
