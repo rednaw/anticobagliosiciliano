@@ -13,7 +13,7 @@ import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
 import { absoluteUrl, pick, ui } from '$lib/standard/i18n';
 
-/** Default share card — same wide portone still as the homepage gate. */
+/** Default share card — same wide portone still as the homepage hero. */
 export const OG_IMAGE_PATH = '/images/ambiance/hero-portone-wide.jpg';
 export const OG_IMAGE_WIDTH = 1248;
 export const OG_IMAGE_HEIGHT = 1229;

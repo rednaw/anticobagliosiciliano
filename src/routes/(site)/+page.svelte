@@ -75,15 +75,6 @@
 <section class="cinema">
   <div class="gate-chapter">
     <div class="gate">
-      <img
-        class="gate-backdrop"
-        src={responsiveImage('/images/ambiance/hero-portone-wide.jpg', { tier })}
-        alt=""
-        aria-hidden="true"
-        width="1248"
-        height="1229"
-        fetchpriority="high"
-      />
       <picture>
         <source
           media="(min-aspect-ratio: 7 / 10)"
@@ -95,10 +86,10 @@
           width="1248"
           height="1690"
           alt={home.alt.hero}
+          fetchpriority="high"
         />
       </picture>
     </div>
-    <div class="gate-veil"></div>
     <div class="hero-copy">
       <h1>{site.name}</h1>
       <p class="hero-lead">{pick(site.description, locale)}</p>
@@ -363,55 +354,14 @@
     z-index: 0;
   }
 
-  .gate-backdrop {
+  .gate-media {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: blur(2.5rem) brightness(0.82) saturate(1.1);
-    animation: gate-backdrop-zoom 8s var(--ease) both;
-  }
-
-  @keyframes gate-backdrop-zoom {
-    from {
-      transform: scale(1.24);
-    }
-    to {
-      transform: scale(1.14);
-    }
-  }
-
-  .gate-media {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
     animation: soft-fade 1.2s var(--ease) both;
-  }
-
-  @media (max-aspect-ratio: 7 / 10) {
-    .gate-media {
-      object-fit: cover;
-    }
-  }
-
-  .gate-veil {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background:
-      linear-gradient(180deg, color-mix(in srgb, var(--sea-deep) 42%, transparent) 0%, transparent 38%),
-      linear-gradient(
-        0deg,
-        color-mix(in srgb, var(--sea-deep) 92%, transparent) 0%,
-        color-mix(in srgb, var(--sea-deep) 55%, transparent) 38%,
-        transparent 68%
-      );
   }
 
   .gate-chapter .hero-copy {
