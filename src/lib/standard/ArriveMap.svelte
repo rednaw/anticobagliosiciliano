@@ -215,6 +215,13 @@
     background: var(--paper-deep);
   }
 
+  :global(.leaflet-bar) {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
   :global(.leaflet-control-attribution) {
     font-size: 0.72rem;
     background: var(--wash);
@@ -226,7 +233,24 @@
   }
 
   :global(.leaflet-bar a) {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--line);
     color: var(--sea);
-    border-radius: var(--radius);
+    border-radius: 0;
+  }
+
+  :global(.leaflet-bar a:hover),
+  :global(.leaflet-bar a:focus) {
+    background-color: var(--paper);
+  }
+
+  :global(.leaflet-bar a.leaflet-disabled) {
+    background-color: var(--paper-deep);
+    color: var(--muted);
+  }
+
+  :global(.leaflet-bar a:first-child),
+  :global(.leaflet-bar a:last-child) {
+    border-radius: 0;
   }
 </style>

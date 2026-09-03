@@ -1,6 +1,6 @@
 ---
 description: Marketing site theme — tokens and surface constraints
-globs: docs/theme.md,src/app.css,src/routes/(site)/**/*.svelte,src/lib/standard/Header.svelte,src/lib/standard/Footer.svelte,src/lib/standard/WeatherChip.svelte,src/lib/standard/ArriveMap.svelte,src/lib/standard/GalleryCarousel.svelte,src/lib/standard/AmbientVideo.svelte,src/lib/standard/StayDates.svelte,src/lib/standard/FieldTrigger.svelte,src/lib/standard/Picker.svelte
+globs: docs/theme.md,src/app.css,src/app.html,src/lib/standard/theme.ts,src/lib/standard/theme.test.ts,src/routes/(site)/**/*.svelte,src/lib/standard/Header.svelte,src/lib/standard/Footer.svelte,src/lib/standard/WeatherChip.svelte,src/lib/standard/ArriveMap.svelte,src/lib/standard/GalleryCarousel.svelte,src/lib/standard/AmbientVideo.svelte,src/lib/standard/StayDates.svelte,src/lib/standard/FieldTrigger.svelte,src/lib/standard/Picker.svelte
 alwaysApply: false
 ---
 
@@ -10,9 +10,12 @@ Narrative and token roles: [docs/theme.md](../../docs/theme.md). Read it before 
 
 ## Must preserve
 
-- Prefer existing CSS variables in `src/app.css` — do not invent new hex accents for site UI.
-- Keep the Sicilian estate triad: paper ground, `--sea` action, `--olive` meta; Fraunces + Figtree; `--radius: 2px`.
+- Put brand hex / palette mixes only in `[data-theme='…']` (or `:root`) value blocks in `src/app.css` — structure rules must use `var(--*)` only (darken with `var(--ink)`, not bare `black` / `#000`).
+- Shipping theme is **baglio** (`data-theme` on `<html>`). Alternates (anti-brochure `oggi`) are experimental until promoted; register ids in `SITE_THEMES` and do not invent accents outside a theme block.
+- Honor the triad luminance contract: light `--paper`/`--surface`, deep `--sea`/`--sea-deep`, mid `--olive` — do not invert light/dark with tokens alone.
+- Keep the baglio character while it ships: paper ground, `--sea` action, `--olive` meta; Fraunces + Figtree; `--radius: 2px`.
 - Text on sea / dark bands uses `--on-sea`; raised interactive tiles use `--surface`; soft media overlays use `--wash`.
 - Cards only for interactive affordances (house tiles, forms) — not default editorial layout.
 - Pills (`999px`) only for media controls; do not theme the archive browser.
-- No dark mode, no palette redesign, no purple / cream-terracotta / broadsheet restyle.
+- Theme probe stays a temporary native `<select>` in the header (`.theme-pick`) — no product styling; remove when experiments end; no purple / cream-terracotta / broadsheet restyle of the shipping theme.
+- Do not rewrite favicon or `theme-color` on toggle; video letterbox uses `--void`; Leaflet zoom/attribution in `ArriveMap` stays on theme tokens.

@@ -14,13 +14,32 @@
     withBase,
     type Locale
   } from '$lib/standard/i18n';
+  import {
+    DEFAULT_SITE_THEME,
+    SITE_THEMES,
+    applySiteTheme,
+    initSiteTheme,
+    isSiteTheme,
+    type SiteTheme
+  } from '$lib/standard/theme';
 
   let open = $state(false);
   let menuBtn: HTMLButtonElement | undefined = $state();
   let navEl: HTMLElement | undefined = $state();
   let backdropEl: HTMLButtonElement | undefined = $state();
+  let currentTheme = $state<SiteTheme>(DEFAULT_SITE_THEME);
 
   const locale = $derived(page.data.locale);
+
+  $effect(() => {
+    currentTheme = initSiteTheme();
+  });
+
+  function onThemePick(event: Event) {
+    const value = (event.currentTarget as HTMLSelectElement).value;
+    if (!isSiteTheme(value)) return;
+    currentTheme = applySiteTheme(value);
+  }
 
   const links = $derived([
     { subpath: '', label: pick(ui.navHome, locale), hash: '' },
@@ -195,6 +214,11 @@
       </div>
     </nav>
   </div>
+  <select class="theme-pick" aria-label="Site theme" value={currentTheme} onchange={onThemePick}>
+    {#each SITE_THEMES as theme}
+      <option value={theme}>{theme}</option>
+    {/each}
+  </select>
 </header>
 
 {#if open}
@@ -218,6 +242,22 @@
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
+  }
+
+  /* Temporary probe control — invisible until hovered/focused. */
+  .theme-pick {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.35rem;
+    z-index: 2;
+    font: inherit;
+    font-size: 0.75rem;
+    opacity: 0;
+  }
+
+  .theme-pick:hover,
+  .theme-pick:focus {
+    opacity: 1;
   }
 
   .bar {

@@ -298,7 +298,7 @@
     height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    background: #000;
+    background: var(--void);
   }
 
   video.awaiting-playback {

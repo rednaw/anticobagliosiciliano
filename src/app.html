@@ -1,9 +1,15 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" data-theme="baglio">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0e3a47" />
+    <script>
+      try {
+        var t = sessionStorage.getItem('abs-theme');
+        if (t === 'baglio' || t === 'oggi') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
     <noscript>
       <style>
         .reveal {

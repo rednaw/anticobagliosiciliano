@@ -896,7 +896,7 @@
   .cta {
     padding: clamp(4rem, 8vw, 6rem) 0;
     background:
-      linear-gradient(135deg, color-mix(in srgb, var(--sea) 92%, #000), var(--olive)),
+      linear-gradient(135deg, color-mix(in srgb, var(--sea) 92%, var(--ink)), var(--olive)),
       var(--sea);
     color: var(--on-sea);
   }
