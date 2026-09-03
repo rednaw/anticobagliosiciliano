@@ -144,7 +144,8 @@
     white-space: nowrap;
   }
 
-  /* Own pill — same wash as .leaflet-control-attribution in ArriveMap. */
+  /* Own pill — same wash as .leaflet-control-attribution in ArriveMap.
+     Link color matches Leaflet `.leaflet-container a` (#0078A8) used by OSM. */
   .credit {
     pointer-events: auto;
     position: absolute;
@@ -157,13 +158,16 @@
     font-weight: 400;
     line-height: 1.4;
     background: var(--wash);
-    color: var(--muted);
-    text-decoration: none;
+    color: #0078a8;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
     white-space: nowrap;
   }
 
-  .credit:hover {
-    color: var(--ink-soft);
+  .credit:hover,
+  .credit:focus {
+    color: #0078a8;
     text-decoration: underline;
   }
 </style>
