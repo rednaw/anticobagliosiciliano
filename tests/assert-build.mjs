@@ -88,7 +88,7 @@ const homepage = read('index.html');
 assert(homepage.length > 0, 'build/index.html exists');
 assert(/<h1[^>]*>Antico Baglio Siciliano<\/h1>/.test(homepage), 'homepage h1 is the baglio name, not a 404');
 assert(!isNotFoundPage(homepage), 'homepage is not the NotFound document');
-assert(/<html lang="it">/.test(homepage), 'homepage html lang is it');
+assert(/<html\b[^>]*\blang="it"/.test(homepage), 'homepage html lang is it');
 assert(
   homepage.includes(`data-hostname="${SIMPLE_ANALYTICS_HOSTNAME}"`),
   'Simple Analytics hostname is filled in'
@@ -169,7 +169,7 @@ if (SITE_PUBLIC) {
 }
 
 const enHome = read('en/index.html');
-assert(/<html lang="en">/.test(enHome), 'English homepage html lang is en');
+assert(/<html\b[^>]*\blang="en"/.test(enHome), 'English homepage html lang is en');
 assert(/<h1[^>]*>Antico Baglio Siciliano<\/h1>/.test(enHome), 'English homepage is not a 404');
 assert(!isNotFoundPage(enHome), 'English homepage is not the NotFound document');
 assert(cspContent(enHome).length > 0, 'English homepage has a CSP meta tag');
@@ -212,7 +212,7 @@ assert(!arrive.includes('Pagina non trovata'), 'Come arrivare is not a 404');
 
 const arriveEn = read('en/come-arrivare/index.html');
 assert(arriveEn.includes('Getting here'), 'English Come arrivare prerendered');
-assert(/<html lang="en">/.test(arriveEn), 'English Come arrivare html lang is en');
+assert(/<html\b[^>]*\blang="en"/.test(arriveEn), 'English Come arrivare html lang is en');
 
 const privacy = read('privacy/index.html');
 assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');

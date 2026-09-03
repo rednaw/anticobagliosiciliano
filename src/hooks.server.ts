@@ -8,7 +8,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   return resolve(event, {
     transformPageChunk: ({ html }) =>
       html
-        .replace('<html lang="it">', `<html lang="${locale}">`)
+        .replace(/<html\b([^>]*)\blang="it"/, `<html$1lang="${locale}"`)
         .replaceAll('__SIMPLE_ANALYTICS_HOSTNAME__', SIMPLE_ANALYTICS_HOSTNAME)
   });
 };
