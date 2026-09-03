@@ -5,10 +5,17 @@
   import WeatherChip from '$lib/standard/WeatherChip.svelte';
   import { googleMapsLinkWithLocale } from '$lib/standard/place-directions';
   import { pick, ui } from '$lib/standard/i18n';
+  import { PORTRAIT_ASPECT_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
 
   const locale = $derived(page.data.locale);
   const heading = $derived(pick(ui.navArrive, locale));
   const t = $derived((key: keyof typeof arriveCopy) => pick(arriveCopy[key], locale));
+
+  let portraitMobile = $state(false);
+
+  $effect(() => subscribeMediaQuery(PORTRAIT_ASPECT_QUERY, (matches) => {
+    portraitMobile = matches;
+  }));
 
   function mapLinkHref(link: (typeof baglioLocation.links)[number]) {
     return link.id === 'google' ? googleMapsLinkWithLocale(link.href, locale) : link.href;
@@ -21,10 +28,13 @@
     <p class="lead">{t('lead')}</p>
 
     <div class="map">
-      <div class="map-stage">
-        <ArriveMap alt={t('mapAlt')} attribution={t('attribution')} />
-        <WeatherChip />
-      </div>
+      <WeatherChip {portraitMobile}>
+        <ArriveMap
+          alt={t('mapAlt')}
+          attribution={t('attribution')}
+          attributionTitle={t('attributionTitle')}
+        />
+      </WeatherChip>
     </div>
 
     <div class="copy">
@@ -67,11 +77,6 @@
 
   .map {
     margin: 0 0 2rem;
-  }
-
-  .map-stage {
-    position: relative;
-    z-index: 0;
   }
 
   .copy {

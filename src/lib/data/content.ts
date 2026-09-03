@@ -885,8 +885,12 @@ export const arriveCopy = liveCopy('arrive', {
     en: 'From the A29 motorway, take the Balestrate exit. Palermo harbour is about 45 minutes away. If you are bringing your own car, there are ferries from Genoa, Civitavecchia, Naples, Salerno and Cagliari.'
   },
   attribution: {
-    it: 'Mappa © collaboratori di OpenStreetMap.',
-    en: 'Map © OpenStreetMap contributors.'
+    it: '© OpenStreetMap',
+    en: '© OpenStreetMap'
+  },
+  attributionTitle: {
+    it: 'Mappa © collaboratori di OpenStreetMap',
+    en: 'Map © OpenStreetMap contributors'
   }
 } satisfies Record<string, LocalizedString>);
 
@@ -1047,6 +1051,10 @@ export const weatherCopy = liveCopy('weather', {
     en: 'Weather at the baglio: {temp} degrees, {condition}'
   },
   credit: {
+    it: '© Open-Meteo',
+    en: '© Open-Meteo'
+  },
+  creditTitle: {
     it: 'Meteo © Open-Meteo',
     en: 'Weather © Open-Meteo'
   },

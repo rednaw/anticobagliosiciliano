@@ -7,10 +7,12 @@
 
   let {
     alt,
-    attribution
+    attribution,
+    attributionTitle
   }: {
     alt: string;
     attribution: string;
+    attributionTitle: string;
   } = $props();
 
   let mapEl: HTMLDivElement | undefined = $state();
@@ -64,7 +66,7 @@
       }
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: `<a href="https://www.openstreetmap.org/copyright">${escapeHtml(attribution)}</a>`,
+        attribution: `<a href="https://www.openstreetmap.org/copyright" title="${escapeHtml(attributionTitle)}">${escapeHtml(attribution)}</a>`,
         detectRetina: true
       }).addTo(map);
 

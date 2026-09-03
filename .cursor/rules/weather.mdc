@@ -20,7 +20,7 @@ Client-direct Open-Meteo — no snapshot in git, no API key. Full tier only; lig
 
 | | Landscape | Portrait |
 |---|---|---|
-| Chip | Overlay top-center on map | Block below map |
+| Chip | Overlay pill top-center on map | One line below map (icon + label · temp · condition) |
 | Open-Meteo credit | Bottom-left on map | Bottom-left on map |
 | OSM credit | Bottom-right (Leaflet) | Bottom-right (Leaflet) |
 
