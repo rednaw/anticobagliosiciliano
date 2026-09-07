@@ -14,6 +14,7 @@
 /build
 /coverage
 /node_modules
+/.node
 /archive/browser/node_modules
 /archive/browser/dist
 /archive/browser/public

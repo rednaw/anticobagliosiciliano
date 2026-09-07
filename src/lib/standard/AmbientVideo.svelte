@@ -58,12 +58,19 @@
   let playBlocked = $state(false);
 
   const sessionSpent = $derived(playOnce && homeCinemaSession.spent());
+  const sessionFinished = $derived(playOnce && homeCinemaSession.finished());
 
   const showControl = $derived(
     showAmbientControl({ playing, reduceMotion, ended, playBlocked, sessionSpent })
   );
   const controlLabel = $derived(pick(ended ? ui.replayVideo : ui.playVideo, locale));
   const stillPoster = $derived(posterEnd ?? poster);
+  /** Start poster when play was blocked or the play-once session was interrupted mid-clip. */
+  const showStartPoster = $derived(
+    !playing &&
+      !ended &&
+      (playBlocked || (sessionSpent && !sessionFinished))
+  );
   /** Hide the element (and its start poster) until playback or a recovery UI is needed. */
   const awaitingPlayback = $derived(!playing && !ended && !playBlocked && !sessionSpent);
 
@@ -117,6 +124,14 @@
   });
 
   $effect(() => {
+    if (posterOnly || !playOnce) return;
+    if (homeCinemaSession.finished()) {
+      ended = true;
+      playing = false;
+    }
+  });
+
+  $effect(() => {
     if (posterOnly) return;
     const video = el;
     if (!video || !playOnce || !homeCinemaSession.finished()) return;
@@ -132,17 +147,27 @@
 
   /** Buffer-gated attach + autoplay when cinema is ready and tier is full. */
   $effect(() => {
-    if (posterOnly || !ready || tier === 'light') return;
+    if (posterOnly || tier === 'light') return;
     const video = el;
+    if (!video) return;
+
+    if (playOnce && homeCinemaSession.spent()) {
+      sourceAttached = true;
+      queueMicrotask(() => {
+        if (!video || posterOnly) return;
+        video.load();
+      });
+      return;
+    }
+
+    if (!ready) return;
     const container = wrap;
-    if (!video || !container) return;
+    if (!container) return;
 
     if (reduceMotion) {
       video.pause();
       return;
     }
-
-    if (playOnce && homeCinemaSession.spent()) return;
 
     let cancelled = false;
     let prepareStarted = false;
@@ -236,7 +261,7 @@
     preload="none"
     width="1600"
     height="900"
-    poster={playBlocked ? responsiveImage(poster, { tier }) : undefined}
+    poster={showStartPoster ? responsiveImage(poster, { tier }) : undefined}
     aria-label={label}
     onplay={() => {
       playing = true;
