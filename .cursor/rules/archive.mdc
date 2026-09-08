@@ -1,6 +1,7 @@
 ---
 description: Public site vs unlinked owner archive.
-alwaysApply: true
+globs: archive/**,src/lib/standard/Header.svelte,src/lib/standard/Footer.svelte,src/routes/(site)/**/*.svelte,src/app.html
+alwaysApply: false
 ---
 
 # Site vs archive

@@ -1,0 +1,12 @@
+---
+description: Baglio identity — static holiday rental
+alwaysApply: true
+---
+
+# Antico Baglio Siciliano
+
+SvelteKit **adapter-static** rebuild of the holiday rental site. GH Pages: `rednaw.github.io/anticobagliosiciliano/` until the custom domain `anticobagliosiciliano.it` is cut over. Public site is Italian `/` and English `/en/`.
+
+Open **this folder** → Reopen in Container. Host needs Docker + Cursor, not Node.
+
+Owner archive under `archive/` is not deployed. Domain invariants (occupancy, theme, mailto, …) are glob rules in `.cursor/rules/`.
