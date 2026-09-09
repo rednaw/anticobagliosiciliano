@@ -10,3 +10,5 @@ SvelteKit **adapter-static** rebuild of the holiday rental site. GH Pages: `redn
 Open **this folder** → Reopen in Container. Host needs Docker + Cursor, not Node.
 
 Owner archive under `archive/` is not deployed. Domain invariants (occupancy, theme, mailto, …) are glob rules in `.cursor/rules/`.
+
+Part of the **rednaw portfolio**. Do not web-search it. Skill `rednaw-map`.
