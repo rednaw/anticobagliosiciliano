@@ -39,31 +39,33 @@ collections:
         media_folder: '{{media_folder}}/ambiance'
         public_folder: '{{public_folder}}/ambiance'
         fields:
-          - name: heroLead
-            label: Sottotitolo hero
-            widget: object
-            collapsed: true
-            fields: &it-en-text
-              - { name: it, label: Italiano, widget: text }
-              - { name: en, label: English, widget: text }
-          - { name: heroWide, label: Hero (largo), widget: image }
-          - { name: heroTall, label: Hero (alto), widget: image }
-          - name: heroAlt
-            label: Testo alternativo hero
+          - name: title
+            label: Titolo
             widget: object
             collapsed: true
             fields: &it-en-string
               - { name: it, label: Italiano, widget: string }
               - { name: en, label: English, widget: string }
+          - name: portone
+            label: Portone
+            widget: object
+            fields:
+              - name: lead
+                label: Sottotitolo
+                widget: object
+                collapsed: true
+                fields: &it-en-text
+                  - { name: it, label: Italiano, widget: text }
+                  - { name: en, label: English, widget: text }
+              - { name: wide, label: Largo, widget: image }
+              - { name: tall, label: Alto, widget: image }
+              - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
           - name: video
             label: Video
             widget: object
             collapsed: true
             fields:
               - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: play, label: Riproduci, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: replay, label: Rivedi, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: unsupported, label: Non supportato, widget: object, collapsed: true, fields: *it-en-text }
           - name: chiSiamo
             label: Chi siamo
             widget: object
@@ -296,7 +298,7 @@ collections:
 
       - name: chrome
         label: Chrome
-        file: src/content/chrome.yml
+        file: src/content/site.yml
         format: yaml
         fields:
           - name: name
@@ -315,106 +317,115 @@ collections:
             widget: object
             collapsed: true
             fields: *it-en-text
-          - name: nav
-            label: Navigazione
-            widget: object
-            fields:
-              - { name: home, label: Home, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: houses, label: Alloggi, widget: object, collapsed: true, fields: *it-en-string }
-          - name: house
-            label: Case (etichette condivise)
-            widget: object
-            collapsed: true
-            fields:
-              - { name: accommodation, label: Alloggio, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: highlights, label: In evidenza, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: otherHouses, label: Altre case, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: keepExploring, label: Continua a esplorare, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: notFound, label: Casa non trovata, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: gallery, label: Galleria, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: previousPhoto, label: Foto precedente, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: nextPhoto, label: Foto successiva, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: thumbnails, label: Anteprime, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: goToPhoto, label: Vai alla foto, widget: object, collapsed: true, fields: *it-en-string }
-          - name: chrome
-            label: Chrome
-            widget: object
-            collapsed: true
-            fields:
-              - { name: skipToContent, label: Salta al contenuto, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: mainNav, label: Nav principale, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: language, label: Lingua, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: menu, label: Menu, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: closeMenu, label: Chiudi menu, widget: object, collapsed: true, fields: *it-en-string }
-          - name: pageNotFound
-            label: Pagina non trovata
-            widget: object
-            collapsed: true
-            fields:
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-          - name: pageError
-            label: Errore
-            widget: object
-            collapsed: true
-            fields:
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: skipToContent, label: Salta al contenuto, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mainNav, label: Nav principale, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: language, label: Lingua, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: menu, label: Menu, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: closeMenu, label: Chiudi menu, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: videoPlay, label: Riproduci video, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: videoReplay, label: Rivedi video, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: videoUnsupported, label: Video non supportato, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: pageNotFoundTitle, label: Pagina non trovata, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: pageNotFoundBody, label: Pagina non trovata (testo), widget: object, collapsed: true, fields: *it-en-text }
+          - { name: pageErrorTitle, label: Errore, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: pageErrorBody, label: Errore (testo), widget: object, collapsed: true, fields: *it-en-text }
 
   - name: houses
     label: Case
     label_singular: Casa
-    folder: src/content/houses
     create: false
     delete: false
-    extension: yml
-    format: yaml
-    identifier_field: slug
-    media_folder: '{{media_folder}}/houses/{{slug}}'
-    public_folder: '{{public_folder}}/houses/{{slug}}'
     editor:
       preview: false
-    fields:
-      - name: name
-        label: Nome
-        widget: string
-      - name: image
-        label: Foto copertina
-        widget: image
-      - { name: tagline, label: Tagline, widget: object, collapsed: true, fields: *it-en-string }
-      - { name: summary, label: Sommario, widget: object, collapsed: true, fields: *it-en-text }
-      - { name: guests, label: Ospiti, widget: object, collapsed: true, fields: *it-en-string }
-      - { name: bedrooms, label: Camere, widget: object, collapsed: true, fields: *it-en-string }
-      - { name: bathrooms, label: Bagni, widget: object, collapsed: true, fields: *it-en-string }
-      - name: paragraphs
-        label: Testo
-        widget: object
-        hint: Riga vuota = nuovo paragrafo.
-        fields: *it-en-text
-      - name: highlights
-        label: In evidenza
-        widget: list
-        summary: "{{it}}"
-        fields: *it-en-string
-      - name: gallery
-        label: Galleria
-        widget: image
-        multiple: true
-      - name: slug
-        widget: hidden
-      - name: size
-        widget: hidden
-      - name: capacity
-        label: Capacità
-        widget: object
-        collapsed: true
-        hint: Non cambiare — allineata a Lodgify.
+    files:
+      - name: casa-1
+        label: Casa 1
+        file: src/content/houses/casa-1.yml
+        format: yaml
+        media_folder: '{{media_folder}}/houses/casa-1'
+        public_folder: '{{public_folder}}/houses/casa-1'
+        fields: &house-fields
+          - name: name
+            label: Nome
+            widget: string
+          - name: image
+            label: Foto copertina
+            widget: image
+          - { name: tagline, label: Tagline, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: summary, label: Sommario, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: guests, label: Ospiti, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: bedrooms, label: Camere, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: bathrooms, label: Bagni, widget: object, collapsed: true, fields: *it-en-string }
+          - name: paragraphs
+            label: Testo
+            widget: object
+            hint: Riga vuota = nuovo paragrafo.
+            fields: *it-en-text
+          - name: highlights
+            label: In evidenza
+            widget: list
+            summary: "{{it}}"
+            fields: *it-en-string
+          - name: gallery
+            label: Galleria
+            widget: image
+            multiple: true
+          - name: slug
+            widget: hidden
+          - name: size
+            widget: hidden
+          - name: capacity
+            label: Capacità
+            widget: object
+            collapsed: true
+            hint: Non cambiare — allineata a Lodgify.
+            fields:
+              - { name: guestMin, label: Ospiti min, widget: number, value_type: int }
+              - { name: guestMax, label: Ospiti max, widget: number, value_type: int }
+              - { name: bedroomCount, label: Camere, widget: number, value_type: int }
+              - { name: bathroomCount, label: Bagni, widget: number, value_type: int }
+              - { name: floorAreaSqm, label: Mq, widget: number, value_type: int }
+
+      - name: casa-2
+        label: Casa 2
+        file: src/content/houses/casa-2.yml
+        format: yaml
+        media_folder: '{{media_folder}}/houses/casa-2'
+        public_folder: '{{public_folder}}/houses/casa-2'
+        fields: *house-fields
+
+      - name: casa-3
+        label: Casa 3
+        file: src/content/houses/casa-3.yml
+        format: yaml
+        media_folder: '{{media_folder}}/houses/casa-3'
+        public_folder: '{{public_folder}}/houses/casa-3'
+        fields: *house-fields
+
+      - name: casa-4
+        label: Casa 4
+        file: src/content/houses/casa-4.yml
+        format: yaml
+        media_folder: '{{media_folder}}/houses/casa-4'
+        public_folder: '{{public_folder}}/houses/casa-4'
+        fields: *house-fields
+
+      - name: chrome
+        label: Chrome
+        file: src/content/accommodation.yml
+        format: yaml
         fields:
-          - { name: guestMin, label: Ospiti min, widget: number, value_type: int }
-          - { name: guestMax, label: Ospiti max, widget: number, value_type: int }
-          - { name: bedroomCount, label: Camere, widget: number, value_type: int }
-          - { name: bathroomCount, label: Bagni, widget: number, value_type: int }
-          - { name: floorAreaSqm, label: Mq, widget: number, value_type: int }
+          - { name: single, label: Singolare, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: plural, label: Plurale, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: highlights, label: In evidenza, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: otherHouses, label: Altre case, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: keepExploring, label: Continua a esplorare, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: notFound, label: Casa non trovata, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: gallery, label: Galleria, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: previousPhoto, label: Foto precedente, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: nextPhoto, label: Foto successiva, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: thumbnails, label: Anteprime, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: goToPhoto, label: Vai alla foto, widget: object, collapsed: true, fields: *it-en-string }
 
   - name: places
     label: Luoghi

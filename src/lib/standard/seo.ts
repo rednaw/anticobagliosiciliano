@@ -15,7 +15,7 @@ import { SITE_ORIGIN } from '$lib/site-config';
 import { absoluteUrl, pick } from '$lib/standard/i18n';
 
 /** Default share card — same wide still as the homepage hero. */
-export const OG_IMAGE_PATH = homeCopy.heroWide;
+export const OG_IMAGE_PATH = homeCopy.portone.wide;
 export const OG_IMAGE_WIDTH = 1248;
 export const OG_IMAGE_HEIGHT = 1229;
 
@@ -37,12 +37,12 @@ export function routeKey(pathname: string): string {
 export function pageSeo(pathname: string, locale: Locale): PageSeo {
   const key = routeKey(pathname);
   const image = absoluteUrl(publicImage(OG_IMAGE_PATH), SITE_ORIGIN);
-  const imageAlt = pick(homeCopy.heroAlt, locale);
+  const imageAlt = pick(homeCopy.portone.alt, locale);
 
   if (key === '/404.html') {
     return {
-      title: `${pick(site.pageNotFound.title, locale)} · ${site.name}`,
-      description: pick(site.pageNotFound.body, locale),
+      title: `${pick(site.pageNotFoundTitle, locale)} · ${site.name}`,
+      description: pick(site.pageNotFoundBody, locale),
       image,
       imageAlt,
       robots: 'noindex, nofollow'

@@ -4,7 +4,7 @@
   import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
   import Reveal from '$lib/standard/Reveal.svelte';
   import SectionHead from '$lib/standard/SectionHead.svelte';
-  import { contactCopy, houses, site } from '$lib/data/content';
+  import { accommodationCopy, contactCopy, houses } from '$lib/data/content';
   import { contactHref, localize, pick, siteHref, splitParagraphs } from '$lib/standard/i18n';
   import { mediaTier } from '$lib/standard/network-tier';
 
@@ -14,7 +14,7 @@
   const house = $derived(data.house);
   const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
   const contatti = $derived(contactHref(locale, house.slug));
-  const chrome = $derived(localize(site.house, locale));
+  const chrome = $derived(localize(accommodationCopy, locale));
   const requestAvailability = $derived(pick(contactCopy.title, locale));
 </script>
 
@@ -22,7 +22,7 @@
   <img src={responsiveImage(house.image, { tier })} alt={house.name} width="1400" height="933" />
   <div class="veil"></div>
   <div class="container copy">
-    <p class="eyebrow">{chrome.accommodation}</p>
+    <p class="eyebrow">{chrome.single}</p>
     <h1>{house.name}</h1>
     {#if house.tagline}
       <p class="tagline">{house.tagline}</p>

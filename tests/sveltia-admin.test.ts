@@ -119,30 +119,43 @@ describe('Sveltia admin', () => {
   });
 
   it('covers every content YAML key in CMS field order, without creating houses or places', () => {
+    expect(config.collections.map((c) => c.name)).toEqual(['pages', 'houses', 'places']);
     expect(byName.pages.editor).toMatchObject({ preview: false });
     expect(byName.houses).toMatchObject({
-      folder: 'src/content/houses',
       create: false,
       delete: false
     });
+    expect(byName.houses.folder).toBeUndefined();
     expect(byName.places).toMatchObject({
       folder: 'src/content/places',
       create: false,
       delete: false
     });
+    expect(byName.chrome).toBeUndefined();
     expect(byName.pages.i18n).toBeUndefined();
     expect(byName.houses.i18n).toBeUndefined();
     expect(byName.places.i18n).toBeUndefined();
 
     const pageFiles = byName.pages.files ?? [];
+    const houseFiles = byName.houses.files ?? [];
     expect(pageFiles.at(-1)).toMatchObject({
       name: 'chrome',
-      file: 'src/content/chrome.yml'
+      file: 'src/content/site.yml'
+    });
+    expect(houseFiles.slice(0, -1).map((file) => file.file)).toEqual([
+      'src/content/houses/casa-1.yml',
+      'src/content/houses/casa-2.yml',
+      'src/content/houses/casa-3.yml',
+      'src/content/houses/casa-4.yml'
+    ]);
+    expect(houseFiles.at(-1)).toMatchObject({
+      name: 'chrome',
+      file: 'src/content/accommodation.yml'
     });
 
     const cmsFiles = [
       ...pageFiles.map((file) => resolve(root, file.file)),
-      ...listYml(resolve(root, 'src/content/houses')),
+      ...houseFiles.map((file) => resolve(root, file.file)),
       ...listYml(resolve(root, 'src/content/places'))
     ].map((path) => relative(root, path).replaceAll('\\', '/'));
     const diskFiles = listYml(resolve(root, 'src/content')).map((path) =>
@@ -150,18 +163,13 @@ describe('Sveltia admin', () => {
     );
     expect(cmsFiles.sort()).toEqual(diskFiles.sort());
 
-    for (const file of pageFiles) {
+    for (const file of [...pageFiles, ...houseFiles]) {
       const data = parse(readFileSync(resolve(root, file.file), 'utf8'));
       assertYamlMatchesCms(file.file, data, file.fields);
     }
-    for (const [name, collection] of [
-      ['houses', byName.houses],
-      ['places', byName.places]
-    ] as const) {
-      for (const path of listYml(resolve(root, collection.folder!))) {
-        const data = parse(readFileSync(path, 'utf8'));
-        assertYamlMatchesCms(`${name}/${relative(root, path)}`, data, collection.fields);
-      }
+    for (const path of listYml(resolve(root, byName.places.folder!))) {
+      const data = parse(readFileSync(path, 'utf8'));
+      assertYamlMatchesCms(`places/${relative(root, path)}`, data, byName.places.fields);
     }
 
     const weather = pageFiles

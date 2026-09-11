@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { splitParagraphs } from '../locale';
-import { amenitiesCopy, awardsCopy, contactCopy, homeCopy, housesSource, inbox, placesSource, site, weatherCopy } from './content';
+import { accommodationCopy, amenitiesCopy, awardsCopy, contactCopy, homeCopy, housesSource, inbox, placesSource, site, weatherCopy } from './content';
 
 describe('marketing YAML', () => {
   it('loads houses and places in site order', () => {
@@ -30,12 +30,17 @@ describe('marketing YAML', () => {
     expect(site).not.toHaveProperty('email');
     expect(contactCopy).not.toHaveProperty('inbox');
     expect(site.tagline).toBe('Case vacanze in Sicilia');
-    expect(site.nav.home).toEqual({ it: 'Home', en: 'Home' });
-    expect(site.nav).not.toHaveProperty('arrive');
+    expect(site).not.toHaveProperty('nav');
+    expect(homeCopy.title).toEqual({ it: 'Home', en: 'Home' });
     expect(contactCopy.title.en).toBe('Request availability');
     expect(homeCopy.houses.eyebrow.it).toBe('I nostri alloggi');
-    expect(site.chrome.menu).toEqual({ it: 'Menu', en: 'Menu' });
-    expect(homeCopy.video.play.en).toBe('Play the video');
+    expect(accommodationCopy.plural).toEqual({ it: 'Alloggi', en: 'Accommodation' });
+    expect(homeCopy.houses.eyebrow.en).toBe('Accommodation');
+    expect(accommodationCopy.single).toEqual({ it: 'Alloggio', en: 'Accommodation' });
+    expect(site.menu).toEqual({ it: 'Menu', en: 'Menu' });
+    expect(site.videoPlay.en).toBe('Play the video');
+    expect(homeCopy.video).not.toHaveProperty('play');
+    expect(homeCopy.video.alt.en).toBe('The baglio seen from above');
     expect(weatherCopy.clear.it).toBe('sereno');
     expect(weatherCopy.line.it).toContain('{temp}');
     expect(weatherCopy.aria.en).toContain('{condition}');
@@ -44,15 +49,16 @@ describe('marketing YAML', () => {
     expect(contactCopy.housesFreeHint.en).toBe('These dates are free for');
     expect(contactCopy.housesFreeHint.it).not.toContain('{');
     expect(homeCopy).not.toHaveProperty('metaDescription');
-    expect(homeCopy.heroLead.it).toContain('Sicilia occidentale');
+    expect(homeCopy.portone.lead.it).toContain('Sicilia occidentale');
     expect(homeCopy).not.toHaveProperty('amenities');
     expect(homeCopy).not.toHaveProperty('awardItems');
     expect(homeCopy).not.toHaveProperty('comfort');
     expect(homeCopy).not.toHaveProperty('awards');
     expect(homeCopy).not.toHaveProperty('images');
-    expect(homeCopy.heroWide).toBe('/images/ambiance/hero-portone-wide.jpg');
-    expect(homeCopy.heroTall).toBe('/images/ambiance/hero-portone-tall.jpg');
-    expect(homeCopy.heroAlt.it).toContain('Portone');
+    expect(homeCopy).not.toHaveProperty('heroWide');
+    expect(homeCopy.portone.wide).toBe('/images/ambiance/hero-portone-wide.jpg');
+    expect(homeCopy.portone.tall).toBe('/images/ambiance/hero-portone-tall.jpg');
+    expect(homeCopy.portone.alt.it).toContain('Portone');
     expect(homeCopy).not.toHaveProperty('alt');
     expect(homeCopy.cortile.alt.it).toContain('Cortile');
     expect(homeCopy.giardino.agrumetoAlt.en).toContain('citrus grove');

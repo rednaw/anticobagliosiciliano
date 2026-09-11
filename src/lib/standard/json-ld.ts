@@ -1,4 +1,4 @@
-import { baglioLocation, getHouse, housesSource, inbox, site } from '$lib/data/content';
+import { accommodationCopy, baglioLocation, getHouse, homeCopy, housesSource, inbox, site } from '$lib/data/content';
 import type { Locale } from '$lib/locale';
 import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
@@ -104,9 +104,9 @@ function houseBreadcrumbs(slug: string, locale: Locale) {
   if (!house) return null;
 
   return breadcrumbList([
-    { name: pick(site.nav.home, locale), url: absoluteUrl(standardHref(locale), SITE_ORIGIN) },
+    { name: pick(homeCopy.title, locale), url: absoluteUrl(standardHref(locale), SITE_ORIGIN) },
     {
-      name: pick(site.nav.houses, locale),
+      name: pick(accommodationCopy.plural, locale),
       url: `${absoluteUrl(standardHref(locale), SITE_ORIGIN)}#houses`
     },
     {

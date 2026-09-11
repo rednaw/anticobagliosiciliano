@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { building } from '$app/environment';
-  import { site, arriveCopy, contactCopy, imperdibiliTitle } from '$lib/data/content';
+  import { site, arriveCopy, accommodationCopy, contactCopy, homeCopy, imperdibiliTitle } from '$lib/data/content';
   import {
     contactHref,
     counterpartHref,
@@ -30,8 +30,17 @@
   let currentTheme = $state<SiteTheme>(DEFAULT_SITE_THEME);
 
   const locale = $derived(page.data.locale);
-  const nav = $derived(localize(site.nav, locale));
-  const chrome = $derived(localize(site.chrome, locale));
+  const chrome = $derived(
+    localize(
+      {
+        mainNav: site.mainNav,
+        language: site.language,
+        menu: site.menu,
+        closeMenu: site.closeMenu
+      },
+      locale
+    )
+  );
 
   $effect(() => {
     currentTheme = initSiteTheme();
@@ -44,8 +53,8 @@
   }
 
   const links = $derived([
-    { subpath: '', label: nav.home, hash: '' },
-    { subpath: '', label: nav.houses, hash: '#houses' },
+    { subpath: '', label: pick(homeCopy.title, locale), hash: '' },
+    { subpath: '', label: pick(accommodationCopy.plural, locale), hash: '#houses' },
     { subpath: 'imperdibili', label: pick(imperdibiliTitle, locale), hash: '' },
     { subpath: 'come-arrivare', label: pick(arriveCopy.title, locale), hash: '' }
   ]);

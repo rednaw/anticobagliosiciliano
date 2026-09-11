@@ -80,21 +80,21 @@
       <picture>
         <source
           media="(min-aspect-ratio: 7 / 10)"
-          srcset={responsiveImage(home.heroWide, { tier })}
+          srcset={responsiveImage(home.portone.wide, { tier })}
         />
         <img
           class="gate-media"
-          src={responsiveImage(home.heroTall, { tier })}
+          src={responsiveImage(home.portone.tall, { tier })}
           width="1248"
           height="1690"
-          alt={home.heroAlt}
+          alt={home.portone.alt}
           fetchpriority="high"
         />
       </picture>
     </div>
     <div class="hero-copy">
       <h1>{site.name}</h1>
-      <p class="hero-lead">{home.heroLead}</p>
+      <p class="hero-lead">{home.portone.lead}</p>
     </div>
   </div>
 

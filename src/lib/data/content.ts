@@ -19,17 +19,14 @@ import salineDiTrapani from '../../content/places/saline-di-trapani.yml';
 import segesta from '../../content/places/segesta.yml';
 import selinunte from '../../content/places/selinunte.yml';
 import privacyYaml from '../../content/privacy.yml';
-import chromeYaml from '../../content/chrome.yml';
+import accommodationYaml from '../../content/accommodation.yml';
+import siteYaml from '../../content/site.yml';
 
 /** Marketing copy. Tagline stays Italian in both languages. Inbox is `contact.yml`. */
 
-type SiteNav = {
-  home: LocalizedString;
-  houses: LocalizedString;
-};
-
-type SiteHouseCopy = {
-  accommodation: LocalizedString;
+type AccommodationCopy = {
+  single: LocalizedString;
+  plural: LocalizedString;
   highlights: LocalizedString;
   otherHouses: LocalizedString;
   keepExploring: LocalizedString;
@@ -41,29 +38,23 @@ type SiteHouseCopy = {
   goToPhoto: LocalizedString;
 };
 
-type SiteChrome = {
-  skipToContent: LocalizedString;
-  mainNav: LocalizedString;
-  language: LocalizedString;
-  menu: LocalizedString;
-  closeMenu: LocalizedString;
-};
-
-type SitePageMessage = {
-  title: LocalizedString;
-  body: LocalizedString;
-};
-
 type SiteCopy = {
   name: string;
   tagline: string;
   location: LocalizedString;
   description: LocalizedString;
-  nav: SiteNav;
-  house: SiteHouseCopy;
-  chrome: SiteChrome;
-  pageNotFound: SitePageMessage;
-  pageError: SitePageMessage;
+  skipToContent: LocalizedString;
+  mainNav: LocalizedString;
+  language: LocalizedString;
+  menu: LocalizedString;
+  closeMenu: LocalizedString;
+  videoPlay: LocalizedString;
+  videoReplay: LocalizedString;
+  videoUnsupported: LocalizedString;
+  pageNotFoundTitle: LocalizedString;
+  pageNotFoundBody: LocalizedString;
+  pageErrorTitle: LocalizedString;
+  pageErrorBody: LocalizedString;
 };
 
 type HouseCapacity = {
@@ -111,15 +102,15 @@ type AwardSource = {
 };
 
 type HomeCopy = {
-  heroLead: LocalizedString;
-  heroWide: string;
-  heroTall: string;
-  heroAlt: LocalizedString;
+  title: LocalizedString;
+  portone: {
+    lead: LocalizedString;
+    wide: string;
+    tall: string;
+    alt: LocalizedString;
+  };
   video: {
     alt: LocalizedString;
-    play: LocalizedString;
-    replay: LocalizedString;
-    unsupported: LocalizedString;
   };
   chiSiamo: { title: LocalizedString; body: LocalizedString };
   houses: {
@@ -313,6 +304,8 @@ export { inbox };
 
 export const contactCopy = contactRest;
 
-export const site = chromeYaml as SiteCopy;
+export const accommodationCopy = accommodationYaml as AccommodationCopy;
+
+export const site = siteYaml as SiteCopy;
 
 export const privacyCopy = privacyYaml as Record<string, LocalizedString>;

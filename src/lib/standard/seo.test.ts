@@ -13,7 +13,7 @@ describe('pageSeo', () => {
     expect(pageSeo('/anticobagliosiciliano/', 'it').title).toBe(`${site.name} · ${site.tagline}`);
     expect(pageSeo('/anticobagliosiciliano/', 'it').description).toBe(site.description.it);
     expect(pageSeo('/anticobagliosiciliano/en/', 'en').title).toBe(`${site.name} · ${site.tagline}`);
-    expect(pageSeo('/anticobagliosiciliano/en/', 'en').imageAlt).toBe(homeCopy.heroAlt.en);
+    expect(pageSeo('/anticobagliosiciliano/en/', 'en').imageAlt).toBe(homeCopy.portone.alt.en);
     expect(pageSeo('/anticobagliosiciliano/', 'it').image).toContain('hero-portone-wide');
     expect(pageSeo('/anticobagliosiciliano/contatti/', 'it').title).toBe(
       `${pick(contactCopy.title, 'it')} · ${site.name}`

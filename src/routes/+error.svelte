@@ -14,7 +14,7 @@
   });
 </script>
 
-<a class="skip" href="#contenuto">{pick(site.chrome.skipToContent, locale)}</a>
+<a class="skip" href="#contenuto">{pick(site.skipToContent, locale)}</a>
 <Header />
 <main id="contenuto">
   <NotFound />

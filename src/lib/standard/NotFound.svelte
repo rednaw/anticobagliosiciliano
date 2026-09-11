@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { site } from '$lib/data/content';
+  import { homeCopy, site } from '$lib/data/content';
   import { localeFromPath } from '$lib/locale';
   import { pick, siteHref } from '$lib/standard/i18n';
 
@@ -9,8 +9,8 @@
   const locale = $derived(page.data.locale ?? localeFromPath(page.url.pathname));
   const code = $derived(status ?? page.status);
   const is404 = $derived(code === 404);
-  const heading = $derived(pick(is404 ? site.pageNotFound.title : site.pageError.title, locale));
-  const body = $derived(pick(is404 ? site.pageNotFound.body : site.pageError.body, locale));
+  const heading = $derived(pick(is404 ? site.pageNotFoundTitle : site.pageErrorTitle, locale));
+  const body = $derived(pick(is404 ? site.pageNotFoundBody : site.pageErrorBody, locale));
   const home = $derived(siteHref(locale));
 </script>
 
@@ -26,7 +26,7 @@
     <p class="eyebrow">{is404 ? '404' : code}</p>
     <h1>{heading}</h1>
     <p class="lead">{body}</p>
-    <a class="btn" href={home}>{pick(site.nav.home, locale)}</a>
+    <a class="btn" href={home}>{pick(homeCopy.title, locale)}</a>
   </div>
 </section>
 

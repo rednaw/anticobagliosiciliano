@@ -1,24 +1,19 @@
-heroLead:
-  it: Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.
-  en: In the heart of western Sicily, a genuine experience of rest and culture.
-heroWide: /images/ambiance/hero-portone-wide.jpg
-heroTall: /images/ambiance/hero-portone-tall.jpg
-heroAlt:
-  it: Portone dell’Antico Baglio Siciliano immerso nel verde
-  en: The gate of Antico Baglio Siciliano surrounded by greenery
+title:
+  it: Home
+  en: Home
+portone:
+  lead:
+    it: Nel cuore della Sicilia occidentale, un’esperienza vera di relax e cultura.
+    en: In the heart of western Sicily, a genuine experience of rest and culture.
+  wide: /images/ambiance/hero-portone-wide.jpg
+  tall: /images/ambiance/hero-portone-tall.jpg
+  alt:
+    it: Portone dell’Antico Baglio Siciliano immerso nel verde
+    en: The gate of Antico Baglio Siciliano surrounded by greenery
 video:
   alt:
     it: Il Baglio ripreso dall’alto
     en: The baglio seen from above
-  play:
-    it: Riproduci il video
-    en: Play the video
-  replay:
-    it: Rivedi il video
-    en: Replay the video
-  unsupported:
-    it: Il tuo browser non supporta la riproduzione video.
-    en: Your browser does not support video playback.
 chiSiamo:
   title:
     it: Chi siamo
@@ -33,7 +28,7 @@ chiSiamo:
 houses:
   eyebrow:
     it: I nostri alloggi
-    en: The Houses
+    en: Accommodation
   title:
     it: Quattro case indipendenti, un solo cortile
     en: Four independent houses, one courtyard

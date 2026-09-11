@@ -1,0 +1,46 @@
+name: Antico Baglio Siciliano
+tagline: Case vacanze in Sicilia
+location:
+  it: Balestrate, Sicilia occidentale
+  en: Balestrate, western Sicily
+description:
+  it: Quattro case vacanze in un antico baglio a Balestrate, Sicilia. Cortile, agrumeto e
+    uliveto; a pochi minuti da Segesta e lo Zingaro.
+  en: Four holiday houses in a historic baglio in Balestrate, Sicily. Courtyard, citrus
+    and olive groves; minutes from Segesta and the Zingaro.
+skipToContent:
+  it: Vai al contenuto
+  en: Skip to content
+mainNav:
+  it: Principale
+  en: Main
+language:
+  it: Lingua
+  en: Language
+menu:
+  it: Menu
+  en: Menu
+closeMenu:
+  it: Chiudi menu
+  en: Close menu
+videoPlay:
+  it: Riproduci il video
+  en: Play the video
+videoReplay:
+  it: Rivedi il video
+  en: Replay the video
+videoUnsupported:
+  it: Il tuo browser non supporta la riproduzione video.
+  en: Your browser does not support video playback.
+pageNotFoundTitle:
+  it: Pagina non trovata
+  en: Page not found
+pageNotFoundBody:
+  it: Questo indirizzo non esiste. Torna alla home per scoprire le case del baglio.
+  en: This address does not exist. Head home to see the houses at the baglio.
+pageErrorTitle:
+  it: Qualcosa è andato storto
+  en: Something went wrong
+pageErrorBody:
+  it: Non siamo riusciti a caricare questa pagina. Puoi tornare alla home e riprovare.
+  en: We could not load this page. You can go back home and try again.

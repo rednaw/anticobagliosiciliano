@@ -1,0 +1,33 @@
+single:
+  it: Alloggio
+  en: Accommodation
+plural:
+  it: Alloggi
+  en: Accommodation
+highlights:
+  it: In evidenza
+  en: Amenities
+otherHouses:
+  it: Altre case
+  en: The other houses
+keepExploring:
+  it: Continua a esplorare
+  en: Keep exploring
+notFound:
+  it: Casa non trovata
+  en: House not found
+gallery:
+  it: Galleria
+  en: Gallery
+previousPhoto:
+  it: Foto precedente
+  en: Previous photo
+nextPhoto:
+  it: Foto successiva
+  en: Next photo
+thumbnails:
+  it: Anteprime
+  en: Thumbnails
+goToPhoto:
+  it: Vai alla foto
+  en: Go to photo
