@@ -1,6 +1,6 @@
 ---
 description: Sveltia CMS /admin invariants
-globs: static/admin/**/*,renovate.json
+globs: static/admin/**/*,renovate.json,vite.config.ts,package.json
 alwaysApply: false
 ---
 
@@ -10,7 +10,7 @@ Pending: `.cursor/plans/sveltia-cms.md` (iac origin allowlist). Live `/admin/` u
 
 ## Must preserve
 
-- Pin `@sveltia/cms` in `static/admin/index.html` and matching schema URL in `static/admin/config.yml` (same version). Renovate regex manager bumps both (`groupName: sveltia cms`); merge only after checking release notes — no automerge.
+- Pin `@sveltia/cms` in `package.json` (exact version). Vite copies `dist/sveltia-cms.js` to `static/admin/sveltia-cms.js` (gitignored). `index.html` loads `./sveltia-cms.js`. Schema in `config.yml` is `../../node_modules/@sveltia/cms/schema/sveltia-cms.json`. Renovate npm (`groupName: sveltia cms`); merge only after checking release notes — no automerge. No unpkg.
 - Backend: GitHub `rednaw/anticobagliosiciliano`, `skip_ci: false`, `base_url: https://auth.tientjeketama.nl`, `auth_methods: [oauth]`. No client secret in this repo. Do not add `/admin` to the public nav. Admin HTML is `noindex`. Local login is still Local Repository.
 - Collections write `src/content/` YAML. Houses and places `create: false` / `delete: false` (explicit imports in `content.ts`). Include every YAML key (hidden/collapsed for slug, capacity, coords) so a save cannot drop fields.
 - YAML is per-field `{ it, en }`. Do not enable Sveltia `i18n` (`single_file` is top-level locale keys and empties the collections). Localized fields are object widgets with `it` / `en`.

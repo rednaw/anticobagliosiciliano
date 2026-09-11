@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
@@ -8,11 +8,20 @@ const indexHtml = readFileSync(resolve(root, 'static/admin/index.html'), 'utf8')
 const configText = readFileSync(resolve(root, 'static/admin/config.yml'), 'utf8');
 
 describe('Sveltia admin', () => {
-  it('pins the same Sveltia version in the script and the schema', () => {
-    const script = indexHtml.match(/unpkg\.com\/@sveltia\/cms@([^/]+)\/dist\/sveltia-cms\.js/);
-    const schema = configText.match(/unpkg\.com\/@sveltia\/cms@([^/]+)\/schema\/sveltia-cms\.json/);
-    expect(script?.[1]).toBeDefined();
-    expect(schema?.[1]).toBe(script?.[1]);
+  it('loads the npm IIFE, not unpkg, and matches the schema in node_modules', () => {
+    const pkg = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as {
+      devDependencies: Record<string, string>;
+    };
+    expect(pkg.devDependencies['@sveltia/cms']).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(indexHtml).toContain('src="./sveltia-cms.js"');
+    expect(indexHtml).not.toContain('unpkg.com');
+    expect(configText).toContain(
+      '$schema=../../node_modules/@sveltia/cms/schema/sveltia-cms.json'
+    );
+    expect(existsSync(resolve(root, 'node_modules/@sveltia/cms/dist/sveltia-cms.js'))).toBe(true);
+    expect(existsSync(resolve(root, 'node_modules/@sveltia/cms/schema/sveltia-cms.json'))).toBe(
+      true
+    );
     expect(indexHtml).toContain('noindex');
   });
 

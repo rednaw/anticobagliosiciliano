@@ -2,6 +2,9 @@
 /static/images/**/*.webp
 /static/videos/**/*.webp
 
+# Copied from node_modules by the Vite sveltia-cms plugin
+/static/admin/sveltia-cms.js
+
 # Output
 .output
 .vercel

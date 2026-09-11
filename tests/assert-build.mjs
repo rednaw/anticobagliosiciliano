@@ -255,6 +255,9 @@ assert(robots.includes(`Disallow: ${SITE_BASE}/admin/`), 'robots.txt disallows /
 
 assert(existsSync(path.join(build, 'admin/index.html')), 'admin SPA is in the build');
 assert(read('admin/index.html').includes('noindex'), 'admin is noindex');
+assert(read('admin/index.html').includes('src="./sveltia-cms.js"'), 'admin loads the local CMS IIFE');
+assert(!read('admin/index.html').includes('unpkg.com'), 'admin does not load CMS from unpkg');
+assert(existsSync(path.join(build, 'admin/sveltia-cms.js')), 'admin ships the CMS bundle');
 assert(read('admin/config.yml').includes('src/content/'), 'admin collections point at src/content/');
 assert(!homepage.includes('/admin'), 'homepage does not link to /admin');
 

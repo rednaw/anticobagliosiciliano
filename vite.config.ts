@@ -1,9 +1,16 @@
 /// <reference types="vitest/config" />
+import { readFileSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
 import { parse as parseYaml } from 'yaml';
 import { SITE_BASE } from './src/lib/site-config.ts';
+
+const require = createRequire(import.meta.url);
+const repoRoot = fileURLToPath(new URL('.', import.meta.url));
 
 const SA_SCRIPT =
   /<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
@@ -33,6 +40,27 @@ function yamlDataPlugin(): Plugin {
         code: `export default ${JSON.stringify(parseYaml(code))};`,
         map: { mappings: '' }
       };
+    }
+  };
+}
+
+/** Copy the npm IIFE next to `static/admin/index.html` (no unpkg). */
+function copySveltiaCms() {
+  const from = join(dirname(require.resolve('@sveltia/cms')), 'sveltia-cms.js');
+  const to = join(repoRoot, 'static/admin/sveltia-cms.js');
+  const js = readFileSync(from, 'utf8').replace(
+    /\n\/\/# sourceMappingURL=sveltia-cms\.js\.map\s*$/,
+    '\n'
+  );
+  writeFileSync(to, js);
+}
+
+function sveltiaCmsPlugin(): Plugin {
+  return {
+    name: 'sveltia-cms',
+    buildStart: copySveltiaCms,
+    configureServer() {
+      copySveltiaCms();
     }
   };
 }
@@ -82,6 +110,7 @@ function simpleAnalyticsDevPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [
+    sveltiaCmsPlugin(),
     adminIndexPlugin(),
     yamlDataPlugin(),
     simpleAnalyticsDevPlugin(),
