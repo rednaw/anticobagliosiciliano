@@ -121,6 +121,12 @@ type HomeCopy = {
   heroWide: string;
   heroTall: string;
   heroAlt: LocalizedString;
+  video: {
+    alt: LocalizedString;
+    play: LocalizedString;
+    replay: LocalizedString;
+    unsupported: LocalizedString;
+  };
   chiSiamo: { title: LocalizedString; body: LocalizedString };
   houses: {
     eyebrow: LocalizedString;
@@ -147,12 +153,6 @@ type HomeCopy = {
   };
   places: { title: LocalizedString; lead: LocalizedString };
   cta: { title: LocalizedString; body: LocalizedString };
-  video: {
-    alt: LocalizedString;
-    play: LocalizedString;
-    replay: LocalizedString;
-    unsupported: LocalizedString;
-  };
 };
 
 type AmenitiesCopy = {

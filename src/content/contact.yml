@@ -6,13 +6,17 @@ eyebrow:
   it: Contatti
   en: Contact
 lead:
-  it: "Raccontaci quando vorresti venire: ti rispondiamo con disponibilità e dettagli per
-    il tuo soggiorno."
-  en: Tell us when you would like to come, and we will write back with availability and
-    details for your stay.
+  it: 'Raccontaci quando vorresti venire: ti rispondiamo con disponibilità e dettagli per il tuo soggiorno.'
+  en: Tell us when you would like to come, and we will write back with availability and details for your stay.
 direct:
   it: Oppure scrivi direttamente a
   en: Or write to us directly at
+hint:
+  it: 'Si apre un messaggio già compilato nella tua app di posta: l’invio lo fai tu da lì. Se non si apre nulla, scrivi all’indirizzo qui accanto.'
+  en: This opens a draft in your mail app; you send it from there. If nothing opens, write to the address next to the form.
+submit:
+  it: Apri in email
+  en: Open in email
 name:
   it: Il tuo nome
   en: Your name
@@ -38,8 +42,8 @@ dateCalendar:
   it: Calendario soggiorno
   en: Stay calendar
 dateMinStayHint:
-  it: "Soggiorno minimo: due notti"
-  en: "Minimum stay: two nights"
+  it: 'Soggiorno minimo: due notti'
+  en: 'Minimum stay: two nights'
 dateUnavailable:
   it: occupata
   en: unavailable
@@ -77,16 +81,8 @@ messageTooLong:
   it: Il messaggio può avere al massimo 500 caratteri.
   en: The message can be at most 500 characters.
 messageUnsafe:
-  it: "Usa solo testo: niente HTML né caratteri speciali nascosti."
+  it: 'Usa solo testo: niente HTML né caratteri speciali nascosti.'
   en: Please use plain text only — no HTML or hidden special characters.
-submit:
-  it: Apri in email
-  en: Open in email
-hint:
-  it: "Si apre un messaggio già compilato nella tua app di posta: l’invio lo fai tu da lì.
-    Se non si apre nulla, scrivi all’indirizzo qui accanto."
-  en: This opens a draft in your mail app; you send it from there. If nothing opens, write
-    to the address next to the form.
 mailName:
   it: Nome
   en: Name

@@ -129,6 +129,15 @@ collections:
           - { name: heroWide, label: Hero (largo), widget: image }
           - { name: heroTall, label: Hero (alto), widget: image }
           - { name: heroAlt, label: Testo alternativo hero, widget: object, collapsed: true, fields: *it-en-string }
+          - name: video
+            label: Video
+            widget: object
+            collapsed: true
+            fields:
+              - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: play, label: Riproduci, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: replay, label: Rivedi, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: unsupported, label: Non supportato, widget: object, collapsed: true, fields: *it-en-text }
           - name: chiSiamo
             label: Chi siamo
             widget: object
@@ -180,15 +189,6 @@ collections:
             fields:
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-          - name: video
-            label: Video (controlli)
-            widget: object
-            collapsed: true
-            fields:
-              - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: play, label: Riproduci, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: replay, label: Rivedi, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: unsupported, label: Non supportato, widget: object, collapsed: true, fields: *it-en-text }
 
       - name: amenities
         label: Servizi

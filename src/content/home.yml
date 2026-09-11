@@ -6,6 +6,19 @@ heroTall: /images/ambiance/hero-portone-tall.jpg
 heroAlt:
   it: Portone dell’Antico Baglio Siciliano immerso nel verde
   en: The gate of Antico Baglio Siciliano surrounded by greenery
+video:
+  alt:
+    it: Il Baglio ripreso dall’alto
+    en: The baglio seen from above
+  play:
+    it: Riproduci il video
+    en: Play the video
+  replay:
+    it: Rivedi il video
+    en: Replay the video
+  unsupported:
+    it: Il tuo browser non supporta la riproduzione video.
+    en: Your browser does not support video playback.
 chiSiamo:
   title:
     it: Chi siamo
@@ -109,16 +122,3 @@ cta:
       ospiti.
     en: Write to us for availability and a quote. We answer with the same care we give our
       guests.
-video:
-  alt:
-    it: Il Baglio ripreso dall’alto
-    en: The baglio seen from above
-  play:
-    it: Riproduci il video
-    en: Play the video
-  replay:
-    it: Rivedi il video
-    en: Replay the video
-  unsupported:
-    it: Il tuo browser non supporta la riproduzione video.
-    en: Your browser does not support video playback.

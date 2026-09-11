@@ -86,6 +86,9 @@ describe('Sveltia admin', () => {
     expect(homeFile?.fields?.find((field) => field.name === 'heroAlt')).toMatchObject({
       widget: 'object'
     });
+    const homeFieldNames = homeFile?.fields?.map((field) => field.name) ?? [];
+    const heroAltAt = homeFieldNames.indexOf('heroAlt');
+    expect(homeFieldNames.slice(heroAltAt, heroAltAt + 3)).toEqual(['heroAlt', 'video', 'chiSiamo']);
     expect(homeFile?.fields?.find((field) => field.name === 'alt')).toBeUndefined();
     const cortile = homeFile?.fields?.find((field) => field.name === 'cortile');
     expect(cortile?.fields?.slice(0, 2).map((field) => field.name)).toEqual(['image', 'alt']);
