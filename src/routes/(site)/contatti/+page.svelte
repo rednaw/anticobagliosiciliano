@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { onMount } from 'svelte';
-  import { contactCopy, housesSource, site } from '$lib/data/content';
+  import { contactCopy, housesSource, inbox, site } from '$lib/data/content';
   import {
     MESSAGE_MAX_LENGTH,
     acceptedHouseSlug,
@@ -19,7 +19,7 @@
   } from '$lib/standard/occupancy';
   import Picker from '$lib/standard/Picker.svelte';
   import StayDates from '$lib/standard/StayDates.svelte';
-  import { CONTACT_HOUSE_PARAM, pick, ui } from '$lib/standard/i18n';
+  import { CONTACT_HOUSE_PARAM, pick } from '$lib/standard/i18n';
 
   const ADULT_OPTIONS = numberOptions(1, 20);
   const CHILD_OPTIONS = numberOptions(0, 20);
@@ -32,7 +32,7 @@
   }
 
   const locale = $derived(page.data.locale);
-  const heading = $derived(pick(ui.requestAvailability, locale));
+  const heading = $derived(pick(site.nav.requestAvailability, locale));
   const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
 
   let name = $state('');
@@ -135,12 +135,12 @@
 <section class="section">
   <div class="container layout">
     <div>
-      <p class="eyebrow">{pick(ui.contact, locale)}</p>
+      <p class="eyebrow">{t('eyebrow')}</p>
       <h1>{heading}</h1>
       <p class="lead">{t('lead')}</p>
       <p class="direct">
         {t('direct')}
-        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={`mailto:${inbox}`}>{inbox}</a>
       </p>
     </div>
 

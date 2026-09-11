@@ -1,0 +1,27 @@
+name:
+  it: Selinunte
+  en: Selinunte
+time: 45 min
+text:
+  it: Uno dei maggiori centri archeologici siciliani. L’area da visitare è molto vasta. Comprende vari templi, resti di mura, strade ed edifici monumentali testimoni della grande ricchezza raggiunta da Selinunte. L’acropoli domina la splendida spiaggia, dove nel 650 a.C., sbarcarono i coloni di Megara Hyblaea, città greca della Sicilia orientale, i quali fondarono l’avamposto ellenico più a occidente di tutta l’isola.
+  en: One of the major archaeological sites in Sicily, covering a very large area. It includes several temples along with the remains of walls, streets and monumental buildings that testify to the great wealth Selinunte once reached. The acropolis looks out over the beautiful beach where, in 650 BC, settlers from Megara Hyblaea — a Greek city in eastern Sicily — came ashore and founded the westernmost Greek outpost on the island.
+directionsLabel:
+  it: Parcheggio ingresso est, Parco Archeologico di Selinunte, Marinella di Selinunte
+  en: East entrance car park, Selinunte Archaeological Park, Marinella di Selinunte
+website:
+  href:
+    it: https://parchiarcheologici.regione.sicilia.it/selinunte-cave-cusa-pantelleria/
+    en: https://parchiarcheologici.regione.sicilia.it/selinunte-cave-cusa-pantelleria/
+  label:
+    it: Sito ufficiale del Parco Archeologico di Selinunte
+    en: Official Selinunte Archaeological Park website (Italian only)
+slug: selinunte
+image: /images/places/selinunte.jpg
+location:
+  lat: 37.5856685
+  lon: 12.8376692
+imageCredit:
+  author: Evan Erickson
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Selinunte-Temple_E_04.JPG
+  licenseUrl: https://commons.wikimedia.org/wiki/Public_domain
+  license: Public domain

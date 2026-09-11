@@ -18,8 +18,6 @@
     "archive:build": "node archive/browser/scripts/build.mjs",
     "archive:dev": "node archive/browser/scripts/build.mjs && npm run dev --prefix archive/browser",
     "archive:install": "npm ci --prefix archive/browser",
-    "copy:export": "node scripts/export-copy.mjs",
-    "copy:import": "node scripts/import-copy.mjs",
     "lodgify:sync": "node scripts/sync-lodgify-availability.mjs"
   },
   "engines": {
@@ -41,6 +39,7 @@
     "svelte-check": "^4.7.6",
     "typescript": "^6.0.3",
     "vite": "^8.2.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "yaml": "^2.9.0"
   }
 }

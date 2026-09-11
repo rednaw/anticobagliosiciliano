@@ -1,0 +1,17 @@
+---
+description: Sveltia CMS /admin invariants
+globs: static/admin/**/*,renovate.json
+alwaysApply: false
+---
+
+# Sveltia CMS
+
+Pending: `.cursor/plans/sveltia-cms.md`. Local Repository now; OAuth next. Do not invent a parallel auth.
+
+## Must preserve
+
+- Pin `@sveltia/cms` in `static/admin/index.html` and matching schema URL in `static/admin/config.yml` (same version). Renovate regex manager bumps both (`groupName: sveltia cms`); merge only after checking release notes — no automerge.
+- Backend: GitHub `rednaw/anticobagliosiciliano`, `skip_ci: false`. No client secret in this repo. Do not add `/admin` to the public nav. Admin HTML is `noindex`.
+- Collections write `src/content/` YAML. Houses and places `create: false` / `delete: false` (explicit imports in `content.ts`). Include every YAML key (hidden/collapsed for slug, capacity, coords) so a save cannot drop fields.
+- YAML is per-field `{ it, en }`. Do not enable Sveltia `i18n` (`single_file` is top-level locale keys and empties the collections). Localized fields are object widgets with `it` / `en`.
+- `media_folder: static/images` + `public_folder: /images`. YAML stores public paths (`/images/…`). Image widgets may upload; JPEG/PNG land under that tree (houses `houses/{{slug}}`, places `places`, awards `awards`, home ambiance `ambiance`). Build emits WebP.

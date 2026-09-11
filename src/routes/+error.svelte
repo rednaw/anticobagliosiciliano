@@ -3,8 +3,9 @@
   import Header from '$lib/standard/Header.svelte';
   import Footer from '$lib/standard/Footer.svelte';
   import NotFound from '$lib/standard/NotFound.svelte';
+  import { site } from '$lib/data/content';
   import { localeFromPath } from '$lib/locale';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { pick } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale ?? localeFromPath(page.url.pathname));
 
@@ -13,7 +14,7 @@
   });
 </script>
 
-<a class="skip" href="#contenuto">{pick(ui.skipToContent, locale)}</a>
+<a class="skip" href="#contenuto">{pick(site.chrome.skipToContent, locale)}</a>
 <Header />
 <main id="contenuto">
   <NotFound />

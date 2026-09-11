@@ -1,0 +1,473 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.206.0/schema/sveltia-cms.json
+#
+# Local: /admin/ → Local Repository → this repo folder.
+# OAuth (auth.tientjeketama.nl) comes next. Do not put /admin in the public nav.
+#
+# Do not enable Sveltia i18n. Its single_file layout is top-level `it:` / `en:`
+# objects. Ours is per-field `{ it, en }` (see src/content/). Map that as object
+# widgets so a save round-trips the YAML the site already loads.
+
+backend:
+  name: github
+  repo: rednaw/anticobagliosiciliano
+  branch: main
+  skip_ci: false
+
+site_url: https://rednaw.github.io/anticobagliosiciliano
+display_url: https://rednaw.github.io/anticobagliosiciliano
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+  lowercase: true
+
+output:
+  omit_empty_optional_fields: true
+
+# Uploads go here. YAML stores public_folder paths (`/images/…`).
+media_folder: static/images
+public_folder: /images
+
+collections:
+  - name: pages
+    label: Pagine
+    files:
+      - name: site
+        label: Sito
+        file: src/content/site.yml
+        format: yaml
+        editor:
+          preview: false
+        fields:
+          - name: name
+            label: Nome
+            widget: string
+          - name: tagline
+            label: Tagline (resta in italiano)
+            widget: string
+          - name: location
+            label: Località
+            widget: object
+            collapsed: true
+            fields: &it-en-string
+              - { name: it, label: Italiano, widget: string }
+              - { name: en, label: English, widget: string }
+          - name: description
+            label: Descrizione (SEO)
+            widget: object
+            collapsed: true
+            fields: &it-en-text
+              - { name: it, label: Italiano, widget: text }
+              - { name: en, label: English, widget: text }
+          - name: nav
+            label: Navigazione
+            widget: object
+            fields:
+              - { name: home, label: Home, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: houses, label: Alloggi, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: housesGroup, label: Gruppo case, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: imperdibili, label: Imperdibili, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: arrive, label: Come arrivare, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: requestAvailability, label: Richiesta disponibilità, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: privacy, label: Privacy, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: photoCredits, label: Crediti fotografici, widget: object, collapsed: true, fields: *it-en-string }
+          - name: house
+            label: Case (etichette condivise)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: accommodation, label: Alloggio, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: highlights, label: In evidenza, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: otherHouses, label: Altre case, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: keepExploring, label: Continua a esplorare, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: notFound, label: Casa non trovata, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: gallery, label: Galleria, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: previousPhoto, label: Foto precedente, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: nextPhoto, label: Foto successiva, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: thumbnails, label: Anteprime, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: goToPhoto, label: Vai alla foto, widget: object, collapsed: true, fields: *it-en-string }
+          - name: chrome
+            label: Chrome
+            widget: object
+            collapsed: true
+            fields:
+              - { name: skipToContent, label: Salta al contenuto, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: mainNav, label: Nav principale, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: language, label: Lingua, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: menu, label: Menu, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: closeMenu, label: Chiudi menu, widget: object, collapsed: true, fields: *it-en-string }
+          - name: pageNotFound
+            label: Pagina non trovata
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+          - name: pageError
+            label: Errore
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+
+      - name: home
+        label: Home
+        file: src/content/home.yml
+        format: yaml
+        editor:
+          preview: false
+        media_folder: '{{media_folder}}/ambiance'
+        public_folder: '{{public_folder}}/ambiance'
+        fields:
+          - name: heroLead
+            label: Sottotitolo hero
+            widget: object
+            collapsed: true
+            fields: *it-en-text
+          - { name: heroWide, label: Hero (largo), widget: image }
+          - { name: heroTall, label: Hero (alto), widget: image }
+          - name: chiSiamo
+            label: Chi siamo
+            widget: object
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+          - name: houses
+            label: Case (blocco)
+            widget: object
+            fields:
+              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+              - { name: more, label: Link, widget: object, collapsed: true, fields: *it-en-string }
+          - name: cortile
+            label: Cortile
+            widget: object
+            fields:
+              - { name: image, label: Foto, widget: image }
+              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+          - name: giardino
+            label: Giardino
+            widget: object
+            fields:
+              - { name: image, label: Foto giardino, widget: image }
+              - { name: agrumeto, label: Foto agrumeto, widget: image }
+              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: p1, label: Paragrafo 1, widget: object, collapsed: true, fields: *it-en-text }
+              - { name: p2, label: Paragrafo 2, widget: object, collapsed: true, fields: *it-en-text }
+              - { name: p3, label: Paragrafo 3, widget: object, collapsed: true, fields: *it-en-text }
+          - name: comfort
+            label: Comfort
+            widget: object
+            fields:
+              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+          - name: awards
+            label: Riconoscimenti (titolo)
+            widget: object
+            fields:
+              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+          - name: places
+            label: Imperdibili (blocco)
+            widget: object
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+          - name: cta
+            label: Invito
+            widget: object
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+          - name: amenities
+            label: Servizi
+            widget: list
+            summary: "{{title.it}}"
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: detail, label: Dettaglio, widget: object, collapsed: true, fields: *it-en-string }
+          - name: awardItems
+            label: Premi
+            widget: list
+            summary: "{{title.it}}"
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: text, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+              - { name: proofUrl, label: Link prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
+              - { name: proofLabel, label: Etichetta prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
+              - name: image
+                label: Logo
+                widget: image
+                media_folder: '{{media_folder}}/awards'
+                public_folder: '{{public_folder}}/awards'
+          - name: alt
+            label: Testi alternativi immagini
+            widget: object
+            collapsed: true
+            fields:
+              - { name: hero, label: Hero, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: cortile, label: Cortile, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: giardino, label: Giardino, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: agrumeto, label: Agrumeto, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: video, label: Video, widget: object, collapsed: true, fields: *it-en-string }
+          - name: video
+            label: Video (controlli)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: play, label: Riproduci, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: replay, label: Rivedi, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: unsupported, label: Non supportato, widget: object, collapsed: true, fields: *it-en-text }
+
+      - name: contact
+        label: Contatti
+        file: src/content/contact.yml
+        format: yaml
+        editor:
+          preview: false
+        fields:
+          - { name: inbox, label: Inbox, widget: string }
+          - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
+          - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: direct, label: Scrivi direttamente, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: hint, label: Nota invio, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: submit, label: Pulsante, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: name, label: Nome, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: email, label: Email, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: checkIn, label: Check-in, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: checkOut, label: Check-out, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: datePlaceholder, label: Segnaposto data, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: datePrevMonth, label: Mese precedente, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: dateNextMonth, label: Mese successivo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: dateCalendar, label: Calendario, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: dateMinStayHint, label: Soggiorno minimo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: dateUnavailable, label: Occupata, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: occupancyBlocked, label: Date occupate, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: housesFreeHint, label: Case libere, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: fieldRequired, label: Campo obbligatorio, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: emailInvalid, label: Email non valida, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: adults, label: Adulti, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: children, label: Bambini, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: house, label: Alloggio, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: houseAny, label: Nessuna preferenza, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: message, label: Messaggio, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: messagePlaceholder, label: Segnaposto messaggio, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: messageTooLong, label: Messaggio troppo lungo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: messageUnsafe, label: Messaggio non valido, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mailName, label: Mailto nome, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mailEmail, label: Mailto email, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mailHouse, label: Mailto alloggio, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mailNoHouse, label: Mailto nessuna casa, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mailNoMessage, label: Mailto nessun messaggio, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mailGuest, label: Mailto ospite, widget: object, collapsed: true, fields: *it-en-string }
+
+      - name: arrive
+        label: Come arrivare
+        file: src/content/arrive.yml
+        format: yaml
+        editor:
+          preview: false
+        fields:
+          - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
+          - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: mapAlt, label: Alt mappa, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: airTitle, label: Titolo aereo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: air, label: In aereo, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: roadTitle, label: Titolo auto, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: road, label: In auto, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: directionsOriginLabel, label: Origine indicazioni, widget: object, collapsed: true, fields: *it-en-string }
+          - name: maps
+            label: Link mappe
+            widget: object
+            fields:
+              - { name: google, label: Google Maps, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: osm, label: OpenStreetMap, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mapCredit, label: Credito OSM, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mapCreditTitle, label: Titolo credito OSM, widget: object, collapsed: true, fields: *it-en-string }
+          - name: weather
+            label: Meteo
+            widget: object
+            collapsed: true
+            fields:
+              - { name: place, label: Luogo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: line, label: Riga, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: aria, label: Accessibile, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: credit, label: Credito, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: creditTitle, label: Titolo credito, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: clear, label: Sereno, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: cloudy, label: Nuvoloso, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: fog, label: Nebbia, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: rain, label: Pioggia, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: snow, label: Neve, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: storm, label: Temporale, widget: object, collapsed: true, fields: *it-en-string }
+
+      - name: imperdibili
+        label: Imperdibili
+        file: src/content/imperdibili.yml
+        format: yaml
+        editor:
+          preview: false
+        fields:
+          - { name: meta, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
+          - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+          - name: directions
+            label: Indicazioni (luoghi)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: routeTitle, label: Come arrivare, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: moreInfoTitle, label: Ulteriori informazioni, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: googleLabel, label: Google Maps, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: osmLabel, label: OpenStreetMap, widget: object, collapsed: true, fields: *it-en-string }
+          - name: photoCredits
+            label: Crediti foto
+            widget: object
+            fields:
+              - { name: photo, label: Prefisso foto, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
+              - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+
+      - name: privacy
+        label: Privacy
+        file: src/content/privacy.yml
+        format: yaml
+        editor:
+          preview: false
+        fields:
+          - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
+          - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: groupContact, label: Gruppo contatto, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: groupBrowse, label: Gruppo visita, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: controllerTitle, label: Titolo titolare, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: controller, label: Titolare, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: contact, label: Quando ci scrivi, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: analyticsTitle, label: Titolo statistiche, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: analytics, label: Statistiche, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: analyticsPolicy, label: Link statistiche, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: cookiesTitle, label: Titolo cookie, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: cookies, label: Cookie, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: hostingTitle, label: Titolo hosting, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: hosting, label: Hosting, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: hostingPolicy, label: Link hosting, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: mapsTitle, label: Titolo mappa, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: maps, label: Mappa, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: mapsPolicy, label: Link mappa, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: weatherTitle, label: Titolo meteo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: weather, label: Meteo, widget: object, collapsed: true, fields: *it-en-text }
+          - { name: weatherPolicy, label: Link meteo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: rightsTitle, label: Titolo diritti, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: rights, label: Diritti, widget: object, collapsed: true, fields: *it-en-text }
+
+  - name: houses
+    label: Case
+    label_singular: Casa
+    folder: src/content/houses
+    create: false
+    delete: false
+    extension: yml
+    format: yaml
+    identifier_field: slug
+    media_folder: '{{media_folder}}/houses/{{slug}}'
+    public_folder: '{{public_folder}}/houses/{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - name: name
+        label: Nome
+        widget: string
+      - { name: tagline, label: Tagline, widget: object, collapsed: true, fields: *it-en-string }
+      - { name: summary, label: Sommario, widget: object, collapsed: true, fields: *it-en-text }
+      - { name: guests, label: Ospiti, widget: object, collapsed: true, fields: *it-en-string }
+      - { name: bedrooms, label: Camere, widget: object, collapsed: true, fields: *it-en-string }
+      - { name: bathrooms, label: Bagni, widget: object, collapsed: true, fields: *it-en-string }
+      - name: paragraphs
+        label: Testo
+        widget: object
+        hint: Riga vuota = nuovo paragrafo.
+        fields: *it-en-text
+      - name: highlights
+        label: In evidenza
+        widget: list
+        summary: "{{it}}"
+        fields: *it-en-string
+      - name: image
+        label: Foto copertina
+        widget: image
+      - name: gallery
+        label: Galleria
+        widget: image
+        multiple: true
+      - name: slug
+        widget: hidden
+      - name: size
+        widget: hidden
+      - name: capacity
+        label: Capacità
+        widget: object
+        collapsed: true
+        hint: Non cambiare — allineata a Lodgify.
+        fields:
+          - { name: guestMin, label: Ospiti min, widget: number, value_type: int }
+          - { name: guestMax, label: Ospiti max, widget: number, value_type: int }
+          - { name: bedroomCount, label: Camere, widget: number, value_type: int }
+          - { name: bathroomCount, label: Bagni, widget: number, value_type: int }
+          - { name: floorAreaSqm, label: Mq, widget: number, value_type: int }
+
+  - name: places
+    label: Luoghi
+    label_singular: Luogo
+    folder: src/content/places
+    create: false
+    delete: false
+    extension: yml
+    format: yaml
+    identifier_field: slug
+    media_folder: '{{media_folder}}/places'
+    public_folder: '{{public_folder}}/places'
+    editor:
+      preview: false
+    fields:
+      - { name: name, label: Nome, widget: object, collapsed: true, fields: *it-en-string }
+      - name: time
+        label: Tempo di viaggio
+        widget: string
+      - { name: text, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+      - { name: directionsLabel, label: Etichetta indicazioni, widget: object, collapsed: true, fields: *it-en-string }
+      - name: website
+        label: Sito ufficiale
+        widget: object
+        required: false
+        fields:
+          - { name: href, label: URL, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: label, label: Etichetta, widget: object, collapsed: true, fields: *it-en-string }
+      - name: slug
+        widget: hidden
+      - name: image
+        label: Foto
+        widget: image
+      - name: location
+        label: Coordinate
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: lat, label: Lat, widget: number, value_type: float }
+          - { name: lon, label: Lon, widget: number, value_type: float }
+      - name: imageCredit
+        label: Credito foto
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: author, label: Autore, widget: string }
+          - { name: sourceUrl, label: Fonte, widget: string }
+          - { name: licenseUrl, label: Licenza URL, widget: string }
+          - { name: license, label: Licenza, widget: string }

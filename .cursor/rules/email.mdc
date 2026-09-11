@@ -10,7 +10,7 @@ Enquiries **mailto-only** — no server POST, no mail API, no `window.open` for 
 
 ## Must preserve
 
-- Single inbox: `site.email` in `content.ts` (footer, privacy, JSON-LD, form).
+- Single inbox: `inbox` in `src/content/contact.yml` (scalar, not `{ it, en }`). Footer, privacy, JSON-LD, and the form mailto all read that export.
 - Validate before navigate; message max length + unsafe markup checks.
 - Mailto body: CRLF (iOS). Prefill house from `?casa=` on contatti (`CONTACT_HOUSE_PARAM`).
 - Occupancy may disable nights in UI — **do not** put occupancy status in mailto body.

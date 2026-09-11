@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { site } from '$lib/data/content';
-  import { pick, siteHref, ui } from '$lib/standard/i18n';
+  import { inbox, site } from '$lib/data/content';
+  import { pick, siteHref } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
   const privacy = $derived(siteHref(locale, 'privacy'));
@@ -14,12 +14,12 @@
     <p class="brand">{site.name}</p>
     <p class="meta">{site.tagline} · {pick(site.location, locale)}</p>
 
-    <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+    <a class="email" href={`mailto:${inbox}`}>{inbox}</a>
 
     <p class="copy">
       © {new Date().getFullYear()}
       <span aria-hidden="true"> · </span>
-      <a href={privacy}>{pick(ui.privacy, locale)}</a>
+      <a href={privacy}>{pick(site.nav.privacy, locale)}</a>
     </p>
   </div>
 </footer>

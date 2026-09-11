@@ -4,17 +4,19 @@ vi.mock('$app/paths', () => ({
   asset: (path: string) => path
 }));
 
-import { arriveCopy, housesSource, privacyCopy, site } from '$lib/data/content';
+import { arriveCopy, homeCopy, housesSource, privacyCopy, site } from '$lib/data/content';
 import { pick } from '$lib/locale';
-import { ui } from './i18n';
 import { pageSeo } from './seo';
 
 describe('pageSeo', () => {
   it('titles marketing pages in both locales', () => {
     expect(pageSeo('/anticobagliosiciliano/', 'it').title).toBe(`${site.name} · ${site.tagline}`);
+    expect(pageSeo('/anticobagliosiciliano/', 'it').description).toBe(site.description.it);
     expect(pageSeo('/anticobagliosiciliano/en/', 'en').title).toBe(`${site.name} · ${site.tagline}`);
+    expect(pageSeo('/anticobagliosiciliano/en/', 'en').imageAlt).toBe(homeCopy.alt.hero.en);
+    expect(pageSeo('/anticobagliosiciliano/', 'it').image).toContain('hero-portone-wide');
     expect(pageSeo('/anticobagliosiciliano/contatti/', 'it').title).toBe(
-      `${pick(ui.requestAvailability, 'it')} · ${site.name}`
+      `${pick(site.nav.requestAvailability, 'it')} · ${site.name}`
     );
     expect(pageSeo('/anticobagliosiciliano/privacy/', 'it').description).toBe(
       privacyCopy.metaDescription.it

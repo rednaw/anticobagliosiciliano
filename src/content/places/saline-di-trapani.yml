@@ -1,0 +1,27 @@
+name:
+  it: Saline di Trapani e Paceco
+  en: Trapani and Paceco salt pans
+time: 45 min
+text:
+  it: 'Riserva naturale gestita dal WWF: vasche di sale ancora attive, mulini a vento, fenicotteri e migrazioni d’autunno. I sentieri esterni si percorrono liberamente; visite guidate su prenotazione.'
+  en: A WWF-managed nature reserve with still-working salt pans, windmills, flamingos and autumn migrations. Outdoor paths are free to walk; guided tours by booking.
+directionsLabel:
+  it: Centro visite Mulino Maria Stella, Saline di Trapani e Paceco
+  en: Mulino Maria Stella visitor centre, Trapani and Paceco salt pans
+website:
+  href:
+    it: https://wwfsalineditrapani.it/
+    en: https://wwfsalineditrapani.it/?lang=en
+  label:
+    it: Sito ufficiale della Riserva Naturale Saline di Trapani e Paceco
+    en: Official Trapani and Paceco salt pans nature reserve website
+slug: saline-di-trapani
+image: /images/places/saline-di-trapani.jpg
+location:
+  lat: 37.996514
+  lon: 12.535508
+imageCredit:
+  author: Renato Raimondo
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Saline_trapani_-_Mulino_a_vento.JPG
+  licenseUrl: https://creativecommons.org/licenses/by-sa/3.0/
+  license: CC BY-SA 3.0

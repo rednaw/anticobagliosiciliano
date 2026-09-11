@@ -1,10 +1,10 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { privacyCopy, site } from '$lib/data/content';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { inbox, privacyCopy, site } from '$lib/data/content';
+  import { pick } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
-  const heading = $derived(pick(ui.privacy, locale));
+  const heading = $derived(pick(site.nav.privacy, locale));
   const t = $derived((key: keyof typeof privacyCopy) => pick(privacyCopy[key], locale));
 
 </script>
@@ -20,7 +20,7 @@
       <h2>{t('controllerTitle')}</h2>
       <p>
         {t('controller')}
-        <a href={`mailto:${site.email}`}>{site.email}</a>.
+        <a href={`mailto:${inbox}`}>{inbox}</a>.
       </p>
     </section>
 

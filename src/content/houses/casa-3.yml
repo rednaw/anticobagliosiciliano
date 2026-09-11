@@ -1,0 +1,101 @@
+name: Casa 3
+tagline:
+  it: 'La più grande: tre camere e terrazza sull’uliveto'
+  en: 'The largest: three bedrooms and a terrace overlooking the olive grove'
+summary:
+  it: Oltre 110 m², tre camere e due soggiorni. Ideale per famiglie numerose o gruppi di amici.
+  en: Over 110 square meters, three bedrooms and two living rooms. Ideal for large families or groups of friends.
+guests:
+  it: 4–8 ospiti
+  en: 4/8 persons
+bedrooms:
+  it: 3 camere
+  en: 3 bedrooms
+bathrooms:
+  it: 2 bagni
+  en: 2 bathrooms
+paragraphs:
+  it: |-
+    Questa pittoresca casa di campagna è disposta su due piani, per un totale di
+    oltre 110 mq. Al piano terra un ampio e confortevole soggiorno con zona
+    ingresso dà accesso alla zona notte. Qui si trovano tre camere da letto,
+    tutte spaziose e luminose: due con letto matrimoniale e una terza con due
+    letti singoli. Due camere si affacciano su un magnifico uliveto, la terza
+    sul cortile del Baglio. Il divano letto del soggiorno può inoltre ospitare
+    due persone.
+
+    Una suggestiva scala in pietra lavica e ferro porta al primo piano, dove si
+    aprono un secondo soggiorno e la zona cucina/pranzo. La cucina, bella e
+    comoda, è dotata di forno. Dalla zona giorno si accede a un delizioso
+    terrazzo (15 mq) affacciato sull’uliveto, dove si può cenare la sera o
+    rilassarsi su una sdraio in totale privacy.
+
+    L’ingresso della casa si affaccia sul cortile del Baglio: nello spazio
+    riservato antistante gli ospiti possono godersi la piacevole atmosfera del
+    cortile.
+
+    La casa è frutto di un recente e accurato restauro: l’utilizzo di materiali
+    di recupero, la scelta di cotto fatto a mano per i pavimenti, di pietra
+    lavica per la scala e per la cucina e di travi grezze di legno per i
+    soffitti, danno all’ambiente uno charme particolare. La casa ha un impianto
+    di riscaldamento che la rende confortevole anche per un soggiorno invernale.
+
+    Sistemazione ideale per una famiglia di 4/8 persone, per due/tre coppie di
+    amici, per due famiglie.
+  en: |-
+    This picturesque country house is on two floors and covers a total of over
+    110 square meters making it ideal accommodation for a family of 4/8 persons,
+    for two/three couples, or for two families. On the ground floor is a large
+    and comfortable living room and hall space which gives access to the
+    sleeping area of the house. Here there are three bedrooms, all bright and
+    spacious: two with a double bed and a third with two single beds. Two of the
+    bedrooms overlook a magnificent olive grove and the third looks out onto the
+    courtyard of the Baglio. In addition, the sofa bed in the living room can
+    accommodate two people.
+
+    A striking lava rock and iron staircase leads to the first floor. Here there
+    is a second living room and the kitchen/dining area. The kitchen is both
+    stylish and comfortable, and is equipped with an oven. From the
+    living/dining area you can access a charming terrace of 15 sqm overlooking
+    the olive grove. Here you can dine in the evening or relax on a sun lounger
+    in absolute privacy.
+
+    The entrance of the house overlooks the courtyard of the Baglio. Guests can
+    here use the space reserved for their exclusive use and enjoy the charming
+    atmosphere of the courtyard.
+
+    The house has recently benefitted from an extensive restoration which
+    employed recycled materials and specially chosen, handmade terracotta tiles
+    for the floors, lava stone for the staircase and kitchen, and rustic wooden
+    beams for the ceilings. All of these features give the house a unique charm.
+    In addition, the house has a heating system that makes it comfortable for
+    even a winter stay.
+highlights:
+  - it: Terrazza sull’uliveto (15 mq)
+    en: Terrace overlooking the olive grove (15 sq m)
+  - it: Cucina attrezzata
+    en: Equipped kitchen
+  - it: Riscaldamento e aria condizionata
+    en: Heating and air conditioning
+  - it: Wi‑Fi gratuito
+    en: Free Wi‑Fi
+slug: casa-3
+size: 110+ m²
+image: /images/houses/casa-3/00-soggiorno-2.jpg
+capacity:
+  guestMin: 4
+  guestMax: 8
+  bedroomCount: 3
+  bathroomCount: 2
+  floorAreaSqm: 110
+gallery:
+  - /images/houses/casa-3/01-ingresso-soggiorno.jpg
+  - /images/houses/casa-3/02-letto-1.jpg
+  - /images/houses/casa-3/03-letto-3.jpg
+  - /images/houses/casa-3/04-letto-2.jpg
+  - /images/houses/casa-3/05-bagno-1.jpg
+  - /images/houses/casa-3/06-bagno-2.jpg
+  - /images/houses/casa-3/07-cucina-1.jpg
+  - /images/houses/casa-3/08-cucina-2.jpg
+  - /images/houses/casa-3/09-soggiorno-1.jpg
+  - /images/houses/casa-3/11-ingresso-sul-cortile.jpg

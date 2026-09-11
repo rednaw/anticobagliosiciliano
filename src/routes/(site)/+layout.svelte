@@ -3,11 +3,11 @@
   import Header from '$lib/standard/Header.svelte';
   import Footer from '$lib/standard/Footer.svelte';
   import { SITE_ORIGIN } from '$lib/site-config';
+  import { site } from '$lib/data/content';
   import {
     absoluteUrl,
     counterpartHref,
-    pick,
-    ui
+    pick
   } from '$lib/standard/i18n';
   import { publicImage } from '$lib/public-image';
   import { OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH, pageSeo } from '$lib/standard/seo';
@@ -67,7 +67,7 @@
   {/if}
 </svelte:head>
 
-<a class="skip" href="#contenuto">{pick(ui.skipToContent, locale)}</a>
+<a class="skip" href="#contenuto">{pick(site.chrome.skipToContent, locale)}</a>
 <Header />
 <main id="contenuto">
   {@render children()}

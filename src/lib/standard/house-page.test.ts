@@ -1,6 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { getHouse, housesSource } from '../data/content';
+import { splitParagraphs } from '../locale';
 import { houseEntries, loadHouse } from './house-page';
+
+describe('house paragraphs', () => {
+  it('keeps the casa copy as separate paragraphs', () => {
+    expect(splitParagraphs(housesSource[0].paragraphs.it)).toHaveLength(6);
+    expect(splitParagraphs(housesSource[0].paragraphs.en)).toHaveLength(6);
+    expect(splitParagraphs(housesSource[2].paragraphs.it)).toHaveLength(5);
+    expect(splitParagraphs(housesSource[2].paragraphs.en)).toHaveLength(4);
+    expect(splitParagraphs(housesSource[3].paragraphs.it)).toHaveLength(6);
+    expect(splitParagraphs(housesSource[3].paragraphs.en)).toHaveLength(5);
+  });
+});
 
 describe('getHouse', () => {
   it('localises a known house and ignores unknown slugs', () => {
@@ -9,6 +21,8 @@ describe('getHouse', () => {
     expect(it?.name).toBe('Casa 1');
     expect(it?.summary).toBe(housesSource[0].summary.it);
     expect(en?.summary).toBe(housesSource[0].summary.en);
+    expect(it?.highlights).toEqual(housesSource[0].highlights.map((item) => item.it));
+    expect(en?.highlights).toEqual(housesSource[0].highlights.map((item) => item.en));
     expect(getHouse('casa-99')).toBeUndefined();
   });
 });

@@ -14,7 +14,8 @@
   } from '$lib/standard/ambient-video';
   import { mediaTier, markLight } from '$lib/standard/network-tier';
   import { REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { homeCopy } from '$lib/data/content';
+  import { pick } from '$lib/standard/i18n';
 
   let {
     src,
@@ -63,7 +64,7 @@
   const showControl = $derived(
     showAmbientControl({ playing, reduceMotion, ended, playBlocked, sessionSpent })
   );
-  const controlLabel = $derived(pick(ended ? ui.replayVideo : ui.playVideo, locale));
+  const controlLabel = $derived(pick(ended ? homeCopy.video.replay : homeCopy.video.play, locale));
   const stillPoster = $derived(posterEnd ?? poster);
   /** Start poster when play was blocked or the play-once session was interrupted mid-clip. */
   const showStartPoster = $derived(
@@ -282,7 +283,7 @@
     {#if sourceAttached}
       <source src={asset(src)} type="video/mp4" />
     {/if}
-    {pick(ui.videoUnsupported, locale)}
+    {pick(homeCopy.video.unsupported, locale)}
   </video>
 
   {#if showControl}

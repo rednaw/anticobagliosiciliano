@@ -2,6 +2,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
+import { parse as parseYaml } from 'yaml';
 import { SITE_BASE } from './src/lib/site-config.ts';
 
 const SA_SCRIPT =
@@ -21,6 +22,50 @@ const OSM_TILE_ORIGINS = [
 /** Open-Meteo current conditions on Come arrivare (full tier only). */
 const OPEN_METEO_ORIGIN = 'https://api.open-meteo.com';
 
+/** Turn `content/*.yml` imports into JS objects (no yaml parser in the client bundle). */
+function yamlDataPlugin(): Plugin {
+  return {
+    name: 'yaml-data',
+    transform(code, id) {
+      const file = (id.split('\0').pop() ?? id).split('?')[0];
+      if (!file.endsWith('.yml') && !file.endsWith('.yaml')) return;
+      return {
+        code: `export default ${JSON.stringify(parseYaml(code))};`,
+        map: { mappings: '' }
+      };
+    }
+  };
+}
+
+/** `/admin/` → `admin/index.html` (Vite has no directory index; Pages does). */
+function adminIndexPlugin(): Plugin {
+  const admin = `${SITE_BASE}/admin`;
+  const indexed = `${admin}/index.html`;
+  function rewrite(url: string | undefined) {
+    if (!url) return url;
+    const [path, query] = url.split('?');
+    if (path !== admin && path !== `${admin}/`) return url;
+    return query ? `${indexed}?${query}` : indexed;
+  }
+  return {
+    name: 'admin-index',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const nextUrl = rewrite(req.url);
+        if (nextUrl) req.url = nextUrl;
+        next();
+      });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const nextUrl = rewrite(req.url);
+        if (nextUrl) req.url = nextUrl;
+        next();
+      });
+    }
+  };
+}
+
 /** Strip Simple Analytics in dev — production builds keep the tag in app.html. */
 function simpleAnalyticsDevPlugin(): Plugin {
   return {
@@ -37,6 +82,8 @@ function simpleAnalyticsDevPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [
+    adminIndexPlugin(),
+    yamlDataPlugin(),
     simpleAnalyticsDevPlugin(),
     sveltekit({
       compilerOptions: {

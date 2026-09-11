@@ -1,14 +1,14 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { arriveCopy, baglioLocation } from '$lib/data/content';
+  import { arriveCopy, baglioLocation, site } from '$lib/data/content';
   import ArriveMap from '$lib/standard/ArriveMap.svelte';
   import WeatherChip from '$lib/standard/WeatherChip.svelte';
   import { googleMapsLinkWithLocale } from '$lib/standard/place-directions';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { pick } from '$lib/standard/i18n';
   import { PORTRAIT_ASPECT_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
 
   const locale = $derived(page.data.locale);
-  const heading = $derived(pick(ui.navArrive, locale));
+  const heading = $derived(pick(site.nav.arrive, locale));
   const t = $derived((key: keyof typeof arriveCopy) => pick(arriveCopy[key], locale));
 
   let portraitMobile = $state(false);
@@ -31,8 +31,8 @@
       <WeatherChip {portraitMobile}>
         <ArriveMap
           alt={t('mapAlt')}
-          attribution={t('attribution')}
-          attributionTitle={t('attributionTitle')}
+          attribution={t('mapCredit')}
+          attributionTitle={t('mapCreditTitle')}
         />
       </WeatherChip>
     </div>

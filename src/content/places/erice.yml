@@ -1,0 +1,27 @@
+name:
+  it: Erice
+  en: Erice
+time: 50 min
+text:
+  it: Suggestivo borgo fondato dagli Elimi, posto in cima al monte Sant’Angelo a circa 800 metri, da cui è possibile ammirare panorami sulle isole Egadi, sulle saline e sulla città di Trapani. L’affascinante atmosfera dei tortuosi vicoli lastricati, delle chiese e dei cortiletti fioriti è resa ancora più unica dall’irreale momentanea nebbia, creata da nuvole di passaggio, che spesso ammanta la città.
+  en: A charming village founded by the Elymians, perched on top of Mount Sant’Angelo at about 800 metres, from which you can admire views of the Egadi Islands, the salt marshes and the city of Trapani. The atmosphere of its steep cobbled streets, churches and flower-filled courtyards is made even more singular by the fleeting, unreal mist that passing clouds often draw over the town.
+directionsLabel:
+  it: Parcheggio Porta Trapani, Erice
+  en: Porta Trapani car park, Erice
+website:
+  href:
+    it: https://www.fondazioneericearte.org/
+    en: https://www.fondazioneericearte.org/
+  label:
+    it: Monumenti e Erice Card
+    en: Monuments and Erice Card (Italian only)
+slug: erice
+image: /images/places/erice.jpg
+location:
+  lat: 38.0385483
+  lon: 12.5835615
+imageCredit:
+  author: Krzysztof Popławski
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Streets_of_Erice,_Sicilia,_Italy_,_july_2023,_KP477.jpg
+  licenseUrl: https://creativecommons.org/licenses/by/4.0/
+  license: CC BY 4.0

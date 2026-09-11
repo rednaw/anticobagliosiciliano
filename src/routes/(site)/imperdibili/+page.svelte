@@ -1,16 +1,16 @@
 <script lang="ts">
   import { responsiveImage } from '$lib/public-image';
   import { page } from '$app/state';
-  import { baglioLocation, imperdibiliLead, imperdibiliRouteCopy, places } from '$lib/data/content';
+  import { baglioLocation, imperdibiliLead, imperdibiliRouteCopy, places, site } from '$lib/data/content';
   import { placeDirectionApps } from '$lib/standard/place-directions';
   import Reveal from '$lib/standard/Reveal.svelte';
-  import { pick, siteHref, ui } from '$lib/standard/i18n';
+  import { pick, siteHref } from '$lib/standard/i18n';
   import { mediaTier } from '$lib/standard/network-tier';
 
   const locale = $derived(page.data.locale);
   const tier = $derived($mediaTier);
   const placeList = $derived(places(locale));
-  const pageTitle = $derived(pick(ui.navImperdibili, locale));
+  const pageTitle = $derived(pick(site.nav.imperdibili, locale));
   const photoCredits = $derived(siteHref(locale, 'imperdibili/crediti-foto'));
   const hasPhotoCredits = $derived(placeList.some((place) => place.imageCredit));
   const routeTitle = $derived(pick(imperdibiliRouteCopy.routeTitle, locale));
@@ -104,7 +104,7 @@
 {#if hasPhotoCredits}
   <section class="credits-link">
     <div class="container">
-      <p><a href={photoCredits}>{pick(ui.photoCredits, locale)}</a></p>
+      <p><a href={photoCredits}>{pick(site.nav.photoCredits, locale)}</a></p>
     </div>
   </section>
 {/if}

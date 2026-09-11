@@ -3,7 +3,6 @@ import { SITE_BASE } from './site-config';
 export type Locale = 'it' | 'en';
 
 export type LocalizedString = { it: string; en: string };
-export type LocalizedStrings = { it: string[]; en: string[] };
 
 export function pick(value: LocalizedString, locale: Locale): string {
   if (locale === 'en') {
@@ -15,14 +14,12 @@ export function pick(value: LocalizedString, locale: Locale): string {
   return value.it;
 }
 
-function pickList(value: LocalizedStrings, locale: Locale): string[] {
-  if (locale === 'en') {
-    if (import.meta.env.DEV && !value.en?.length) {
-      console.warn('Missing English list:', value.it);
-    }
-    return value.en;
-  }
-  return value.it;
+/** Blank line in a CMS/YAML textarea starts a new `<p>`. */
+export function splitParagraphs(text: string): string[] {
+  return text
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, ' ').trim())
+    .filter(Boolean);
 }
 
 function isLocalizedString(value: unknown): value is LocalizedString {
@@ -34,19 +31,9 @@ function isLocalizedString(value: unknown): value is LocalizedString {
   );
 }
 
-function isLocalizedStrings(value: unknown): value is LocalizedStrings {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    'it' in value &&
-    Array.isArray((value as LocalizedStrings).it)
-  );
-}
-
-/** Walk a tree of `LocalizedString` / `LocalizedStrings` leaves and pick the active locale. */
+/** Walk a tree of `LocalizedString` leaves and pick the active locale. */
 export function localize<T>(value: T, locale: Locale): Localized<T> {
   if (isLocalizedString(value)) return pick(value, locale) as Localized<T>;
-  if (isLocalizedStrings(value)) return pickList(value, locale) as Localized<T>;
   if (Array.isArray(value)) {
     return value.map((item) => localize(item, locale)) as Localized<T>;
   }
@@ -62,13 +49,11 @@ export function localize<T>(value: T, locale: Locale): Localized<T> {
 
 type Localized<T> = T extends LocalizedString
   ? string
-  : T extends LocalizedStrings
-    ? string[]
-    : T extends Array<infer U>
-      ? Localized<U>[]
-      : T extends object
-        ? { [K in keyof T]: Localized<T[K]> }
-        : T;
+  : T extends Array<infer U>
+    ? Localized<U>[]
+    : T extends object
+      ? { [K in keyof T]: Localized<T[K]> }
+      : T;
 
 /** Drop the SvelteKit `base` prefix (GitHub Pages). */
 export function stripBase(pathname: string, base = SITE_BASE): string {

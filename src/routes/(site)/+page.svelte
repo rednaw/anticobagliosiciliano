@@ -12,7 +12,7 @@
     places,
     site
   } from '$lib/data/content';
-  import { localize, pick, siteHref, ui } from '$lib/standard/i18n';
+  import { localize, siteHref } from '$lib/standard/i18n';
   import { PORTRAIT_ASPECT_QUERY, REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
   import { mediaTier } from '$lib/standard/network-tier';
 
@@ -25,6 +25,7 @@
   const contatti = $derived(siteHref(locale, 'contatti'));
   const imperdibili = $derived(siteHref(locale, 'imperdibili'));
   const home = $derived(localize(homeCopy, locale));
+  const nav = $derived(localize(site.nav, locale));
   const tier = $derived($mediaTier);
 
   let videoPlaying = $state(false);
@@ -78,11 +79,11 @@
       <picture>
         <source
           media="(min-aspect-ratio: 7 / 10)"
-          srcset={responsiveImage('/images/ambiance/hero-portone-wide.jpg', { tier })}
+          srcset={responsiveImage(home.heroWide, { tier })}
         />
         <img
           class="gate-media"
-          src={responsiveImage('/images/ambiance/hero-portone-tall.jpg', { tier })}
+          src={responsiveImage(home.heroTall, { tier })}
           width="1248"
           height="1690"
           alt={home.alt.hero}
@@ -92,7 +93,7 @@
     </div>
     <div class="hero-copy">
       <h1>{site.name}</h1>
-      <p class="hero-lead">{pick(site.description, locale)}</p>
+      <p class="hero-lead">{home.heroLead}</p>
     </div>
   </div>
 
@@ -153,7 +154,7 @@
     <Reveal>
       <div id="houses-intro">
         <SectionHead
-          eyebrow={pick(ui.ourHouses, locale)}
+          eyebrow={home.houses.eyebrow}
           title={home.houses.title}
           lead={home.houses.lead}
         />
@@ -189,7 +190,7 @@
 
 <section class="feature">
   <img
-    src={responsiveImage('/images/ambiance/cortile.jpg', { tier })}
+    src={responsiveImage(home.cortile.image, { tier })}
     alt={home.alt.cortile}
     width="1400"
     height="1867"
@@ -218,14 +219,14 @@
     <Reveal delay={100}>
       <div class="garden-photos">
         <img
-          src={responsiveImage('/images/ambiance/giardino.jpg', { tier })}
+          src={responsiveImage(home.giardino.image, { tier })}
           alt={home.alt.giardino}
           width="1024"
           height="768"
           loading="lazy"
         />
         <img
-          src={responsiveImage('/images/ambiance/agrumeto.jpg', { tier })}
+          src={responsiveImage(home.giardino.agrumeto, { tier })}
           alt={home.alt.agrumeto}
           width="1600"
           height="1067"
@@ -256,7 +257,7 @@
   <div class="container">
     <Reveal>
       <SectionHead
-        eyebrow={pick(ui.navImperdibili, locale)}
+        eyebrow={nav.imperdibili}
         title={home.places.title}
         lead={home.places.lead}
       />
@@ -286,7 +287,7 @@
 <section class="section band-dark">
   <div class="container">
     <Reveal>
-      <SectionHead eyebrow={pick(ui.awards, locale)} title={home.awards.title} />
+      <SectionHead eyebrow={home.awards.eyebrow} title={home.awards.title} />
     </Reveal>
     <div class="award-grid">
       {#each awardList as award, i}
@@ -325,7 +326,7 @@
     <Reveal>
       <h2>{home.cta.title}</h2>
       <p>{home.cta.body}</p>
-      <a class="btn btn-light" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
+      <a class="btn btn-light" href={contatti}>{nav.requestAvailability}</a>
     </Reveal>
   </div>
 </section>

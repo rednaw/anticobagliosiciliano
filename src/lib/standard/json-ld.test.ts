@@ -4,7 +4,7 @@ vi.mock('$app/paths', () => ({
   asset: (path: string) => path
 }));
 
-import { baglioLocation, homeCopy, housesSource, site } from '$lib/data/content';
+import { baglioLocation, housesSource, inbox, site } from '$lib/data/content';
 import {
   LODGING_ID_FRAGMENT,
   RENTAL_ID_FRAGMENT,
@@ -23,8 +23,8 @@ describe('pageJsonLd', () => {
     expect(data?.['@type']).toBe('LodgingBusiness');
     expect(data?.['@id']).toBe(lodgingId('it'));
     expect(data?.name).toBe(site.name);
-    expect(data?.description).toBe(homeCopy.metaDescription.it);
-    expect(data?.email).toBe(site.email);
+    expect(data?.description).toBe(site.description.it);
+    expect(data?.email).toBe(inbox);
     expect(data?.geo).toEqual({
       '@type': 'GeoCoordinates',
       latitude: baglioLocation.lat,
@@ -106,7 +106,7 @@ describe('pageJsonLd', () => {
 
   it('localizes the English homepage lodging description and url', () => {
     const data = pageJsonLd(`${base}/en/`, 'en');
-    expect(data?.description).toBe(homeCopy.metaDescription.en);
+    expect(data?.description).toBe(site.description.en);
     expect(data?.url).toBe(`https://rednaw.github.io${base}/en/`);
     expect(data?.['@id']).toBe(lodgingId('en'));
     expect(data).not.toHaveProperty('inLanguage');

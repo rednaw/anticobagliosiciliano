@@ -2,15 +2,15 @@
   import { page } from '$app/state';
   import { site } from '$lib/data/content';
   import { localeFromPath } from '$lib/locale';
-  import { pick, siteHref, ui } from '$lib/standard/i18n';
+  import { pick, siteHref } from '$lib/standard/i18n';
 
   let { status, head = true }: { status?: number; head?: boolean } = $props();
 
   const locale = $derived(page.data.locale ?? localeFromPath(page.url.pathname));
   const code = $derived(status ?? page.status);
   const is404 = $derived(code === 404);
-  const heading = $derived(pick(is404 ? ui.notFoundTitle : ui.errorTitle, locale));
-  const body = $derived(pick(is404 ? ui.notFoundBody : ui.errorBody, locale));
+  const heading = $derived(pick(is404 ? site.pageNotFound.title : site.pageError.title, locale));
+  const body = $derived(pick(is404 ? site.pageNotFound.body : site.pageError.body, locale));
   const home = $derived(siteHref(locale));
 </script>
 
@@ -26,7 +26,7 @@
     <p class="eyebrow">{is404 ? '404' : code}</p>
     <h1>{heading}</h1>
     <p class="lead">{body}</p>
-    <a class="btn" href={home}>{pick(ui.navHome, locale)}</a>
+    <a class="btn" href={home}>{pick(site.nav.home, locale)}</a>
   </div>
 </section>
 

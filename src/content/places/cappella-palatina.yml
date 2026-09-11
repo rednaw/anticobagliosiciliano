@@ -1,0 +1,27 @@
+name:
+  it: Cappella Palatina
+  en: Palatine Chapel
+time: 40 min
+text:
+  it: Capolavoro dell’Arte Normanna. La Cappella Palatina di Palermo è l’esempio più elevato, dal punto di vista storico-artistico, della convivenza tra culture, religioni e modi di pensare apparentemente inconciliabili. Nella sua costruzione furono coinvolte maestranze bizantine, latine e musulmane, queste ultime eseguirono il soffitto a muqarnas, pregevole ed unico esempio al mondo di decorazioni pittoriche islamiche con rappresentazioni di figure umane all’interno di un luogo di culto.
+  en: A masterpiece of Norman art. The Palatine Chapel in Palermo is the finest expression, historically and artistically, of coexistence between cultures, religions and ways of thinking that seemed irreconcilable. Byzantine, Latin and Muslim craftsmen all worked on it, and it was the last of these who created the muqarnas ceiling — a precious and, in the world, unique example of Islamic decorative painting depicting human figures inside a place of worship.
+directionsLabel:
+  it: Palazzo Reale di Palermo
+  en: Royal Palace of Palermo
+website:
+  href:
+    it: https://www.federicosecondo.org/
+    en: https://www.federicosecondo.org/en/home-english/
+  label:
+    it: Sito ufficiale del Palazzo Reale
+    en: Official Royal Palace website
+slug: cappella-palatina
+image: /images/places/cappella-palatina.jpg
+location:
+  lat: 38.1116821
+  lon: 13.3540374
+imageCredit:
+  author: TeKappa
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Palermo_-_Cappella_Palatina_-_2025-09-24_14-49-26_001.jpg
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/
+  license: CC BY-SA 4.0

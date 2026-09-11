@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { localeFromPath, localize, pick, stripBase } from './locale';
+import { localeFromPath, localize, pick, splitParagraphs, stripBase } from './locale';
+
+describe('splitParagraphs', () => {
+  it('splits on a blank line and joins wrapped YAML lines', () => {
+    expect(splitParagraphs('First paragraph\nstill the first.\n\nSecond paragraph.')).toEqual([
+      'First paragraph still the first.',
+      'Second paragraph.'
+    ]);
+  });
+});
 
 describe('pick', () => {
   it('returns the matching locale', () => {
@@ -10,10 +19,10 @@ describe('pick', () => {
 });
 
 describe('localize', () => {
-  it('picks nested localized strings and lists', () => {
+  it('picks nested localized strings and lists of pairs', () => {
     const tree = {
       title: { it: 'Titolo', en: 'Title' },
-      items: { it: ['uno'], en: ['one'] },
+      items: [{ it: 'uno', en: 'one' }],
       plain: 3
     };
     expect(localize(tree, 'en')).toEqual({ title: 'Title', items: ['one'], plain: 3 });

@@ -1,0 +1,27 @@
+name:
+  it: Segesta
+  en: Segesta
+time: 20 min
+text:
+  it: Sito archeologico di rara bellezza. Si visita il tempio, posto su un poggio alle cui spalle si sviluppa un canyon, e il Teatro in cima al monte Barbaro da cui si gode un bellissimo panorama sul golfo.
+  en: An archaeological site of rare beauty. You can visit the temple, which stands on a hill with a canyon opening up behind it, and the theatre at the top of Mount Barbaro, where you can enjoy a beautiful view over the gulf.
+directionsLabel:
+  it: Parcheggio Segesta, Calatafimi Segesta
+  en: Segesta car park, Calatafimi Segesta
+website:
+  href:
+    it: https://www.parcodisegesta.com/home
+    en: https://www.parcodisegesta.com/home
+  label:
+    it: Sito ufficiale del Parco Archeologico di Segesta
+    en: Official Segesta Archaeological Park website (Italian only)
+slug: segesta
+image: /images/places/segesta.jpg
+location:
+  lat: 37.9478139
+  lon: 12.827791
+imageCredit:
+  author: Paul Stephenson
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Temple_of_Segesta,_Sicily.jpg
+  licenseUrl: https://creativecommons.org/licenses/by/2.0/
+  license: CC BY 2.0

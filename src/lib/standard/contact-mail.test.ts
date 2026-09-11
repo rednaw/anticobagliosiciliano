@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { site } from '../data/content';
+import { inbox } from '../data/content';
 import {
   MESSAGE_MAX_LENGTH,
   acceptedHouseSlug,
@@ -71,7 +71,7 @@ describe('buildMailtoHref', () => {
     expect(href).toContain('%0D%0A');
 
     const mail = parseMailto(href);
-    expect(mail.to).toBe(site.email);
+    expect(mail.to).toBe(inbox);
     expect(mail.subject).toBe('Richiesta disponibilità — Maria Rossi');
     expect(mail.body.split('\r\n')).toEqual([
       'Nome: Maria Rossi',

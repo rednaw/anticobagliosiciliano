@@ -38,7 +38,6 @@
         "editor.tabSize": 2,
         "editor.detectIndentation": false
       }
-    },
-    "remote.containers.autoReopen": true
+    }
   }
 }

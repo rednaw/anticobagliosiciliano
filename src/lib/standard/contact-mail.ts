@@ -1,5 +1,5 @@
-import { contactCopy, housesSource, site } from '$lib/data/content';
-import { pick, ui, type Locale } from '$lib/standard/i18n';
+import { contactCopy, housesSource, inbox, site } from '$lib/data/content';
+import { pick, type Locale } from '$lib/standard/i18n';
 
 export const MESSAGE_MAX_LENGTH = 500;
 
@@ -112,7 +112,7 @@ export function housesFreeHint(locale: Locale, slugs: readonly string[]): string
 
 export function buildMailtoHref(fields: MailtoFields): string {
   const t = (key: keyof typeof contactCopy) => pick(contactCopy[key], fields.locale);
-  const heading = pick(ui.requestAvailability, fields.locale);
+  const heading = pick(site.nav.requestAvailability, fields.locale);
   const selectedHouse = housesSource.find((house) => house.slug === fields.houseSlug);
   const houseLabel = selectedHouse?.name ?? t('mailNoHouse');
   const subject = encodeURIComponent(
@@ -132,5 +132,5 @@ export function buildMailtoHref(fields: MailtoFields): string {
     fields.message || t('mailNoMessage')
   ];
   const body = encodeURIComponent(lines.join('\n').replace(/\r\n|\n|\r/g, '\r\n'));
-  return `mailto:${site.email}?subject=${subject}&body=${body}`;
+  return `mailto:${inbox}?subject=${subject}&body=${body}`;
 }

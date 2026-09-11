@@ -4,8 +4,8 @@
   import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
   import Reveal from '$lib/standard/Reveal.svelte';
   import SectionHead from '$lib/standard/SectionHead.svelte';
-  import { houses } from '$lib/data/content';
-  import { contactHref, pick, siteHref, ui } from '$lib/standard/i18n';
+  import { houses, site } from '$lib/data/content';
+  import { contactHref, localize, siteHref, splitParagraphs } from '$lib/standard/i18n';
   import { mediaTier } from '$lib/standard/network-tier';
 
   let { data } = $props();
@@ -14,13 +14,15 @@
   const house = $derived(data.house);
   const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
   const contatti = $derived(contactHref(locale, house.slug));
+  const chrome = $derived(localize(site.house, locale));
+  const requestAvailability = $derived(localize(site.nav.requestAvailability, locale));
 </script>
 
 <section class="hero">
   <img src={responsiveImage(house.image, { tier })} alt={house.name} width="1400" height="933" />
   <div class="veil"></div>
   <div class="container copy">
-    <p class="eyebrow">{pick(ui.accommodation, locale)}</p>
+    <p class="eyebrow">{chrome.accommodation}</p>
     <h1>{house.name}</h1>
     {#if house.tagline}
       <p class="tagline">{house.tagline}</p>
@@ -39,7 +41,7 @@
           <span>{house.bathrooms}</span>
         </div>
       </Reveal>
-      {#each house.paragraphs as paragraph, i}
+      {#each splitParagraphs(house.paragraphs) as paragraph, i}
         <Reveal delay={i * 60}>
           <p class="body">{paragraph}</p>
         </Reveal>
@@ -48,7 +50,7 @@
     <aside>
       <Reveal delay={80}>
         <div class="panel">
-          <p class="eyebrow">{pick(ui.highlights, locale)}</p>
+          <p class="eyebrow">{chrome.highlights}</p>
           <ul>
             {#each house.highlights as item}
               <li>{item}</li>
@@ -63,7 +65,7 @@
       <GalleryCarousel images={house.gallery} alt={house.name} />
     </Reveal>
     <Reveal delay={140}>
-      <a class="btn cta" href={contatti}>{pick(ui.requestAvailability, locale)}</a>
+      <a class="btn cta" href={contatti}>{requestAvailability}</a>
     </Reveal>
   </div>
 </section>
@@ -71,7 +73,7 @@
 <section class="section more">
   <div class="container">
     <Reveal>
-      <SectionHead eyebrow={pick(ui.otherHouses, locale)} title={pick(ui.keepExploring, locale)} />
+      <SectionHead eyebrow={chrome.otherHouses} title={chrome.keepExploring} />
     </Reveal>
     <div class="grid">
       {#each others as other, i}

@@ -1,0 +1,16 @@
+---
+description: Marketing YAML — pages, houses, places
+globs: src/content/**/*.yml,src/lib/data/content.ts
+alwaysApply: false
+---
+
+# Marketing content (YAML)
+
+Page copy lives in `src/content/*.yml` (nested `{ it, en }`). Labels used on more than one page live in `site.yml` (`nav`, `house`, `chrome`, `pageNotFound`, `pageError`). Page-only labels live on that page file. Inbox is `inbox` in `contact.yml` (scalar). Occupancy, Lodgify ids, courtyard coords, and map hrefs are not these files.
+
+## Must preserve
+
+- House files `casa-1`…`casa-4` only; slugs and `capacity` stay in YAML (CMS hides them). Sequence is the import list in `content.ts`. House `paragraphs` is `{ it, en }`; a blank line starts a new `<p>`. House `highlights` is a list of `{ it, en }` (one add/remove for both languages).
+- Place sequence is the import list in `content.ts` (not filename sort).
+- Amenities and awards lists live on `home.yml` (`amenities`, `awardItems`); `home.awards.title` is the section heading. Home photos sit on their sections: `heroWide` / `heroTall`, `cortile.image`, `giardino.image` / `giardino.agrumeto`.
+- Write path is `/admin/` (or the YAML files). Do not invent a parallel copy store (CSV, second JSON, per-locale files).

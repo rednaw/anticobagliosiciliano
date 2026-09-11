@@ -12,16 +12,11 @@ Open the repo in VS Code or Cursor and **Reopen in Container**. The host needs D
 npm run dev
 ```
 
+CMS (local): [http://localhost:5173/anticobagliosiciliano/admin/](http://localhost:5173/anticobagliosiciliano/admin/) → **Local Repository** → this repo folder. Not in the public nav. GitHub OAuth comes later.
+
 ### Owner copy
 
-Italiano and English seed copy lives in `src/lib/data/content.ts` and `src/lib/standard/i18n.ts`. The owner edits `copy/testi.csv`. Overrides land in `src/lib/data/copy-overrides.json`.
-
-```sh
-npm run copy:export   # writes gitignored copy/testi.csv
-npm run copy:import   # applies that CSV onto copy-overrides.json
-```
-
-The last CSV column is a stable `id`. Import accepts comma, semicolon, or tab separators (and an Excel `sep=` first line) and refuses a file whose ids do not match the site. Blank cells are left unchanged — they do not wipe site copy. Overrides win over the seed; unchanged strings stay in the seed and show up on the next export. Restart `npm run dev` after import if the running app still shows the old text.
+Houses, places, home (including amenities and awards), contact (including the inbox address), site, arrive, imperdibili, and privacy live in `src/content/*.yml`. Edit them in `/admin/` (Local Repository for now; GitHub OAuth later). Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
 
 ### Lodgify occupancy
 

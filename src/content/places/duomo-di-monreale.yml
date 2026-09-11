@@ -1,0 +1,27 @@
+name:
+  it: Duomo di Monreale
+  en: Cathedral of Monreale
+time: 40 min
+text:
+  it: 'Visita immancabile. Uno dei gioielli più rari del patrimonio artistico italiano, sorprendente riuscita dell’incontro degli universi culturali islamico, bizantino, romanico: il Duomo normanno coi mosaici siculo-veneziani e il chiostro benedettino. Dal Belvedere vista sulla valle dell’Oreto e sulla Conca d’Oro.'
+  en: 'A must-see. One of the rarest jewels of Italy’s artistic heritage and a remarkable meeting of the Islamic, Byzantine and Romanesque worlds: the Norman cathedral with its Sicilian-Venetian mosaics, and the Benedictine cloister. From the Belvedere there is a view over the Oreto valley and the Conca d’Oro.'
+directionsLabel:
+  it: Parcheggio Duomo, Monreale
+  en: Parking Duomo, Monreale
+website:
+  href:
+    it: https://www.duomomonreale.com/duomo-di-monreale/
+    en: https://www.duomomonreale.com/en/duomo-di-monreale/
+  label:
+    it: Sito ufficiale del Duomo di Monreale
+    en: Official Monreale Cathedral website (Italian only)
+slug: duomo-di-monreale
+image: /images/places/monreale.jpg
+location:
+  lat: 38.0840913
+  lon: 13.2934427
+imageCredit:
+  author: Berthold Werner
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Monreale_Cathedral_BW_2025-04-29_16-01-19_hdr.jpg
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/
+  license: CC BY-SA 4.0

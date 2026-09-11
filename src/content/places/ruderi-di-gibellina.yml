@@ -1,0 +1,27 @@
+name:
+  it: Ruderi di Gibellina
+  en: The Ruins of Gibellina
+time: 1 h
+text:
+  it: 'Nella notte fra il 14 e il 15 gennaio 1968 il terremoto del Belice rase al suolo Gibellina, ricostruita poi una ventina di chilometri più a ovest. Sulle macerie del vecchio paese Alberto Burri ha steso un immenso sudario di cemento bianco: blocchi alti quanto un uomo, separati da fenditure che ricalcano le strade di un tempo. Si cammina dentro la pianta di un paese scomparso, fra le colline coltivate del Belice, in una delle più grandi opere di arte ambientale al mondo.'
+  en: 'On the night of 14 January 1968 the Belice earthquake razed Gibellina to the ground; the town was later rebuilt some twenty kilometres to the west. Over the rubble of the old town Alberto Burri laid an immense shroud of white concrete: blocks about the height of a person, separated by fissures that follow the streets as they once ran. You walk through the plan of a vanished town, among the cultivated hills of the Belice, within one of the largest works of environmental art in the world.'
+directionsLabel:
+  it: Parcheggio Cretto di Burri, Gibellina Vecchia
+  en: Cretto di Burri car park, Gibellina Vecchia
+website:
+  href:
+    it: https://www.macgibellina.it/il-grande-cretto
+    en: https://www.macgibellina.it/il-grande-cretto
+  label:
+    it: Il Grande Cretto — MAC Gibellina
+    en: Grande Cretto di Burri (Italian only)
+slug: ruderi-di-gibellina
+image: /images/places/ruderi-di-gibellina.jpg
+location:
+  lat: 37.7869315
+  lon: 12.974021
+imageCredit:
+  author: Boobax
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Ruderi_di_Gibellina.jpg
+  licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+  license: CC BY-SA 3.0

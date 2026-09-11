@@ -1,0 +1,27 @@
+name:
+  it: Riserva dello Zingaro
+  en: Zingaro Nature Reserve
+time: 30 min
+text:
+  it: Zona di costa protetta. Calette di ciotoli con acqua cristallina. Divieto alle imbarcazioni e alla pesca. Nella stagione meno calda è affascinante percorre il sentiero che congiunge i due ingressi della riserva. Panorami mozzafiato e profumi della macchia mediterranea.
+  en: A protected stretch of coastline, with pebble coves and crystal clear water. Boats and fishing are not allowed. Outside the hottest months, the path linking the two entrances of the reserve makes a wonderful walk, with breathtaking views and the scents of the Mediterranean scrub.
+directionsLabel:
+  it: Ingresso sud Riserva dello Zingaro, Scopello
+  en: Zingaro Nature Reserve south entrance, Scopello
+website:
+  href:
+    it: https://www.riservazingaro.it/
+    en: https://www.riservazingaro.it/en/
+  label:
+    it: Sito ufficiale della Riserva dello Zingaro
+    en: Official Zingaro Nature Reserve website
+slug: riserva-dello-zingaro
+image: /images/places/zingaro.jpg
+location:
+  lat: 38.0818609
+  lon: 12.8080923
+imageCredit:
+  author: Daniele Pugliesi
+  sourceUrl: https://commons.wikimedia.org/wiki/File:Riserva_dello_Zingaro_18.jpg
+  licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/
+  license: CC BY-SA 4.0

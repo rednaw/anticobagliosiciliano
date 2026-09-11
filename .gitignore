@@ -2,9 +2,6 @@
 /static/images/**/*.webp
 /static/videos/**/*.webp
 
-# Owner copy export (`npm run copy:export`)
-/copy/*.csv
-
 # Output
 .output
 .vercel

@@ -1,8 +1,8 @@
-import { baglioLocation, getHouse, homeCopy, housesSource, site } from '$lib/data/content';
+import { baglioLocation, getHouse, housesSource, inbox, site } from '$lib/data/content';
 import type { Locale } from '$lib/locale';
 import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
-import { absoluteUrl, pick, standardHref, ui } from '$lib/standard/i18n';
+import { absoluteUrl, pick, standardHref } from '$lib/standard/i18n';
 import { OG_IMAGE_PATH, routeKey } from './seo';
 
 export const LODGING_ID_FRAGMENT = '#lodging';
@@ -47,9 +47,9 @@ function lodgingBusiness(locale: Locale) {
     '@type': 'LodgingBusiness',
     '@id': lodgingId(locale),
     name: site.name,
-    description: pick(homeCopy.metaDescription, locale),
+    description: pick(site.description, locale),
     url: absoluteUrl(standardHref(locale), SITE_ORIGIN),
-    email: site.email,
+    email: inbox,
     image: absoluteUrl(publicImage(OG_IMAGE_PATH), SITE_ORIGIN),
     geo: geoCoordinates(),
     address: postalAddress(),
@@ -104,9 +104,9 @@ function houseBreadcrumbs(slug: string, locale: Locale) {
   if (!house) return null;
 
   return breadcrumbList([
-    { name: pick(ui.navHome, locale), url: absoluteUrl(standardHref(locale), SITE_ORIGIN) },
+    { name: pick(site.nav.home, locale), url: absoluteUrl(standardHref(locale), SITE_ORIGIN) },
     {
-      name: pick(ui.navHouses, locale),
+      name: pick(site.nav.houses, locale),
       url: `${absoluteUrl(standardHref(locale), SITE_ORIGIN)}#houses`
     },
     {

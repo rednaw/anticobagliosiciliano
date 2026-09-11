@@ -2,7 +2,8 @@
   import { responsiveImage } from '$lib/public-image';
   import { page } from '$app/state';
   import { indexAfterKey, photoAlt as galleryPhotoAlt, wrapIndex } from '$lib/standard/gallery';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { site } from '$lib/data/content';
+  import { pick } from '$lib/standard/i18n';
   import { mediaTier } from '$lib/standard/network-tier';
 
   let {
@@ -59,7 +60,7 @@
   <div
     role="region"
     aria-roledescription="carousel"
-    aria-label={`${pick(ui.gallery, locale)} ${alt}`}
+    aria-label={`${pick(site.house.gallery, locale)} ${alt}`}
   >
     <div class="stage">
       <img src={responsiveImage(current, { tier })} alt={photoAlt} width="1600" height="1100" />
@@ -69,7 +70,7 @@
           class="nav prev"
           onclick={prev}
           onkeydown={onKeydown}
-          aria-label={pick(ui.previousPhoto, locale)}
+          aria-label={pick(site.house.previousPhoto, locale)}
         >
           ‹
         </button>
@@ -78,7 +79,7 @@
           class="nav next"
           onclick={next}
           onkeydown={onKeydown}
-          aria-label={pick(ui.nextPhoto, locale)}
+          aria-label={pick(site.house.nextPhoto, locale)}
         >
           ›
         </button>
@@ -87,14 +88,14 @@
     </div>
 
     {#if count > 1}
-      <div class="thumbs" bind:this={thumbsEl} role="group" aria-label={pick(ui.thumbnails, locale)}>
+      <div class="thumbs" bind:this={thumbsEl} role="group" aria-label={pick(site.house.thumbnails, locale)}>
         {#each images as src, i}
           <button
             type="button"
             class="thumb"
             class:active={i === index}
             aria-current={i === index ? 'true' : undefined}
-            aria-label={`${pick(ui.goToPhoto, locale)} ${i + 1}`}
+            aria-label={`${pick(site.house.goToPhoto, locale)} ${i + 1}`}
             onclick={() => go(i)}
             onkeydown={onKeydown}
           >

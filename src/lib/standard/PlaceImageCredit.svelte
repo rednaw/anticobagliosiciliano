@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { imperdibiliPhotoCreditsCopy } from '$lib/data/content';
   import type { Locale } from '$lib/locale';
-  import { pick, ui } from '$lib/standard/i18n';
+  import { pick } from '$lib/standard/i18n';
 
   type Credit = {
     author: string;
@@ -18,7 +19,7 @@
 
 {#if inline}
   <span class="credit inline">
-    {pick(ui.photoCredit, locale)}:
+    {pick(imperdibiliPhotoCreditsCopy.photo, locale)}:
     {credit.author},
     <a href={credit.sourceUrl} rel="license noopener noreferrer" target="_blank"
       >Wikimedia Commons</a
@@ -27,7 +28,7 @@
   </span>
 {:else}
   <p class="credit">
-    {pick(ui.photoCredit, locale)}:
+    {pick(imperdibiliPhotoCreditsCopy.photo, locale)}:
     {credit.author},
     <a href={credit.sourceUrl} rel="license noopener noreferrer" target="_blank"
       >Wikimedia Commons</a

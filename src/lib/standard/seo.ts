@@ -11,10 +11,10 @@ import {
 import { stripBase, type Locale } from '$lib/locale';
 import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
-import { absoluteUrl, pick, ui } from '$lib/standard/i18n';
+import { absoluteUrl, pick } from '$lib/standard/i18n';
 
-/** Default share card — same wide portone still as the homepage hero. */
-export const OG_IMAGE_PATH = '/images/ambiance/hero-portone-wide.jpg';
+/** Default share card — same wide still as the homepage hero. */
+export const OG_IMAGE_PATH = homeCopy.heroWide;
 export const OG_IMAGE_WIDTH = 1248;
 export const OG_IMAGE_HEIGHT = 1229;
 
@@ -40,8 +40,8 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/404.html') {
     return {
-      title: `${pick(ui.notFoundTitle, locale)} · ${site.name}`,
-      description: pick(ui.notFoundBody, locale),
+      title: `${pick(site.pageNotFound.title, locale)} · ${site.name}`,
+      description: pick(site.pageNotFound.body, locale),
       image,
       imageAlt,
       robots: 'noindex, nofollow'
@@ -50,7 +50,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/imperdibili') {
     return {
-      title: `${pick(ui.navImperdibili, locale)} · ${site.name}`,
+      title: `${pick(site.nav.imperdibili, locale)} · ${site.name}`,
       description: pick(imperdibiliMeta, locale),
       image,
       imageAlt
@@ -59,7 +59,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/imperdibili/crediti-foto') {
     return {
-      title: `${pick(ui.photoCredits, locale)} · ${site.name}`,
+      title: `${pick(site.nav.photoCredits, locale)} · ${site.name}`,
       description: pick(imperdibiliPhotoCreditsCopy.metaDescription, locale),
       image,
       imageAlt,
@@ -69,7 +69,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/come-arrivare') {
     return {
-      title: `${pick(ui.navArrive, locale)} · ${site.name}`,
+      title: `${pick(site.nav.arrive, locale)} · ${site.name}`,
       description: pick(arriveCopy.metaDescription, locale),
       image,
       imageAlt
@@ -78,7 +78,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/contatti') {
     return {
-      title: `${pick(ui.requestAvailability, locale)} · ${site.name}`,
+      title: `${pick(site.nav.requestAvailability, locale)} · ${site.name}`,
       description: pick(contactCopy.metaDescription, locale),
       image,
       imageAlt
@@ -87,7 +87,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/privacy') {
     return {
-      title: `${pick(ui.privacy, locale)} · ${site.name}`,
+      title: `${pick(site.nav.privacy, locale)} · ${site.name}`,
       description: pick(privacyCopy.metaDescription, locale),
       image,
       imageAlt
@@ -109,7 +109,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   return {
     title: `${site.name} · ${site.tagline}`,
-    description: pick(homeCopy.metaDescription, locale),
+    description: pick(site.description, locale),
     image,
     imageAlt
   };

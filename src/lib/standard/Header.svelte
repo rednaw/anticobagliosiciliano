@@ -6,11 +6,10 @@
     contactHref,
     counterpartHref,
     houseSlugFromPath,
+    localize,
     navLinkActive,
-    pick,
     siteHref,
     stripBase,
-    ui,
     withBase,
     type Locale
   } from '$lib/standard/i18n';
@@ -30,6 +29,8 @@
   let currentTheme = $state<SiteTheme>(DEFAULT_SITE_THEME);
 
   const locale = $derived(page.data.locale);
+  const nav = $derived(localize(site.nav, locale));
+  const chrome = $derived(localize(site.chrome, locale));
 
   $effect(() => {
     currentTheme = initSiteTheme();
@@ -42,10 +43,10 @@
   }
 
   const links = $derived([
-    { subpath: '', label: pick(ui.navHome, locale), hash: '' },
-    { subpath: '', label: pick(ui.navHouses, locale), hash: '#houses' },
-    { subpath: 'imperdibili', label: pick(ui.navImperdibili, locale), hash: '' },
-    { subpath: 'come-arrivare', label: pick(ui.navArrive, locale), hash: '' }
+    { subpath: '', label: nav.home, hash: '' },
+    { subpath: '', label: nav.houses, hash: '#houses' },
+    { subpath: 'imperdibili', label: nav.imperdibili, hash: '' },
+    { subpath: 'come-arrivare', label: nav.arrive, hash: '' }
   ]);
 
   const contactLink = $derived(contactHref(locale, houseSlugFromPath(page.url.pathname)));
@@ -156,11 +157,11 @@
       aria-controls="site-nav"
       onclick={toggle}
     >
-      <span class="sr-only">{pick(open ? ui.closeMenu : ui.menu, locale)}</span>
+      <span class="sr-only">{open ? chrome.closeMenu : chrome.menu}</span>
       <span class="burger" class:open></span>
     </button>
 
-    <nav bind:this={navEl} id="site-nav" class="nav" class:open aria-label={pick(ui.mainNav, locale)}>
+    <nav bind:this={navEl} id="site-nav" class="nav" class:open aria-label={chrome.mainNav}>
       {#each links as link}
         <a
           href={hrefFor(link.subpath, link.hash)}
@@ -172,7 +173,7 @@
         </a>
       {/each}
       <div class="nav-houses">
-        <p>{pick(ui.housesGroup, locale)}</p>
+        <p>{nav.housesGroup}</p>
         <ul>
           {#each housesSource as house}
             <li>
@@ -190,10 +191,10 @@
         href={contactLink}
         class:active={isActive('contatti')}
         aria-current={isActive('contatti') ? 'page' : undefined}
-        onclick={close}>{pick(ui.requestAvailability, locale)}</a
+        onclick={close}>{nav.requestAvailability}</a
       >
 
-      <div class="langs" role="group" aria-label={pick(ui.language, locale)}>
+      <div class="langs" role="group" aria-label={chrome.language}>
         <a
           href={langHref('it')}
           hreflang="it"
@@ -226,7 +227,7 @@
     bind:this={backdropEl}
     class="backdrop"
     type="button"
-    aria-label={pick(ui.closeMenu, locale)}
+    aria-label={chrome.closeMenu}
     onclick={close}
   ></button>
 {/if}

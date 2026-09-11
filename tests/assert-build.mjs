@@ -251,6 +251,12 @@ assert(!existsSync(path.join(build, 'archivio')), 'archivio static assets are no
 
 const robots = read('robots.txt');
 assert(robots.includes(`Sitemap: https://${SITE_HOSTNAME}${SITE_BASE}/sitemap.xml`), 'robots.txt points at the sitemap');
+assert(robots.includes(`Disallow: ${SITE_BASE}/admin/`), 'robots.txt disallows /admin/');
+
+assert(existsSync(path.join(build, 'admin/index.html')), 'admin SPA is in the build');
+assert(read('admin/index.html').includes('noindex'), 'admin is noindex');
+assert(read('admin/config.yml').includes('src/content/'), 'admin collections point at src/content/');
+assert(!homepage.includes('/admin'), 'homepage does not link to /admin');
 
 assert(
   existsSync(path.join(build, 'google3e4b083f6284aa55.html')),

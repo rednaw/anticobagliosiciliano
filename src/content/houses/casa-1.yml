@@ -1,0 +1,114 @@
+name: Casa 1
+tagline:
+  it: Spaziosa, luminosa, con soppalco e terrazza sui tetti
+  en: Spacious and bright, with a loft and a terrace on the roofs
+summary:
+  it: Oltre 100 mq su due livelli, ideale per famiglie o due/tre coppie. Soggiorno ampio, due camere, soppalco e terrazza privata.
+  en: Over 100 square meters on two levels, ideal for families or two/three couples. A large living room, two bedrooms, a loft and a private terrace.
+guests:
+  it: 4–6 ospiti
+  en: 4/6 persons
+bedrooms:
+  it: 2 camere + soppalco
+  en: 2 bedrooms + loft
+bathrooms:
+  it: 2 bagni
+  en: 2 bathrooms
+paragraphs:
+  it: |-
+    Disposta su due livelli, per un totale di oltre 100 mq, la casa si apre su
+    un ampio soggiorno con due divani, un comodo tavolo da pranzo e una bella
+    cucina che, benché aperta da un lato, ha uno spazio autonomo, comodo e
+    organizzato. Due sono le stanze da letto, entrambe spaziose e luminose ed
+    entrambe affacciate su un magnifico uliveto. La più grande ha un letto
+    matrimoniale (160 x 200), la seconda due letti singoli eventualmente
+    affiancabili. In entrambe c’è lo spazio per un lettino per bambini.
+
+    Una scala in muratura porta dal soggiorno all’ampio soppalco, dove si apre
+    un’altra zona soggiorno eventualmente utilizzabile come terza camera da
+    letto per 2/3 persone. Vi è infatti un divano letto (140x 200) e lo spazio
+    per un eventuale letto supplementare. Da qui si accede a un bel terrazzo (15
+    mq) sui tetti del Baglio dove si può fare colazione col primo sole del
+    mattino, prendere il sole in totale privacy o godersi il fresco della sera.
+
+    La casa ha due bagni spaziosi ed eleganti, entrambi con doccia, uno a piano
+    terra e uno nella zona soppalco.
+
+    L’ingresso della casa si affaccia sul cortile del Baglio e nello spazio
+    riservato antistante è possibile rilassarsi su una sdraio o cenare a lume di
+    candela.
+
+    La casa è frutto di un recente restauro: l’utilizzo di materiali di
+    recupero, come antiche pietre e ringhiere, e la scelta di utilizzare cotto
+    fatto a mano per i pavimenti e travi grezze di castagno per i soffitti,
+    danno all’ambiente uno charme particolare. La casa ha un impianto di
+    riscaldamento che la rende confortevole anche per un soggiorno invernale.
+
+    Sistemazione ideale per una famiglia di 4/6 persone, per due/tre coppie di
+    amici, per due famiglie.
+  en: |-
+    On two levels and covering 100 square meters, the house opens onto a large
+    living room with two couches, a comfortable dining table and a beautiful
+    kitchen that although open on one side, has an autonomous space, comfortable
+    and organized. There are two bedrooms, both spacious and bright and both
+    overlooking a magnificent olive grove. The largest has a double bed (160 x
+    200), the second two single beds that you can put side by side if you want.
+    In both there is space for a cot.
+
+    A stone staircase leads from the living room to the large loft, where you
+    find another living area usable as a third bedroom for 2/3 people. Here
+    there is a sofa bed (140x 200) and space for an extra bed. This area leads
+    to a lovely terrace (15 sq m) on the roof of the baglio where you can have
+    breakfast with the morning sun, sunbathe in privacy or enjoy the cool of the
+    evening.
+
+    The house has two large and elegant bathrooms, both with a shower, one on
+    the ground floor and one in the loft area.
+
+    The entrance of the house overlooks the courtyard of the baglio and in the
+    space reserved in front of it you can relax on a sun lounger or dine by
+    candlelight.
+
+    The house is the result of a recent restoration using recycled materials
+    such as ancient stones and railings, and the choice of handmade terracotta
+    for the floors and chestnut beams for the ceilings, give the house a
+    particular charm. The house has a heating system that makes it comfortable
+    even for a winter stay.
+
+    Ideal accommodation for a family of 4/6 persons, for two/three couples, or
+    for two families.
+highlights:
+  - it: Terrazza sull’uliveto (15 mq)
+    en: Terrace overlooking the olive grove (15 sq m)
+  - it: Cucina attrezzata
+    en: Equipped kitchen
+  - it: Riscaldamento e aria condizionata
+    en: Heating and air conditioning
+  - it: Wi‑Fi gratuito
+    en: Free Wi‑Fi
+slug: casa-1
+size: 100 m²
+image: /images/houses/casa-1/00-img_6532.jpg
+capacity:
+  guestMin: 4
+  guestMax: 6
+  bedroomCount: 2
+  bathroomCount: 2
+  floorAreaSqm: 100
+gallery:
+  - /images/houses/casa-1/01-img_6807.jpg
+  - /images/houses/casa-1/02-img_6513.jpg
+  - /images/houses/casa-1/03-img_6514.jpg
+  - /images/houses/casa-1/04-img_6511.jpg
+  - /images/houses/casa-1/05-img_6494.jpg
+  - /images/houses/casa-1/06-img_6493.jpg
+  - /images/houses/casa-1/07-img_6368.jpg
+  - /images/houses/casa-1/08-img_6383.jpg
+  - /images/houses/casa-1/09-img_6391.jpg
+  - /images/houses/casa-1/10-img_6501.jpg
+  - /images/houses/casa-1/11-img_6482.jpg
+  - /images/houses/casa-1/12-img_6419.jpg
+  - /images/houses/casa-1/13-img_6669.jpg
+  - /images/houses/casa-1/14-img_6653.jpg
+  - /images/houses/casa-1/15-img_6479.jpg
+  - /images/houses/casa-1/16-img_6470.jpg
