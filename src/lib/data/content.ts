@@ -120,6 +120,7 @@ type HomeCopy = {
   heroLead: LocalizedString;
   heroWide: string;
   heroTall: string;
+  heroAlt: LocalizedString;
   chiSiamo: { title: LocalizedString; body: LocalizedString };
   houses: {
     eyebrow: LocalizedString;
@@ -129,6 +130,7 @@ type HomeCopy = {
   };
   cortile: {
     image: string;
+    alt: LocalizedString;
     eyebrow: LocalizedString;
     title: LocalizedString;
     lead: LocalizedString;
@@ -136,21 +138,17 @@ type HomeCopy = {
   };
   giardino: {
     image: string;
+    alt: LocalizedString;
     agrumeto: string;
+    agrumetoAlt: LocalizedString;
     eyebrow: LocalizedString;
     title: LocalizedString;
     paragraphs: LocalizedString;
   };
   places: { title: LocalizedString; lead: LocalizedString };
   cta: { title: LocalizedString; body: LocalizedString };
-  alt: {
-    hero: LocalizedString;
-    cortile: LocalizedString;
-    giardino: LocalizedString;
-    agrumeto: LocalizedString;
-    video: LocalizedString;
-  };
   video: {
+    alt: LocalizedString;
     play: LocalizedString;
     replay: LocalizedString;
     unsupported: LocalizedString;

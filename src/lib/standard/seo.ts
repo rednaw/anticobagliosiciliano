@@ -36,7 +36,7 @@ export function routeKey(pathname: string): string {
 export function pageSeo(pathname: string, locale: Locale): PageSeo {
   const key = routeKey(pathname);
   const image = absoluteUrl(publicImage(OG_IMAGE_PATH), SITE_ORIGIN);
-  const imageAlt = pick(homeCopy.alt.hero, locale);
+  const imageAlt = pick(homeCopy.heroAlt, locale);
 
   if (key === '/404.html') {
     return {

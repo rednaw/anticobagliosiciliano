@@ -83,10 +83,19 @@ describe('Sveltia admin', () => {
     expect(homeFile?.fields?.find((field) => field.name === 'heroTall')).toMatchObject({
       widget: 'image'
     });
+    expect(homeFile?.fields?.find((field) => field.name === 'heroAlt')).toMatchObject({
+      widget: 'object'
+    });
+    expect(homeFile?.fields?.find((field) => field.name === 'alt')).toBeUndefined();
     const cortile = homeFile?.fields?.find((field) => field.name === 'cortile');
-    expect(cortile?.fields?.[0]).toMatchObject({ name: 'image', widget: 'image' });
+    expect(cortile?.fields?.slice(0, 2).map((field) => field.name)).toEqual(['image', 'alt']);
     const giardino = homeFile?.fields?.find((field) => field.name === 'giardino');
-    expect(giardino?.fields?.map((field) => field.name).slice(0, 2)).toEqual(['image', 'agrumeto']);
+    expect(giardino?.fields?.map((field) => field.name).slice(0, 4)).toEqual([
+      'image',
+      'alt',
+      'agrumeto',
+      'agrumetoAlt'
+    ]);
     expect(giardino?.fields?.find((field) => field.name === 'paragraphs')).toMatchObject({
       widget: 'object'
     });

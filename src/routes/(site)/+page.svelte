@@ -86,7 +86,7 @@
           src={responsiveImage(home.heroTall, { tier })}
           width="1248"
           height="1690"
-          alt={home.alt.hero}
+          alt={home.heroAlt}
           fetchpriority="high"
         />
       </picture>
@@ -114,7 +114,7 @@
         src="/videos/baglio-movie.mp4"
         poster="/videos/baglio-movie-start.jpg"
         posterEnd="/videos/baglio-movie-end.jpg"
-        label={home.alt.video}
+        label={home.video.alt}
       />
       {#if cinemaDesktopStill}
         <div class="cinema-card cinema-card--hold">
@@ -191,7 +191,7 @@
 <section class="feature">
   <img
     src={responsiveImage(home.cortile.image, { tier })}
-    alt={home.alt.cortile}
+    alt={home.cortile.alt}
     width="1400"
     height="1867"
     loading="lazy"
@@ -220,14 +220,14 @@
       <div class="garden-photos">
         <img
           src={responsiveImage(home.giardino.image, { tier })}
-          alt={home.alt.giardino}
+          alt={home.giardino.alt}
           width="1024"
           height="768"
           loading="lazy"
         />
         <img
           src={responsiveImage(home.giardino.agrumeto, { tier })}
-          alt={home.alt.agrumeto}
+          alt={home.giardino.agrumetoAlt}
           width="1600"
           height="1067"
           loading="lazy"

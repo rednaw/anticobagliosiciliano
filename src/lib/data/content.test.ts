@@ -46,6 +46,10 @@ describe('marketing YAML', () => {
     expect(homeCopy).not.toHaveProperty('images');
     expect(homeCopy.heroWide).toBe('/images/ambiance/hero-portone-wide.jpg');
     expect(homeCopy.heroTall).toBe('/images/ambiance/hero-portone-tall.jpg');
+    expect(homeCopy.heroAlt.it).toContain('Portone');
+    expect(homeCopy).not.toHaveProperty('alt');
+    expect(homeCopy.cortile.alt.it).toContain('Cortile');
+    expect(homeCopy.giardino.agrumetoAlt.en).toContain('citrus grove');
     expect(homeCopy.cortile.image).toBe('/images/ambiance/cortile.jpg');
     expect(homeCopy.giardino.image).toBe('/images/ambiance/giardino.jpg');
     expect(homeCopy.giardino.agrumeto).toBe('/images/ambiance/agrumeto.jpg');

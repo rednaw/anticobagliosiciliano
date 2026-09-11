@@ -128,6 +128,7 @@ collections:
             fields: *it-en-text
           - { name: heroWide, label: Hero (largo), widget: image }
           - { name: heroTall, label: Hero (alto), widget: image }
+          - { name: heroAlt, label: Testo alternativo hero, widget: object, collapsed: true, fields: *it-en-string }
           - name: chiSiamo
             label: Chi siamo
             widget: object
@@ -147,6 +148,7 @@ collections:
             widget: object
             fields:
               - { name: image, label: Foto, widget: image }
+              - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
@@ -156,7 +158,9 @@ collections:
             widget: object
             fields:
               - { name: image, label: Foto giardino, widget: image }
+              - { name: alt, label: Testo alternativo giardino, widget: object, collapsed: true, fields: *it-en-string }
               - { name: agrumeto, label: Foto agrumeto, widget: image }
+              - { name: agrumetoAlt, label: Testo alternativo agrumeto, widget: object, collapsed: true, fields: *it-en-string }
               - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - name: paragraphs
@@ -176,21 +180,12 @@ collections:
             fields:
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-          - name: alt
-            label: Testi alternativi immagini
-            widget: object
-            collapsed: true
-            fields:
-              - { name: hero, label: Hero, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: cortile, label: Cortile, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: giardino, label: Giardino, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: agrumeto, label: Agrumeto, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: video, label: Video, widget: object, collapsed: true, fields: *it-en-string }
           - name: video
             label: Video (controlli)
             widget: object
             collapsed: true
             fields:
+              - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: play, label: Riproduci, widget: object, collapsed: true, fields: *it-en-string }
               - { name: replay, label: Rivedi, widget: object, collapsed: true, fields: *it-en-string }
               - { name: unsupported, label: Non supportato, widget: object, collapsed: true, fields: *it-en-text }
