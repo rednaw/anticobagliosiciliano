@@ -51,8 +51,8 @@ occupancyBlocked:
   it: Queste date sono occupate. Scegline altre per richiedere disponibilità.
   en: These dates are unavailable. Choose another stay to request availability.
 housesFreeHint:
-  it: In queste date sono libere {houses}.
-  en: These dates are free for {houses}.
+  it: In queste date sono libere
+  en: These dates are free for
 fieldRequired:
   it: Compila questo campo.
   en: Please fill in this field.

@@ -107,7 +107,7 @@ function joinHouseNames(slugs: readonly string[], locale: Locale): string {
 
 export function housesFreeHint(locale: Locale, slugs: readonly string[]): string {
   if (!slugs.length) return '';
-  return pick(contactCopy.housesFreeHint, locale).replace('{houses}', joinHouseNames(slugs, locale));
+  return `${pick(contactCopy.housesFreeHint, locale)} ${joinHouseNames(slugs, locale)}.`;
 }
 
 export function buildMailtoHref(fields: MailtoFields): string {

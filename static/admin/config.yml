@@ -307,8 +307,8 @@ collections:
             collapsed: true
             fields:
               - { name: place, label: Luogo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: line, label: Riga, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: aria, label: Accessibile, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: line, widget: hidden }
+              - { name: aria, widget: hidden }
               - { name: credit, label: Credito, widget: object, collapsed: true, fields: *it-en-string }
               - { name: creditTitle, label: Titolo credito, widget: object, collapsed: true, fields: *it-en-string }
               - { name: clear, label: Sereno, widget: object, collapsed: true, fields: *it-en-string }

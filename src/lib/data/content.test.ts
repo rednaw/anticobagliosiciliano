@@ -36,7 +36,12 @@ describe('marketing YAML', () => {
     expect(site.chrome.menu).toEqual({ it: 'Menu', en: 'Menu' });
     expect(homeCopy.video.play.en).toBe('Play the video');
     expect(weatherCopy.clear.it).toBe('sereno');
+    expect(weatherCopy.line.it).toContain('{temp}');
+    expect(weatherCopy.aria.en).toContain('{condition}');
     expect(contactCopy.eyebrow.en).toBe('Contact');
+    expect(contactCopy.housesFreeHint.it).toBe('In queste date sono libere');
+    expect(contactCopy.housesFreeHint.en).toBe('These dates are free for');
+    expect(contactCopy.housesFreeHint.it).not.toContain('{');
     expect(homeCopy).not.toHaveProperty('metaDescription');
     expect(homeCopy.heroLead.it).toContain('Sicilia occidentale');
     expect(homeCopy).not.toHaveProperty('amenities');

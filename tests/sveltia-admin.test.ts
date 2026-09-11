@@ -17,7 +17,14 @@ describe('Sveltia admin', () => {
   });
 
   it('points collections at src/content and does not allow creating houses or places', () => {
-    type Field = { name: string; widget?: string; fields?: Field[]; i18n?: unknown; multiple?: boolean };
+    type Field = {
+      name: string;
+      widget?: string;
+      fields?: Field[];
+      i18n?: unknown;
+      multiple?: boolean;
+      hint?: string;
+    };
     const config = parse(configText, { maxAliasCount: 1000 }) as {
       backend: { name: string; repo: string };
       media_folder: string;
@@ -120,6 +127,18 @@ describe('Sveltia admin', () => {
     expect(awardProof?.fields?.map((field) => field.name)).toEqual(['href', 'label']);
     expect(awardProof?.fields?.[0]).toMatchObject({ name: 'href', widget: 'string' });
     expect(awardProof?.fields?.[1]).toMatchObject({ name: 'label', widget: 'object' });
+    const arriveFile = byName.pages.files?.find((file) => file.file === 'src/content/arrive.yml');
+    const weather = arriveFile?.fields?.find((field) => field.name === 'weather');
+    expect(weather?.fields?.find((field) => field.name === 'line')).toMatchObject({
+      widget: 'hidden'
+    });
+    expect(weather?.fields?.find((field) => field.name === 'aria')).toMatchObject({
+      widget: 'hidden'
+    });
+    const contactFile = byName.pages.files?.find((file) => file.file === 'src/content/contact.yml');
+    expect(contactFile?.fields?.find((field) => field.name === 'housesFreeHint')).toMatchObject({
+      widget: 'object'
+    });
     const pageFiles = byName.pages.files?.map((file) => file.file) ?? [];
     expect(pageFiles).toEqual(
       expect.arrayContaining([

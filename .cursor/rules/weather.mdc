@@ -14,6 +14,7 @@ Client-direct Open-Meteo — no snapshot in git, no API key. Full tier only; lig
 - CC BY credit on the map whenever weather shows (`https://open-meteo.com/`).
 - Meteocons **monochrome** SVGs in `static/images/weather/`; paint via CSS mask / `currentColor`.
 - Unit tests use fixtures — no live Open-Meteo in CI.
+- Weather `line` / `aria` stay in `arrive.yml` (`{temp}`, `{condition}`); CMS hides them.
 - **One component, one fetch** in `WeatherChip.svelte` — do not split across context/children (Svelte 5 reactivity breaks).
 
 ## Layout (`portraitMobile` from `PORTRAIT_ASPECT_QUERY`, same as homepage Chi siamo)
