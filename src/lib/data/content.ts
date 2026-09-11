@@ -26,7 +26,6 @@ import chromeYaml from '../../content/chrome.yml';
 type SiteNav = {
   home: LocalizedString;
   houses: LocalizedString;
-  housesGroup: LocalizedString;
 };
 
 type SiteHouseCopy = {

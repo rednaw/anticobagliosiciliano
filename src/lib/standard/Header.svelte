@@ -2,6 +2,7 @@
   import { page } from '$app/state';
   import { building } from '$app/environment';
   import { housesSource, site, arriveCopy, contactCopy, imperdibiliTitle } from '$lib/data/content';
+  import { responsiveImage } from '$lib/public-image';
   import {
     contactHref,
     counterpartHref,
@@ -22,6 +23,7 @@
     isSiteTheme,
     type SiteTheme
   } from '$lib/standard/theme';
+  import { mediaTier } from '$lib/standard/network-tier';
 
   let open = $state(false);
   let menuBtn: HTMLButtonElement | undefined = $state();
@@ -32,6 +34,7 @@
   const locale = $derived(page.data.locale);
   const nav = $derived(localize(site.nav, locale));
   const chrome = $derived(localize(site.chrome, locale));
+  const tier = $derived($mediaTier);
 
   $effect(() => {
     currentTheme = initSiteTheme();
@@ -43,9 +46,9 @@
     currentTheme = applySiteTheme(value);
   }
 
-  const links = $derived([
-    { subpath: '', label: nav.home, hash: '' },
-    { subpath: '', label: nav.houses, hash: '#houses' },
+  const homeLink = $derived({ subpath: '', label: nav.home, hash: '' });
+  const housesLink = $derived({ subpath: '', label: nav.houses, hash: '#houses' });
+  const moreLinks = $derived([
     { subpath: 'imperdibili', label: pick(imperdibiliTitle, locale), hash: '' },
     { subpath: 'come-arrivare', label: pick(arriveCopy.title, locale), hash: '' }
   ]);
@@ -163,7 +166,44 @@
     </button>
 
     <nav bind:this={navEl} id="site-nav" class="nav" class:open aria-label={chrome.mainNav}>
-      {#each links as link}
+      <a
+        href={hrefFor(homeLink.subpath, homeLink.hash)}
+        class:active={isActive(homeLink.subpath, homeLink.hash)}
+        aria-current={isActive(homeLink.subpath, homeLink.hash) ? 'page' : undefined}
+        onclick={close}
+      >
+        {homeLink.label}
+      </a>
+      <div class="nav-houses">
+        <a
+          href={hrefFor(housesLink.subpath, housesLink.hash)}
+          class:active={isActive(housesLink.subpath, housesLink.hash)}
+          aria-current={isActive(housesLink.subpath, housesLink.hash) ? 'page' : undefined}
+          onclick={close}
+        >
+          {housesLink.label}
+        </a>
+        <ul>
+          {#each housesSource as house}
+            <li>
+              <a
+                href={hrefFor(`case/${house.slug}`)}
+                aria-current={isActive(`case/${house.slug}`) ? 'page' : undefined}
+                onclick={close}
+              >
+                <img
+                  src={responsiveImage(house.image, { tier })}
+                  alt=""
+                  width="1400"
+                  height="933"
+                />
+                {house.name}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </div>
+      {#each moreLinks as link}
         <a
           href={hrefFor(link.subpath, link.hash)}
           class:active={isActive(link.subpath, link.hash)}
@@ -173,20 +213,6 @@
           {link.label}
         </a>
       {/each}
-      <div class="nav-houses">
-        <p>{nav.housesGroup}</p>
-        <ul>
-          {#each housesSource as house}
-            <li>
-              <a
-                href={hrefFor(`case/${house.slug}`)}
-                aria-current={isActive(`case/${house.slug}`) ? 'page' : undefined}
-                onclick={close}>{house.name}</a
-              >
-            </li>
-          {/each}
-        </ul>
-      </div>
       <a
         class="nav-cta"
         href={contactLink}
@@ -378,27 +404,33 @@
   .nav-houses {
     display: grid;
     gap: 0.15rem;
-    padding: 0.75rem 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    margin: 0.5rem 0;
   }
 
   .nav-houses ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0.35rem 0 0.5rem 0.75rem;
     display: grid;
-    gap: 0.15rem;
+    gap: 0.2rem;
+    border-inline-start: 1px solid var(--line);
   }
 
-  .nav-houses p {
-    margin: 0;
-    padding: 0.35rem 0.4rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+  .nav-houses ul a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding-block: 0.45rem;
+  }
+
+  .nav-houses ul img {
+    width: 4.5rem;
+    height: 3.2rem;
+    object-fit: cover;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+    background: var(--surface);
   }
 
   .nav-cta {
@@ -444,8 +476,15 @@
 
   @media (min-width: 960px) {
     .menu-btn,
-    .backdrop,
+    .backdrop {
+      display: none;
+    }
+
     .nav-houses {
+      display: contents;
+    }
+
+    .nav-houses ul {
       display: none;
     }
 

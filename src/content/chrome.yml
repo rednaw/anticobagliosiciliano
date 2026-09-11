@@ -15,9 +15,6 @@ nav:
   houses:
     it: Alloggi
     en: The Houses
-  housesGroup:
-    it: Case
-    en: The Houses
 house:
   accommodation:
     it: Alloggio

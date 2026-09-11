@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Marketing content (YAML)
 
-Page copy lives in `src/content/*.yml` (nested `{ it, en }`). Page titles live on that page file (`title`; photo credits is `photoCredits.title` in `imperdibili.yml`). Header, footer, CTAs, and SEO read those titles. Nav-only labels (`home`, `houses`, `housesGroup`) and other shared chrome live in `chrome.yml`. Page-only labels live on that page file. Inbox is `inbox` in `contact.yml` (scalar). Occupancy, Lodgify ids, courtyard coords, and map hrefs are not these files.
+Page copy lives in `src/content/*.yml` (nested `{ it, en }`). Page titles live on that page file (`title`; photo credits is `photoCredits.title` in `imperdibili.yml`). Header, footer, CTAs, and SEO read those titles. Nav-only labels (`home`, `houses`) and other shared chrome live in `chrome.yml`. Page-only labels live on that page file. Inbox is `inbox` in `contact.yml` (scalar). Occupancy, Lodgify ids, courtyard coords, and map hrefs are not these files.
 
 ## Must preserve
 

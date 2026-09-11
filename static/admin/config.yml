@@ -321,7 +321,6 @@ collections:
             fields:
               - { name: home, label: Home, widget: object, collapsed: true, fields: *it-en-string }
               - { name: houses, label: Alloggi, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: housesGroup, label: Gruppo case, widget: object, collapsed: true, fields: *it-en-string }
           - name: house
             label: Case (etichette condivise)
             widget: object
