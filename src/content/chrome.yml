@@ -18,21 +18,6 @@ nav:
   housesGroup:
     it: Case
     en: The Houses
-  imperdibili:
-    it: Imperdibili
-    en: Nearby
-  arrive:
-    it: Come arrivare
-    en: Getting here
-  requestAvailability:
-    it: Richiesta disponibilità
-    en: Request availability
-  privacy:
-    it: Privacy
-    en: Privacy
-  photoCredits:
-    it: Crediti fotografici
-    en: Photo credits
 house:
   accommodation:
     it: Alloggio

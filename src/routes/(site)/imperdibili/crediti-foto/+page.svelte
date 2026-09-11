@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { imperdibiliPhotoCreditsCopy, places, site } from '$lib/data/content';
+  import { imperdibiliPhotoCreditsCopy, imperdibiliTitle, places } from '$lib/data/content';
   import PlaceImageCredit from '$lib/standard/PlaceImageCredit.svelte';
   import { pick, siteHref } from '$lib/standard/i18n';
 
@@ -15,10 +15,10 @@
 <section class="section">
   <div class="container">
     <p class="back">
-      <a href={imperdibili}>← {pick(site.nav.imperdibili, locale)}</a>
+      <a href={imperdibili}>← {pick(imperdibiliTitle, locale)}</a>
     </p>
 
-    <h1>{pick(site.nav.photoCredits, locale)}</h1>
+    <h1>{copy('title')}</h1>
     <p class="lead">{copy('lead')}</p>
 
     <ul class="list">

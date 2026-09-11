@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../../node_modules/@sveltia/cms/schema/sveltia-cms.json
 #
 # Live /admin/ → Sign in with GitHub via https://auth.tientjeketama.nl
-# (iac ALLOWED_DOMAINS must include this host). Local: Local Repository.
+# (iac ALLOWED_DOMAINS includes this host). Local: Local Repository.
 # Do not put /admin in the public nav. No client secret in this repo.
 #
 # Do not enable Sveltia i18n. Its single_file layout is top-level `it:` / `en:`
@@ -32,83 +32,6 @@ collections:
     editor:
       preview: false
     files:
-      - name: site
-        label: Sito
-        file: src/content/site.yml
-        format: yaml
-        fields:
-          - name: name
-            label: Nome
-            widget: string
-          - name: tagline
-            label: Tagline (resta in italiano)
-            widget: string
-          - name: location
-            label: Località
-            widget: object
-            collapsed: true
-            fields: &it-en-string
-              - { name: it, label: Italiano, widget: string }
-              - { name: en, label: English, widget: string }
-          - name: description
-            label: Descrizione (SEO)
-            widget: object
-            collapsed: true
-            fields: &it-en-text
-              - { name: it, label: Italiano, widget: text }
-              - { name: en, label: English, widget: text }
-          - name: nav
-            label: Navigazione
-            widget: object
-            fields:
-              - { name: home, label: Home, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: houses, label: Alloggi, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: housesGroup, label: Gruppo case, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: imperdibili, label: Imperdibili, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: arrive, label: Come arrivare, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: requestAvailability, label: Richiesta disponibilità, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: privacy, label: Privacy, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: photoCredits, label: Crediti fotografici, widget: object, collapsed: true, fields: *it-en-string }
-          - name: house
-            label: Case (etichette condivise)
-            widget: object
-            collapsed: true
-            fields:
-              - { name: accommodation, label: Alloggio, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: highlights, label: In evidenza, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: otherHouses, label: Altre case, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: keepExploring, label: Continua a esplorare, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: notFound, label: Casa non trovata, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: gallery, label: Galleria, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: previousPhoto, label: Foto precedente, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: nextPhoto, label: Foto successiva, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: thumbnails, label: Anteprime, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: goToPhoto, label: Vai alla foto, widget: object, collapsed: true, fields: *it-en-string }
-          - name: chrome
-            label: Chrome
-            widget: object
-            collapsed: true
-            fields:
-              - { name: skipToContent, label: Salta al contenuto, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: mainNav, label: Nav principale, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: language, label: Lingua, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: menu, label: Menu, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: closeMenu, label: Chiudi menu, widget: object, collapsed: true, fields: *it-en-string }
-          - name: pageNotFound
-            label: Pagina non trovata
-            widget: object
-            collapsed: true
-            fields:
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-          - name: pageError
-            label: Errore
-            widget: object
-            collapsed: true
-            fields:
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-
       - name: home
         label: Home
         file: src/content/home.yml
@@ -120,10 +43,18 @@ collections:
             label: Sottotitolo hero
             widget: object
             collapsed: true
-            fields: *it-en-text
+            fields: &it-en-text
+              - { name: it, label: Italiano, widget: text }
+              - { name: en, label: English, widget: text }
           - { name: heroWide, label: Hero (largo), widget: image }
           - { name: heroTall, label: Hero (alto), widget: image }
-          - { name: heroAlt, label: Testo alternativo hero, widget: object, collapsed: true, fields: *it-en-string }
+          - name: heroAlt
+            label: Testo alternativo hero
+            widget: object
+            collapsed: true
+            fields: &it-en-string
+              - { name: it, label: Italiano, widget: string }
+              - { name: en, label: English, widget: string }
           - name: video
             label: Video
             widget: object
@@ -232,6 +163,7 @@ collections:
         format: yaml
         fields:
           - { name: inbox, label: Inbox, widget: string }
+          - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
@@ -272,6 +204,7 @@ collections:
         file: src/content/arrive.yml
         format: yaml
         fields:
+          - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
           - { name: mapAlt, label: Alt mappa, widget: object, collapsed: true, fields: *it-en-text }
@@ -310,6 +243,7 @@ collections:
         file: src/content/imperdibili.yml
         format: yaml
         fields:
+          - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: meta, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
           - name: directions
@@ -325,6 +259,7 @@ collections:
             label: Crediti foto
             widget: object
             fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: photo, label: Prefisso foto, widget: object, collapsed: true, fields: *it-en-string }
               - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
               - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
@@ -334,6 +269,7 @@ collections:
         file: src/content/privacy.yml
         format: yaml
         fields:
+          - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
           - { name: groupContact, label: Gruppo contatto, widget: object, collapsed: true, fields: *it-en-string }
@@ -357,6 +293,74 @@ collections:
           - { name: weatherPolicy, label: Link meteo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: rightsTitle, label: Titolo diritti, widget: object, collapsed: true, fields: *it-en-string }
           - { name: rights, label: Diritti, widget: object, collapsed: true, fields: *it-en-text }
+
+      - name: chrome
+        label: Chrome
+        file: src/content/chrome.yml
+        format: yaml
+        fields:
+          - name: name
+            label: Nome
+            widget: string
+          - name: tagline
+            label: Tagline (resta in italiano)
+            widget: string
+          - name: location
+            label: Località
+            widget: object
+            collapsed: true
+            fields: *it-en-string
+          - name: description
+            label: Descrizione (SEO)
+            widget: object
+            collapsed: true
+            fields: *it-en-text
+          - name: nav
+            label: Navigazione
+            widget: object
+            fields:
+              - { name: home, label: Home, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: houses, label: Alloggi, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: housesGroup, label: Gruppo case, widget: object, collapsed: true, fields: *it-en-string }
+          - name: house
+            label: Case (etichette condivise)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: accommodation, label: Alloggio, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: highlights, label: In evidenza, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: otherHouses, label: Altre case, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: keepExploring, label: Continua a esplorare, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: notFound, label: Casa non trovata, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: gallery, label: Galleria, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: previousPhoto, label: Foto precedente, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: nextPhoto, label: Foto successiva, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: thumbnails, label: Anteprime, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: goToPhoto, label: Vai alla foto, widget: object, collapsed: true, fields: *it-en-string }
+          - name: chrome
+            label: Chrome
+            widget: object
+            collapsed: true
+            fields:
+              - { name: skipToContent, label: Salta al contenuto, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: mainNav, label: Nav principale, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: language, label: Lingua, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: menu, label: Menu, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: closeMenu, label: Chiudi menu, widget: object, collapsed: true, fields: *it-en-string }
+          - name: pageNotFound
+            label: Pagina non trovata
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+          - name: pageError
+            label: Errore
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
 
   - name: houses
     label: Case

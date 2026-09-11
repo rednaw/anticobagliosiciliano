@@ -7,12 +7,14 @@
   import {
     amenities,
     awards,
+    contactCopy,
     homeCopy,
     houses,
+    imperdibiliTitle,
     places,
     site
   } from '$lib/data/content';
-  import { localize, siteHref, splitParagraphs } from '$lib/standard/i18n';
+  import { localize, pick, siteHref, splitParagraphs } from '$lib/standard/i18n';
   import { PORTRAIT_ASPECT_QUERY, REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
   import { mediaTier } from '$lib/standard/network-tier';
 
@@ -25,7 +27,6 @@
   const contatti = $derived(siteHref(locale, 'contatti'));
   const imperdibili = $derived(siteHref(locale, 'imperdibili'));
   const home = $derived(localize(homeCopy, locale));
-  const nav = $derived(localize(site.nav, locale));
   const tier = $derived($mediaTier);
 
   let videoPlaying = $state(false);
@@ -257,7 +258,7 @@
   <div class="container">
     <Reveal>
       <SectionHead
-        eyebrow={nav.imperdibili}
+        eyebrow={pick(imperdibiliTitle, locale)}
         title={home.places.title}
         lead={home.places.lead}
       />
@@ -326,7 +327,7 @@
     <Reveal>
       <h2>{home.cta.title}</h2>
       <p>{home.cta.body}</p>
-      <a class="btn btn-light" href={contatti}>{nav.requestAvailability}</a>
+      <a class="btn btn-light" href={contatti}>{pick(contactCopy.title, locale)}</a>
     </Reveal>
   </div>
 </section>

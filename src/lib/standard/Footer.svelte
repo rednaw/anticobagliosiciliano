@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { inbox, site } from '$lib/data/content';
+  import { inbox, privacyCopy, site } from '$lib/data/content';
   import { pick, siteHref } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
@@ -19,7 +19,7 @@
     <p class="copy">
       © {new Date().getFullYear()}
       <span aria-hidden="true"> · </span>
-      <a href={privacy}>{pick(site.nav.privacy, locale)}</a>
+      <a href={privacy}>{pick(privacyCopy.title, locale)}</a>
     </p>
   </div>
 </footer>

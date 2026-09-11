@@ -134,8 +134,14 @@ describe('Sveltia admin', () => {
     expect(byName.houses.i18n).toBeUndefined();
     expect(byName.places.i18n).toBeUndefined();
 
+    const pageFiles = byName.pages.files ?? [];
+    expect(pageFiles.at(-1)).toMatchObject({
+      name: 'chrome',
+      file: 'src/content/chrome.yml'
+    });
+
     const cmsFiles = [
-      ...(byName.pages.files?.map((file) => resolve(root, file.file)) ?? []),
+      ...pageFiles.map((file) => resolve(root, file.file)),
       ...listYml(resolve(root, 'src/content/houses')),
       ...listYml(resolve(root, 'src/content/places'))
     ].map((path) => relative(root, path).replaceAll('\\', '/'));
@@ -144,7 +150,7 @@ describe('Sveltia admin', () => {
     );
     expect(cmsFiles.sort()).toEqual(diskFiles.sort());
 
-    for (const file of byName.pages.files ?? []) {
+    for (const file of pageFiles) {
       const data = parse(readFileSync(resolve(root, file.file), 'utf8'));
       assertYamlMatchesCms(file.file, data, file.fields);
     }
@@ -158,7 +164,7 @@ describe('Sveltia admin', () => {
       }
     }
 
-    const weather = byName.pages.files
+    const weather = pageFiles
       ?.find((file) => file.file === 'src/content/arrive.yml')
       ?.fields?.find((field) => field.name === 'weather');
     expect(weather?.fields?.find((field) => field.name === 'line')).toMatchObject({

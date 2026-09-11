@@ -19,7 +19,7 @@ import salineDiTrapani from '../../content/places/saline-di-trapani.yml';
 import segesta from '../../content/places/segesta.yml';
 import selinunte from '../../content/places/selinunte.yml';
 import privacyYaml from '../../content/privacy.yml';
-import siteYaml from '../../content/site.yml';
+import chromeYaml from '../../content/chrome.yml';
 
 /** Marketing copy. Tagline stays Italian in both languages. Inbox is `contact.yml`. */
 
@@ -27,11 +27,6 @@ type SiteNav = {
   home: LocalizedString;
   houses: LocalizedString;
   housesGroup: LocalizedString;
-  imperdibili: LocalizedString;
-  arrive: LocalizedString;
-  requestAvailability: LocalizedString;
-  privacy: LocalizedString;
-  photoCredits: LocalizedString;
 };
 
 type SiteHouseCopy = {
@@ -216,6 +211,7 @@ export function places(locale: Locale = 'it') {
 }
 
 type ImperdibiliYaml = {
+  title: LocalizedString;
   meta: LocalizedString;
   lead: LocalizedString;
   directions: {
@@ -224,10 +220,17 @@ type ImperdibiliYaml = {
     googleLabel: LocalizedString;
     osmLabel: LocalizedString;
   };
-  photoCredits: { photo: LocalizedString; metaDescription: LocalizedString; lead: LocalizedString };
+  photoCredits: {
+    title: LocalizedString;
+    photo: LocalizedString;
+    metaDescription: LocalizedString;
+    lead: LocalizedString;
+  };
 };
 
 const imperdibili = imperdibiliYaml as ImperdibiliYaml;
+
+export const imperdibiliTitle = imperdibili.title;
 
 export const imperdibiliMeta = imperdibili.meta;
 
@@ -252,6 +255,7 @@ type WeatherCopy = {
 };
 
 type ArriveYaml = {
+  title: LocalizedString;
   metaDescription: LocalizedString;
   lead: LocalizedString;
   mapAlt: LocalizedString;
@@ -310,6 +314,6 @@ export { inbox };
 
 export const contactCopy = contactRest;
 
-export const site = siteYaml as SiteCopy;
+export const site = chromeYaml as SiteCopy;
 
 export const privacyCopy = privacyYaml as Record<string, LocalizedString>;

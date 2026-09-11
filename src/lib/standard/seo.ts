@@ -5,6 +5,7 @@ import {
   arriveCopy,
   imperdibiliMeta,
   imperdibiliPhotoCreditsCopy,
+  imperdibiliTitle,
   privacyCopy,
   site
 } from '$lib/data/content';
@@ -50,7 +51,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/imperdibili') {
     return {
-      title: `${pick(site.nav.imperdibili, locale)} · ${site.name}`,
+      title: `${pick(imperdibiliTitle, locale)} · ${site.name}`,
       description: pick(imperdibiliMeta, locale),
       image,
       imageAlt
@@ -59,7 +60,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/imperdibili/crediti-foto') {
     return {
-      title: `${pick(site.nav.photoCredits, locale)} · ${site.name}`,
+      title: `${pick(imperdibiliPhotoCreditsCopy.title, locale)} · ${site.name}`,
       description: pick(imperdibiliPhotoCreditsCopy.metaDescription, locale),
       image,
       imageAlt,
@@ -69,7 +70,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/come-arrivare') {
     return {
-      title: `${pick(site.nav.arrive, locale)} · ${site.name}`,
+      title: `${pick(arriveCopy.title, locale)} · ${site.name}`,
       description: pick(arriveCopy.metaDescription, locale),
       image,
       imageAlt
@@ -78,7 +79,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/contatti') {
     return {
-      title: `${pick(site.nav.requestAvailability, locale)} · ${site.name}`,
+      title: `${pick(contactCopy.title, locale)} · ${site.name}`,
       description: pick(contactCopy.metaDescription, locale),
       image,
       imageAlt
@@ -87,7 +88,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/privacy') {
     return {
-      title: `${pick(site.nav.privacy, locale)} · ${site.name}`,
+      title: `${pick(privacyCopy.title, locale)} · ${site.name}`,
       description: pick(privacyCopy.metaDescription, locale),
       image,
       imageAlt

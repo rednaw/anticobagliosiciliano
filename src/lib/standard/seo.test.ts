@@ -4,7 +4,7 @@ vi.mock('$app/paths', () => ({
   asset: (path: string) => path
 }));
 
-import { arriveCopy, homeCopy, housesSource, privacyCopy, site } from '$lib/data/content';
+import { arriveCopy, contactCopy, homeCopy, housesSource, privacyCopy, site } from '$lib/data/content';
 import { pick } from '$lib/locale';
 import { pageSeo } from './seo';
 
@@ -16,7 +16,7 @@ describe('pageSeo', () => {
     expect(pageSeo('/anticobagliosiciliano/en/', 'en').imageAlt).toBe(homeCopy.heroAlt.en);
     expect(pageSeo('/anticobagliosiciliano/', 'it').image).toContain('hero-portone-wide');
     expect(pageSeo('/anticobagliosiciliano/contatti/', 'it').title).toBe(
-      `${pick(site.nav.requestAvailability, 'it')} · ${site.name}`
+      `${pick(contactCopy.title, 'it')} · ${site.name}`
     );
     expect(pageSeo('/anticobagliosiciliano/privacy/', 'it').description).toBe(
       privacyCopy.metaDescription.it

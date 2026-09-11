@@ -31,7 +31,8 @@ describe('marketing YAML', () => {
     expect(contactCopy).not.toHaveProperty('inbox');
     expect(site.tagline).toBe('Case vacanze in Sicilia');
     expect(site.nav.home).toEqual({ it: 'Home', en: 'Home' });
-    expect(site.nav.requestAvailability.en).toBe('Request availability');
+    expect(site.nav).not.toHaveProperty('arrive');
+    expect(contactCopy.title.en).toBe('Request availability');
     expect(homeCopy.houses.eyebrow.it).toBe('I nostri alloggi');
     expect(site.chrome.menu).toEqual({ it: 'Menu', en: 'Menu' });
     expect(homeCopy.video.play.en).toBe('Play the video');

@@ -1,4 +1,4 @@
-import { contactCopy, housesSource, inbox, site } from '$lib/data/content';
+import { contactCopy, housesSource, inbox } from '$lib/data/content';
 import { pick, type Locale } from '$lib/standard/i18n';
 
 export const MESSAGE_MAX_LENGTH = 500;
@@ -112,7 +112,7 @@ export function housesFreeHint(locale: Locale, slugs: readonly string[]): string
 
 export function buildMailtoHref(fields: MailtoFields): string {
   const t = (key: keyof typeof contactCopy) => pick(contactCopy[key], fields.locale);
-  const heading = pick(site.nav.requestAvailability, fields.locale);
+  const heading = t('title');
   const selectedHouse = housesSource.find((house) => house.slug === fields.houseSlug);
   const houseLabel = selectedHouse?.name ?? t('mailNoHouse');
   const subject = encodeURIComponent(

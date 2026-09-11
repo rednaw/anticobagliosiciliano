@@ -1,13 +1,14 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { building } from '$app/environment';
-  import { housesSource, site } from '$lib/data/content';
+  import { housesSource, site, arriveCopy, contactCopy, imperdibiliTitle } from '$lib/data/content';
   import {
     contactHref,
     counterpartHref,
     houseSlugFromPath,
     localize,
     navLinkActive,
+    pick,
     siteHref,
     stripBase,
     withBase,
@@ -45,8 +46,8 @@
   const links = $derived([
     { subpath: '', label: nav.home, hash: '' },
     { subpath: '', label: nav.houses, hash: '#houses' },
-    { subpath: 'imperdibili', label: nav.imperdibili, hash: '' },
-    { subpath: 'come-arrivare', label: nav.arrive, hash: '' }
+    { subpath: 'imperdibili', label: pick(imperdibiliTitle, locale), hash: '' },
+    { subpath: 'come-arrivare', label: pick(arriveCopy.title, locale), hash: '' }
   ]);
 
   const contactLink = $derived(contactHref(locale, houseSlugFromPath(page.url.pathname)));
@@ -191,7 +192,7 @@
         href={contactLink}
         class:active={isActive('contatti')}
         aria-current={isActive('contatti') ? 'page' : undefined}
-        onclick={close}>{nav.requestAvailability}</a
+        onclick={close}>{pick(contactCopy.title, locale)}</a
       >
 
       <div class="langs" role="group" aria-label={chrome.language}>

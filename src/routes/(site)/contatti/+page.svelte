@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { onMount } from 'svelte';
-  import { contactCopy, housesSource, inbox, site } from '$lib/data/content';
+  import { contactCopy, housesSource, inbox } from '$lib/data/content';
   import {
     MESSAGE_MAX_LENGTH,
     acceptedHouseSlug,
@@ -32,7 +32,7 @@
   }
 
   const locale = $derived(page.data.locale);
-  const heading = $derived(pick(site.nav.requestAvailability, locale));
+  const heading = $derived(pick(contactCopy.title, locale));
   const t = $derived((key: keyof typeof contactCopy) => pick(contactCopy[key], locale));
 
   let name = $state('');

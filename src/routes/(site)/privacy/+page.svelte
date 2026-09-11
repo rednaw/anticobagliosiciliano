@@ -1,10 +1,10 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { inbox, privacyCopy, site } from '$lib/data/content';
+  import { inbox, privacyCopy } from '$lib/data/content';
   import { pick } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
-  const heading = $derived(pick(site.nav.privacy, locale));
+  const heading = $derived(pick(privacyCopy.title, locale));
   const t = $derived((key: keyof typeof privacyCopy) => pick(privacyCopy[key], locale));
 
 </script>

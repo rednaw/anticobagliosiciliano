@@ -4,8 +4,8 @@
   import GalleryCarousel from '$lib/standard/GalleryCarousel.svelte';
   import Reveal from '$lib/standard/Reveal.svelte';
   import SectionHead from '$lib/standard/SectionHead.svelte';
-  import { houses, site } from '$lib/data/content';
-  import { contactHref, localize, siteHref, splitParagraphs } from '$lib/standard/i18n';
+  import { contactCopy, houses, site } from '$lib/data/content';
+  import { contactHref, localize, pick, siteHref, splitParagraphs } from '$lib/standard/i18n';
   import { mediaTier } from '$lib/standard/network-tier';
 
   let { data } = $props();
@@ -15,7 +15,7 @@
   const others = $derived(houses(locale).filter((h) => h.slug !== house.slug));
   const contatti = $derived(contactHref(locale, house.slug));
   const chrome = $derived(localize(site.house, locale));
-  const requestAvailability = $derived(localize(site.nav.requestAvailability, locale));
+  const requestAvailability = $derived(pick(contactCopy.title, locale));
 </script>
 
 <section class="hero">
