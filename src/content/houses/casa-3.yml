@@ -1,4 +1,5 @@
 name: Casa 3
+image: /images/houses/casa-3/00-soggiorno-2.jpg
 tagline:
   it: 'La più grande: tre camere e terrazza sull’uliveto'
   en: 'The largest: three bedrooms and a terrace overlooking the olive grove'
@@ -79,15 +80,6 @@ highlights:
     en: Heating and air conditioning
   - it: Wi‑Fi gratuito
     en: Free Wi‑Fi
-slug: casa-3
-size: 110+ m²
-image: /images/houses/casa-3/00-soggiorno-2.jpg
-capacity:
-  guestMin: 4
-  guestMax: 8
-  bedroomCount: 3
-  bathroomCount: 2
-  floorAreaSqm: 110
 gallery:
   - /images/houses/casa-3/01-ingresso-soggiorno.jpg
   - /images/houses/casa-3/02-letto-1.jpg
@@ -99,3 +91,11 @@ gallery:
   - /images/houses/casa-3/08-cucina-2.jpg
   - /images/houses/casa-3/09-soggiorno-1.jpg
   - /images/houses/casa-3/11-ingresso-sul-cortile.jpg
+slug: casa-3
+size: 110+ m²
+capacity:
+  guestMin: 4
+  guestMax: 8
+  bedroomCount: 3
+  bathroomCount: 2
+  floorAreaSqm: 110

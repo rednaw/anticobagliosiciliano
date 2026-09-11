@@ -19,12 +19,6 @@ backend:
 site_url: https://rednaw.github.io/anticobagliosiciliano
 display_url: https://rednaw.github.io/anticobagliosiciliano
 
-slug:
-  encoding: ascii
-  clean_accents: true
-  sanitize_replacement: "-"
-  lowercase: true
-
 output:
   omit_empty_optional_fields: true
 
@@ -35,13 +29,13 @@ public_folder: /images
 collections:
   - name: pages
     label: Pagine
+    editor:
+      preview: false
     files:
       - name: site
         label: Sito
         file: src/content/site.yml
         format: yaml
-        editor:
-          preview: false
         fields:
           - name: name
             label: Nome
@@ -119,8 +113,6 @@ collections:
         label: Home
         file: src/content/home.yml
         format: yaml
-        editor:
-          preview: false
         media_folder: '{{media_folder}}/ambiance'
         public_folder: '{{public_folder}}/ambiance'
         fields:
@@ -197,8 +189,6 @@ collections:
         label: Servizi
         file: src/content/amenities.yml
         format: yaml
-        editor:
-          preview: false
         fields:
           - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
@@ -214,8 +204,6 @@ collections:
         label: Premi
         file: src/content/awards.yml
         format: yaml
-        editor:
-          preview: false
         media_folder: '{{media_folder}}/awards'
         public_folder: '{{public_folder}}/awards'
         fields:
@@ -242,8 +230,6 @@ collections:
         label: Contatti
         file: src/content/contact.yml
         format: yaml
-        editor:
-          preview: false
         fields:
           - { name: inbox, label: Inbox, widget: string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
@@ -285,8 +271,6 @@ collections:
         label: Come arrivare
         file: src/content/arrive.yml
         format: yaml
-        editor:
-          preview: false
         fields:
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
@@ -325,8 +309,6 @@ collections:
         label: Imperdibili
         file: src/content/imperdibili.yml
         format: yaml
-        editor:
-          preview: false
         fields:
           - { name: meta, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
@@ -351,8 +333,6 @@ collections:
         label: Privacy
         file: src/content/privacy.yml
         format: yaml
-        editor:
-          preview: false
         fields:
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }

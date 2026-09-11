@@ -1,4 +1,5 @@
 name: Casa 2
+image: /images/houses/casa-2/00-img_6783.jpg
 tagline:
   it: Intima e raffinata, perfetta per coppie o piccole famiglie
   en: Intimate and refined, perfect for couples or small families
@@ -79,15 +80,6 @@ highlights:
     en: Heating and air conditioning
   - it: Wi‑Fi gratuito
     en: Free Wi‑Fi
-slug: casa-2
-size: 65 m²
-image: /images/houses/casa-2/00-img_6783.jpg
-capacity:
-  guestMin: 2
-  guestMax: 4
-  bedroomCount: 1
-  bathroomCount: 1
-  floorAreaSqm: 65
 gallery:
   - /images/houses/casa-2/01-img_65581.jpg
   - /images/houses/casa-2/02-img_65771.jpg
@@ -106,3 +98,11 @@ gallery:
   - /images/houses/casa-2/15-img_6623.jpg
   - /images/houses/casa-2/16-img_6769.jpg
   - /images/houses/casa-2/17-img_5933.jpg
+slug: casa-2
+size: 65 m²
+capacity:
+  guestMin: 2
+  guestMax: 4
+  bedroomCount: 1
+  bathroomCount: 1
+  floorAreaSqm: 65

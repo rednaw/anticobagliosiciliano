@@ -1,4 +1,5 @@
 name: Casa 4
+image: /images/houses/casa-4/00-patio-3.jpg
 tagline:
   it: La più elegante, con patio interno e vista sul Golfo
   en: The most elegant, with an interior patio and a view over the Gulf
@@ -86,15 +87,6 @@ highlights:
     en: Heating and air conditioning
   - it: Wi‑Fi gratuito
     en: Free Wi‑Fi
-slug: casa-4
-size: 110+ m²
-image: /images/houses/casa-4/00-patio-3.jpg
-capacity:
-  guestMin: 4
-  guestMax: 7
-  bedroomCount: 2
-  bathroomCount: 2
-  floorAreaSqm: 110
 gallery:
   - /images/houses/casa-4/01-porta-sul-cortile.jpg
   - /images/houses/casa-4/02-soggiorno-11.jpg
@@ -114,3 +106,11 @@ gallery:
   - /images/houses/casa-4/16-patio-1.jpg
   - /images/houses/casa-4/17-terrazzo-2.jpg
   - /images/houses/casa-4/18-terrazzo1.jpg
+slug: casa-4
+size: 110+ m²
+capacity:
+  guestMin: 4
+  guestMax: 7
+  bedroomCount: 2
+  bathroomCount: 2
+  floorAreaSqm: 110

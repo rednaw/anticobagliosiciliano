@@ -1,11 +1,79 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
+import { SITE_BASE, SITE_HOSTNAME } from '../src/lib/site-config';
 
 const root = resolve(import.meta.dirname, '..');
 const indexHtml = readFileSync(resolve(root, 'static/admin/index.html'), 'utf8');
 const configText = readFileSync(resolve(root, 'static/admin/config.yml'), 'utf8');
+
+type Field = {
+  name: string;
+  widget?: string;
+  fields?: Field[];
+  i18n?: unknown;
+};
+
+type Collection = {
+  name: string;
+  create?: boolean;
+  delete?: boolean;
+  folder?: string;
+  i18n?: unknown;
+  editor?: { preview?: boolean };
+  files?: Array<{ name?: string; file: string; i18n?: unknown; fields?: Field[] }>;
+  fields?: Field[];
+};
+
+type CmsConfig = {
+  backend: {
+    name: string;
+    repo: string;
+    base_url?: string;
+    auth_methods?: string[];
+  };
+  site_url?: string;
+  display_url?: string;
+  media_folder: string;
+  public_folder: string;
+  i18n?: unknown;
+  slug?: unknown;
+  collections: Collection[];
+};
+
+const config = parse(configText, { maxAliasCount: 1000 }) as CmsConfig;
+const byName = Object.fromEntries(config.collections.map((c) => [c.name, c]));
+
+function listYml(dir: string): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return listYml(path);
+    return entry.name.endsWith('.yml') ? [path] : [];
+  });
+}
+
+function assertYamlMatchesCms(label: string, data: unknown, fields: Field[] | undefined) {
+  expect(fields, `${label} has CMS fields`).toBeDefined();
+  if (data == null || typeof data !== 'object') return;
+  if (Array.isArray(data)) {
+    const item = data.find((entry) => entry && typeof entry === 'object' && !Array.isArray(entry));
+    if (item && fields?.length) assertYamlMatchesCms(`${label}[]`, item, fields);
+    return;
+  }
+  const yamlKeys = Object.keys(data);
+  const cmsKeys = fields!.map((field) => field.name);
+  const missing = yamlKeys.filter((key) => !cmsKeys.includes(key));
+  expect(missing, `${label} YAML keys missing from CMS`).toEqual([]);
+  expect(
+    cmsKeys.filter((key) => yamlKeys.includes(key)),
+    `${label} field order`
+  ).toEqual(yamlKeys);
+  for (const field of fields!) {
+    if (!yamlKeys.includes(field.name) || !field.fields) continue;
+    assertYamlMatchesCms(`${label}.${field.name}`, (data as Record<string, unknown>)[field.name], field.fields);
+  }
+}
 
 describe('Sveltia admin', () => {
   it('loads the npm IIFE, not unpkg, and matches the schema in node_modules', () => {
@@ -25,47 +93,33 @@ describe('Sveltia admin', () => {
     expect(indexHtml).toContain('noindex');
   });
 
-  it('points collections at src/content and does not allow creating houses or places', () => {
-    type Field = {
-      name: string;
-      widget?: string;
-      fields?: Field[];
-      i18n?: unknown;
-      multiple?: boolean;
-      hint?: string;
-    };
-    const config = parse(configText, { maxAliasCount: 1000 }) as {
-      backend: {
-        name: string;
-        repo: string;
-        base_url?: string;
-        auth_methods?: string[];
-      };
-      media_folder: string;
-      public_folder: string;
-      i18n?: unknown;
-      collections: Array<{
-        name: string;
-        create?: boolean;
-        delete?: boolean;
-        folder?: string;
-        i18n?: unknown;
-        files?: Array<{ name?: string; file: string; i18n?: unknown; fields?: Field[] }>;
-        fields?: Field[];
-      }>;
-    };
+  it('308s /admin to /admin/ so relative CMS assets resolve', () => {
+    const vite = readFileSync(resolve(root, 'vite.config.ts'), 'utf8');
+    expect(vite).toMatch(/statusCode = 308/);
+    expect(vite).toMatch(/path === admin/);
+    expect(vite).toMatch(/path === withSlash/);
+  });
+
+  it('points at this repo, OAuth, and the public site origin', () => {
+    const publicOrigin = `https://${SITE_HOSTNAME}${SITE_BASE}`;
     expect(config.backend).toMatchObject({
       name: 'github',
       repo: 'rednaw/anticobagliosiciliano',
       base_url: 'https://auth.tientjeketama.nl',
       auth_methods: ['oauth']
     });
+    expect(config.site_url).toBe(publicOrigin);
+    expect(config.display_url).toBe(publicOrigin);
     expect(config).toMatchObject({
       media_folder: 'static/images',
       public_folder: '/images'
     });
     expect(config.i18n).toBeUndefined();
-    const byName = Object.fromEntries(config.collections.map((c) => [c.name, c]));
+    expect(config.slug).toBeUndefined();
+  });
+
+  it('covers every content YAML key in CMS field order, without creating houses or places', () => {
+    expect(byName.pages.editor).toMatchObject({ preview: false });
     expect(byName.houses).toMatchObject({
       folder: 'src/content/houses',
       create: false,
@@ -79,94 +133,39 @@ describe('Sveltia admin', () => {
     expect(byName.pages.i18n).toBeUndefined();
     expect(byName.houses.i18n).toBeUndefined();
     expect(byName.places.i18n).toBeUndefined();
-    const tagline = byName.houses.fields?.find((field) => field.name === 'tagline');
-    expect(tagline).toMatchObject({ widget: 'object' });
-    expect(tagline?.fields?.map((field) => field.name)).toEqual(['it', 'en']);
-    const paragraphs = byName.houses.fields?.find((field) => field.name === 'paragraphs');
-    expect(paragraphs).toMatchObject({ widget: 'object' });
-    expect(paragraphs?.fields?.map((field) => field.name)).toEqual(['it', 'en']);
-    expect(paragraphs?.fields?.map((field) => field.widget)).toEqual(['text', 'text']);
-    const highlights = byName.houses.fields?.find((field) => field.name === 'highlights');
-    expect(highlights).toMatchObject({ widget: 'list' });
-    expect(highlights?.fields?.map((field) => field.name)).toEqual(['it', 'en']);
-    expect(highlights?.fields?.map((field) => field.widget)).toEqual(['string', 'string']);
-    const houseImage = byName.houses.fields?.find((field) => field.name === 'image');
-    expect(houseImage).toMatchObject({ widget: 'image' });
-    expect(byName.houses.fields?.slice(0, 2).map((field) => field.name)).toEqual(['name', 'image']);
-    const houseGallery = byName.houses.fields?.find((field) => field.name === 'gallery');
-    expect(houseGallery).toMatchObject({ widget: 'image', multiple: true });
-    const placeImage = byName.places.fields?.find((field) => field.name === 'image');
-    expect(placeImage).toMatchObject({ widget: 'image' });
-    expect(configText).not.toMatch(/Niente upload/);
-    const homeFile = byName.pages.files?.find((file) => file.file === 'src/content/home.yml');
-    expect(homeFile?.fields?.find((field) => field.name === 'images')).toBeUndefined();
-    expect(homeFile?.fields?.find((field) => field.name === 'heroWide')).toMatchObject({
-      widget: 'image'
-    });
-    expect(homeFile?.fields?.find((field) => field.name === 'heroTall')).toMatchObject({
-      widget: 'image'
-    });
-    expect(homeFile?.fields?.find((field) => field.name === 'heroAlt')).toMatchObject({
-      widget: 'object'
-    });
-    const homeFieldNames = homeFile?.fields?.map((field) => field.name) ?? [];
-    const heroAltAt = homeFieldNames.indexOf('heroAlt');
-    expect(homeFieldNames.slice(heroAltAt, heroAltAt + 3)).toEqual(['heroAlt', 'video', 'chiSiamo']);
-    expect(homeFile?.fields?.find((field) => field.name === 'alt')).toBeUndefined();
-    const cortile = homeFile?.fields?.find((field) => field.name === 'cortile');
-    expect(cortile?.fields?.slice(0, 2).map((field) => field.name)).toEqual(['image', 'alt']);
-    const giardino = homeFile?.fields?.find((field) => field.name === 'giardino');
-    expect(giardino?.fields?.map((field) => field.name).slice(0, 4)).toEqual([
-      'image',
-      'alt',
-      'agrumeto',
-      'agrumetoAlt'
-    ]);
-    expect(giardino?.fields?.find((field) => field.name === 'paragraphs')).toMatchObject({
-      widget: 'object'
-    });
-    expect(giardino?.fields?.some((field) => /^p[123]$/.test(field.name))).toBe(false);
-    expect(homeFile?.fields?.find((field) => field.name === 'amenities')).toBeUndefined();
-    expect(homeFile?.fields?.find((field) => field.name === 'awardItems')).toBeUndefined();
-    expect(homeFile?.fields?.find((field) => field.name === 'comfort')).toBeUndefined();
-    expect(homeFile?.fields?.find((field) => field.name === 'awards')).toBeUndefined();
-    const amenitiesFile = byName.pages.files?.find((file) => file.file === 'src/content/amenities.yml');
-    expect(amenitiesFile?.fields?.map((field) => field.name)).toEqual(['eyebrow', 'title', 'items']);
-    expect(amenitiesFile?.fields?.[2]).toMatchObject({ name: 'items', widget: 'list' });
-    const awardsFile = byName.pages.files?.find((file) => file.file === 'src/content/awards.yml');
-    expect(awardsFile?.fields?.map((field) => field.name)).toEqual(['eyebrow', 'title', 'items']);
-    expect(awardsFile?.fields?.[2]?.fields?.find((field) => field.name === 'image')).toMatchObject({
-      widget: 'image'
-    });
-    const awardProof = awardsFile?.fields?.[2]?.fields?.find((field) => field.name === 'proof');
-    expect(awardProof).toMatchObject({ widget: 'object', required: false });
-    expect(awardProof?.fields?.map((field) => field.name)).toEqual(['href', 'label']);
-    expect(awardProof?.fields?.[0]).toMatchObject({ name: 'href', widget: 'string' });
-    expect(awardProof?.fields?.[1]).toMatchObject({ name: 'label', widget: 'object' });
-    const arriveFile = byName.pages.files?.find((file) => file.file === 'src/content/arrive.yml');
-    const weather = arriveFile?.fields?.find((field) => field.name === 'weather');
+
+    const cmsFiles = [
+      ...(byName.pages.files?.map((file) => resolve(root, file.file)) ?? []),
+      ...listYml(resolve(root, 'src/content/houses')),
+      ...listYml(resolve(root, 'src/content/places'))
+    ].map((path) => relative(root, path).replaceAll('\\', '/'));
+    const diskFiles = listYml(resolve(root, 'src/content')).map((path) =>
+      relative(root, path).replaceAll('\\', '/')
+    );
+    expect(cmsFiles.sort()).toEqual(diskFiles.sort());
+
+    for (const file of byName.pages.files ?? []) {
+      const data = parse(readFileSync(resolve(root, file.file), 'utf8'));
+      assertYamlMatchesCms(file.file, data, file.fields);
+    }
+    for (const [name, collection] of [
+      ['houses', byName.houses],
+      ['places', byName.places]
+    ] as const) {
+      for (const path of listYml(resolve(root, collection.folder!))) {
+        const data = parse(readFileSync(path, 'utf8'));
+        assertYamlMatchesCms(`${name}/${relative(root, path)}`, data, collection.fields);
+      }
+    }
+
+    const weather = byName.pages.files
+      ?.find((file) => file.file === 'src/content/arrive.yml')
+      ?.fields?.find((field) => field.name === 'weather');
     expect(weather?.fields?.find((field) => field.name === 'line')).toMatchObject({
       widget: 'hidden'
     });
     expect(weather?.fields?.find((field) => field.name === 'aria')).toMatchObject({
       widget: 'hidden'
     });
-    const contactFile = byName.pages.files?.find((file) => file.file === 'src/content/contact.yml');
-    expect(contactFile?.fields?.find((field) => field.name === 'housesFreeHint')).toMatchObject({
-      widget: 'object'
-    });
-    const pageFiles = byName.pages.files?.map((file) => file.file) ?? [];
-    expect(pageFiles).toEqual(
-      expect.arrayContaining([
-        'src/content/site.yml',
-        'src/content/home.yml',
-        'src/content/amenities.yml',
-        'src/content/awards.yml',
-        'src/content/contact.yml',
-        'src/content/arrive.yml',
-        'src/content/imperdibili.yml',
-        'src/content/privacy.yml'
-      ])
-    );
   });
 });

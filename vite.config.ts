@@ -44,52 +44,75 @@ function yamlDataPlugin(): Plugin {
   };
 }
 
-/** Copy the npm IIFE next to `static/admin/index.html` (no unpkg). */
-function copySveltiaCms() {
+/** Copy/serve the npm IIFE next to `static/admin/index.html` (no unpkg). */
+function sveltiaIife() {
   const from = join(dirname(require.resolve('@sveltia/cms')), 'sveltia-cms.js');
-  const to = join(repoRoot, 'static/admin/sveltia-cms.js');
-  const js = readFileSync(from, 'utf8').replace(
+  return readFileSync(from, 'utf8').replace(
     /\n\/\/# sourceMappingURL=sveltia-cms\.js\.map\s*$/,
     '\n'
   );
-  writeFileSync(to, js);
+}
+
+function copySveltiaCms() {
+  writeFileSync(join(repoRoot, 'static/admin/sveltia-cms.js'), sveltiaIife());
 }
 
 function sveltiaCmsPlugin(): Plugin {
+  let command: 'build' | 'serve' = 'serve';
   return {
     name: 'sveltia-cms',
-    buildStart: copySveltiaCms,
-    configureServer() {
-      copySveltiaCms();
+    configResolved(config) {
+      command = config.command;
+    },
+    buildStart() {
+      if (command === 'build') copySveltiaCms();
+    },
+    configureServer(server) {
+      const urlPath = `${SITE_BASE}/admin/sveltia-cms.js`;
+      server.middlewares.use((req, res, next) => {
+        const path = req.url?.split('?')[0];
+        if (path !== urlPath) return next();
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-store');
+        res.end(sveltiaIife());
+      });
     }
   };
 }
 
-/** `/admin/` → `admin/index.html` (Vite has no directory index; Pages does). */
+/** `/admin` → `/admin/` (relative CMS assets). `/admin/` → `index.html` (Vite has no directory index; Pages does). */
 function adminIndexPlugin(): Plugin {
   const admin = `${SITE_BASE}/admin`;
+  const withSlash = `${admin}/`;
   const indexed = `${admin}/index.html`;
-  function rewrite(url: string | undefined) {
-    if (!url) return url;
-    const [path, query] = url.split('?');
-    if (path !== admin && path !== `${admin}/`) return url;
-    return query ? `${indexed}?${query}` : indexed;
+  function splitUrl(url: string | undefined) {
+    if (!url) return { path: '', query: '' };
+    const q = url.indexOf('?');
+    return q === -1 ? { path: url, query: '' } : { path: url.slice(0, q), query: url.slice(q) };
+  }
+  function attachQuery(path: string, query: string) {
+    return query ? `${path}${query}` : path;
+  }
+  function middleware(req: { url?: string }, res: { statusCode: number; setHeader: (n: string, v: string) => void; end: () => void }, next: () => void) {
+    const { path, query } = splitUrl(req.url);
+    if (path === admin) {
+      res.statusCode = 308;
+      res.setHeader('Location', attachQuery(withSlash, query));
+      res.end();
+      return;
+    }
+    if (path === withSlash) {
+      req.url = attachQuery(indexed, query);
+    }
+    next();
   }
   return {
     name: 'admin-index',
     configureServer(server) {
-      server.middlewares.use((req, _res, next) => {
-        const nextUrl = rewrite(req.url);
-        if (nextUrl) req.url = nextUrl;
-        next();
-      });
+      server.middlewares.use(middleware);
     },
     configurePreviewServer(server) {
-      server.middlewares.use((req, _res, next) => {
-        const nextUrl = rewrite(req.url);
-        if (nextUrl) req.url = nextUrl;
-        next();
-      });
+      server.middlewares.use(middleware);
     }
   };
 }
