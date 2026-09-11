@@ -16,7 +16,7 @@ CMS (local): [http://localhost:5173/anticobagliosiciliano/admin/](http://localho
 
 ### Owner copy
 
-Houses, places, home (including amenities and awards), contact (including the inbox address), site, arrive, imperdibili, and privacy live in `src/content/*.yml`. Edit them in `/admin/` (Local Repository for now; GitHub OAuth later). Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
+Houses, places, home, amenities, awards, contact (including the inbox address), site, arrive, imperdibili, and privacy live in `src/content/*.yml`. Edit them in `/admin/` (Local Repository for now; GitHub OAuth later). Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
 
 ### Lodgify occupancy
 

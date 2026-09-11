@@ -1,6 +1,8 @@
 import type { Locale, LocalizedString } from '$lib/locale';
 import { localize } from '$lib/locale';
+import amenitiesYaml from '../../content/amenities.yml';
 import arriveYaml from '../../content/arrive.yml';
+import awardsYaml from '../../content/awards.yml';
 import contactYaml from '../../content/contact.yml';
 import homeYaml from '../../content/home.yml';
 import casa1 from '../../content/houses/casa-1.yml';
@@ -142,8 +144,6 @@ type HomeCopy = {
     p2: LocalizedString;
     p3: LocalizedString;
   };
-  comfort: { eyebrow: LocalizedString; title: LocalizedString };
-  awards: { eyebrow: LocalizedString; title: LocalizedString };
   places: { title: LocalizedString; lead: LocalizedString };
   cta: { title: LocalizedString; body: LocalizedString };
   alt: {
@@ -160,30 +160,31 @@ type HomeCopy = {
   };
 };
 
-type HomeYaml = HomeCopy & {
-  amenities: AmenitySource[];
-  awardItems: AwardSource[];
+type AmenitiesCopy = {
+  eyebrow: LocalizedString;
+  title: LocalizedString;
+  items: AmenitySource[];
 };
 
-const {
-  amenities: homeAmenities,
-  awardItems: homeAwards,
-  ...homeRest
-} = homeYaml as HomeYaml;
+type AwardsCopy = {
+  eyebrow: LocalizedString;
+  title: LocalizedString;
+  items: AwardSource[];
+};
 
-export const amenitiesSource = homeAmenities;
+export const amenitiesCopy = amenitiesYaml as AmenitiesCopy;
 
 export function amenities(locale: Locale = 'it') {
-  return localize(amenitiesSource, locale);
+  return localize(amenitiesCopy, locale);
 }
 
-export const awardsSource = homeAwards;
+export const awardsCopy = awardsYaml as AwardsCopy;
 
 export function awards(locale: Locale = 'it') {
-  return localize(awardsSource, locale);
+  return localize(awardsCopy, locale);
 }
 
-export const homeCopy = homeRest;
+export const homeCopy = homeYaml as HomeCopy;
 
 type PlaceImageCredit = {
   author: string;

@@ -162,18 +162,6 @@ collections:
               - { name: p1, label: Paragrafo 1, widget: object, collapsed: true, fields: *it-en-text }
               - { name: p2, label: Paragrafo 2, widget: object, collapsed: true, fields: *it-en-text }
               - { name: p3, label: Paragrafo 3, widget: object, collapsed: true, fields: *it-en-text }
-          - name: comfort
-            label: Comfort
-            widget: object
-            fields:
-              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-          - name: awards
-            label: Riconoscimenti (titolo)
-            widget: object
-            fields:
-              - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - name: places
             label: Imperdibili (blocco)
             widget: object
@@ -186,27 +174,6 @@ collections:
             fields:
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: body, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-          - name: amenities
-            label: Servizi
-            widget: list
-            summary: "{{title.it}}"
-            fields:
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: detail, label: Dettaglio, widget: object, collapsed: true, fields: *it-en-string }
-          - name: awardItems
-            label: Premi
-            widget: list
-            summary: "{{title.it}}"
-            fields:
-              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: text, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-              - { name: proofUrl, label: Link prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
-              - { name: proofLabel, label: Etichetta prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
-              - name: image
-                label: Logo
-                widget: image
-                media_folder: '{{media_folder}}/awards'
-                public_folder: '{{public_folder}}/awards'
           - name: alt
             label: Testi alternativi immagini
             widget: object
@@ -225,6 +192,45 @@ collections:
               - { name: play, label: Riproduci, widget: object, collapsed: true, fields: *it-en-string }
               - { name: replay, label: Rivedi, widget: object, collapsed: true, fields: *it-en-string }
               - { name: unsupported, label: Non supportato, widget: object, collapsed: true, fields: *it-en-text }
+
+      - name: amenities
+        label: Servizi
+        file: src/content/amenities.yml
+        format: yaml
+        editor:
+          preview: false
+        fields:
+          - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+          - name: items
+            label: Servizi
+            widget: list
+            summary: "{{title.it}}"
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: detail, label: Dettaglio, widget: object, collapsed: true, fields: *it-en-string }
+
+      - name: awards
+        label: Premi
+        file: src/content/awards.yml
+        format: yaml
+        editor:
+          preview: false
+        media_folder: '{{media_folder}}/awards'
+        public_folder: '{{public_folder}}/awards'
+        fields:
+          - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
+          - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+          - name: items
+            label: Premi
+            widget: list
+            summary: "{{title.it}}"
+            fields:
+              - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
+              - { name: text, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
+              - { name: proofUrl, label: Link prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
+              - { name: proofLabel, label: Etichetta prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
+              - { name: image, label: Logo, widget: image }
 
       - name: contact
         label: Contatti

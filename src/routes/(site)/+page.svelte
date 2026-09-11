@@ -20,8 +20,8 @@
   const locale = $derived(page.data.locale);
   const houseList = $derived(houses(locale));
   const placeList = $derived(places(locale));
-  const amenityList = $derived(amenities(locale));
-  const awardList = $derived(awards(locale));
+  const amenity = $derived(amenities(locale));
+  const award = $derived(awards(locale));
   const contatti = $derived(siteHref(locale, 'contatti'));
   const imperdibili = $derived(siteHref(locale, 'imperdibili'));
   const home = $derived(localize(homeCopy, locale));
@@ -240,10 +240,10 @@
 <section class="section band-dark">
   <div class="container">
     <Reveal>
-      <SectionHead eyebrow={home.comfort.eyebrow} title={home.comfort.title} />
+      <SectionHead eyebrow={amenity.eyebrow} title={amenity.title} />
     </Reveal>
     <ul class="amenity-list">
-      {#each amenityList as item, i}
+      {#each amenity.items as item, i}
         <Reveal as="li" delay={i * 40}>
           <strong>{item.title}</strong>
           <span>{item.detail}</span>
@@ -287,30 +287,30 @@
 <section class="section band-dark">
   <div class="container">
     <Reveal>
-      <SectionHead eyebrow={home.awards.eyebrow} title={home.awards.title} />
+      <SectionHead eyebrow={award.eyebrow} title={award.title} />
     </Reveal>
     <div class="award-grid">
-      {#each awardList as award, i}
+      {#each award.items as item, i}
         <Reveal delay={i * 70}>
           <figure>
             <img
-              src={responsiveImage(award.image, { tier })}
-              alt={award.title}
+              src={responsiveImage(item.image, { tier })}
+              alt={item.title}
               width="1600"
               height="1000"
               loading="lazy"
             />
             <figcaption>
-              <strong>{award.title}</strong>
-              <span>{award.text}</span>
-              {#if award.proofUrl && award.proofLabel}
+              <strong>{item.title}</strong>
+              <span>{item.text}</span>
+              {#if item.proofUrl && item.proofLabel}
                 <a
                   class="award-proof"
-                  href={award.proofUrl}
+                  href={item.proofUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  {award.proofLabel}
+                  {item.proofLabel}
                 </a>
               {/if}
             </figcaption>

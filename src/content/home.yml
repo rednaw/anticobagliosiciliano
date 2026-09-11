@@ -75,20 +75,6 @@ giardino:
       la pietra viva del nostro baglio.
     en: There is also a barbecue area, perfect for dinners outdoors among the greenery and
       the bare stone of our baglio.
-comfort:
-  eyebrow:
-    it: Comfort
-    en: Comfort
-  title:
-    it: Accoglienza autentica, servizi chiari
-    en: A genuine welcome, clear amenities
-awards:
-  eyebrow:
-    it: Riconoscimenti
-    en: Awards
-  title:
-    it: Ospitalità riconosciuta
-    en: Recognised hospitality
 places:
   title:
     it: Un buon punto per esplorare
@@ -131,80 +117,3 @@ video:
   unsupported:
     it: Il tuo browser non supporta la riproduzione video.
     en: Your browser does not support video playback.
-amenities:
-  - title:
-      it: Wi‑Fi gratuito
-      en: Free Wi‑Fi
-    detail:
-      it: Connessione in tutte le case
-      en: A connection in every house
-  - title:
-      it: Parcheggio interno
-      en: Private parking
-    detail:
-      it: Ampio spazio auto nel baglio
-      en: Plenty of space for cars inside the baglio
-  - title:
-      it: Agrumeto e uliveto
-      en: Citrus and olive groves
-    detail:
-      it: Relax tra alberi e profumi di Sicilia
-      en: Rest among the trees and the scents of Sicily
-  - title:
-      it: Area barbecue
-      en: Barbecue area
-    detail:
-      it: Cene all’aperto sotto la tettoia
-      en: Dinners outdoors under the canopy
-  - title:
-      it: Pulizia all’arrivo
-      en: Cleaned on arrival
-    detail:
-      it: Servizio professionale incluso
-      en: A professional service, included
-  - title:
-      it: Biancheria inclusa
-      en: Linen included
-    detail:
-      it: Lenzuola e asciugamani forniti
-      en: Sheets and towels provided
-  - title:
-      it: Check-in flessibile
-      en: Flexible check-in
-    detail:
-      it: Arrivi e partenze secondo i tuoi orari
-      en: Arrivals and departures to suit your times
-awardItems:
-  - title:
-      it: Superhost Airbnb
-      en: Airbnb Superhost
-    text:
-      it: Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta
-        qualità e recensioni eccellenti da parte degli ospiti.
-      en: Awarded by Airbnb for excellence in hospitality, for stays of a consistently high
-        standard and excellent guest reviews.
-    proofUrl:
-      it: https://www.airbnb.it/users/show/26312991
-      en: https://www.airbnb.com/users/show/26312991
-    proofLabel:
-      it: Profilo host su Airbnb
-      en: Airbnb host profile
-    image: /images/awards/superhost.png
-  - title:
-      it: Amato dagli ospiti Airbnb
-      en: Airbnb Guest Favourite
-    text:
-      it: Un riconoscimento speciale per l’attenzione e la cura verso gli ospiti, che ci ha
-        permesso di costruire un rapporto di fiducia e calore.
-      en: A special recognition for the attention and care we give our guests, which has let
-        us build a relationship of trust and warmth.
-    image: /images/awards/guest-favorite.png
-  - title:
-      it: Traveller Review Awards
-      en: Traveller Review Awards
-    text:
-      it: Premio annuale assegnato da Booking.com basato sulle recensioni positive ricevute, a
-        testimonianza della soddisfazione dei nostri clienti.
-      en: An annual award from Booking.com based on the positive reviews we receive, a sign of
-        how satisfied our guests are.
-    image: /images/awards/traveller-review.png

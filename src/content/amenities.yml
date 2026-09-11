@@ -1,0 +1,49 @@
+eyebrow:
+  it: Comfort
+  en: Comfort
+title:
+  it: Accoglienza autentica, servizi chiari
+  en: A genuine welcome, clear amenities
+items:
+  - title:
+      it: Wi‑Fi gratuito
+      en: Free Wi‑Fi
+    detail:
+      it: Connessione in tutte le case
+      en: A connection in every house
+  - title:
+      it: Parcheggio interno
+      en: Private parking
+    detail:
+      it: Ampio spazio auto nel baglio
+      en: Plenty of space for cars inside the baglio
+  - title:
+      it: Agrumeto e uliveto
+      en: Citrus and olive groves
+    detail:
+      it: Relax tra alberi e profumi di Sicilia
+      en: Rest among the trees and the scents of Sicily
+  - title:
+      it: Area barbecue
+      en: Barbecue area
+    detail:
+      it: Cene all’aperto sotto la tettoia
+      en: Dinners outdoors under the canopy
+  - title:
+      it: Pulizia all’arrivo
+      en: Cleaned on arrival
+    detail:
+      it: Servizio professionale incluso
+      en: A professional service, included
+  - title:
+      it: Biancheria inclusa
+      en: Linen included
+    detail:
+      it: Lenzuola e asciugamani forniti
+      en: Sheets and towels provided
+  - title:
+      it: Check-in flessibile
+      en: Flexible check-in
+    detail:
+      it: Arrivi e partenze secondo i tuoi orari
+      en: Arrivals and departures to suit your times

@@ -86,11 +86,25 @@ describe('Sveltia admin', () => {
     expect(cortile?.fields?.[0]).toMatchObject({ name: 'image', widget: 'image' });
     const giardino = homeFile?.fields?.find((field) => field.name === 'giardino');
     expect(giardino?.fields?.map((field) => field.name).slice(0, 2)).toEqual(['image', 'agrumeto']);
+    expect(homeFile?.fields?.find((field) => field.name === 'amenities')).toBeUndefined();
+    expect(homeFile?.fields?.find((field) => field.name === 'awardItems')).toBeUndefined();
+    expect(homeFile?.fields?.find((field) => field.name === 'comfort')).toBeUndefined();
+    expect(homeFile?.fields?.find((field) => field.name === 'awards')).toBeUndefined();
+    const amenitiesFile = byName.pages.files?.find((file) => file.file === 'src/content/amenities.yml');
+    expect(amenitiesFile?.fields?.map((field) => field.name)).toEqual(['eyebrow', 'title', 'items']);
+    expect(amenitiesFile?.fields?.[2]).toMatchObject({ name: 'items', widget: 'list' });
+    const awardsFile = byName.pages.files?.find((file) => file.file === 'src/content/awards.yml');
+    expect(awardsFile?.fields?.map((field) => field.name)).toEqual(['eyebrow', 'title', 'items']);
+    expect(awardsFile?.fields?.[2]?.fields?.find((field) => field.name === 'image')).toMatchObject({
+      widget: 'image'
+    });
     const pageFiles = byName.pages.files?.map((file) => file.file) ?? [];
     expect(pageFiles).toEqual(
       expect.arrayContaining([
         'src/content/site.yml',
         'src/content/home.yml',
+        'src/content/amenities.yml',
+        'src/content/awards.yml',
         'src/content/contact.yml',
         'src/content/arrive.yml',
         'src/content/imperdibili.yml',

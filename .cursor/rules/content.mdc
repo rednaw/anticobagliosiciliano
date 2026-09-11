@@ -12,5 +12,5 @@ Page copy lives in `src/content/*.yml` (nested `{ it, en }`). Labels used on mor
 
 - House files `casa-1`…`casa-4` only; slugs and `capacity` stay in YAML (CMS hides them). Sequence is the import list in `content.ts`. House `paragraphs` is `{ it, en }`; a blank line starts a new `<p>`. House `highlights` is a list of `{ it, en }` (one add/remove for both languages).
 - Place sequence is the import list in `content.ts` (not filename sort).
-- Amenities and awards lists live on `home.yml` (`amenities`, `awardItems`); `home.awards.title` is the section heading. Home photos sit on their sections: `heroWide` / `heroTall`, `cortile.image`, `giardino.image` / `giardino.agrumeto`.
+- Amenities live in `amenities.yml` (eyebrow, title, items); awards in `awards.yml` (same shape). Home photos sit on their sections: `heroWide` / `heroTall`, `cortile.image`, `giardino.image` / `giardino.agrumeto`.
 - Write path is `/admin/` (or the YAML files). Do not invent a parallel copy store (CSV, second JSON, per-locale files).
