@@ -53,6 +53,14 @@ describe('marketing YAML', () => {
     expect(awardsCopy.items).toHaveLength(3);
     expect(awardsCopy.title.en).toBe('Recognised hospitality');
     expect(awardsCopy.items[0].image).toBe('/images/awards/superhost.png');
+    expect(awardsCopy.items[0].proof).toEqual({
+      href: 'https://www.airbnb.it/users/show/26312991',
+      label: {
+        it: 'Profilo host su Airbnb',
+        en: 'Airbnb host profile'
+      }
+    });
+    expect(awardsCopy.items[1]).not.toHaveProperty('proof');
     expect(typeof housesSource[0].paragraphs.it).toBe('string');
     expect(housesSource[0].paragraphs.it).toContain('\n\n');
     expect(housesSource[0].highlights[0]).toEqual({

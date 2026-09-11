@@ -113,8 +113,7 @@ type AwardSource = {
   title: LocalizedString;
   text: LocalizedString;
   image: string;
-  proofUrl?: LocalizedString;
-  proofLabel?: LocalizedString;
+  proof?: { href: string; label: LocalizedString };
 };
 
 type HomeCopy = {

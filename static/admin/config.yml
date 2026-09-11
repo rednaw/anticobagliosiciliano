@@ -228,8 +228,14 @@ collections:
             fields:
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: text, label: Testo, widget: object, collapsed: true, fields: *it-en-text }
-              - { name: proofUrl, label: Link prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
-              - { name: proofLabel, label: Etichetta prova, widget: object, collapsed: true, required: false, fields: *it-en-string }
+              - name: proof
+                label: Link prova
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { name: href, label: URL, widget: string }
+                  - { name: label, label: Etichetta, widget: object, collapsed: true, fields: *it-en-string }
               - { name: image, label: Logo, widget: image }
 
       - name: contact
@@ -389,6 +395,9 @@ collections:
       - name: name
         label: Nome
         widget: string
+      - name: image
+        label: Foto copertina
+        widget: image
       - { name: tagline, label: Tagline, widget: object, collapsed: true, fields: *it-en-string }
       - { name: summary, label: Sommario, widget: object, collapsed: true, fields: *it-en-text }
       - { name: guests, label: Ospiti, widget: object, collapsed: true, fields: *it-en-string }
@@ -404,9 +413,6 @@ collections:
         widget: list
         summary: "{{it}}"
         fields: *it-en-string
-      - name: image
-        label: Foto copertina
-        widget: image
       - name: gallery
         label: Galleria
         widget: image

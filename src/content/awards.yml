@@ -9,32 +9,25 @@ items:
       it: Superhost Airbnb
       en: Airbnb Superhost
     text:
-      it: Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta
-        qualità e recensioni eccellenti da parte degli ospiti.
-      en: Awarded by Airbnb for excellence in hospitality, for stays of a consistently high
-        standard and excellent guest reviews.
-    proofUrl:
-      it: https://www.airbnb.it/users/show/26312991
-      en: https://www.airbnb.com/users/show/26312991
-    proofLabel:
-      it: Profilo host su Airbnb
-      en: Airbnb host profile
+      it: Ricevuto da Airbnb per l’eccellenza nell’ospitalità, garantendo esperienze di alta qualità e recensioni eccellenti da parte degli ospiti.
+      en: Awarded by Airbnb for excellence in hospitality, for stays of a consistently high standard and excellent guest reviews.
+    proof:
+      href: https://www.airbnb.it/users/show/26312991
+      label:
+        it: Profilo host su Airbnb
+        en: Airbnb host profile
     image: /images/awards/superhost.png
   - title:
       it: Amato dagli ospiti Airbnb
       en: Airbnb Guest Favourite
     text:
-      it: Un riconoscimento speciale per l’attenzione e la cura verso gli ospiti, che ci ha
-        permesso di costruire un rapporto di fiducia e calore.
-      en: A special recognition for the attention and care we give our guests, which has let
-        us build a relationship of trust and warmth.
+      it: Un riconoscimento speciale per l’attenzione e la cura verso gli ospiti, che ci ha permesso di costruire un rapporto di fiducia e calore.
+      en: A special recognition for the attention and care we give our guests, which has let us build a relationship of trust and warmth.
     image: /images/awards/guest-favorite.png
   - title:
       it: Traveller Review Awards
       en: Traveller Review Awards
     text:
-      it: Premio annuale assegnato da Booking.com basato sulle recensioni positive ricevute, a
-        testimonianza della soddisfazione dei nostri clienti.
-      en: An annual award from Booking.com based on the positive reviews we receive, a sign of
-        how satisfied our guests are.
+      it: Premio annuale assegnato da Booking.com basato sulle recensioni positive ricevute, a testimonianza della soddisfazione dei nostri clienti.
+      en: An annual award from Booking.com based on the positive reviews we receive, a sign of how satisfied our guests are.
     image: /images/awards/traveller-review.png

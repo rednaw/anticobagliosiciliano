@@ -303,14 +303,14 @@
             <figcaption>
               <strong>{item.title}</strong>
               <span>{item.text}</span>
-              {#if item.proofUrl && item.proofLabel}
+              {#if item.proof}
                 <a
                   class="award-proof"
-                  href={item.proofUrl}
+                  href={item.proof.href}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  {item.proofLabel}
+                  {item.proof.label}
                 </a>
               {/if}
             </figcaption>

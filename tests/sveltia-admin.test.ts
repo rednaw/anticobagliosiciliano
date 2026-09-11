@@ -69,6 +69,7 @@ describe('Sveltia admin', () => {
     expect(highlights?.fields?.map((field) => field.widget)).toEqual(['string', 'string']);
     const houseImage = byName.houses.fields?.find((field) => field.name === 'image');
     expect(houseImage).toMatchObject({ widget: 'image' });
+    expect(byName.houses.fields?.slice(0, 2).map((field) => field.name)).toEqual(['name', 'image']);
     const houseGallery = byName.houses.fields?.find((field) => field.name === 'gallery');
     expect(houseGallery).toMatchObject({ widget: 'image', multiple: true });
     const placeImage = byName.places.fields?.find((field) => field.name === 'image');
@@ -98,6 +99,11 @@ describe('Sveltia admin', () => {
     expect(awardsFile?.fields?.[2]?.fields?.find((field) => field.name === 'image')).toMatchObject({
       widget: 'image'
     });
+    const awardProof = awardsFile?.fields?.[2]?.fields?.find((field) => field.name === 'proof');
+    expect(awardProof).toMatchObject({ widget: 'object', required: false });
+    expect(awardProof?.fields?.map((field) => field.name)).toEqual(['href', 'label']);
+    expect(awardProof?.fields?.[0]).toMatchObject({ name: 'href', widget: 'string' });
+    expect(awardProof?.fields?.[1]).toMatchObject({ name: 'label', widget: 'object' });
     const pageFiles = byName.pages.files?.map((file) => file.file) ?? [];
     expect(pageFiles).toEqual(
       expect.arrayContaining([
