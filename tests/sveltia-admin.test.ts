@@ -26,7 +26,12 @@ describe('Sveltia admin', () => {
       hint?: string;
     };
     const config = parse(configText, { maxAliasCount: 1000 }) as {
-      backend: { name: string; repo: string };
+      backend: {
+        name: string;
+        repo: string;
+        base_url?: string;
+        auth_methods?: string[];
+      };
       media_folder: string;
       public_folder: string;
       i18n?: unknown;
@@ -42,7 +47,9 @@ describe('Sveltia admin', () => {
     };
     expect(config.backend).toMatchObject({
       name: 'github',
-      repo: 'rednaw/anticobagliosiciliano'
+      repo: 'rednaw/anticobagliosiciliano',
+      base_url: 'https://auth.tientjeketama.nl',
+      auth_methods: ['oauth']
     });
     expect(config).toMatchObject({
       media_folder: 'static/images',

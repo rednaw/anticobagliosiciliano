@@ -12,11 +12,11 @@ Open the repo in VS Code or Cursor and **Reopen in Container**. The host needs D
 npm run dev
 ```
 
-CMS (local): [http://localhost:5173/anticobagliosiciliano/admin/](http://localhost:5173/anticobagliosiciliano/admin/) → **Local Repository** → this repo folder. Not in the public nav. GitHub OAuth comes later.
+CMS (live): [https://rednaw.github.io/anticobagliosiciliano/admin/](https://rednaw.github.io/anticobagliosiciliano/admin/) → **Sign in with GitHub**. Local: [http://localhost:5173/anticobagliosiciliano/admin/](http://localhost:5173/anticobagliosiciliano/admin/) → **Local Repository** → this repo folder. Not in the public nav.
 
 ### Owner copy
 
-Houses, places, home, amenities, awards, contact (including the inbox address), site, arrive, imperdibili, and privacy live in `src/content/*.yml`. Edit them in `/admin/` (Local Repository for now; GitHub OAuth later). Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
+Houses, places, home, amenities, awards, contact (including the inbox address), site, arrive, imperdibili, and privacy live in `src/content/*.yml`. Edit them in `/admin/`. Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
 
 ### Lodgify occupancy
 

@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.206.0/schema/sveltia-cms.json
 #
-# Local: /admin/ → Local Repository → this repo folder.
-# OAuth (auth.tientjeketama.nl) comes next. Do not put /admin in the public nav.
+# Live /admin/ → Sign in with GitHub via https://auth.tientjeketama.nl
+# (iac ALLOWED_DOMAINS must include this host). Local: Local Repository.
+# Do not put /admin in the public nav. No client secret in this repo.
 #
 # Do not enable Sveltia i18n. Its single_file layout is top-level `it:` / `en:`
 # objects. Ours is per-field `{ it, en }` (see src/content/). Map that as object
@@ -12,6 +13,8 @@ backend:
   repo: rednaw/anticobagliosiciliano
   branch: main
   skip_ci: false
+  base_url: https://auth.tientjeketama.nl
+  auth_methods: [oauth]
 
 site_url: https://rednaw.github.io/anticobagliosiciliano
 display_url: https://rednaw.github.io/anticobagliosiciliano
