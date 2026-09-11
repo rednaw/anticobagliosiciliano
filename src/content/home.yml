@@ -58,23 +58,29 @@ giardino:
   title:
     it: Vivi il nostro giardino siciliano
     en: Enjoy our Sicilian garden
-  p1:
-    it: "Il cuore dell’Antico Baglio Siciliano è la natura che lo circonda: un autentico
-      agrumeto e un uliveto secolare avvolgono la struttura, regalando profumi, ombra e
-      silenzio."
-    en: "The heart of Antico Baglio Siciliano is the nature around it: a real citrus grove
-      and a centuries-old olive grove wrap around the houses, giving scent, shade and
-      silence."
-  p2:
-    it: Tra gli alberi si apre una zona relax sotto una grande tettoia antica, dove puoi
-      leggere, riposare su una sdraio o condividere momenti speciali con chi ami.
-    en: Among the trees there is a quiet corner under a large old canopy, where you can
-      read, rest on a sun lounger or share special moments with the people you love.
-  p3:
-    it: A disposizione anche un’area barbecue perfetta per cene all’aperto, tra il verde e
-      la pietra viva del nostro baglio.
-    en: There is also a barbecue area, perfect for dinners outdoors among the greenery and
-      the bare stone of our baglio.
+  paragraphs:
+    it: |-
+      Il cuore dell’Antico Baglio Siciliano è la natura che lo circonda: un
+      autentico agrumeto e un uliveto secolare avvolgono la struttura, regalando
+      profumi, ombra e silenzio.
+
+      Tra gli alberi si apre una zona relax sotto una grande tettoia antica, dove
+      puoi leggere, riposare su una sdraio o condividere momenti speciali con chi
+      ami.
+
+      A disposizione anche un’area barbecue perfetta per cene all’aperto, tra il
+      verde e la pietra viva del nostro baglio.
+    en: |-
+      The heart of Antico Baglio Siciliano is the nature around it: a real citrus
+      grove and a centuries-old olive grove wrap around the houses, giving scent,
+      shade and silence.
+
+      Among the trees there is a quiet corner under a large old canopy, where you
+      can read, rest on a sun lounger or share special moments with the people you
+      love.
+
+      There is also a barbecue area, perfect for dinners outdoors among the
+      greenery and the bare stone of our baglio.
 places:
   title:
     it: Un buon punto per esplorare

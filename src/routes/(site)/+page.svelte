@@ -12,7 +12,7 @@
     places,
     site
   } from '$lib/data/content';
-  import { localize, siteHref } from '$lib/standard/i18n';
+  import { localize, siteHref, splitParagraphs } from '$lib/standard/i18n';
   import { PORTRAIT_ASPECT_QUERY, REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
   import { mediaTier } from '$lib/standard/network-tier';
 
@@ -212,9 +212,9 @@
   <div class="container garden-grid">
     <Reveal>
       <SectionHead eyebrow={home.giardino.eyebrow} title={home.giardino.title} />
-      <p>{home.giardino.p1}</p>
-      <p>{home.giardino.p2}</p>
-      <p>{home.giardino.p3}</p>
+      {#each splitParagraphs(home.giardino.paragraphs) as paragraph}
+        <p>{paragraph}</p>
+      {/each}
     </Reveal>
     <Reveal delay={100}>
       <div class="garden-photos">

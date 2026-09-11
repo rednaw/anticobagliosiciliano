@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { splitParagraphs } from '../locale';
 import { amenitiesCopy, awardsCopy, contactCopy, homeCopy, housesSource, inbox, placesSource, site, weatherCopy } from './content';
 
 describe('marketing YAML', () => {
@@ -48,6 +49,10 @@ describe('marketing YAML', () => {
     expect(homeCopy.cortile.image).toBe('/images/ambiance/cortile.jpg');
     expect(homeCopy.giardino.image).toBe('/images/ambiance/giardino.jpg');
     expect(homeCopy.giardino.agrumeto).toBe('/images/ambiance/agrumeto.jpg');
+    expect(homeCopy.giardino.paragraphs.it).toContain('\n\n');
+    expect(splitParagraphs(homeCopy.giardino.paragraphs.it)).toHaveLength(3);
+    expect(splitParagraphs(homeCopy.giardino.paragraphs.en)).toHaveLength(3);
+    expect(homeCopy.giardino).not.toHaveProperty('p1');
     expect(amenitiesCopy.items).toHaveLength(7);
     expect(amenitiesCopy.eyebrow.it).toBe('Comfort');
     expect(awardsCopy.items).toHaveLength(3);

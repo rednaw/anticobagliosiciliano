@@ -139,9 +139,7 @@ type HomeCopy = {
     agrumeto: string;
     eyebrow: LocalizedString;
     title: LocalizedString;
-    p1: LocalizedString;
-    p2: LocalizedString;
-    p3: LocalizedString;
+    paragraphs: LocalizedString;
   };
   places: { title: LocalizedString; lead: LocalizedString };
   cta: { title: LocalizedString; body: LocalizedString };

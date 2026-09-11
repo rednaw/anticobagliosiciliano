@@ -159,9 +159,11 @@ collections:
               - { name: agrumeto, label: Foto agrumeto, widget: image }
               - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
               - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: p1, label: Paragrafo 1, widget: object, collapsed: true, fields: *it-en-text }
-              - { name: p2, label: Paragrafo 2, widget: object, collapsed: true, fields: *it-en-text }
-              - { name: p3, label: Paragrafo 3, widget: object, collapsed: true, fields: *it-en-text }
+              - name: paragraphs
+                label: Testo
+                widget: object
+                hint: Riga vuota = nuovo paragrafo.
+                fields: *it-en-text
           - name: places
             label: Imperdibili (blocco)
             widget: object
