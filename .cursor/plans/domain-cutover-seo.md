@@ -25,6 +25,9 @@ todos:
   - id: cutover-code
     content: Same release as DNS/Pages custom domain — SITE_HOSTNAME anticobagliosiciliano.it, SITE_BASE '', SITE_PUBLIC true
     status: pending
+  - id: cms-oauth-it
+    content: iac ALLOWED_DOMAINS add anticobagliosiciliano.it (same night as SITE_*)
+    status: pending
   - id: redirects
     content: Host-wide 301 of .com, wordpress.com, www, and github.io to the apex
     status: pending
@@ -128,6 +131,7 @@ This is the single window where `.it` starts serving this site and github.io sto
 3. Deploy. Spot-check a live page: canonical, hreflang, and OG must be `https://anticobagliosiciliano.it/come-arrivare/` (no `/anticobagliosiciliano/` prefix).
 4. In *your* Search Console, on the `.it` **domain** property (verified after you publish the TXT) → **Sitemaps** → submit `sitemap.xml`.
 5. Host-wide 301s the same night: Lodgify `.com` and wordpress.com → `https://anticobagliosiciliano.it/`.
+6. iac cms-oauth `ALLOWED_DOMAINS` add `anticobagliosiciliano.it` so `/admin/` OAuth works on the new host. Open **iac**. Secret stays on the VPS.
 
 ## Redirects (decided: host-wide only)
 

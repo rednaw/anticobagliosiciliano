@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Sveltia CMS
 
-Pending: `.cursor/plans/sveltia-cms.md` (iac origin allowlist). Live `/admin/` uses GitHub OAuth via `auth.tientjeketama.nl`. Do not invent a parallel auth.
+Live `/admin/` uses GitHub OAuth via `auth.tientjeketama.nl`. iac `ALLOWED_DOMAINS` includes `rednaw.github.io`. Add `anticobagliosiciliano.it` at cutover (`.cursor/plans/domain-cutover-seo.md`). Do not invent a parallel auth.
 
 ## Must preserve
 

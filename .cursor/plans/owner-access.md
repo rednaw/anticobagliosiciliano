@@ -1,11 +1,11 @@
 ---
 name: Owner access (one conversation)
 status: pending
-saved: 2026-08-28
-overview: Remote (two countries). One ask for access to Register.it, WordPress, Lodgify, and Google Business Profile. You do every technical step. Cutover how-to is the SEO runbook.
+saved: 2026-09-11
+overview: Remote (two countries). One ask — they grant Register.it, WordPress, Lodgify, and Google Business Profile; you grant GitHub Write on this repo for /admin/. You do every technical step. Cutover how-to is the SEO runbook.
 todos:
   - id: conversation
-    content: Request access once — Register.it TA, WordPress Administrator, Lodgify owner login, Google Business Profile manager
+    content: One ask — Register.it TA, WordPress Administrator, Lodgify owner login, GBP manager; invite owners Write on this repo for CMS
     status: pending
 ---
 
@@ -13,9 +13,9 @@ todos:
 
 You and the owners are in different countries. There is no shared keyboard and no “they click while you watch.”
 
-**Shape:** (1) you request access to all four systems, once; (2) you do every technical step. Occupancy API (`LODGIFY_API_KEY`) already works and is not this conversation.
+**Shape:** (1) one ask, two directions — they grant you their four systems, you grant them GitHub Write here; (2) you do every technical step. Occupancy API (`LODGIFY_API_KEY`) already works and is not this conversation. Live `/admin/` GitHub OAuth already works on github.io. iac `.it` origin is the SEO cutover, not this ask.
 
-What to type in DNS, which URLs 301, and when to flip `SITE_*` live in `.cursor/plans/domain-cutover-seo.md`. Do not grow this file into that checklist.
+What to type in DNS, which URLs 301, and when to flip `SITE_*` live in `.cursor/plans/domain-cutover-seo.md`. Do not grow this file into that checklist. `/admin/` collections and YAML live in the Sveltia plan and `.cursor/rules/sveltia-cms.mdc`.
 
 ## Register.it
 
@@ -53,6 +53,18 @@ While you have access, confirm: (1) this is the only listing for the baglio near
 - [ ] Manager on the Antico Baglio Siciliano listing
 - [ ] Listing share link matches `maps.app.goo.gl/NA1BwasQVcFzn1qHA` (or update `baglioLocation.links` if theirs differs)
 
+## GitHub (CMS)
+
+Sveltia `/admin/` commits as the signed-in GitHub user. Each owner who will edit copy needs their **own** GitHub account and **Write** on `rednaw/anticobagliosiciliano` only. You invite; they accept. No shared GitHub login. Do not give Admin (Pages, secrets, collaborators). Do not add them to other rednaw repos.
+
+They sign in at the live admin (`https://rednaw.github.io/anticobagliosiciliano/admin/` until `.it` cutover) with **Sign in with GitHub**.
+
+Guide: [Inviting collaborators](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository) (role **Write**).
+
+- [ ] Each owner who will edit copy has their own GitHub account
+- [ ] You invite them Write on this repo
+- [ ] They have accepted
+
 ## After this conversation
 
-You have the four accesses. Stop. You run cutover from the other file.
+You have Register.it, WordPress, Lodgify, and GBP. They have Write here. Stop. Cutover is the SEO runbook.
