@@ -25,4 +25,4 @@ Client-direct Open-Meteo — no snapshot in git, no API key. Full tier only; lig
 | Open-Meteo credit | Bottom-left on map | Bottom-left on map |
 | OSM credit | Bottom-right (Leaflet) | Bottom-right (Leaflet) |
 
-Attribution labels short (`© Open-Meteo`, `© OpenStreetMap`); fuller text in `title` only.
+Attribution labels short (`© Open-Meteo`, `© OpenStreetMap`).

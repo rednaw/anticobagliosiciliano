@@ -50,9 +50,6 @@ maps:
 mapCredit:
   it: © OpenStreetMap
   en: © OpenStreetMap
-mapCreditTitle:
-  it: Mappa © collaboratori di OpenStreetMap
-  en: Map © OpenStreetMap contributors
 weather:
   place:
     it: Meteo attuale
@@ -66,9 +63,6 @@ weather:
   credit:
     it: © Open-Meteo
     en: © Open-Meteo
-  creditTitle:
-    it: Meteo © Open-Meteo
-    en: Weather © Open-Meteo
   clear:
     it: sereno
     en: clear

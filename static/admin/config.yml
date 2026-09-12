@@ -238,7 +238,6 @@ collections:
               - { name: google, label: Google Maps, widget: object, collapsed: true, fields: *it-en-string }
               - { name: osm, label: OpenStreetMap, widget: object, collapsed: true, fields: *it-en-string }
           - { name: mapCredit, label: Credito OSM, widget: object, collapsed: true, fields: *it-en-string }
-          - { name: mapCreditTitle, label: Titolo credito OSM, widget: object, collapsed: true, fields: *it-en-string }
           - name: weather
             label: Meteo
             widget: object
@@ -248,7 +247,6 @@ collections:
               - { name: line, widget: hidden }
               - { name: aria, widget: hidden }
               - { name: credit, label: Credito, widget: object, collapsed: true, fields: *it-en-string }
-              - { name: creditTitle, label: Titolo credito, widget: object, collapsed: true, fields: *it-en-string }
               - { name: clear, label: Sereno, widget: object, collapsed: true, fields: *it-en-string }
               - { name: cloudy, label: Nuvoloso, widget: object, collapsed: true, fields: *it-en-string }
               - { name: fog, label: Nebbia, widget: object, collapsed: true, fields: *it-en-string }

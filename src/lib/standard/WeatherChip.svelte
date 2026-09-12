@@ -78,7 +78,7 @@
       href="https://open-meteo.com/"
       rel="noopener noreferrer"
       target="_blank"
-      title={pick(weatherCopy.creditTitle, locale)}>{pick(weatherCopy.credit, locale)}</a
+      title={pick(weatherCopy.credit, locale)}>{pick(weatherCopy.credit, locale)}</a
     >
 
     {#if !portraitMobile}

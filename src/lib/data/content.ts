@@ -236,7 +236,6 @@ type WeatherCopy = {
   line: LocalizedString;
   aria: LocalizedString;
   credit: LocalizedString;
-  creditTitle: LocalizedString;
   clear: LocalizedString;
   cloudy: LocalizedString;
   fog: LocalizedString;
@@ -258,7 +257,6 @@ type ArriveYaml = {
   directionsOriginLabel: LocalizedString;
   maps: { google: LocalizedString; osm: LocalizedString };
   mapCredit: LocalizedString;
-  mapCreditTitle: LocalizedString;
   weather: WeatherCopy;
 };
 

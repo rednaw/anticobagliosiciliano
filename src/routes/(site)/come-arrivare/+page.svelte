@@ -32,7 +32,6 @@
         <ArriveMap
           alt={t('mapAlt')}
           attribution={t('mapCredit')}
-          attributionTitle={t('mapCreditTitle')}
         />
       </WeatherChip>
     </div>
