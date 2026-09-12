@@ -11,8 +11,7 @@
     homeCopy,
     houses,
     imperdibiliTitle,
-    places,
-    site
+    places
   } from '$lib/data/content';
   import { localize, pick, siteHref, splitParagraphs } from '$lib/standard/i18n';
   import { PORTRAIT_ASPECT_QUERY, REDUCE_MOTION_QUERY, subscribeMediaQuery } from '$lib/standard/media-query';
@@ -93,7 +92,7 @@
       </picture>
     </div>
     <div class="hero-copy">
-      <h1>{site.name}</h1>
+      <h1>{home.brand.name}</h1>
       <p class="hero-lead">{home.portone.lead}</p>
     </div>
   </div>

@@ -1,15 +1,16 @@
 import type { Locale, LocalizedString } from '$lib/locale';
 import { localize } from '$lib/locale';
-import amenitiesYaml from '../../content/amenities.yml';
-import arriveYaml from '../../content/arrive.yml';
-import awardsYaml from '../../content/awards.yml';
-import contactYaml from '../../content/contact.yml';
-import homeYaml from '../../content/home.yml';
+import amenitiesYaml from '../../content/pages/amenities.yml';
+import arriveYaml from '../../content/pages/arrive.yml';
+import awardsYaml from '../../content/pages/awards.yml';
+import contactYaml from '../../content/pages/contact.yml';
+import homeYaml from '../../content/pages/home.yml';
 import casa1 from '../../content/houses/casa-1.yml';
 import casa2 from '../../content/houses/casa-2.yml';
 import casa3 from '../../content/houses/casa-3.yml';
 import casa4 from '../../content/houses/casa-4.yml';
-import imperdibiliYaml from '../../content/imperdibili.yml';
+import chromeYaml from '../../content/houses/chrome.yml';
+import imperdibiliYaml from '../../content/pages/imperdibili.yml';
 import cappellaPalatina from '../../content/places/cappella-palatina.yml';
 import duomoDiMonreale from '../../content/places/duomo-di-monreale.yml';
 import erice from '../../content/places/erice.yml';
@@ -18,9 +19,8 @@ import ruderiDiGibellina from '../../content/places/ruderi-di-gibellina.yml';
 import salineDiTrapani from '../../content/places/saline-di-trapani.yml';
 import segesta from '../../content/places/segesta.yml';
 import selinunte from '../../content/places/selinunte.yml';
-import privacyYaml from '../../content/privacy.yml';
-import accommodationYaml from '../../content/accommodation.yml';
-import siteYaml from '../../content/site.yml';
+import privacyYaml from '../../content/pages/privacy.yml';
+import siteYaml from '../../content/pages/chrome.yml';
 
 /** Marketing copy. Tagline stays Italian in both languages. Inbox is `contact.yml`. */
 
@@ -39,10 +39,6 @@ type AccommodationCopy = {
 };
 
 type SiteCopy = {
-  name: string;
-  tagline: string;
-  location: LocalizedString;
-  description: LocalizedString;
   skipToContent: LocalizedString;
   mainNav: LocalizedString;
   language: LocalizedString;
@@ -103,6 +99,11 @@ type AwardSource = {
 
 type HomeCopy = {
   title: LocalizedString;
+  brand: {
+    name: string;
+    tagline: string;
+    description: LocalizedString;
+  };
   portone: {
     lead: LocalizedString;
     wide: string;
@@ -247,6 +248,7 @@ type WeatherCopy = {
 type ArriveYaml = {
   title: LocalizedString;
   metaDescription: LocalizedString;
+  location: LocalizedString;
   lead: LocalizedString;
   mapAlt: LocalizedString;
   airTitle: LocalizedString;
@@ -304,7 +306,7 @@ export { inbox };
 
 export const contactCopy = contactRest;
 
-export const accommodationCopy = accommodationYaml as AccommodationCopy;
+export const accommodationCopy = chromeYaml as AccommodationCopy;
 
 export const site = siteYaml as SiteCopy;
 

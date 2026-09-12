@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { splitParagraphs } from '../locale';
-import { accommodationCopy, amenitiesCopy, awardsCopy, contactCopy, homeCopy, housesSource, inbox, placesSource, site, weatherCopy } from './content';
+import { accommodationCopy, amenitiesCopy, awardsCopy, arriveCopy, contactCopy, homeCopy, housesSource, inbox, placesSource, site, weatherCopy } from './content';
 
 describe('marketing YAML', () => {
   it('loads houses and places in site order', () => {
@@ -28,8 +28,11 @@ describe('marketing YAML', () => {
     expect(contactCopy.submit.en).toBe('Open in email');
     expect(inbox).toBe('info@anticobagliosiciliano.it');
     expect(site).not.toHaveProperty('email');
+    expect(site).not.toHaveProperty('name');
     expect(contactCopy).not.toHaveProperty('inbox');
-    expect(site.tagline).toBe('Case vacanze in Sicilia');
+    expect(homeCopy.brand.tagline).toBe('Case vacanze in Sicilia');
+    expect(homeCopy.brand.name).toBe('Antico Baglio Siciliano');
+    expect(arriveCopy.location.it).toBe('Balestrate, Sicilia occidentale');
     expect(site).not.toHaveProperty('nav');
     expect(homeCopy.title).toEqual({ it: 'Home', en: 'Home' });
     expect(contactCopy.title.en).toBe('Request availability');

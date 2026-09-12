@@ -4,19 +4,23 @@ vi.mock('$app/paths', () => ({
   asset: (path: string) => path
 }));
 
-import { arriveCopy, contactCopy, homeCopy, housesSource, privacyCopy, site } from '$lib/data/content';
+import { arriveCopy, contactCopy, homeCopy, housesSource, privacyCopy } from '$lib/data/content';
 import { pick } from '$lib/locale';
 import { pageSeo } from './seo';
 
 describe('pageSeo', () => {
   it('titles marketing pages in both locales', () => {
-    expect(pageSeo('/anticobagliosiciliano/', 'it').title).toBe(`${site.name} · ${site.tagline}`);
-    expect(pageSeo('/anticobagliosiciliano/', 'it').description).toBe(site.description.it);
-    expect(pageSeo('/anticobagliosiciliano/en/', 'en').title).toBe(`${site.name} · ${site.tagline}`);
+    expect(pageSeo('/anticobagliosiciliano/', 'it').title).toBe(
+      `${homeCopy.brand.name} · ${homeCopy.brand.tagline}`
+    );
+    expect(pageSeo('/anticobagliosiciliano/', 'it').description).toBe(homeCopy.brand.description.it);
+    expect(pageSeo('/anticobagliosiciliano/en/', 'en').title).toBe(
+      `${homeCopy.brand.name} · ${homeCopy.brand.tagline}`
+    );
     expect(pageSeo('/anticobagliosiciliano/en/', 'en').imageAlt).toBe(homeCopy.portone.alt.en);
     expect(pageSeo('/anticobagliosiciliano/', 'it').image).toContain('hero-portone-wide');
     expect(pageSeo('/anticobagliosiciliano/contatti/', 'it').title).toBe(
-      `${pick(contactCopy.title, 'it')} · ${site.name}`
+      `${pick(contactCopy.title, 'it')} · ${homeCopy.brand.name}`
     );
     expect(pageSeo('/anticobagliosiciliano/privacy/', 'it').description).toBe(
       privacyCopy.metaDescription.it
@@ -46,7 +50,7 @@ describe('pageSeo', () => {
   it('uses the house summary for house pages', () => {
     const house = housesSource[0];
     const seo = pageSeo(`/anticobagliosiciliano/case/${house.slug}/`, 'it');
-    expect(seo.title).toBe(`${house.name} · ${site.name}`);
+    expect(seo.title).toBe(`${house.name} · ${homeCopy.brand.name}`);
     expect(seo.description).toBe(house.summary.it);
   });
 });

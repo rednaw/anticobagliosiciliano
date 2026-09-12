@@ -34,7 +34,7 @@ collections:
     files:
       - name: home
         label: Home
-        file: src/content/home.yml
+        file: src/content/pages/home.yml
         format: yaml
         media_folder: '{{media_folder}}/ambiance'
         public_folder: '{{public_folder}}/ambiance'
@@ -46,6 +46,23 @@ collections:
             fields: &it-en-string
               - { name: it, label: Italiano, widget: string }
               - { name: en, label: English, widget: string }
+          - name: brand
+            label: Marchio
+            widget: object
+            fields:
+              - name: name
+                label: Nome
+                widget: string
+              - name: tagline
+                label: Tagline (resta in italiano)
+                widget: string
+              - name: description
+                label: Descrizione (SEO)
+                widget: object
+                collapsed: true
+                fields: &it-en-text
+                  - { name: it, label: Italiano, widget: text }
+                  - { name: en, label: English, widget: text }
           - name: portone
             label: Portone
             widget: object
@@ -54,9 +71,7 @@ collections:
                 label: Sottotitolo
                 widget: object
                 collapsed: true
-                fields: &it-en-text
-                  - { name: it, label: Italiano, widget: text }
-                  - { name: en, label: English, widget: text }
+                fields: *it-en-text
               - { name: wide, label: Largo, widget: image }
               - { name: tall, label: Alto, widget: image }
               - { name: alt, label: Testo alternativo, widget: object, collapsed: true, fields: *it-en-string }
@@ -120,7 +135,7 @@ collections:
 
       - name: amenities
         label: Servizi
-        file: src/content/amenities.yml
+        file: src/content/pages/amenities.yml
         format: yaml
         fields:
           - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
@@ -135,7 +150,7 @@ collections:
 
       - name: awards
         label: Premi
-        file: src/content/awards.yml
+        file: src/content/pages/awards.yml
         format: yaml
         media_folder: '{{media_folder}}/awards'
         public_folder: '{{public_folder}}/awards'
@@ -161,7 +176,7 @@ collections:
 
       - name: contact
         label: Contatti
-        file: src/content/contact.yml
+        file: src/content/pages/contact.yml
         format: yaml
         fields:
           - { name: inbox, label: Inbox, widget: string }
@@ -203,11 +218,12 @@ collections:
 
       - name: arrive
         label: Come arrivare
-        file: src/content/arrive.yml
+        file: src/content/pages/arrive.yml
         format: yaml
         fields:
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
+          - { name: location, label: Località, widget: object, collapsed: true, fields: *it-en-string }
           - { name: lead, label: Intro, widget: object, collapsed: true, fields: *it-en-text }
           - { name: mapAlt, label: Alt mappa, widget: object, collapsed: true, fields: *it-en-text }
           - { name: airTitle, label: Titolo aereo, widget: object, collapsed: true, fields: *it-en-string }
@@ -242,7 +258,7 @@ collections:
 
       - name: imperdibili
         label: Imperdibili
-        file: src/content/imperdibili.yml
+        file: src/content/pages/imperdibili.yml
         format: yaml
         fields:
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
@@ -268,7 +284,7 @@ collections:
 
       - name: privacy
         label: Privacy
-        file: src/content/privacy.yml
+        file: src/content/pages/privacy.yml
         format: yaml
         fields:
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
@@ -298,25 +314,9 @@ collections:
 
       - name: chrome
         label: Chrome
-        file: src/content/site.yml
+        file: src/content/pages/chrome.yml
         format: yaml
         fields:
-          - name: name
-            label: Nome
-            widget: string
-          - name: tagline
-            label: Tagline (resta in italiano)
-            widget: string
-          - name: location
-            label: Località
-            widget: object
-            collapsed: true
-            fields: *it-en-string
-          - name: description
-            label: Descrizione (SEO)
-            widget: object
-            collapsed: true
-            fields: *it-en-text
           - { name: skipToContent, label: Salta al contenuto, widget: object, collapsed: true, fields: *it-en-string }
           - { name: mainNav, label: Nav principale, widget: object, collapsed: true, fields: *it-en-string }
           - { name: language, label: Lingua, widget: object, collapsed: true, fields: *it-en-string }
@@ -412,7 +412,7 @@ collections:
 
       - name: chrome
         label: Chrome
-        file: src/content/accommodation.yml
+        file: src/content/houses/chrome.yml
         format: yaml
         fields:
           - { name: single, label: Singolare, widget: object, collapsed: true, fields: *it-en-string }

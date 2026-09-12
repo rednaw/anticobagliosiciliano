@@ -1,4 +1,4 @@
-import { accommodationCopy, baglioLocation, getHouse, homeCopy, housesSource, inbox, site } from '$lib/data/content';
+import { accommodationCopy, baglioLocation, getHouse, homeCopy, housesSource, inbox } from '$lib/data/content';
 import type { Locale } from '$lib/locale';
 import { publicImage } from '$lib/public-image';
 import { SITE_ORIGIN } from '$lib/site-config';
@@ -46,8 +46,8 @@ function lodgingBusiness(locale: Locale) {
   return {
     '@type': 'LodgingBusiness',
     '@id': lodgingId(locale),
-    name: site.name,
-    description: pick(site.description, locale),
+    name: homeCopy.brand.name,
+    description: pick(homeCopy.brand.description, locale),
     url: absoluteUrl(standardHref(locale), SITE_ORIGIN),
     email: inbox,
     image: absoluteUrl(publicImage(OG_IMAGE_PATH), SITE_ORIGIN),

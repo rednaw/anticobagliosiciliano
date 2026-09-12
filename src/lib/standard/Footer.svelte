@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { inbox, privacyCopy, site } from '$lib/data/content';
+  import { arriveCopy, inbox, privacyCopy, homeCopy } from '$lib/data/content';
   import { pick, siteHref } from '$lib/standard/i18n';
 
   const locale = $derived(page.data.locale);
@@ -11,8 +11,8 @@
   <div class="container inner">
     <span class="rule" aria-hidden="true"></span>
 
-    <p class="brand">{site.name}</p>
-    <p class="meta">{site.tagline} · {pick(site.location, locale)}</p>
+    <p class="brand">{homeCopy.brand.name}</p>
+    <p class="meta">{homeCopy.brand.tagline} · {pick(arriveCopy.location, locale)}</p>
 
     <a class="email" href={`mailto:${inbox}`}>{inbox}</a>
 

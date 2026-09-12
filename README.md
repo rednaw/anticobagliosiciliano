@@ -16,7 +16,7 @@ CMS (live): [https://rednaw.github.io/anticobagliosiciliano/admin/](https://redn
 
 ### Owner copy
 
-Houses, places, home, amenities, awards, contact (including the inbox address), site, arrive, imperdibili, and privacy live in `src/content/*.yml`. Edit them in `/admin/`. Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
+Houses, places, and pages (including the inbox address) live in `src/content/{pages,houses,places}/`. Edit them in `/admin/`. Map hrefs and courtyard coords stay in `src/lib/data/content.ts`.
 
 ### Lodgify occupancy
 

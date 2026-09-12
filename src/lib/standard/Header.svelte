@@ -155,8 +155,8 @@
 <header class="header">
   <div class="container bar">
     <a class="brand" href={hrefFor('')} onclick={close}>
-      <span class="brand-name">{site.name}</span>
-      <span class="brand-tag">{site.tagline}</span>
+      <span class="brand-name">{homeCopy.brand.name}</span>
+      <span class="brand-tag">{homeCopy.brand.tagline}</span>
     </a>
 
     <button

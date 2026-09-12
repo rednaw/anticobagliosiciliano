@@ -16,7 +16,7 @@
 
 <svelte:head>
   {#if head}
-    <title>{heading} · {site.name}</title>
+    <title>{heading} · {homeCopy.brand.name}</title>
     <meta name="robots" content="noindex, nofollow" />
   {/if}
 </svelte:head>

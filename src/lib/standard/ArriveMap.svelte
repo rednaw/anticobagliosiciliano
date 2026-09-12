@@ -1,6 +1,6 @@
 <script lang="ts">
   import { responsiveImage } from '$lib/public-image';
-  import { baglioLocation, site } from '$lib/data/content';
+  import { baglioLocation, homeCopy } from '$lib/data/content';
   import type { Map as LeafletMap } from 'leaflet';
   import { ARRIVE_MAP, arriveMinZoomForView } from './arrive-map';
   import { mediaTier } from '$lib/standard/network-tier';
@@ -71,8 +71,8 @@
       }).addTo(map);
 
       L.marker(center, {
-        title: site.name,
-        alt: site.name,
+        title: homeCopy.brand.name,
+        alt: homeCopy.brand.name,
         icon: L.divIcon({
           className: 'arrive-pin',
           iconSize: [28, 40],

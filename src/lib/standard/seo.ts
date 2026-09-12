@@ -41,7 +41,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/404.html') {
     return {
-      title: `${pick(site.pageNotFoundTitle, locale)} · ${site.name}`,
+      title: `${pick(site.pageNotFoundTitle, locale)} · ${homeCopy.brand.name}`,
       description: pick(site.pageNotFoundBody, locale),
       image,
       imageAlt,
@@ -51,7 +51,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/imperdibili') {
     return {
-      title: `${pick(imperdibiliTitle, locale)} · ${site.name}`,
+      title: `${pick(imperdibiliTitle, locale)} · ${homeCopy.brand.name}`,
       description: pick(imperdibiliMeta, locale),
       image,
       imageAlt
@@ -60,7 +60,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/imperdibili/crediti-foto') {
     return {
-      title: `${pick(imperdibiliPhotoCreditsCopy.title, locale)} · ${site.name}`,
+      title: `${pick(imperdibiliPhotoCreditsCopy.title, locale)} · ${homeCopy.brand.name}`,
       description: pick(imperdibiliPhotoCreditsCopy.metaDescription, locale),
       image,
       imageAlt,
@@ -70,7 +70,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/come-arrivare') {
     return {
-      title: `${pick(arriveCopy.title, locale)} · ${site.name}`,
+      title: `${pick(arriveCopy.title, locale)} · ${homeCopy.brand.name}`,
       description: pick(arriveCopy.metaDescription, locale),
       image,
       imageAlt
@@ -79,7 +79,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/contatti') {
     return {
-      title: `${pick(contactCopy.title, locale)} · ${site.name}`,
+      title: `${pick(contactCopy.title, locale)} · ${homeCopy.brand.name}`,
       description: pick(contactCopy.metaDescription, locale),
       image,
       imageAlt
@@ -88,7 +88,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
 
   if (key === '/privacy') {
     return {
-      title: `${pick(privacyCopy.title, locale)} · ${site.name}`,
+      title: `${pick(privacyCopy.title, locale)} · ${homeCopy.brand.name}`,
       description: pick(privacyCopy.metaDescription, locale),
       image,
       imageAlt
@@ -100,7 +100,7 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
     const house = getHouse(houseSlug, locale);
     if (house) {
       return {
-        title: `${house.name} · ${site.name}`,
+        title: `${house.name} · ${homeCopy.brand.name}`,
         description: house.summary,
         image: absoluteUrl(publicImage(house.image), SITE_ORIGIN),
         imageAlt: house.name
@@ -109,8 +109,8 @@ export function pageSeo(pathname: string, locale: Locale): PageSeo {
   }
 
   return {
-    title: `${site.name} · ${site.tagline}`,
-    description: pick(site.description, locale),
+    title: `${homeCopy.brand.name} · ${homeCopy.brand.tagline}`,
+    description: pick(homeCopy.brand.description, locale),
     image,
     imageAlt
   };

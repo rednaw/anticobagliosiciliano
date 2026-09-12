@@ -138,9 +138,21 @@ describe('Sveltia admin', () => {
 
     const pageFiles = byName.pages.files ?? [];
     const houseFiles = byName.houses.files ?? [];
+    for (const collection of config.collections) {
+      if (collection.files) {
+        for (const file of collection.files) {
+          expect(file.file, `${collection.name}/${file.name}`).toBe(
+            `src/content/${collection.name}/${file.name}.yml`
+          );
+        }
+      } else {
+        expect(collection.folder, collection.name).toBe(`src/content/${collection.name}`);
+      }
+    }
+
     expect(pageFiles.at(-1)).toMatchObject({
       name: 'chrome',
-      file: 'src/content/site.yml'
+      file: 'src/content/pages/chrome.yml'
     });
     expect(houseFiles.slice(0, -1).map((file) => file.file)).toEqual([
       'src/content/houses/casa-1.yml',
@@ -150,7 +162,7 @@ describe('Sveltia admin', () => {
     ]);
     expect(houseFiles.at(-1)).toMatchObject({
       name: 'chrome',
-      file: 'src/content/accommodation.yml'
+      file: 'src/content/houses/chrome.yml'
     });
 
     const cmsFiles = [
@@ -173,7 +185,7 @@ describe('Sveltia admin', () => {
     }
 
     const weather = pageFiles
-      ?.find((file) => file.file === 'src/content/arrive.yml')
+      ?.find((file) => file.file === 'src/content/pages/arrive.yml')
       ?.fields?.find((field) => field.name === 'weather');
     expect(weather?.fields?.find((field) => field.name === 'line')).toMatchObject({
       widget: 'hidden'
