@@ -26,7 +26,7 @@ export function weatherBucketFromCode(code: number): WeatherBucket | null {
   return null;
 }
 
-/** Meteocons monochrome stem under `/images/weather/{stem}.svg` (vendored MIT). */
+/** Meteocons monochrome stem under `/weather/{stem}.svg` (vendored MIT). */
 export function weatherIconStem(bucket: WeatherBucket, isDay = true): string {
   if (bucket === 'clear') return isDay ? 'clear-day' : 'clear-night';
   if (bucket === 'storm') return 'thunderstorms';

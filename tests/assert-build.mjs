@@ -354,20 +354,20 @@ for (const rel of tierSpotChecks) {
 }
 
 const weatherIcons = [
-  'images/weather/clear-day.svg',
-  'images/weather/clear-night.svg',
-  'images/weather/cloudy.svg',
-  'images/weather/fog.svg',
-  'images/weather/rain.svg',
-  'images/weather/snow.svg',
-  'images/weather/thunderstorms.svg',
-  'images/weather/LICENSE'
+  'weather/clear-day.svg',
+  'weather/clear-night.svg',
+  'weather/cloudy.svg',
+  'weather/fog.svg',
+  'weather/rain.svg',
+  'weather/snow.svg',
+  'weather/thunderstorms.svg',
+  'weather/LICENSE'
 ];
 for (const rel of weatherIcons) {
   assert(existsSync(path.join(build, rel)), `weather icon spot check: ${rel}`);
 }
 assert(
-  !existsSync(path.join(build, 'images/weather/preview.html')),
+  !existsSync(path.join(build, 'weather/preview.html')),
   'weather icon preview.html is not shipped'
 );
 

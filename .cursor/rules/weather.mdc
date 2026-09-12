@@ -1,6 +1,6 @@
 ---
 description: Come arrivare weather — Open-Meteo edit constraints and layout flow
-globs: src/lib/standard/weather*,src/lib/standard/WeatherChip.svelte,src/routes/(site)/come-arrivare/**,src/routes/(site)/en/come-arrivare/**,vite.config.ts,tests/assert-build.mjs
+globs: src/lib/standard/weather*,src/lib/standard/WeatherChip.svelte,static/weather/**,src/routes/(site)/come-arrivare/**,src/routes/(site)/en/come-arrivare/**,vite.config.ts,tests/assert-build.mjs
 alwaysApply: false
 ---
 
@@ -12,7 +12,7 @@ Client-direct Open-Meteo — no snapshot in git, no API key. Full tier only; lig
 
 - Coords: `baglioLocation` courtyard lat/lon. CSP `connect-src` includes `https://api.open-meteo.com`.
 - CC BY credit on the map whenever weather shows (`https://open-meteo.com/`).
-- Meteocons **monochrome** SVGs in `static/images/weather/`; paint via CSS mask / `currentColor`.
+- Meteocons **monochrome** SVGs in `static/weather/` (not under `static/images`, so `/admin/` cannot list or delete them); paint via CSS mask / `currentColor`.
 - Unit tests use fixtures — no live Open-Meteo in CI.
 - Weather `line` / `aria` stay in `pages/arrive.yml` (`{temp}`, `{condition}`); CMS hides them.
 - **One component, one fetch** in `WeatherChip.svelte` — do not split across context/children (Svelte 5 reactivity breaks).

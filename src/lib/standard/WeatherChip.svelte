@@ -64,7 +64,7 @@
   );
   const iconSrc = $derived(
     reading
-      ? asset(`/images/weather/${weatherIconStem(reading.bucket, reading.isDay)}.svg`)
+      ? asset(`/weather/${weatherIconStem(reading.bucket, reading.isDay)}.svg`)
       : ''
   );
 </script>
