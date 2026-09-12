@@ -84,7 +84,7 @@ describe('initMediaTier', () => {
     await initMediaTier();
 
     expect(getMediaTier()).toBe('full');
-    expect(proveFullMedia).toHaveBeenCalledWith('/base/images/contact/mappa.jpg');
+    expect(proveFullMedia).toHaveBeenCalledWith('/base/images/arrive/mappa.jpg');
     expect(storage['media-tier']).toBe('full');
   });
 

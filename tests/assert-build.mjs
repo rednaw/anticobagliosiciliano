@@ -335,8 +335,8 @@ for (const full of fullWebps) {
 assert(missingLight === 0, `every full WebP has a -light sibling (${fullWebps.length} checked)`);
 
 const tierSpotChecks = [
-  'images/contact/mappa.webp',
-  'images/contact/mappa-light.webp',
+  'images/arrive/mappa.webp',
+  'images/arrive/mappa-light.webp',
   'images/ambiance/hero-portone-wide.webp',
   'images/ambiance/hero-portone-wide-light.webp',
   'images/ambiance/hero-portone-tall.webp',

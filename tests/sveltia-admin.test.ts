@@ -191,10 +191,11 @@ describe('Sveltia admin', () => {
       assertYamlMatchesCms(`places/${relative(root, path)}`, data, byName.places.fields);
     }
 
-    expect(pageFiles.find((file) => file.name === 'contact')).toMatchObject({
-      media_folder: '{{media_folder}}/contact',
-      public_folder: '{{public_folder}}/contact'
+    expect(pageFiles.find((file) => file.name === 'arrive')).toMatchObject({
+      media_folder: '{{media_folder}}/arrive',
+      public_folder: '{{public_folder}}/arrive'
     });
+    expect(pageFiles.find((file) => file.name === 'contact')?.media_folder).toBeUndefined();
     const weather = pageFiles
       ?.find((file) => file.file === 'src/content/pages/arrive.yml')
       ?.fields?.find((field) => field.name === 'weather');

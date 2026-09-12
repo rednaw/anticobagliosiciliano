@@ -178,8 +178,6 @@ collections:
         label: Contatti
         file: src/content/pages/contact.yml
         format: yaml
-        media_folder: '{{media_folder}}/contact'
-        public_folder: '{{public_folder}}/contact'
         fields:
           - { name: inbox, label: Inbox, widget: string }
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
@@ -222,6 +220,8 @@ collections:
         label: Come arrivare
         file: src/content/pages/arrive.yml
         format: yaml
+        media_folder: '{{media_folder}}/arrive'
+        public_folder: '{{public_folder}}/arrive'
         fields:
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }

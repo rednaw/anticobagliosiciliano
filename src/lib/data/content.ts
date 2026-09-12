@@ -291,7 +291,7 @@ export const baglioLocation = {
     lon: 13.017571
   },
   directionsOriginLabel,
-  map: '/images/contact/mappa.jpg',
+  map: '/images/arrive/mappa.jpg',
   links: MAP_LINKS.map((link) => ({
     ...link,
     label: arriveMapLabels[link.id]
