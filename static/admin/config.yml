@@ -178,6 +178,8 @@ collections:
         label: Contatti
         file: src/content/pages/contact.yml
         format: yaml
+        media_folder: '{{media_folder}}/contact'
+        public_folder: '{{public_folder}}/contact'
         fields:
           - { name: inbox, label: Inbox, widget: string }
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }

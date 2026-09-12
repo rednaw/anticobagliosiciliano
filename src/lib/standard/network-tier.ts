@@ -8,7 +8,7 @@ export type MediaTier = 'full' | 'light';
 const STORAGE_KEY = 'media-tier';
 
 /** Committed JPEG; prod probe uses the light WebP sibling (small, always emitted). */
-const PROBE_SOURCE = '/images/ambiance/mappa.jpg';
+const PROBE_SOURCE = '/images/contact/mappa.jpg';
 
 function probeUrl(): string {
   if (import.meta.env.PROD) {

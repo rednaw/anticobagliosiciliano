@@ -22,7 +22,14 @@ type Collection = {
   folder?: string;
   i18n?: unknown;
   editor?: { preview?: boolean };
-  files?: Array<{ name?: string; file: string; i18n?: unknown; fields?: Field[] }>;
+  files?: Array<{
+    name?: string;
+    file: string;
+    i18n?: unknown;
+    fields?: Field[];
+    media_folder?: string;
+    public_folder?: string;
+  }>;
   fields?: Field[];
 };
 
@@ -184,6 +191,10 @@ describe('Sveltia admin', () => {
       assertYamlMatchesCms(`places/${relative(root, path)}`, data, byName.places.fields);
     }
 
+    expect(pageFiles.find((file) => file.name === 'contact')).toMatchObject({
+      media_folder: '{{media_folder}}/contact',
+      public_folder: '{{public_folder}}/contact'
+    });
     const weather = pageFiles
       ?.find((file) => file.file === 'src/content/pages/arrive.yml')
       ?.fields?.find((field) => field.name === 'weather');
