@@ -1,3 +1,4 @@
+image: /images/places/selinunte.jpg
 name:
   it: Selinunte
   en: Selinunte
@@ -16,7 +17,6 @@ website:
     it: Sito ufficiale del Parco Archeologico di Selinunte
     en: Official Selinunte Archaeological Park website (Italian only)
 slug: selinunte
-image: /images/places/selinunte.jpg
 location:
   lat: 37.5856685
   lon: 12.8376692

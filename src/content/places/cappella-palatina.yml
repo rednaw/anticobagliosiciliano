@@ -1,3 +1,4 @@
+image: /images/places/cappella-palatina.jpg
 name:
   it: Cappella Palatina
   en: Palatine Chapel
@@ -16,7 +17,6 @@ website:
     it: Sito ufficiale del Palazzo Reale
     en: Official Royal Palace website
 slug: cappella-palatina
-image: /images/places/cappella-palatina.jpg
 location:
   lat: 38.1116821
   lon: 13.3540374

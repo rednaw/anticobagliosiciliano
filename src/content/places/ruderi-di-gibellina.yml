@@ -1,3 +1,4 @@
+image: /images/places/ruderi-di-gibellina.jpg
 name:
   it: Ruderi di Gibellina
   en: The Ruins of Gibellina
@@ -16,7 +17,6 @@ website:
     it: Il Grande Cretto — MAC Gibellina
     en: Grande Cretto di Burri (Italian only)
 slug: ruderi-di-gibellina
-image: /images/places/ruderi-di-gibellina.jpg
 location:
   lat: 37.7869315
   lon: 12.974021

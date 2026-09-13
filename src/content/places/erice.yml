@@ -1,3 +1,4 @@
+image: /images/places/erice.jpg
 name:
   it: Erice
   en: Erice
@@ -16,7 +17,6 @@ website:
     it: Monumenti e Erice Card
     en: Monuments and Erice Card (Italian only)
 slug: erice
-image: /images/places/erice.jpg
 location:
   lat: 38.0385483
   lon: 12.5835615

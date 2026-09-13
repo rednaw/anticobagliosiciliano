@@ -1,3 +1,4 @@
+image: /images/places/monreale.jpg
 name:
   it: Duomo di Monreale
   en: Cathedral of Monreale
@@ -16,7 +17,6 @@ website:
     it: Sito ufficiale del Duomo di Monreale
     en: Official Monreale Cathedral website (Italian only)
 slug: duomo-di-monreale
-image: /images/places/monreale.jpg
 location:
   lat: 38.0840913
   lon: 13.2934427

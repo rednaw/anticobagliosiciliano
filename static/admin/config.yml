@@ -436,11 +436,15 @@ collections:
     extension: yml
     format: yaml
     identifier_field: slug
+    thumbnail: false
     media_folder: '{{media_folder}}/places'
     public_folder: '{{public_folder}}/places'
     editor:
       preview: false
     fields:
+      - name: image
+        label: Foto
+        widget: image
       - { name: name, label: Nome, widget: object, collapsed: true, fields: *it-en-string }
       - name: time
         label: Tempo di viaggio
@@ -456,9 +460,6 @@ collections:
           - { name: label, label: Etichetta, widget: object, collapsed: true, fields: *it-en-string }
       - name: slug
         widget: hidden
-      - name: image
-        label: Foto
-        widget: image
       - name: location
         label: Coordinate
         widget: object

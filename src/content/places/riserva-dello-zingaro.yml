@@ -1,3 +1,4 @@
+image: /images/places/zingaro.jpg
 name:
   it: Riserva dello Zingaro
   en: Zingaro Nature Reserve
@@ -16,7 +17,6 @@ website:
     it: Sito ufficiale della Riserva dello Zingaro
     en: Official Zingaro Nature Reserve website
 slug: riserva-dello-zingaro
-image: /images/places/zingaro.jpg
 location:
   lat: 38.0818609
   lon: 12.8080923

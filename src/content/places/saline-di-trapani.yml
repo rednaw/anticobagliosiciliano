@@ -1,3 +1,4 @@
+image: /images/places/saline-di-trapani.jpg
 name:
   it: Saline di Trapani e Paceco
   en: Trapani and Paceco salt pans
@@ -16,7 +17,6 @@ website:
     it: Sito ufficiale della Riserva Naturale Saline di Trapani e Paceco
     en: Official Trapani and Paceco salt pans nature reserve website
 slug: saline-di-trapani
-image: /images/places/saline-di-trapani.jpg
 location:
   lat: 37.996514
   lon: 12.535508

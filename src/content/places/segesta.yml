@@ -1,3 +1,4 @@
+image: /images/places/segesta.jpg
 name:
   it: Segesta
   en: Segesta
@@ -16,7 +17,6 @@ website:
     it: Sito ufficiale del Parco Archeologico di Segesta
     en: Official Segesta Archaeological Park website (Italian only)
 slug: segesta
-image: /images/places/segesta.jpg
 location:
   lat: 37.9478139
   lon: 12.827791

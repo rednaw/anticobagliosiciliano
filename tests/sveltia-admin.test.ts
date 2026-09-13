@@ -22,6 +22,7 @@ type Collection = {
   folder?: string;
   i18n?: unknown;
   editor?: { preview?: boolean };
+  thumbnail?: boolean | string | string[];
   files?: Array<{
     name?: string;
     file: string;
@@ -136,7 +137,8 @@ describe('Sveltia admin', () => {
     expect(byName.places).toMatchObject({
       folder: 'src/content/places',
       create: false,
-      delete: false
+      delete: false,
+      thumbnail: false
     });
     expect(byName.chrome).toBeUndefined();
     expect(byName.pages.i18n).toBeUndefined();
