@@ -36,8 +36,8 @@ collections:
         label: Home
         file: src/content/pages/home.yml
         format: yaml
-        media_folder: '{{media_folder}}/ambiance'
-        public_folder: '{{public_folder}}/ambiance'
+        media_folder: /static/images/ambiance
+        public_folder: /images/ambiance
         fields:
           - name: title
             label: Titolo
@@ -152,8 +152,8 @@ collections:
         label: Premi
         file: src/content/pages/awards.yml
         format: yaml
-        media_folder: '{{media_folder}}/awards'
-        public_folder: '{{public_folder}}/awards'
+        media_folder: /static/images/awards
+        public_folder: /images/awards
         fields:
           - { name: eyebrow, label: Sopratitolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
@@ -220,8 +220,8 @@ collections:
         label: Come arrivare
         file: src/content/pages/arrive.yml
         format: yaml
-        media_folder: '{{media_folder}}/arrive'
-        public_folder: '{{public_folder}}/arrive'
+        media_folder: /static/images/arrive
+        public_folder: /images/arrive
         fields:
           - { name: title, label: Titolo, widget: object, collapsed: true, fields: *it-en-string }
           - { name: metaDescription, label: Descrizione (SEO), widget: object, collapsed: true, fields: *it-en-text }
@@ -342,8 +342,8 @@ collections:
         label: Casa 1
         file: src/content/houses/casa-1.yml
         format: yaml
-        media_folder: '{{media_folder}}/houses/casa-1'
-        public_folder: '{{public_folder}}/houses/casa-1'
+        media_folder: /static/images/houses/casa-1
+        public_folder: /images/houses/casa-1
         fields: &house-fields
           - name: name
             label: Nome
@@ -390,24 +390,24 @@ collections:
         label: Casa 2
         file: src/content/houses/casa-2.yml
         format: yaml
-        media_folder: '{{media_folder}}/houses/casa-2'
-        public_folder: '{{public_folder}}/houses/casa-2'
+        media_folder: /static/images/houses/casa-2
+        public_folder: /images/houses/casa-2
         fields: *house-fields
 
       - name: casa-3
         label: Casa 3
         file: src/content/houses/casa-3.yml
         format: yaml
-        media_folder: '{{media_folder}}/houses/casa-3'
-        public_folder: '{{public_folder}}/houses/casa-3'
+        media_folder: /static/images/houses/casa-3
+        public_folder: /images/houses/casa-3
         fields: *house-fields
 
       - name: casa-4
         label: Casa 4
         file: src/content/houses/casa-4.yml
         format: yaml
-        media_folder: '{{media_folder}}/houses/casa-4'
-        public_folder: '{{public_folder}}/houses/casa-4'
+        media_folder: /static/images/houses/casa-4
+        public_folder: /images/houses/casa-4
         fields: *house-fields
 
       - name: chrome
@@ -437,8 +437,8 @@ collections:
     format: yaml
     identifier_field: slug
     thumbnail: false
-    media_folder: '{{media_folder}}/places'
-    public_folder: '{{public_folder}}/places'
+    media_folder: /static/images/places
+    public_folder: /images/places
     editor:
       preview: false
     fields:
@@ -478,3 +478,40 @@ collections:
           - { name: sourceUrl, label: Fonte, widget: string }
           - { name: licenseUrl, label: Licenza URL, widget: string }
           - { name: license, label: Licenza, widget: string }
+
+# Named folders in the Select Image dialog. Paths match file/collection media_folder
+# (leading / so Sveltia treats them as repo-root, not next to the YAML).
+asset_collections:
+  - name: home-photos
+    label: Home
+    media_folder: /static/images/ambiance
+    public_folder: /images/ambiance
+  - name: awards-photos
+    label: Premi
+    media_folder: /static/images/awards
+    public_folder: /images/awards
+  - name: arrive-photos
+    label: Come arrivare
+    media_folder: /static/images/arrive
+    public_folder: /images/arrive
+  - name: casa-1-photos
+    label: Casa 1
+    media_folder: /static/images/houses/casa-1
+    public_folder: /images/houses/casa-1
+  - name: casa-2-photos
+    label: Casa 2
+    media_folder: /static/images/houses/casa-2
+    public_folder: /images/houses/casa-2
+  - name: casa-3-photos
+    label: Casa 3
+    media_folder: /static/images/houses/casa-3
+    public_folder: /images/houses/casa-3
+  - name: casa-4-photos
+    label: Casa 4
+    media_folder: /static/images/houses/casa-4
+    public_folder: /images/houses/casa-4
+  - name: luoghi-photos
+    label: Luoghi
+    media_folder: /static/images/places
+    public_folder: /images/places
+

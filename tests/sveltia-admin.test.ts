@@ -48,6 +48,12 @@ type CmsConfig = {
   i18n?: unknown;
   slug?: unknown;
   collections: Collection[];
+  asset_collections?: Array<{
+    name: string;
+    label?: string;
+    media_folder: string;
+    public_folder?: string;
+  }>;
 };
 
 const config = parse(configText, { maxAliasCount: 1000 }) as CmsConfig;
@@ -194,10 +200,84 @@ describe('Sveltia admin', () => {
     }
 
     expect(pageFiles.find((file) => file.name === 'arrive')).toMatchObject({
-      media_folder: '{{media_folder}}/arrive',
-      public_folder: '{{public_folder}}/arrive'
+      media_folder: '/static/images/arrive',
+      public_folder: '/images/arrive'
+    });
+    expect(pageFiles.find((file) => file.name === 'home')).toMatchObject({
+      media_folder: '/static/images/ambiance',
+      public_folder: '/images/ambiance'
+    });
+    expect(pageFiles.find((file) => file.name === 'awards')).toMatchObject({
+      media_folder: '/static/images/awards',
+      public_folder: '/images/awards'
     });
     expect(pageFiles.find((file) => file.name === 'contact')?.media_folder).toBeUndefined();
+    expect(byName.places).toMatchObject({
+      media_folder: '/static/images/places',
+      public_folder: '/images/places'
+    });
+    for (const n of [1, 2, 3, 4] as const) {
+      expect(houseFiles.find((file) => file.name === `casa-${n}`)).toMatchObject({
+        media_folder: `/static/images/houses/casa-${n}`,
+        public_folder: `/images/houses/casa-${n}`
+      });
+    }
+    expect(config.asset_collections).toEqual([
+      {
+        name: 'home-photos',
+        label: 'Home',
+        media_folder: '/static/images/ambiance',
+        public_folder: '/images/ambiance'
+      },
+      {
+        name: 'awards-photos',
+        label: 'Premi',
+        media_folder: '/static/images/awards',
+        public_folder: '/images/awards'
+      },
+      {
+        name: 'arrive-photos',
+        label: 'Come arrivare',
+        media_folder: '/static/images/arrive',
+        public_folder: '/images/arrive'
+      },
+      {
+        name: 'casa-1-photos',
+        label: 'Casa 1',
+        media_folder: '/static/images/houses/casa-1',
+        public_folder: '/images/houses/casa-1'
+      },
+      {
+        name: 'casa-2-photos',
+        label: 'Casa 2',
+        media_folder: '/static/images/houses/casa-2',
+        public_folder: '/images/houses/casa-2'
+      },
+      {
+        name: 'casa-3-photos',
+        label: 'Casa 3',
+        media_folder: '/static/images/houses/casa-3',
+        public_folder: '/images/houses/casa-3'
+      },
+      {
+        name: 'casa-4-photos',
+        label: 'Casa 4',
+        media_folder: '/static/images/houses/casa-4',
+        public_folder: '/images/houses/casa-4'
+      },
+      {
+        name: 'luoghi-photos',
+        label: 'Luoghi',
+        media_folder: '/static/images/places',
+        public_folder: '/images/places'
+      }
+    ]);
+    const collectionNames = new Set(config.collections.map((c) => c.name));
+    for (const asset of config.asset_collections ?? []) {
+      expect(collectionNames.has(asset.name), `${asset.name} collides with a collection`).toBe(
+        false
+      );
+    }
     const weather = pageFiles
       ?.find((file) => file.file === 'src/content/pages/arrive.yml')
       ?.fields?.find((field) => field.name === 'weather');
