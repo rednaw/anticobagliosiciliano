@@ -6,12 +6,12 @@ alwaysApply: false
 
 # Sveltia CMS
 
-Live `/admin/` uses GitHub OAuth via `auth.tientjeketama.nl`. iac `ALLOWED_DOMAINS` includes `rednaw.github.io`. Add `anticobagliosiciliano.it` at cutover (`.cursor/plans/domain-cutover-seo.md`). Do not invent a parallel auth.
+Live `/admin/` uses GitHub OAuth via `auth.rednaw.nl`. iac `ALLOWED_DOMAINS` includes `rednaw.github.io`. Add `anticobagliosiciliano.it` at cutover (`.cursor/plans/domain-cutover-seo.md`). Do not invent a parallel auth.
 
 ## Must preserve
 
 - Pin `@sveltia/cms` in `package.json` (exact version). Vite copies `dist/sveltia-cms.js` to `static/admin/sveltia-cms.js` on **build** (gitignored). Dev serves that URL from `node_modules`. `index.html` loads `./sveltia-cms.js`. Schema in `config.yml` is `../../node_modules/@sveltia/cms/schema/sveltia-cms.json`. Renovate npm (`groupName: sveltia cms`); merge only after checking release notes — no automerge. No unpkg.
-- Backend: GitHub `rednaw/anticobagliosiciliano`, `skip_ci: false`, `base_url: https://auth.tientjeketama.nl`, `auth_methods: [oauth]`. No client secret in this repo. Do not add `/admin` to the public nav. Admin HTML is `noindex`. Local login is still Local Repository. Vite 308s `/admin` to `/admin/` so `./sveltia-cms.js` and `config.yml` resolve.
+- Backend: GitHub `rednaw/anticobagliosiciliano`, `skip_ci: false`, `base_url: https://auth.rednaw.nl`, `auth_methods: [oauth]`. No client secret in this repo. Do not add `/admin` to the public nav. Admin HTML is `noindex`. Local login is still Local Repository. Vite 308s `/admin` to `/admin/` so `./sveltia-cms.js` and `config.yml` resolve.
 - Collections write `src/content/<collection.name>/` YAML (files `src/content/<collection.name>/<file.name>.yml`). Places `create: false` / `delete: false` / `thumbnail: false`. Houses are an explicit files list (`casa-1`…`casa-4` then `chrome`; no folder create). Include every YAML key (hidden/collapsed for slug, capacity, coords) so a save cannot drop fields. CMS field order matches YAML key order.
 - YAML is per-field `{ it, en }`. Do not enable Sveltia `i18n` (`single_file` is top-level locale keys and empties the collections). Localized fields are object widgets with `it` / `en`.
 - `media_folder: static/images` + `public_folder: /images`. File/collection media paths are repo-root (`/static/images/…`, `/images/…`) so the image picker scopes File Assets to that folder. `asset_collections` (Home, Premi, Come arrivare, Casa 1–4, Luoghi) are the named folders in Select Image. JPEG/PNG land under houses `casa-N`, places, awards, ambiance, arrive. Build emits WebP.

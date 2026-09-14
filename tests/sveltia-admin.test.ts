@@ -119,7 +119,7 @@ describe('Sveltia admin', () => {
     expect(config.backend).toMatchObject({
       name: 'github',
       repo: 'rednaw/anticobagliosiciliano',
-      base_url: 'https://auth.tientjeketama.nl',
+      base_url: 'https://auth.rednaw.nl',
       auth_methods: ['oauth']
     });
     expect(config.site_url).toBe(publicOrigin);

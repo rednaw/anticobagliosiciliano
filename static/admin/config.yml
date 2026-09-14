@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../../node_modules/@sveltia/cms/schema/sveltia-cms.json
 #
-# Live /admin/ → Sign in with GitHub via https://auth.tientjeketama.nl
+# Live /admin/ → Sign in with GitHub via https://auth.rednaw.nl
 # (iac ALLOWED_DOMAINS includes this host). Local: Local Repository.
 # Do not put /admin in the public nav. No client secret in this repo.
 #
@@ -13,7 +13,7 @@ backend:
   repo: rednaw/anticobagliosiciliano
   branch: main
   skip_ci: false
-  base_url: https://auth.tientjeketama.nl
+  base_url: https://auth.rednaw.nl
   auth_methods: [oauth]
 
 site_url: https://rednaw.github.io/anticobagliosiciliano
