@@ -1,22 +1,23 @@
----
-name: Sveltia CMS
-status: pending
-saved: 2026-09-11
-overview: Git-backed /admin (Sveltia) for marketing copy. Maintainer first, then owners on GitHub. YAML in src/content/{pages,houses,places}/ matching CMS English names. Page titles on the page file. Home brand is name/tagline/description. Arrive has location. Pagine chrome is UI chrome (pages/chrome.yml); Case chrome is houses/chrome.yml.
----
-
 # Sveltia CMS
 
-**Shipped invariants:** `.cursor/rules/content.mdc` (YAML), `.cursor/rules/sveltia-cms.mdc` (`/admin`).
+Git-backed `/admin` for marketing copy. Shipped invariants: `.cursor/rules/content.mdc`, `.cursor/rules/sveltia-cms.mdc`. Owner GitHub Write: [owner-access.md](./owner-access.md). Cutover OAuth host: [domain-cutover-seo.md](./domain-cutover-seo.md).
 
-## Decisions
+## Decided
 
-- Authors: you first; owners later. Same `/admin`. Owner GitHub Write is the one conversation in `.cursor/plans/owner-access.md`.
-- Hybrid: `src/content/{pages,houses,places}/` — disk path is CMS `collection.name` / `file.name`. Nested `{ it, en }` on each field. Sequence of houses/places is the import list in `src/lib/data/content.ts` (Vite plugin + `scripts/register-lib.mjs` both parse `.yml`).
-- Not in YAML: occupancy, Lodgify ids, courtyard coords, map `href`s, `SITE_*`. Inbox is `pages/contact.yml` `inbox` (scalar). All other user-facing strings are `src/content/**/*.yml`. `i18n.ts` is path helpers only.
-- `/admin` is `static/admin/`. CMS IIFE is copied from `node_modules/@sveltia/cms` on build (`./sveltia-cms.js`); Vite serves it from `node_modules` in dev. Live: GitHub OAuth via `https://auth.rednaw.nl` (`backend.base_url`, `auth_methods: [oauth]`). Project Pages URL is `…/anticobagliosiciliano/admin/` until `.it` cutover. Local: Local Repository, this folder. Not in the public nav. `robots.txt` Disallow `${SITE_BASE}/admin/`. Localized YAML is object widgets (`it`/`en`) — do not enable Sveltia i18n (`single_file` is top-level locale keys and empties collections).
-- Marketing YAML is the only copy store.
+| | |
+|--|--|
+| Authors | You first; owners later. Same `/admin`. |
+| YAML | `src/content/{pages,houses,places}/` — disk path is CMS `collection.name` / `file.name`. Nested `{ it, en }` per field. Sequence of houses/places is the import list in `src/lib/data/content.ts`. |
+| Not in YAML | Occupancy, Lodgify ids, courtyard coords, map `href`s, `SITE_*`. Inbox is `pages/contact.yml` `inbox` (scalar). `i18n.ts` is path helpers only. |
+| `/admin` | `static/admin/`. Live GitHub OAuth via `https://auth.rednaw.nl`. Local: Local Repository. Not in the public nav. Object widgets `it`/`en` — do not enable Sveltia `i18n`. |
+| Copy store | Marketing YAML only. |
 
-## Remaining
+## Decide
 
-**OAuth origin.** iac cms-oauth `ALLOWED_DOMAINS` includes `rednaw.github.io`. At cutover add `anticobagliosiciliano.it` — `.cursor/plans/domain-cutover-seo.md`. Secret stays on the VPS. Open **iac** for that allowlist.
+None.
+
+## Do
+
+### 0. OAuth origin at `.it` cutover
+
+after [domain-cutover-seo.md](./domain-cutover-seo.md) cutover night — iac `ALLOWED_DOMAINS` already includes `rednaw.github.io`; add `anticobagliosiciliano.it` in that same release. Do not duplicate the runbook here.
