@@ -23,6 +23,6 @@ RUN apt-get update \
   && chmod a+rx /usr/local/bin/yt-dlp \
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /workspace
+WORKDIR /workspaces/anticobagliosiciliano
 
 EXPOSE 5173

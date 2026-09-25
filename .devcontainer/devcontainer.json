@@ -4,8 +4,8 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/anticobagliosiciliano,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/anticobagliosiciliano",
   "remoteUser": "node",
   "containerEnv": {
     "GIT_CONFIG_COUNT": "1",
@@ -16,7 +16,7 @@
     "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,readonly,consistency=cached",
     "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,readonly,consistency=cached",
     "source=${localEnv:HOME}/.cursor/skills,target=/home/node/.cursor/skills,type=bind,consistency=cached",
-    "source=${localEnv:HOME}/.cursor/skills,target=/workspace/.cursor/skills,type=bind,consistency=cached"
+    "source=${localEnv:HOME}/.cursor/skills,target=/workspaces/anticobagliosiciliano/.cursor/skills,type=bind,consistency=cached"
   ],
   "postCreateCommand": "npm ci && npm ci --prefix archive/browser",
   "forwardPorts": [5173, 5174],
