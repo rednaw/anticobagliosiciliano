@@ -106,8 +106,8 @@ assert(
   'production HTML keeps Umami'
 );
 assert(
-  homepage.includes('data-website-id="fce8ee03-0f12-4b98-b6f7-4d6f384dfce3"'),
-  'production HTML has the Umami website id'
+  homepage.includes('data-exclude-search="true"'),
+  'Umami snippet excludes URL search params'
 );
 
 const homepageCsp = cspContent(homepage);
