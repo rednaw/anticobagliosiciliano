@@ -14,10 +14,14 @@ const repoRoot = fileURLToPath(new URL('.', import.meta.url));
 
 const SA_SCRIPT =
   /<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
+const UMAMI_SCRIPT =
+  /<script[\s\S]*?analytics\.rednaw\.nl\/script\.js[\s\S]*?<\/script>\s*/;
 
 /** Public Simple Analytics origins used by `app.html` (`latest.js` + Beacon). */
 const SA_SCRIPT_ORIGIN = 'https://scripts.simpleanalyticscdn.com';
 const SA_QUEUE_ORIGIN = 'https://queue.simpleanalyticscdn.com';
+/** Self-hosted Umami (`script.js` + `/api/send`). */
+const UMAMI_ORIGIN = 'https://analytics.rednaw.nl';
 
 /** Leaflet raster tiles on Come arrivare (`{s}.tile.openstreetmap.org`). */
 const OSM_TILE_ORIGINS = [
@@ -117,15 +121,15 @@ function adminIndexPlugin(): Plugin {
   };
 }
 
-/** Strip Simple Analytics in dev — production builds keep the tag in app.html. */
-function simpleAnalyticsDevPlugin(): Plugin {
+/** Strip analytics tags in dev — production builds keep them in app.html. */
+function analyticsDevPlugin(): Plugin {
   return {
-    name: 'simple-analytics-dev',
+    name: 'analytics-dev',
     transformIndexHtml: {
       order: 'pre',
       handler(html, ctx) {
         if (!ctx.server) return html;
-        return html.replace(SA_SCRIPT, '');
+        return html.replace(SA_SCRIPT, '').replace(UMAMI_SCRIPT, '');
       }
     }
   };
@@ -136,7 +140,7 @@ export default defineConfig({
     sveltiaCmsPlugin(),
     adminIndexPlugin(),
     yamlDataPlugin(),
-    simpleAnalyticsDevPlugin(),
+    analyticsDevPlugin(),
     sveltekit({
       compilerOptions: {
         // Force runes mode for the project, except for libraries. Can be removed in svelte 6.
@@ -162,13 +166,13 @@ export default defineConfig({
           'default-src': ['none'],
           'base-uri': ['self'],
           'form-action': ['self'],
-          'script-src': ['self', SA_SCRIPT_ORIGIN],
+          'script-src': ['self', SA_SCRIPT_ORIGIN, UMAMI_ORIGIN],
           'style-src': ['self', 'unsafe-inline'],
           'img-src': ['self', SA_QUEUE_ORIGIN, ...OSM_TILE_ORIGINS],
           'font-src': ['self'],
           'media-src': ['self'],
           // Script origin is for DevTools fetching latest.js.map.
-          'connect-src': ['self', SA_QUEUE_ORIGIN, SA_SCRIPT_ORIGIN, OPEN_METEO_ORIGIN],
+          'connect-src': ['self', SA_QUEUE_ORIGIN, SA_SCRIPT_ORIGIN, UMAMI_ORIGIN, OPEN_METEO_ORIGIN],
           'frame-src': ['none'],
           'object-src': ['none'],
           'worker-src': ['none'],

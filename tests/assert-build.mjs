@@ -101,12 +101,24 @@ assert(
   homepage.includes('scripts.simpleanalyticscdn.com/latest.js'),
   'production HTML keeps Simple Analytics'
 );
+assert(
+  homepage.includes('analytics.rednaw.nl/script.js'),
+  'production HTML keeps Umami'
+);
+assert(
+  homepage.includes('data-website-id="fce8ee03-0f12-4b98-b6f7-4d6f384dfce3"'),
+  'production HTML has the Umami website id'
+);
 
 const homepageCsp = cspContent(homepage);
 assert(homepageCsp.length > 0, 'homepage has a CSP meta tag');
 assert(
   cspDirective(homepageCsp, 'script-src').includes('https://scripts.simpleanalyticscdn.com'),
   'CSP allows the Simple Analytics script origin'
+);
+assert(
+  cspDirective(homepageCsp, 'script-src').includes('https://analytics.rednaw.nl'),
+  'CSP allows the Umami script origin'
 );
 assert(
   !cspDirective(homepageCsp, 'script-src').includes('unsafe-inline'),
@@ -123,6 +135,10 @@ assert(
 assert(
   cspDirective(homepageCsp, 'connect-src').includes('https://scripts.simpleanalyticscdn.com'),
   'CSP allows Simple Analytics source maps from the script origin'
+);
+assert(
+  cspDirective(homepageCsp, 'connect-src').includes('https://analytics.rednaw.nl'),
+  'CSP allows Umami collect'
 );
 assert(
   cspDirective(homepageCsp, 'connect-src').includes('https://api.open-meteo.com'),
@@ -216,6 +232,7 @@ assert(/<html\b[^>]*\blang="en"/.test(arriveEn), 'English Come arrivare html lan
 
 const privacy = read('privacy/index.html');
 assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');
+assert(privacy.includes('analytics.rednaw.nl'), 'privacy page names Umami host during dual-run');
 assert(
   privacy.includes('open-meteo.com'),
   'privacy page mentions Open-Meteo weather'
