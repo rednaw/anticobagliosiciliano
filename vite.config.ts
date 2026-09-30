@@ -1,16 +1,9 @@
 /// <reference types="vitest/config" />
-import { readFileSync, writeFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
 import { parse as parseYaml } from 'yaml';
 import { SITE_BASE } from './src/lib/site-config.ts';
-
-const require = createRequire(import.meta.url);
-const repoRoot = fileURLToPath(new URL('.', import.meta.url));
 
 const SA_SCRIPT =
   /<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
@@ -48,79 +41,6 @@ function yamlDataPlugin(): Plugin {
   };
 }
 
-/** Copy/serve the npm IIFE next to `static/admin/index.html` (no unpkg). */
-function sveltiaIife() {
-  const from = join(dirname(require.resolve('@sveltia/cms')), 'sveltia-cms.js');
-  return readFileSync(from, 'utf8').replace(
-    /\n\/\/# sourceMappingURL=sveltia-cms\.js\.map\s*$/,
-    '\n'
-  );
-}
-
-function copySveltiaCms() {
-  writeFileSync(join(repoRoot, 'static/admin/sveltia-cms.js'), sveltiaIife());
-}
-
-function sveltiaCmsPlugin(): Plugin {
-  let command: 'build' | 'serve' = 'serve';
-  return {
-    name: 'sveltia-cms',
-    configResolved(config) {
-      command = config.command;
-    },
-    buildStart() {
-      if (command === 'build') copySveltiaCms();
-    },
-    configureServer(server) {
-      const urlPath = `${SITE_BASE}/admin/sveltia-cms.js`;
-      server.middlewares.use((req, res, next) => {
-        const path = req.url?.split('?')[0];
-        if (path !== urlPath) return next();
-        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        res.setHeader('Cache-Control', 'no-store');
-        res.end(sveltiaIife());
-      });
-    }
-  };
-}
-
-/** `/admin` → `/admin/` (relative CMS assets). `/admin/` → `index.html` (Vite has no directory index; Pages does). */
-function adminIndexPlugin(): Plugin {
-  const admin = `${SITE_BASE}/admin`;
-  const withSlash = `${admin}/`;
-  const indexed = `${admin}/index.html`;
-  function splitUrl(url: string | undefined) {
-    if (!url) return { path: '', query: '' };
-    const q = url.indexOf('?');
-    return q === -1 ? { path: url, query: '' } : { path: url.slice(0, q), query: url.slice(q) };
-  }
-  function attachQuery(path: string, query: string) {
-    return query ? `${path}${query}` : path;
-  }
-  function middleware(req: { url?: string }, res: { statusCode: number; setHeader: (n: string, v: string) => void; end: () => void }, next: () => void) {
-    const { path, query } = splitUrl(req.url);
-    if (path === admin) {
-      res.statusCode = 308;
-      res.setHeader('Location', attachQuery(withSlash, query));
-      res.end();
-      return;
-    }
-    if (path === withSlash) {
-      req.url = attachQuery(indexed, query);
-    }
-    next();
-  }
-  return {
-    name: 'admin-index',
-    configureServer(server) {
-      server.middlewares.use(middleware);
-    },
-    configurePreviewServer(server) {
-      server.middlewares.use(middleware);
-    }
-  };
-}
-
 /** Strip analytics tags in dev — production builds keep them in app.html. */
 function analyticsDevPlugin(): Plugin {
   return {
@@ -137,8 +57,6 @@ function analyticsDevPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [
-    sveltiaCmsPlugin(),
-    adminIndexPlugin(),
     yamlDataPlugin(),
     analyticsDevPlugin(),
     sveltekit({
@@ -160,6 +78,7 @@ export default defineConfig({
       // GitHub Pages cannot set CSP headers. SvelteKit emits a <meta> tag and
       // hashes the inline scripts it generates. style-src needs unsafe-inline
       // for Reveal --delay, the app.html wrapper, and the noscript .reveal rule.
+      // Admin (/admin/) strips this meta in hooks — CMS needs GitHub + OAuth.
       csp: {
         mode: 'hash',
         directives: {

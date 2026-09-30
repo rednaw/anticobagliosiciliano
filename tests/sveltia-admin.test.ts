@@ -2,11 +2,10 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
+import { cmsConfig } from '../src/lib/cms-config';
 import { SITE_BASE, SITE_HOSTNAME } from '../src/lib/site-config';
 
 const root = resolve(import.meta.dirname, '..');
-const indexHtml = readFileSync(resolve(root, 'static/admin/index.html'), 'utf8');
-const configText = readFileSync(resolve(root, 'static/admin/config.yml'), 'utf8');
 
 type Field = {
   name: string;
@@ -34,7 +33,7 @@ type Collection = {
   fields?: Field[];
 };
 
-type CmsConfig = {
+const config = cmsConfig as {
   backend: {
     name: string;
     repo: string;
@@ -56,7 +55,6 @@ type CmsConfig = {
   }>;
 };
 
-const config = parse(configText, { maxAliasCount: 1000 }) as CmsConfig;
 const byName = Object.fromEntries(config.collections.map((c) => [c.name, c]));
 
 function listYml(dir: string): string[] {
@@ -90,28 +88,29 @@ function assertYamlMatchesCms(label: string, data: unknown, fields: Field[] | un
 }
 
 describe('Sveltia admin', () => {
-  it('loads the npm IIFE, not unpkg, and matches the schema in node_modules', () => {
+  it('bundles @sveltia/cms via the Kit /admin route, not unpkg or a copied IIFE', () => {
     const pkg = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as {
       devDependencies: Record<string, string>;
     };
     expect(pkg.devDependencies['@sveltia/cms']).toMatch(/^\d+\.\d+\.\d+$/);
-    expect(indexHtml).toContain('src="./sveltia-cms.js"');
-    expect(indexHtml).not.toContain('unpkg.com');
-    expect(configText).toContain(
-      '$schema=../../node_modules/@sveltia/cms/schema/sveltia-cms.json'
-    );
-    expect(existsSync(resolve(root, 'node_modules/@sveltia/cms/dist/sveltia-cms.js'))).toBe(true);
-    expect(existsSync(resolve(root, 'node_modules/@sveltia/cms/schema/sveltia-cms.json'))).toBe(
-      true
-    );
-    expect(indexHtml).toContain('noindex');
-  });
+    expect(pkg.devDependencies['@sveltia/cms']).toBe('0.206.0');
 
-  it('308s /admin to /admin/ so relative CMS assets resolve', () => {
+    const page = readFileSync(resolve(root, 'src/routes/(cms)/admin/+page.svelte'), 'utf8');
+    const pageTs = readFileSync(resolve(root, 'src/routes/(cms)/admin/+page.ts'), 'utf8');
+    const layout = readFileSync(resolve(root, 'src/routes/(cms)/admin/+layout.svelte'), 'utf8');
+    expect(page).toMatch(/import\s+CMS\s+from\s+'@sveltia\/cms'/);
+    expect(page).toMatch(/CMS\.init\s*\(/);
+    expect(page).toMatch(/load_config_file:\s*false/);
+    expect(page).toContain('cms-config');
+    expect(pageTs).toMatch(/ssr\s*=\s*false/);
+    expect(layout).toContain('noindex');
+    expect(page).not.toContain('unpkg.com');
+    expect(layout).not.toContain('unpkg.com');
+
     const vite = readFileSync(resolve(root, 'vite.config.ts'), 'utf8');
-    expect(vite).toMatch(/statusCode = 308/);
-    expect(vite).toMatch(/path === admin/);
-    expect(vite).toMatch(/path === withSlash/);
+    expect(vite).not.toMatch(/sveltiaCmsPlugin|sveltiaIife|copySveltiaCms|adminIndexPlugin/);
+    expect(existsSync(resolve(root, 'static/admin'))).toBe(false);
+    expect(existsSync(resolve(root, 'src/lib/cms-config.ts'))).toBe(true);
   });
 
   it('points at this repo, OAuth, and the public site origin', () => {

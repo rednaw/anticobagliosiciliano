@@ -29,7 +29,7 @@ None.
 
 ### 0. Admin route + TS config + drop IIFE plugin (on 0.206.0)
 
-- [ ] Agent: implemented
+- [x] Agent: implemented
 - [ ] Human: reviewed
 
 **Agent will implement** — can start now after go: port `static/admin/config.yml` → `src/lib/cms-config.ts` (`CmsConfig`); add `src/routes/(cms)/admin/` with `ssr = false`, prerendered shell, minimal layout, `import CMS from '@sveltia/cms'` and `CMS.init({ config: { load_config_file: false, ...config } })` (mount `#nc-root` if useful). Keep `@sveltia/cms` at **0.206.0**. Remove `sveltiaCmsPlugin` / `sveltiaIife` / `copySveltiaCms` from `vite.config.ts`; remove `static/admin/index.html` and stop shipping `static/admin/sveltia-cms.js`; delete `static/admin/config.yml` after the port matches. Drop `adminIndexPlugin` if Kit trailing-slash covers `/admin/`; otherwise keep only what still helps. Build must emit admin HTML + hashed CMS chunks/assets under `SITE_BASE`, with no `unpkg.com` CMS entry.
@@ -38,7 +38,7 @@ None.
 
 ### 1. Tests and Renovate alignment
 
-- [ ] Agent: implemented
+- [x] Agent: implemented
 - [ ] Human: reviewed
 
 **Agent will implement** — after 0: rewrite `tests/sveltia-admin.test.ts` and `tests/assert-build.mjs` — drop `./sveltia-cms.js` / copied-IIFE / YAML-path assertions; assert admin HTML in build, noindex, no unpkg CMS entry, config lives in `cms-config.ts`, collections still cover every content YAML key/order. Keep Renovate npm rule for `@sveltia/cms` only (no CDN regex manager).

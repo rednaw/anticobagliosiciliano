@@ -1,5 +1,8 @@
 <script lang="ts">
+  import '../../app.css';
   import { page } from '$app/state';
+  import figtree from '@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url';
+  import fraunces from '@fontsource-variable/fraunces/files/fraunces-latin-standard-normal.woff2?url';
   import Header from '$lib/standard/Header.svelte';
   import Footer from '$lib/standard/Footer.svelte';
   import { SITE_ORIGIN } from '$lib/site-config';
@@ -39,6 +42,8 @@
 </script>
 
 <svelte:head>
+  <link rel="preload" as="font" type="font/woff2" href={fraunces} crossorigin="anonymous" />
+  <link rel="preload" as="font" type="font/woff2" href={figtree} crossorigin="anonymous" />
   <title>{seo.title}</title>
   <meta name="description" content={seo.description} />
   {#if seo.robots}

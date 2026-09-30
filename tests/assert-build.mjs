@@ -272,10 +272,19 @@ assert(robots.includes(`Disallow: ${SITE_BASE}/admin/`), 'robots.txt disallows /
 
 assert(existsSync(path.join(build, 'admin/index.html')), 'admin SPA is in the build');
 assert(read('admin/index.html').includes('noindex'), 'admin is noindex');
-assert(read('admin/index.html').includes('src="./sveltia-cms.js"'), 'admin loads the local CMS IIFE');
 assert(!read('admin/index.html').includes('unpkg.com'), 'admin does not load CMS from unpkg');
-assert(existsSync(path.join(build, 'admin/sveltia-cms.js')), 'admin ships the CMS bundle');
-assert(read('admin/config.yml').includes('src/content/'), 'admin collections point at src/content/');
+assert(!read('admin/index.html').includes('sveltia-cms.js'), 'admin does not ship a copied IIFE');
+assert(!existsSync(path.join(build, 'admin/sveltia-cms.js')), 'admin does not copy the CMS IIFE');
+assert(!existsSync(path.join(build, 'admin/config.yml')), 'admin config is not a YAML file in the build');
+assert(
+  !read('admin/index.html').includes('http-equiv="content-security-policy"'),
+  'admin strips site CSP so GitHub OAuth can run'
+);
+const adminHtml = read('admin/index.html');
+assert(
+  /\/_app\/immutable\/.*\.js/.test(adminHtml) || adminHtml.includes('_app/immutable'),
+  'admin HTML loads hashed Kit/CMS chunks'
+);
 assert(!homepage.includes('/admin'), 'homepage does not link to /admin');
 
 assert(

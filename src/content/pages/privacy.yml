@@ -37,14 +37,18 @@ analyticsTitle:
   en: Visit statistics
 analytics:
   it: "Contiamo quante persone visitano il sito e quali pagine guardano, così capiamo se
-    le informazioni sono chiare. Non sappiamo chi sei: niente nome, email o un identikit
-    da pubblicità. Per questo usiamo Simple Analytics. "
+    le informazioni sono chiare. Non profiliamo le persone: niente nome, email o pubblicità.
+    Usiamo Simple Analytics e, in parallelo, Umami (analytics.rednaw.nl, sui nostri server).
+    Umami non conserva l’indirizzo IP; da esso deduce solo paese/regione/città. Non
+    raccogliamo i parametri dopo il ? nell’URL. "
   en: "We count how many people visit the site and which pages they look at, so we can
-    tell whether the information is clear. We do not know who you are: no name, email,
-    or advertising profile. That is why we use Simple Analytics. "
+    tell whether the information is clear. We do not profile people: no name, email, or
+    advertising. We use Simple Analytics and, in parallel, Umami (analytics.rednaw.nl,
+    on our servers). Umami does not keep IP addresses; from the IP it only derives
+    country/region/city. We do not collect URL query parameters (the part after ?). "
 analyticsPolicy:
-  it: Vedi quali dati vengono raccolti
-  en: See what data is collected
+  it: Vedi quali dati raccoglie Simple Analytics
+  en: See what data Simple Analytics collects
 cookiesTitle:
   it: Cookie
   en: Cookies
