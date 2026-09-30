@@ -92,8 +92,8 @@ describe('Sveltia admin', () => {
     const pkg = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as {
       devDependencies: Record<string, string>;
     };
+    // Exact pin (no ^/~) so Renovate bumps intentionally; version floats with Do 2.
     expect(pkg.devDependencies['@sveltia/cms']).toMatch(/^\d+\.\d+\.\d+$/);
-    expect(pkg.devDependencies['@sveltia/cms']).toBe('0.206.0');
 
     const page = readFileSync(resolve(root, 'src/routes/(cms)/admin/+page.svelte'), 'utf8');
     const pageTs = readFileSync(resolve(root, 'src/routes/(cms)/admin/+page.ts'), 'utf8');
