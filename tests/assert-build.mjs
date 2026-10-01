@@ -280,6 +280,14 @@ assert(
   !read('admin/index.html').includes('http-equiv="content-security-policy"'),
   'admin strips site CSP so GitHub OAuth can run'
 );
+assert(
+  !read('admin/index.html').includes('analytics.rednaw.nl'),
+  'admin does not load Umami'
+);
+assert(
+  !read('admin/index.html').includes('simpleanalyticscdn.com'),
+  'admin does not load Simple Analytics'
+);
 const adminHtml = read('admin/index.html');
 assert(
   /\/_app\/immutable\/.*\.js/.test(adminHtml) || adminHtml.includes('_app/immutable'),

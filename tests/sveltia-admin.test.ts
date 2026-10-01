@@ -111,6 +111,11 @@ describe('Sveltia admin', () => {
     expect(vite).not.toMatch(/sveltiaCmsPlugin|sveltiaIife|copySveltiaCms|adminIndexPlugin/);
     expect(existsSync(resolve(root, 'static/admin'))).toBe(false);
     expect(existsSync(resolve(root, 'src/lib/cms-config.ts'))).toBe(true);
+
+    const hooks = readFileSync(resolve(root, 'src/hooks.server.ts'), 'utf8');
+    expect(hooks).toMatch(/UMAMI_SCRIPT|analytics\.rednaw\.nl/);
+    expect(hooks).toMatch(/SA_SCRIPT|simpleanalyticscdn/);
+    expect(hooks).toMatch(/isAdminPath/);
   });
 
   it('points at this repo, OAuth, and the public site origin', () => {
