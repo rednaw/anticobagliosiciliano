@@ -26,20 +26,17 @@ describe('prerender regressions', () => {
     expect(beforeMount).not.toMatch(/page\.url\.search/);
   });
 
-  it('reports Simple Analytics under SIMPLE_ANALYTICS_HOSTNAME, not SITE_HOSTNAME', () => {
-    expect(read('src/app.html')).toContain('data-hostname="__SIMPLE_ANALYTICS_HOSTNAME__"');
-    const hooks = read('src/hooks.server.ts');
-    expect(hooks).toMatch(/replaceAll\('__SIMPLE_ANALYTICS_HOSTNAME__',\s*SIMPLE_ANALYTICS_HOSTNAME\)/);
-    expect(hooks).not.toMatch(/replaceAll\([^)]*SITE_HOSTNAME/);
-  });
+  it('ships Umami only (no Simple Analytics), with hashed CSP and no inline scripts', () => {
+    const app = read('src/app.html');
+    expect(app).toContain('analytics.rednaw.nl/script.js');
+    expect(app).not.toContain('simpleanalyticscdn.com');
+    expect(app).not.toContain('SIMPLE_ANALYTICS');
 
-  it('ships a hashed CSP that allows Simple Analytics and Umami, not inline scripts', () => {
     const vite = read('vite.config.ts');
     expect(vite).toMatch(/csp:\s*\{/);
     expect(vite).toMatch(/mode:\s*'hash'/);
-    expect(vite).toContain('https://scripts.simpleanalyticscdn.com');
-    expect(vite).toContain('https://queue.simpleanalyticscdn.com');
     expect(vite).toContain('https://analytics.rednaw.nl');
+    expect(vite).not.toContain('simpleanalyticscdn.com');
     expect(vite).toMatch(/'script-src':\s*\[[^\]]*'self'/);
     expect(vite).not.toMatch(/'script-src':\s*\[[^\]]*'unsafe-inline'/);
     expect(vite).toMatch(/'style-src':\s*\[[^\]]*'unsafe-inline'/);

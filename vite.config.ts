@@ -5,14 +5,9 @@ import { defineConfig, type Plugin } from 'vite';
 import { parse as parseYaml } from 'yaml';
 import { SITE_BASE } from './src/lib/site-config.ts';
 
-const SA_SCRIPT =
-  /<script[\s\S]*?scripts\.simpleanalyticscdn\.com\/latest\.js[\s\S]*?<\/script>\s*/;
 const UMAMI_SCRIPT =
   /<script[\s\S]*?analytics\.rednaw\.nl\/script\.js[\s\S]*?<\/script>\s*/;
 
-/** Public Simple Analytics origins used by `app.html` (`latest.js` + Beacon). */
-const SA_SCRIPT_ORIGIN = 'https://scripts.simpleanalyticscdn.com';
-const SA_QUEUE_ORIGIN = 'https://queue.simpleanalyticscdn.com';
 /** Self-hosted Umami (`script.js` + `/api/send`). */
 const UMAMI_ORIGIN = 'https://analytics.rednaw.nl';
 
@@ -49,7 +44,7 @@ function analyticsDevPlugin(): Plugin {
       order: 'pre',
       handler(html, ctx) {
         if (!ctx.server) return html;
-        return html.replace(SA_SCRIPT, '').replace(UMAMI_SCRIPT, '');
+        return html.replace(UMAMI_SCRIPT, '');
       }
     }
   };
@@ -85,13 +80,12 @@ export default defineConfig({
           'default-src': ['none'],
           'base-uri': ['self'],
           'form-action': ['self'],
-          'script-src': ['self', SA_SCRIPT_ORIGIN, UMAMI_ORIGIN],
+          'script-src': ['self', UMAMI_ORIGIN],
           'style-src': ['self', 'unsafe-inline'],
-          'img-src': ['self', SA_QUEUE_ORIGIN, ...OSM_TILE_ORIGINS],
+          'img-src': ['self', ...OSM_TILE_ORIGINS],
           'font-src': ['self'],
           'media-src': ['self'],
-          // Script origin is for DevTools fetching latest.js.map.
-          'connect-src': ['self', SA_QUEUE_ORIGIN, SA_SCRIPT_ORIGIN, UMAMI_ORIGIN, OPEN_METEO_ORIGIN],
+          'connect-src': ['self', UMAMI_ORIGIN, OPEN_METEO_ORIGIN],
           'frame-src': ['none'],
           'object-src': ['none'],
           'worker-src': ['none'],

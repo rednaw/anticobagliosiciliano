@@ -13,7 +13,7 @@ Make this rebuild the only public site at `anticobagliosiciliano.it`. Owner acce
 | Canonicals now | Still github.io (must match the host that serves the HTML). WordPress `.it` is still the indexed public site. |
 | GSC github.io | URL-prefix verified. Sitemap file is live at `/sitemap.xml`. **Do not** submit it under GSC Sitemaps on github.io. |
 | robots.txt | `Allow: /`, `Disallow` only `/archivio/`. Indexing is the meta tag, not Disallow. |
-| Analytics | Simple Analytics already uses `anticobagliosiciliano.it` — leave `SIMPLE_ANALYTICS_HOSTNAME` alone. |
+| Analytics | Umami at `analytics.rednaw.nl` (no hostname flip at cutover). |
 | Canonical after cutover | Apex `https://anticobagliosiciliano.it/`. `www` 301s to apex (HTTPS, same path, trailing slash). |
 | Redirects | Host-wide 301 only: `.com`, wordpress.com, www, github.io project URL → apex. No per-path table. Old WordPress paths on `.it` become **404** — do not catch-all onto `/`. |
 | Registrar | Register.it. You type DNS as Technical Administrator. Do **not** transfer `.it` to TransIP. Leave MX untouched. |

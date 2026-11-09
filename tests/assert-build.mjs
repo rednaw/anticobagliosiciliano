@@ -14,15 +14,10 @@ const siteConfig = readFileSync(path.join(root, 'src/lib/site-config.ts'), 'utf8
 
 const SITE_BASE = siteConfig.match(/export const SITE_BASE = '([^']*)'/)?.[1];
 const SITE_HOSTNAME = siteConfig.match(/export const SITE_HOSTNAME = '([^']*)'/)?.[1];
-const SIMPLE_ANALYTICS_HOSTNAME = siteConfig.match(
-  /export const SIMPLE_ANALYTICS_HOSTNAME = '([^']*)'/
-)?.[1];
 const SITE_PUBLIC = /export const SITE_PUBLIC = true/.test(siteConfig);
 
-if (SITE_BASE === undefined || !SITE_HOSTNAME || !SIMPLE_ANALYTICS_HOSTNAME) {
-  console.error(
-    'Could not parse SITE_BASE / SITE_HOSTNAME / SIMPLE_ANALYTICS_HOSTNAME from src/lib/site-config.ts'
-  );
+if (SITE_BASE === undefined || !SITE_HOSTNAME) {
+  console.error('Could not parse SITE_BASE / SITE_HOSTNAME from src/lib/site-config.ts');
   process.exit(1);
 }
 
@@ -90,18 +85,6 @@ assert(/<h1[^>]*>Antico Baglio Siciliano<\/h1>/.test(homepage), 'homepage h1 is 
 assert(!isNotFoundPage(homepage), 'homepage is not the NotFound document');
 assert(/<html\b[^>]*\blang="it"/.test(homepage), 'homepage html lang is it');
 assert(
-  homepage.includes(`data-hostname="${SIMPLE_ANALYTICS_HOSTNAME}"`),
-  'Simple Analytics hostname is filled in'
-);
-assert(
-  !homepage.includes('__SIMPLE_ANALYTICS_HOSTNAME__'),
-  'prerender placeholder __SIMPLE_ANALYTICS_HOSTNAME__ is gone'
-);
-assert(
-  homepage.includes('scripts.simpleanalyticscdn.com/latest.js'),
-  'production HTML keeps Simple Analytics'
-);
-assert(
   homepage.includes('analytics.rednaw.nl/script.js'),
   'production HTML keeps Umami'
 );
@@ -109,16 +92,20 @@ assert(
   homepage.includes('data-exclude-search="true"'),
   'Umami snippet excludes URL search params'
 );
+assert(
+  !homepage.includes('simpleanalyticscdn.com'),
+  'production HTML has no Simple Analytics'
+);
 
 const homepageCsp = cspContent(homepage);
 assert(homepageCsp.length > 0, 'homepage has a CSP meta tag');
 assert(
-  cspDirective(homepageCsp, 'script-src').includes('https://scripts.simpleanalyticscdn.com'),
-  'CSP allows the Simple Analytics script origin'
-);
-assert(
   cspDirective(homepageCsp, 'script-src').includes('https://analytics.rednaw.nl'),
   'CSP allows the Umami script origin'
+);
+assert(
+  !cspDirective(homepageCsp, 'script-src').includes('simpleanalyticscdn.com'),
+  'CSP does not allow Simple Analytics'
 );
 assert(
   !cspDirective(homepageCsp, 'script-src').includes('unsafe-inline'),
@@ -129,16 +116,12 @@ assert(
   'script-src includes hashes for SvelteKit inline scripts'
 );
 assert(
-  cspDirective(homepageCsp, 'connect-src').includes('https://queue.simpleanalyticscdn.com'),
-  'CSP allows the Simple Analytics beacon origin'
-);
-assert(
-  cspDirective(homepageCsp, 'connect-src').includes('https://scripts.simpleanalyticscdn.com'),
-  'CSP allows Simple Analytics source maps from the script origin'
-);
-assert(
   cspDirective(homepageCsp, 'connect-src').includes('https://analytics.rednaw.nl'),
   'CSP allows Umami collect'
+);
+assert(
+  !cspDirective(homepageCsp, 'connect-src').includes('simpleanalyticscdn.com'),
+  'connect-src does not allow Simple Analytics'
 );
 assert(
   cspDirective(homepageCsp, 'connect-src').includes('https://api.open-meteo.com'),
@@ -231,8 +214,9 @@ assert(arriveEn.includes('Getting here'), 'English Come arrivare prerendered');
 assert(/<html\b[^>]*\blang="en"/.test(arriveEn), 'English Come arrivare html lang is en');
 
 const privacy = read('privacy/index.html');
-assert(privacy.includes('simpleanalytics.com/data-collection'), 'privacy page links Simple Analytics data collection');
-assert(privacy.includes('analytics.rednaw.nl'), 'privacy page names Umami host during dual-run');
+assert(privacy.includes('umami.is/privacy'), 'privacy page links Umami privacy');
+assert(privacy.includes('analytics.rednaw.nl'), 'privacy page names Umami host');
+assert(!privacy.includes('simpleanalytics'), 'privacy page does not mention Simple Analytics');
 assert(
   privacy.includes('open-meteo.com'),
   'privacy page mentions Open-Meteo weather'
@@ -283,10 +267,6 @@ assert(
 assert(
   !read('admin/index.html').includes('analytics.rednaw.nl'),
   'admin does not load Umami'
-);
-assert(
-  !read('admin/index.html').includes('simpleanalyticscdn.com'),
-  'admin does not load Simple Analytics'
 );
 const adminHtml = read('admin/index.html');
 assert(

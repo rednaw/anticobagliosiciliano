@@ -2,7 +2,7 @@
 
 SvelteKit rebuild of [anticobagliosiciliano.it](https://anticobagliosiciliano.it/), deployed as a static site on GitHub Pages.
 
-The public host is **`https://rednaw.github.io/anticobagliosiciliano/`** until the owners approve the custom domain **`anticobagliosiciliano.it`**. Canonicals, hreflang, sitemap, and asset URLs follow `SITE_HOSTNAME` and `SITE_BASE` in `src/lib/site-config.ts`. Simple Analytics already reports under `anticobagliosiciliano.it`.
+The public host is **`https://rednaw.github.io/anticobagliosiciliano/`** until the owners approve the custom domain **`anticobagliosiciliano.it`**. Canonicals, hreflang, sitemap, and asset URLs follow `SITE_HOSTNAME` and `SITE_BASE` in `src/lib/site-config.ts`.
 
 ## Develop
 
@@ -46,14 +46,9 @@ npm run preview
 
 Push to `main`. The GitHub Actions workflow builds and deploys to GitHub Pages.
 
-In the repo settings, set **Pages → Source** to **GitHub Actions**. After owner review, set **Pages → Custom domain** to `anticobagliosiciliano.it`, then set `SITE_HOSTNAME` to that host and `SITE_BASE` to `''` in `src/lib/site-config.ts`. Simple Analytics already uses that hostname.
+In the repo settings, set **Pages → Source** to **GitHub Actions**. After owner review, set **Pages → Custom domain** to `anticobagliosiciliano.it`, then set `SITE_HOSTNAME` to that host and `SITE_BASE` to `''` in `src/lib/site-config.ts`.
 
-### Simple Analytics
-
-Production only. The script is stripped during `npm run dev`. Page views are collected under **`anticobagliosiciliano.it`** (`SIMPLE_ANALYTICS_HOSTNAME`) even while the site is still on GitHub Pages, so the dashboard does not need renaming at cutover.
-
-1. In [Simple Analytics](https://simpleanalytics.com/) → **Websites**, add `anticobagliosiciliano.it`.
-2. Deploy — page views appear after the first visit (SPA navigation is tracked automatically).
+Visit stats: self-hosted Umami at `analytics.rednaw.nl` (production only; stripped in `npm run dev`).
 
 ## Contact email
 

@@ -114,7 +114,7 @@ describe('Sveltia admin', () => {
 
     const hooks = readFileSync(resolve(root, 'src/hooks.server.ts'), 'utf8');
     expect(hooks).toMatch(/UMAMI_SCRIPT|analytics\.rednaw\.nl/);
-    expect(hooks).toMatch(/SA_SCRIPT|simpleanalyticscdn/);
+    expect(hooks).not.toMatch(/simpleanalyticscdn/);
     expect(hooks).toMatch(/isAdminPath/);
   });
 

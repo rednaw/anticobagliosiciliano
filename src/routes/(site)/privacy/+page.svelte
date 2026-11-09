@@ -40,7 +40,7 @@
       <article class="item">
         <h3>{t('analyticsTitle')}</h3>
         <p>
-          {t('analytics')}<a href="https://www.simpleanalytics.com/data-collection">{t('analyticsPolicy')}</a>.
+          {t('analytics')}<a href="https://umami.is/privacy">{t('analyticsPolicy')}</a>.
         </p>
       </article>
 
